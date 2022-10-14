@@ -332,7 +332,6 @@
                 
                 <h1 id="信号的采样与重建"><a href="#信号的采样与重建" class="headerlink" title="信号的采样与重建"></a><strong>信号的采样与重建</strong></h1><h2 id="第一问"><a href="#第一问" class="headerlink" title="第一问"></a>第一问</h2><h3 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h3><p> ①固定采样频率500 kHz，分别对100 kHz、250 kHz、400 kHz的正弦波信号（幅度，相位自定义）进行采样和重建，分析比较原信号与重建信号的波形；        </p>
 <h3 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs matlab">clear<br><span class="hljs-comment">%参数设定</span><br>f1 = <span class="hljs-number">100000</span>;<span class="hljs-comment">%信号频率</span><br>fs = <span class="hljs-number">500000</span>;<span class="hljs-comment">%采样频率</span><br>dt = <span class="hljs-number">1</span>/fs; <span class="hljs-comment">% 采样间隔，采样间隔可以理解为采样信号的周期，周期 = 1/频率</span><br>Tf = <span class="hljs-number">1</span>/f1; <span class="hljs-comment">%  一个信号周期的时间</span><br><br><span class="hljs-comment">%可得参数</span><br>t = <span class="hljs-built_in">linspace</span>(<span class="hljs-number">0</span>,<span class="hljs-number">20</span>*Tf,<span class="hljs-number">1000</span>*<span class="hljs-number">20</span>); <span class="hljs-comment">% 原信号每个周期内的点数为1000个点</span><br>f_ori = <span class="hljs-built_in">cos</span>(<span class="hljs-number">2</span> * <span class="hljs-built_in">pi</span> * f1 * t) ;<br><span class="hljs-comment">%figure(1);</span><br>subplot(<span class="hljs-number">221</span>);<br><span class="hljs-built_in">plot</span>(t, f_ori);title(strcat(num2str(f1/<span class="hljs-number">1000</span>),<span class="hljs-string">&#x27;kHz原始信号&#x27;</span>));xlabel(<span class="hljs-string">&#x27;t/s&#x27;</span>);<br><br><span class="hljs-comment">%采样</span><br>t2  = <span class="hljs-number">0</span>:dt:t(<span class="hljs-keyword">end</span>); <span class="hljs-comment">% 整个信号时间范围内采样</span><br>f_sam =  <span class="hljs-built_in">cos</span>(<span class="hljs-number">2</span> * <span class="hljs-built_in">pi</span> * f1 * t2) ;<br><span class="hljs-comment">%figure(2);</span><br>subplot(<span class="hljs-number">222</span>);<br>stem(t2, f_sam,<span class="hljs-string">&#x27;.&#x27;</span>);title(<span class="hljs-string">&#x27;采样信号(500kHz采样率)&#x27;</span>);xlabel(<span class="hljs-string">&#x27;t/s&#x27;</span>);<br><br><span class="hljs-comment">%fft变换</span><br>f_<span class="hljs-built_in">true</span>=t2*fs/<span class="hljs-built_in">length</span>(t2);<br>k=fft(f_sam,<span class="hljs-built_in">length</span>(t2));<br><span class="hljs-comment">%figure(3);</span><br>subplot(<span class="hljs-number">223</span>);<br>stem(f_<span class="hljs-built_in">true</span>*fs/<span class="hljs-number">1e3</span>,<span class="hljs-built_in">abs</span>(k),<span class="hljs-string">&#x27;.&#x27;</span>);title(<span class="hljs-string">&#x27;采样信号傅里叶变换&#x27;</span>);xlabel(<span class="hljs-string">&#x27;kHz&#x27;</span>);<br><br><span class="hljs-comment">%恢复</span><br>y = [];<br><span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> = <span class="hljs-number">1</span> : <span class="hljs-built_in">length</span>(t)<br>    x = t(<span class="hljs-built_in">i</span>);<br>    h = sinc((x - t2).*fs);<br>    g = <span class="hljs-built_in">dot</span>(f_sam, h);<span class="hljs-comment">%向量相乘</span><br>    y = [y,g];<br><span class="hljs-keyword">end</span><br>subplot(<span class="hljs-number">224</span>);<br><span class="hljs-comment">%figure(4);</span><br><span class="hljs-built_in">plot</span>(t, y);title(<span class="hljs-string">&#x27;恢复信号&#x27;</span>);xlabel(<span class="hljs-string">&#x27;t/s&#x27;</span>);<br></code></pre></td></tr></table></figure>
-
 <h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><ul>
 <li><p>100kHz原始信号</p>
 <p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/100k_1.png" srcset="/img/loading.gif" lazyload alt=" "></p>
@@ -350,7 +349,6 @@
 </ul>
 <h2 id="第二问"><a href="#第二问" class="headerlink" title="第二问"></a>第二问</h2><h3 id="要求-1"><a href="#要求-1" class="headerlink" title="要求"></a>要求</h3><p> ②采集一段音频信号，分别用欠采样、临界采样和过采样对信号进行重采样，并重建原音频信号，分析比较重建信号与原信号的差别。 </p>
 <h3 id="程序设计-1"><a href="#程序设计-1" class="headerlink" title="程序设计"></a>程序设计</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs matlab">clear<br><span class="hljs-comment">%声音信号的采样</span><br>[x,Fs] = audioread(<span class="hljs-string">&#x27;oba.mp3&#x27;</span>);<br>x=x(:,<span class="hljs-number">1</span>);<span class="hljs-comment">%由于x是双声道，所以取它的左声道</span><br>x = resample(x,<span class="hljs-number">13000</span>,Fs) ; <span class="hljs-comment">%重新采样</span><br>x=x.&#x27;;<br>Fs=<span class="hljs-number">13000</span>;<br>n=<span class="hljs-built_in">length</span>(x);<span class="hljs-comment">%获取x的采样点数</span><br>dt=<span class="hljs-number">1</span>/Fs;<span class="hljs-comment">%求采样间隔</span><br>time=(<span class="hljs-number">0</span>:n<span class="hljs-number">-1</span>)*dt;<span class="hljs-comment">%采样时间点</span><br><span class="hljs-comment">%figure(1);</span><br>subplot(<span class="hljs-number">321</span>);<br><span class="hljs-built_in">plot</span>(time,x);<br>title(<span class="hljs-string">&#x27;原始声音信号时域波形&#x27;</span>)<br>xlabel(<span class="hljs-string">&#x27;时间/s&#x27;</span>);<br><br><span class="hljs-comment">%原始信号fft变换</span><br>f_<span class="hljs-built_in">true</span>=time*Fs/<span class="hljs-built_in">length</span>(time);<br>k=fft(x,<span class="hljs-built_in">length</span>(time));<br><span class="hljs-comment">%figure(2);</span><br>subplot(<span class="hljs-number">322</span>);<br><span class="hljs-built_in">plot</span>(f_<span class="hljs-built_in">true</span>*Fs/<span class="hljs-number">1e3</span>,<span class="hljs-built_in">abs</span>(k));title(<span class="hljs-string">&#x27;原始声音信号傅里叶变换&#x27;</span>);xlabel(<span class="hljs-string">&#x27;kHz&#x27;</span>);<br><br><span class="hljs-comment">%对原始信号进行采样</span><br>fs=Fs/<span class="hljs-number">2</span>; <span class="hljs-comment">%新的采样率</span><br>y = resample(x,fs,Fs) ; <span class="hljs-comment">%从x中第一个元素开始采样(奇采样)</span><br>n_sam=<span class="hljs-built_in">length</span>(y);<span class="hljs-comment">%获取y的采样点数</span><br>dt_sam=<span class="hljs-number">1</span>/fs;<span class="hljs-comment">%求采样间隔</span><br>time_sam=(<span class="hljs-number">0</span>:n_sam<span class="hljs-number">-1</span>)*dt_sam;<span class="hljs-comment">%新的采样时间点</span><br><span class="hljs-comment">%figure(3);</span><br>subplot(<span class="hljs-number">323</span>);<br><span class="hljs-built_in">plot</span>(time_sam,y);<br>title(<span class="hljs-string">&#x27;过采样信号时域波形&#x27;</span>)<br>xlabel(<span class="hljs-string">&#x27;时间/s&#x27;</span>);<br><br><span class="hljs-comment">%采样信号fft变换</span><br>f_<span class="hljs-built_in">true</span>_sam=time_sam*Fs/<span class="hljs-built_in">length</span>(time_sam);<br>k=fft(y,<span class="hljs-built_in">length</span>(time_sam));<br><span class="hljs-comment">%figure(4);</span><br>subplot(<span class="hljs-number">324</span>);<br><span class="hljs-built_in">plot</span>(f_<span class="hljs-built_in">true</span>_sam*fs/<span class="hljs-number">1e3</span>,<span class="hljs-built_in">abs</span>(k));title(<span class="hljs-string">&#x27;过采样信号傅里叶变换&#x27;</span>);xlabel(<span class="hljs-string">&#x27;kHz&#x27;</span>);<br><br><span class="hljs-comment">%重建信号</span><br>z = [];<br><span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> = <span class="hljs-number">1</span> : <span class="hljs-built_in">length</span>(x)<br>    m = time(<span class="hljs-built_in">i</span>);<br>    h = sinc((m - time_sam).*fs);<br>    g=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-number">1</span>:<span class="hljs-number">1</span>:<span class="hljs-built_in">length</span>(y)<br>        s=y(<span class="hljs-built_in">j</span>)*h(<span class="hljs-built_in">j</span>);<br>        g=g+s;<br>    <span class="hljs-keyword">end</span><br>    <span class="hljs-comment">%g = dot(y, h);%向量相乘</span><br>    z = [z,g];<br><span class="hljs-keyword">end</span><br><span class="hljs-comment">%figure(5);</span><br>subplot(<span class="hljs-number">325</span>);<br><span class="hljs-built_in">plot</span>(time, z);title(<span class="hljs-string">&#x27;重建声音信号&#x27;</span>);xlabel(<span class="hljs-string">&#x27;t/s&#x27;</span>);<br><br><span class="hljs-comment">%重建信号fft变换</span><br>f_<span class="hljs-built_in">true</span>=time*Fs/<span class="hljs-built_in">length</span>(time);<br>k=fft(z,<span class="hljs-built_in">length</span>(time));<br><span class="hljs-comment">%figure(6);</span><br>subplot(<span class="hljs-number">326</span>);<br><span class="hljs-built_in">plot</span>(f_<span class="hljs-built_in">true</span>*Fs/<span class="hljs-number">1e3</span>,<span class="hljs-built_in">abs</span>(k));title(<span class="hljs-string">&#x27;重建声音信号傅里叶变换&#x27;</span>);xlabel(<span class="hljs-string">&#x27;kHz&#x27;</span>);<br><br><span class="hljs-comment">%试听和写入信号</span><br> sound(z,Fs);<br> audiowrite(<span class="hljs-string">&#x27;over_sampling.wav&#x27;</span>,z,Fs);<br></code></pre></td></tr></table></figure>
-
 <h3 id="实验结果-1"><a href="#实验结果-1" class="headerlink" title="实验结果"></a>实验结果</h3><ul>
 <li><p>临界采样</p>
 <p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/critical_sampling.png" srcset="/img/loading.gif" lazyload alt=" "></p>
@@ -547,12 +545,6 @@
   
 
 
-  
-  
-
-
-
-
 
 
 
@@ -718,40 +710,6 @@
 
   <script>Fluid.plugins.imageCaption();</script>
 
-  
-      <script>
-        if (!window.MathJax) {
-          window.MathJax = {
-            tex    : {
-              inlineMath: { '[+]': [['$', '$']] }
-            },
-            loader : {
-              load: ['ui/lazy']
-            },
-            options: {
-              renderActions: {
-                insertedScript: [200, () => {
-                  document.querySelectorAll('mjx-container').forEach(node => {
-                    let target = node.parentNode;
-                    if (target.nodeName.toLowerCase() === 'li') {
-                      target.parentNode.classList.add('has-jax');
-                    }
-                  });
-                }, '', false]
-              }
-            }
-          };
-        } else {
-          MathJax.startup.document.state(0);
-          MathJax.texReset();
-          MathJax.typeset();
-          MathJax.typesetPromise();
-        }
-      </script>
-    
-
-  <script  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" ></script>
-
   <script  src="/js/local-search.js" ></script>
 
 
@@ -768,5 +726,21 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":300,"height":600},"mobile":{"show":false}});</script></body>
 </html>
