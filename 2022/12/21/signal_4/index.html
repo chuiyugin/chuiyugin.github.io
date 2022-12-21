@@ -18,26 +18,27 @@
   <meta name="author" content="Mr.CHUI">
   <meta name="keywords" content="">
   
-    <meta name="description" content="分治法、算法">
+    <meta name="description" content="数字信号处理、算法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Points">
-<meta property="og:url" content="http://example.com/2021/12/12/points/index.html">
+<meta property="og:title" content="数字滤波器性能指标分析">
+<meta property="og:url" content="http://example.com/2022/12/21/signal_4/index.html">
 <meta property="og:site_name" content="CHUI YUGIN">
-<meta property="og:description" content="分治法、算法">
+<meta property="og:description" content="数字信号处理、算法">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/7.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/6.png">
-<meta property="article:published_time" content="2021-12-12T13:40:00.000Z">
-<meta property="article:modified_time" content="2022-09-09T05:55:47.499Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/%E5%99%AA%E5%A3%B0.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/%E6%BB%A4%E6%B3%A2%E5%99%A8.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/%E6%BB%A4%E6%B3%A2%E5%99%A82.png">
+<meta property="article:published_time" content="2022-12-21T10:30:00.000Z">
+<meta property="article:modified_time" content="2022-12-21T10:35:11.354Z">
 <meta property="article:author" content="Mr.CHUI">
-<meta property="article:tag" content="数据结构">
-<meta property="article:tag" content="分治法">
+<meta property="article:tag" content="数字信号处理">
+<meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/7.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/%E5%99%AA%E5%A3%B0.png">
   
   
   
-  <title>Points - CHUI YUGIN</title>
+  <title>数字滤波器性能指标分析 - CHUI YUGIN</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -48,6 +49,8 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0/dist/katex.min.css" />
 
 
 
@@ -246,7 +249,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Points"></span>
+            <span id="subtitle" data-typed-text="数字滤波器性能指标分析"></span>
           
         </div>
 
@@ -262,8 +265,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-12-12 21:40" pubdate>
-          2021年12月12日 晚上
+        <time datetime="2022-12-21 18:30" pubdate>
+          2022年12月21日 晚上
         </time>
       </span>
     
@@ -275,7 +278,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.7k 字
+          1.4k 字
         
       </span>
     
@@ -287,7 +290,7 @@
         
         
           <!-- compatible with older versions-->
-          9 分钟
+          5 分钟
         
       </span>
     
@@ -325,21 +328,28 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Points</h1>
+            <h1 style="display: none">数字滤波器性能指标分析</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/7.png" srcset="/img/loading.gif" lazyload alt=" " /></p>
-<h3 id="示例输入"><a class="markdownIt-Anchor" href="#示例输入"></a> 示例输入</h3>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>第一个输入为有几个点，其下输入为点的坐标<br><span class="hljs-number">3</span><br><br><span class="hljs-number">1</span> <span class="hljs-number">1</span><br><br><span class="hljs-number">3</span> <span class="hljs-number">4</span><br><br><span class="hljs-number">2</span> <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
-<h3 id="实现原理"><a class="markdownIt-Anchor" href="#实现原理"></a> 实现原理</h3>
-<p>​        本次示例程序使用10000个点来测试分治法的效率，利用分治法求10000个点中的最小点对，首先将一万个点按照x的大小从小到大排序，若x相同，则按照y的大小排序，得到有序排列的一万个点，再取数组中间值的元素将一万个点分为s1和s2两部分，先分别求出s1和s2两部分的最小点对取其最小值，再与跨越s1和s2的点对距离进行对比，这里有筛选条件为当奋力在s1和s2两边的点如果x轴或者y轴到中间点的距离必须小于或等于s1与s2两部分点的最小值，即形成一个矩形内取点，通过不断递归得到最小点对。设置全局变量记录最小点对的坐标即可，经测试可以在1s内得到最小点对。</p>
-<h3 id="示例结果"><a class="markdownIt-Anchor" href="#示例结果"></a> 示例结果</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/6.png" srcset="/img/loading.gif" lazyload alt=" " /></p>
-<h3 id="完整代码实现"><a class="markdownIt-Anchor" href="#完整代码实现"></a> 完整代码实现</h3>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;math.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/time.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> INF 99999</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 10000</span><br><br><span class="hljs-keyword">int</span> m,t;<br><span class="hljs-keyword">int</span> temp[N];<span class="hljs-comment">//储存宽度为d的点</span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span> &#123;</span><br>    <span class="hljs-keyword">double</span> x;<br>    <span class="hljs-keyword">double</span> y;<br>&#125;point[N];<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">compar</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span>* a, <span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span>* b)</span><span class="hljs-comment">//用来比较两个元素的函数，即函数指针（回调函数）</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span> <span class="hljs-title">A</span> =</span> *(struct node*)a;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span> <span class="hljs-title">B</span> =</span> *(struct node*)b;<br>    <span class="hljs-keyword">if</span> (A.x != B.x)<br>        <span class="hljs-keyword">return</span> A.x - B.x;<span class="hljs-comment">//按照x从小到大的顺序排序</span><br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> A.y - B.y;<span class="hljs-comment">//当x相等的时候，按照y的从大到小的顺序排序</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">Min_distance</span><span class="hljs-params">(<span class="hljs-keyword">double</span> left, <span class="hljs-keyword">double</span> right)</span><span class="hljs-comment">//返回距离的大小关系</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> left &lt; right ? left : right;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">distance</span><span class="hljs-params">(<span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right)</span><span class="hljs-comment">//计算两点距离的函数</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">sqrt</span>((point[left].x - point[right].x) * (point[left].x - point[right].x) + ((point[left].y - point[right].y) * (point[left].y - point[right].y)));<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">Closest_Pair</span><span class="hljs-params">(<span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">double</span> End_dis = INF;<span class="hljs-comment">//距离的初始值,无穷大</span><br>    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>, k = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">if</span> (left == right)<span class="hljs-comment">//只有一个点的时候，返回无穷大</span><br>        <span class="hljs-keyword">return</span> End_dis;<br><br>    <span class="hljs-keyword">if</span> (right - left == <span class="hljs-number">1</span>)<span class="hljs-comment">// 刚好两个点的时候，返回两点的距离</span><br>        <span class="hljs-keyword">return</span> distance(left, right);<br><br>    <span class="hljs-keyword">int</span> mid = (left + right) / <span class="hljs-number">2</span>;<span class="hljs-comment">//大于或等于三个点的时候</span><br><br>    <span class="hljs-keyword">double</span> distance_left = Closest_Pair(left, mid);<span class="hljs-comment">//左边递归</span><br>    <span class="hljs-keyword">double</span> distancer_ight = Closest_Pair(mid + <span class="hljs-number">1</span>, right);<span class="hljs-comment">//右边递归</span><br><br>    End_dis = Min_distance(distance_left, distancer_ight);<span class="hljs-comment">//比较左右两边点对距离，找出其中的最小值</span><br><br><br>    <span class="hljs-keyword">for</span> (i = left; i &lt;= right; i++)<span class="hljs-comment">//找出符合要求的距离mid横坐标小于等于d的点</span><br>    &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">fabs</span>(point[mid].x - point[i].x) &lt;= End_dis)<br>            temp[k++] = i;<span class="hljs-comment">//temp用于储存符合要求的点的序号</span><br>    &#125;<br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= k - <span class="hljs-number">1</span>; i++)<span class="hljs-comment">//通过纵坐标寻找最短距离</span><br>        <span class="hljs-keyword">for</span> (j = i + <span class="hljs-number">1</span>; j &lt;= k - <span class="hljs-number">1</span> &amp;&amp; j &lt; i + <span class="hljs-number">7</span>; j++)<br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">fabs</span>(point[temp[j]].y - point[temp[i]].y) &lt; End_dis)<br>            &#123;<br>                <span class="hljs-keyword">if</span>(End_dis&gt;=distance(temp[i], temp[j]))<br>                &#123;<br>                    m=temp[i];<br>                    t=temp[j];<br>                &#125;<br>                <span class="hljs-keyword">else</span> m = left,t = right;<br>                End_dis = Min_distance(End_dis, distance(temp[i], temp[j]));<br>            &#125;<br>    <span class="hljs-keyword">return</span> End_dis;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">timeval</span> <span class="hljs-title">start</span>, <span class="hljs-title">end</span>;</span><br>    <span class="hljs-keyword">int</span> n;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);<br>    <span class="hljs-keyword">double</span> a;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lf %lf&quot;</span>, &amp;point[i].x, &amp;point[i].y);<br>        gettimeofday(&amp;start, <span class="hljs-literal">NULL</span>);<br>        qsort(point, n, <span class="hljs-keyword">sizeof</span>(point[<span class="hljs-number">0</span>]), compar);<br>        a = Closest_Pair(<span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);<br>        gettimeofday(&amp;end, <span class="hljs-literal">NULL</span>);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;the shortest distance is:%.10lf\n&quot;</span>, a);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;the co-ordinates of the pair of points is:\n%.10lf %.10lf\n&quot;</span>,point[m].x,point[m].y);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.10lf %.10lf\n&quot;</span>,point[t].x,point[t].y);<br>        <span class="hljs-keyword">long</span> elapsed = (end.tv_sec - start.tv_sec)*<span class="hljs-number">1000000.0</span> + end.tv_usec - start.tv_usec;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.ld ms elapsed\n&quot;</span>, elapsed);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+                <h1 id="数字滤波器性能指标分析"><a class="markdownIt-Anchor" href="#数字滤波器性能指标分析"></a> 数字滤波器性能指标分析</h1>
+<h2 id="要求"><a class="markdownIt-Anchor" href="#要求"></a> 要求</h2>
+<p>​         为了完成对子作业1中音频信号的滤波，对子作业1中的音频信号进行频谱分析，并获取滤波器设计所需要的性能指标。</p>
+<h2 id="音频加噪处理"><a class="markdownIt-Anchor" href="#音频加噪处理"></a> 音频加噪处理</h2>
+<p>​         由于在子作业1中的音频较为纯净，没有过多噪声。为了方便数字滤波器性能指标的分析和数字滤波器的设计，需要对原有的音频进行加噪处理。本项目通过在音频的8.5kHz至10kHz中增加带限噪声，并在绘制出其时域波形和频域波形。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/%E5%99%AA%E5%A3%B0.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h2 id="加噪程序设计"><a class="markdownIt-Anchor" href="#加噪程序设计"></a> 加噪程序设计</h2>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs matlab">clear ;<br><br><span class="hljs-comment">%声音信号的采样</span><br>[x,Fs] = audioread(<span class="hljs-string">&#x27;puppy love.mp3&#x27;</span>);<br>x=x(:,<span class="hljs-number">1</span>);<span class="hljs-comment">%由于x是双声道，所以取它的左声道</span><br>x=x.&#x27;;<span class="hljs-comment">%转置</span><br>n=<span class="hljs-built_in">length</span>(x);<span class="hljs-comment">%获取x的采样点数</span><br>dt=<span class="hljs-number">1</span>/Fs;<span class="hljs-comment">%求采样间隔</span><br>time=(<span class="hljs-number">0</span>:n<span class="hljs-number">-1</span>)*dt;<span class="hljs-comment">%采样时间点</span><br>subplot(<span class="hljs-number">221</span>);<br><span class="hljs-built_in">plot</span>(time,x);<br>title(<span class="hljs-string">&#x27;原始声音信号时域波形&#x27;</span>)<br>xlabel(<span class="hljs-string">&#x27;时间/s&#x27;</span>);<br><br><span class="hljs-comment">%原始信号fft变换</span><br>f_<span class="hljs-built_in">true</span>=time*Fs/<span class="hljs-built_in">length</span>(time);<br>k=fft(x,<span class="hljs-built_in">length</span>(time));<br>k(:,<span class="hljs-built_in">ceil</span>(<span class="hljs-built_in">length</span>(k)/<span class="hljs-number">2</span>):<span class="hljs-keyword">end</span>) = [];<span class="hljs-comment">%去掉快速傅里叶变换对称的一半</span><br>l=f_<span class="hljs-built_in">true</span>*Fs/<span class="hljs-number">1e3</span>;<br>l(:,<span class="hljs-built_in">ceil</span>(<span class="hljs-built_in">length</span>(l)/<span class="hljs-number">2</span>):<span class="hljs-keyword">end</span>) = [];<span class="hljs-comment">%去掉快速傅里叶变换对称的一半</span><br>subplot(<span class="hljs-number">222</span>);<br><span class="hljs-built_in">plot</span>(l,<span class="hljs-built_in">abs</span>(k));title(<span class="hljs-string">&#x27;原始声音信号傅里叶变换&#x27;</span>);xlabel(<span class="hljs-string">&#x27;kHz&#x27;</span>);<br><br><span class="hljs-comment">%加入带限噪声</span><br>noise=<span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span> f=<span class="hljs-number">8500</span>:<span class="hljs-number">20</span>:<span class="hljs-number">10000</span><br>noise=noise+<span class="hljs-number">0.01</span>*<span class="hljs-built_in">sin</span>(<span class="hljs-number">2</span>*<span class="hljs-built_in">pi</span>*f*time);<br><span class="hljs-keyword">end</span><br>xa=x+noise;<br>subplot(<span class="hljs-number">223</span>);<br><span class="hljs-built_in">plot</span>(time,xa);<br>title(<span class="hljs-string">&#x27;加噪声音信号时域波形&#x27;</span>)<br>xlabel(<span class="hljs-string">&#x27;时间/s&#x27;</span>);<br><br><span class="hljs-comment">%加噪信号傅里叶变换</span><br>f_<span class="hljs-built_in">true</span>=time*Fs/<span class="hljs-built_in">length</span>(time);<br>k=fft(xa,<span class="hljs-built_in">length</span>(time));<br>k(:,<span class="hljs-built_in">ceil</span>(<span class="hljs-built_in">length</span>(k)/<span class="hljs-number">2</span>):<span class="hljs-keyword">end</span>) = [];<span class="hljs-comment">%去掉快速傅里叶变换对称的一半</span><br>l=f_<span class="hljs-built_in">true</span>*Fs/<span class="hljs-number">1e3</span>;<br>l(:,<span class="hljs-built_in">ceil</span>(<span class="hljs-built_in">length</span>(l)/<span class="hljs-number">2</span>):<span class="hljs-keyword">end</span>) = [];<span class="hljs-comment">%去掉快速傅里叶变换对称的一半</span><br>subplot(<span class="hljs-number">224</span>);<br><span class="hljs-built_in">plot</span>(l,<span class="hljs-built_in">abs</span>(k));title(<span class="hljs-string">&#x27;加噪后声音信号傅里叶变换&#x27;</span>);xlabel(<span class="hljs-string">&#x27;kHz&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<h2 id="数字滤波器性能指标分析-2"><a class="markdownIt-Anchor" href="#数字滤波器性能指标分析-2"></a> 数字滤波器性能指标分析</h2>
+<p>假设数字滤波器的频率响应表示为：</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>H</mi><mo stretchy="false">(</mo><msup><mi>e</mi><mrow><mi>j</mi><mi>ω</mi></mrow></msup><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">∣</mi><mi>H</mi><mo stretchy="false">(</mo><msup><mi>e</mi><mrow><mi>j</mi><mi>ω</mi></mrow></msup><mo stretchy="false">)</mo><mi mathvariant="normal">∣</mi><msup><mi>e</mi><mrow><mi>j</mi><mi>β</mi><mo stretchy="false">(</mo><mi>j</mi><mi>ω</mi><mo stretchy="false">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">H(e^{j \omega})=|H(e^{j \omega})|e^{j \beta(j \omega)}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.124664em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.874664em;"><span style="top:-3.1130000000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">ω</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.188em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.874664em;"><span style="top:-3.1130000000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">ω</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mord mathnormal mtight" style="margin-right:0.05278em;">β</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">ω</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>根据下图中理想低通滤波器逼近的误差容限可以看出，频率响应有通带、过渡带、阻带三个范围。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/%E6%BB%A4%E6%B3%A2%E5%99%A8.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p>下图为不同滤波器的技术指标：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/%E6%BB%A4%E6%B3%A2%E5%99%A82.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p>​        因此我们对加噪后的音频频谱进行分析，可以确定出<strong>通带截止频率</strong>为8kHz，<strong>阻带截止频率</strong>为8.5kHz。<strong>通带最大允许衰减</strong>为1dB,<strong>阻带最小允许衰减</strong>为80dB。</p>
 
                 
               </div>
@@ -358,7 +368,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  <a href="/categories/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" class="category-chain-item">数字信号处理</a>
   
   
 
@@ -373,9 +383,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#数据结构</a>
+        <a href="/tags/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">#数字信号处理</a>
       
-        <a href="/tags/%E5%88%86%E6%B2%BB%E6%B3%95/">#分治法</a>
+        <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
       
     </div>
   
@@ -387,8 +397,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Points</div>
-      <div>http://example.com/2021/12/12/points/</div>
+      <div>数字滤波器性能指标分析</div>
+      <div>http://example.com/2022/12/21/signal_4/</div>
     </div>
     <div class="license-meta">
       
@@ -400,7 +410,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2021年12月12日</div>
+          <div>2022年12月21日</div>
         </div>
       
       
@@ -430,18 +440,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/12/12/graph%20counts/" title="Graph Counts">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Graph Counts</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/11/23/sort/" title="快速排序算法与冒泡排序算法的比较">
-                        <span class="hidden-mobile">快速排序算法与冒泡排序算法的比较</span>
+                      <a href="/2022/11/14/signal_3/" title="快速卷积实现滤波">
+                        <span class="hidden-mobile">快速卷积实现滤波</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -462,7 +466,7 @@
         var options = Object.assign(
           {"clientID":"5879fef477aebfb46fe6","clientSecret":"c6ddf310da089b6eade5be010238bbfc1507e2d9","repo":"blog-comments","owner":"chuiyugin","admin":["chuiyugin"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":false,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token"},
           {
-            id: '7e299a0acc5d9b35b2d29147e5de8ad3'
+            id: 'd46c47f78d7453536afbf193082b3ecb'
           }
         )
         var gitalk = new Gitalk(options);
@@ -519,6 +523,11 @@
 
 
   
+
+
+  
+  
+
 
 
 
