@@ -26,7 +26,7 @@
 <meta property="og:description" content="HTML、程序设计、Web">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-12-22T09:00:00.000Z">
-<meta property="article:modified_time" content="2022-12-27T11:41:12.791Z">
+<meta property="article:modified_time" content="2022-12-28T09:40:22.446Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="Web">
 <meta property="article:tag" content="HTML">
@@ -272,7 +272,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          27k 字
+          29k 字
         
       </span>
     
@@ -284,7 +284,7 @@
         
         
           <!-- compatible with older versions-->
-          84 分钟
+          90 分钟
         
       </span>
     
@@ -824,6 +824,48 @@
 <h2 id="django"><a class="markdownIt-Anchor" href="#django"></a> Django</h2>
 <h3 id="默认文件介绍"><a class="markdownIt-Anchor" href="#默认文件介绍"></a> 默认文件介绍</h3>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs stylus">│  manage<span class="hljs-selector-class">.py</span>	【项目的管理，启动项目，创建app，数据管理】【不能动】【常常用】<br>│<br>├─<span class="hljs-selector-class">.idea</span><br>│  │  <span class="hljs-selector-class">.gitignore</span><br>│  │  misc<span class="hljs-selector-class">.xml</span><br>│  │  modules<span class="hljs-selector-class">.xml</span><br>│  │  mysite<span class="hljs-selector-class">.iml</span><br>│  │  workspace<span class="hljs-selector-class">.xml</span><br>│  │<br>│  └─inspectionProfiles<br>│          profiles_settings<span class="hljs-selector-class">.xml</span><br>│<br>├─mysite<br>│  │  settings<span class="hljs-selector-class">.py</span>	【项目配置文件】【常修改】<br>│  │  urls<span class="hljs-selector-class">.py</span>	【URL和函数的对应关系】【常修改】<br>│  │  asgi<span class="hljs-selector-class">.py</span>	【接收网络请求】【不能动】<br>│  │  wsgi<span class="hljs-selector-class">.py</span>	【接收网络请求】【不能动】<br>│  │  __init__<span class="hljs-selector-class">.py</span><br>│  │<br>│  └─__pycache__<br>│          settings<span class="hljs-selector-class">.cpython-310</span><span class="hljs-selector-class">.pyc</span><br>│          __init__<span class="hljs-selector-class">.cpython-310</span><span class="hljs-selector-class">.pyc</span><br>│<br>└─__pycache__<br>        manage<span class="hljs-selector-class">.cpython-310</span>.pyc<br></code></pre></td></tr></table></figure>
+<h3 id="app"><a class="markdownIt-Anchor" href="#app"></a> APP</h3>
+<h4 id="创建app"><a class="markdownIt-Anchor" href="#创建app"></a> 创建APP</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">python manage.py startapp [名字]<br></code></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs css">-项目<br>	-app，用户管理【表结构、函数、<span class="hljs-selector-tag">HTML</span>模板、CSS等独立】<br>	-app，订单管理【表结构、函数、<span class="hljs-selector-tag">HTML</span>模板、CSS等独立】<br>	-app，后台管理【表结构、函数、<span class="hljs-selector-tag">HTML</span>模板、CSS等独立】<br>   	-app，网站管理【表结构、函数、<span class="hljs-selector-tag">HTML</span>模板、CSS等独立】<br>   	-app，API    【表结构、函数、<span class="hljs-selector-tag">HTML</span>模板、CSS等独立】<br>   	···<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><figcaption><span>basic</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs visual">├─app1<br>│  │  admin.py	【固定，不用动】django默认提供了admin后台管理<br>│  │  apps.py	【固定，不用动】app启动类<br>│  │  models.py	【重要，模型层】对数据库操作<br>│  │  tests.py	【固定，不用动】单元测试<br>│  │  views.py	【重要，视图层】前后端交互处理请求返回结果的函数<br>│  │  __init__.py<br>│  │<br>│  └─migrations	【固定，不用动】数据库变更记录<br>│          __init__.py<br></code></pre></td></tr></table></figure>
+<h3 id="快速上手"><a class="markdownIt-Anchor" href="#快速上手"></a> 快速上手</h3>
+<ul>
+<li><strong>确保app已注册【<a target="_blank" rel="noopener" href="http://setting.py">setting.py</a>】</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">INSTALLED_APPS = [<br>    <span class="hljs-string">&quot;django.contrib.admin&quot;</span>,<br>    <span class="hljs-string">&quot;django.contrib.auth&quot;</span>,<br>    <span class="hljs-string">&quot;django.contrib.contenttypes&quot;</span>,<br>    <span class="hljs-string">&quot;django.contrib.sessions&quot;</span>,<br>    <span class="hljs-string">&quot;django.contrib.messages&quot;</span>,<br>    <span class="hljs-string">&quot;django.contrib.staticfiles&quot;</span>,<br>    <span class="hljs-string">&quot;app01.apps.App01Config&quot;</span>          <span class="hljs-comment">#注册app01</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>编写URL和视图函数对应关系【<a target="_blank" rel="noopener" href="http://urls.py">urls.py</a>】</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.contrib <span class="hljs-keyword">import</span> admin<br><span class="hljs-keyword">from</span> django.urls <span class="hljs-keyword">import</span> path<br><span class="hljs-keyword">from</span> app01 <span class="hljs-keyword">import</span> views<br><br>urlpatterns = [<br>    <span class="hljs-comment"># path(&quot;admin/&quot;, admin.site.urls),</span><br>    path(<span class="hljs-string">&quot;index/&quot;</span>, views.index),<br>]<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>编写视图函数【<a target="_blank" rel="noopener" href="http://view.py">view.py</a>】</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.shortcuts <span class="hljs-keyword">import</span> render, HttpResponse<br><br><br><span class="hljs-comment"># Create your views here.</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index</span>(<span class="hljs-params">request</span>):</span><br>    <span class="hljs-keyword">return</span> HttpResponse(<span class="hljs-string">&quot;欢迎访问YUGIN Blog&quot;</span>)<br></code></pre></td></tr></table></figure>
+<ul>
+<li><strong>启动Django项目</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">1.</span>命令行启动<br>python manage.py runserver<br><span class="hljs-number">2.</span>pycharm启动<br>直接点击pycharm里的启动按钮<br></code></pre></td></tr></table></figure>
+<h3 id="编写页面"><a class="markdownIt-Anchor" href="#编写页面"></a> 编写页面</h3>
+<h4 id="引入html"><a class="markdownIt-Anchor" href="#引入html"></a> 引入HTML</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">user_list</span>(<span class="hljs-params">request</span>):</span><br>    <span class="hljs-comment"># 根据app注册顺序,去每个app目录下的templates中寻找对应的html</span><br>    <span class="hljs-keyword">return</span> render(request, <span class="hljs-string">&quot;user_list.html&quot;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="静态文件"><a class="markdownIt-Anchor" href="#静态文件"></a> 静态文件</h4>
+<p>一般开发过程中：</p>
+<ul>
+<li>图片</li>
+<li>CSS</li>
+<li>Js</li>
+</ul>
+<p>都会当做静态文件处理！</p>
+<ul>
+<li>
+<p>一般在app目录下放置static文件夹</p>
+</li>
+<li>
+<p>注意Django一般引入静态文件：</p>
+</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs html">&#123;% load static %&#125;<br><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>用户列表<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;&#123;% static &#x27;plugins/bootstrap-3.4.1/css/bootstrap.css&#x27; %&#125;&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>用户列表<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&#123;% static &#x27;js/jquery-3.6.1.min.js&#x27; %&#125;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;&#123;% static &#x27;plugins/bootstrap-3.4.1/js/bootstrap.min.js&#x27; %&#125;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
                 
               </div>
