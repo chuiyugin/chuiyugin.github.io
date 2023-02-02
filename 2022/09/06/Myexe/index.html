@@ -72,7 +72,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"3ab6987a72dcf290bd1498abd234c736","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"3ab6987a72dcf290bd1498abd234c736","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -117,7 +117,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -150,7 +150,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                首页
+                <span>首页</span>
               </a>
             </li>
           
@@ -162,7 +162,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                归档
+                <span>归档</span>
               </a>
             </li>
           
@@ -174,7 +174,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -186,7 +186,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -198,7 +198,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -210,7 +210,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
-                链接
+                <span>链接</span>
               </a>
             </li>
           
@@ -218,15 +218,16 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
           
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
@@ -327,26 +328,17 @@
             
               <div class="markdown-body">
                 
-                <h1 id="打包exe应用程序"><a class="markdownIt-Anchor" href="#打包exe应用程序"></a> 打包.exe应用程序</h1>
-<h2 id="用python打包exe应用程序-pyinstaller"><a class="markdownIt-Anchor" href="#用python打包exe应用程序-pyinstaller"></a> 用python打包exe应用程序-PyInstaller</h2>
-<h3 id="1-pyinstaller简介"><a class="markdownIt-Anchor" href="#1-pyinstaller简介"></a> <strong>1、PyInstaller简介</strong></h3>
-<p>PyInstaller是一个跨平台的Python应用打包工具，支持 Windows/Linux/MacOS三大主流平台，能够把 Python 脚本及其所在的 Python 解释器打包成可执行文件，从而允许最终用户在无需安装 Python 的情况下执行应用程序。<br />
-PyInstaller 制作出来的执行文件并不是跨平台的，如果需要为不同平台打包，就要在相应平台上运行PyInstaller进行打包。</p>
-<h3 id="2-pyinstaller安装"><a class="markdownIt-Anchor" href="#2-pyinstaller安装"></a> <strong>2、PyInstaller安装</strong></h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple Pyinstaller<br></code></pre></td></tr></table></figure>
-<h3 id="3参数含义"><a class="markdownIt-Anchor" href="#3参数含义"></a> 3.参数含义</h3>
-<p><strong>-F</strong> 表示生成单个可执行文件</p>
+                <h1 id="打包-exe应用程序"><a href="#打包-exe应用程序" class="headerlink" title="打包.exe应用程序"></a>打包.exe应用程序</h1><h2 id="用python打包exe应用程序-PyInstaller"><a href="#用python打包exe应用程序-PyInstaller" class="headerlink" title="用python打包exe应用程序-PyInstaller"></a>用python打包exe应用程序-PyInstaller</h2><h3 id="1、PyInstaller简介"><a href="#1、PyInstaller简介" class="headerlink" title="1、PyInstaller简介"></a><strong>1、PyInstaller简介</strong></h3><p>PyInstaller是一个跨平台的Python应用打包工具，支持 Windows/Linux/MacOS三大主流平台，能够把 Python 脚本及其所在的 Python 解释器打包成可执行文件，从而允许最终用户在无需安装 Python 的情况下执行应用程序。<br>PyInstaller 制作出来的执行文件并不是跨平台的，如果需要为不同平台打包，就要在相应平台上运行PyInstaller进行打包。</p>
+<h3 id="2、PyInstaller安装"><a href="#2、PyInstaller安装" class="headerlink" title="2、PyInstaller安装"></a><strong>2、PyInstaller安装</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple Pyinstaller<br></code></pre></td></tr></table></figure>
+<h3 id="3-参数含义"><a href="#3-参数含义" class="headerlink" title="3.参数含义"></a>3.参数含义</h3><p><strong>-F</strong> 表示生成单个可执行文件</p>
 <p><strong>-w</strong> 表示去掉控制台窗口，这在GUI界面时非常有用。不过如果是命令行程序的话那就把这个选项删除吧！</p>
 <p><strong>-p</strong> 表示你自己自定义需要加载的类路径，一般情况下用不到</p>
 <p><strong>-i</strong> 表示可执行文件的图标</p>
-<h3 id="4示例"><a class="markdownIt-Anchor" href="#4示例"></a> 4.示例</h3>
-<p>在<code>.py</code>和<code>.ico</code>文件夹下打开终端</p>
+<h3 id="4-示例"><a href="#4-示例" class="headerlink" title="4.示例"></a>4.示例</h3><p>在<code>.py</code>和<code>.ico</code>文件夹下打开终端</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">pyinstaller -F -<span class="hljs-selector-tag">i</span> ./fac<span class="hljs-selector-class">.ico</span> tree.py<br></code></pre></td></tr></table></figure>
 <p>这个时候多了很多文件和文件夹，dist目录就是我们打包好的地方。使用-w只生成<code>.exe</code>文件</p>
-<h2 id="python使得exe文件运行完保留"><a class="markdownIt-Anchor" href="#python使得exe文件运行完保留"></a> PYTHON使得.exe文件运行完保留</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br>os.system(<span class="hljs-string">&quot;pause&quot;</span>)<br></code></pre></td></tr></table></figure>
-<h2 id="c使得exe文件运行完保留"><a class="markdownIt-Anchor" href="#c使得exe文件运行完保留"></a> C++使得.exe文件运行完保留</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;Pause&quot;</span>);<span class="hljs-comment">//生成的exe运行完程序保留，点任意键结束</span><br></code></pre></td></tr></table></figure>
+<h2 id="PYTHON使得-exe文件运行完保留"><a href="#PYTHON使得-exe文件运行完保留" class="headerlink" title="PYTHON使得.exe文件运行完保留"></a>PYTHON使得.exe文件运行完保留</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br>os.system(<span class="hljs-string">&quot;pause&quot;</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="C-使得-exe文件运行完保留"><a href="#C-使得-exe文件运行完保留" class="headerlink" title="C++使得.exe文件运行完保留"></a>C++使得.exe文件运行完保留</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;Pause&quot;</span>);<span class="hljs-comment">//生成的exe运行完程序保留，点任意键结束</span><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -411,21 +403,23 @@ PyInstaller 制作出来的执行文件并不是跨平台的，如果需要为�
         </div>
       
       
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
             
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
             
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
+          </div>
         </div>
-      </div>
+      
     </div>
     <div class="license-icon iconfont"></div>
   </div>
@@ -459,8 +453,10 @@ PyInstaller 制作出来的执行文件并不是跨平台的，如果需要为�
             </div>
 
             
-  <article id="comments" lazyload>
-    
+  
+  
+    <article id="comments" lazyload>
+      
   <div id="gitalk-container"></div>
   <script type="text/javascript">
     Fluid.utils.loadComments('#gitalk-container', function() {
@@ -480,7 +476,8 @@ PyInstaller 制作出来的执行文件并不是跨平台的，如果需要为�
   <noscript>Please enable JavaScript to view the comments</noscript>
 
 
-  </article>
+    </article>
+  
 
 
           </article>
@@ -492,7 +489,10 @@ PyInstaller 制作出来的执行文件并不是跨平台的，如果需要为�
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -635,22 +635,34 @@ PyInstaller 制作出来的执行文件并不是跨平台的，如果需要为�
     var boardCtn = jQuery('#board-ctn');
     var boardTop = boardCtn.offset().top;
 
-    window.tocbot.init({
+    window.tocbot.init(Object.assign({
       tocSelector     : '#toc-body',
       contentSelector : '.markdown-body',
-      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
       linkClass       : 'tocbot-link',
       activeLinkClass : 'tocbot-active-link',
       listClass       : 'tocbot-list',
       isCollapsedClass: 'tocbot-is-collapsed',
       collapsibleClass: 'tocbot-is-collapsible',
-      collapseDepth   : CONFIG.toc.collapseDepth || 0,
       scrollSmooth    : true,
-      headingsOffset  : -boardTop
-    });
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
     if (toc.find('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
     }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
   });
 </script>
 
@@ -679,6 +691,21 @@ PyInstaller 制作出来的执行文件并不是跨平台的，如果需要为�
       window.anchors.options.class = 'anchorjs-link-left';
     }
     window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
   });
 </script>
 
@@ -723,7 +750,6 @@ PyInstaller 制作出来的执行文件并不是跨平台的，如果需要为�
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":300,"height":600},"mobile":{"show":false}});</script></body>
 </html>

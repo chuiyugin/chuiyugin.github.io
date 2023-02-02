@@ -75,7 +75,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"3ab6987a72dcf290bd1498abd234c736","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"3ab6987a72dcf290bd1498abd234c736","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -120,7 +120,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -153,7 +153,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                首页
+                <span>首页</span>
               </a>
             </li>
           
@@ -165,7 +165,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                归档
+                <span>归档</span>
               </a>
             </li>
           
@@ -177,7 +177,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -189,7 +189,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -201,7 +201,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -213,7 +213,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
-                链接
+                <span>链接</span>
               </a>
             </li>
           
@@ -221,15 +221,16 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
           
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
@@ -330,39 +331,32 @@
             
               <div class="markdown-body">
                 
-                <h4 id="原理分析"><a class="markdownIt-Anchor" href="#原理分析"></a> 原理分析</h4>
-<p><strong>1.冒泡排序：</strong></p>
-<p>​</p>
-<hr />
-<p>交换排序顾名思义就是通过元素的两两比较，判断是否符合要求，如过不符合就交换位置来达到排序的目的。冒泡排序名字的由来就是因为在交换过程中，类似水冒泡，小（大）的元素经过不断的交换由水底慢慢的浮到水的顶端。</p>
-<p>冒泡排序的思想就是利用的比较交换，利用循环将第 i 小或者大的元素归位，归位操作利用的是对 n 个元素中相邻的两个进行比较，如果顺序正确就不交换，如果顺序错误就进行位置的交换。通过重复的循环访问数组，直到没有可以交换的元素，那么整个排序就已经完成了。</p>
+                <h4 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h4><p><strong>1.冒泡排序：</strong></p>
+<p>​       </p>
+<hr>
+<p>　   交换排序顾名思义就是通过元素的两两比较，判断是否符合要求，如过不符合就交换位置来达到排序的目的。冒泡排序名字的由来就是因为在交换过程中，类似水冒泡，小（大）的元素经过不断的交换由水底慢慢的浮到水的顶端。</p>
+<p>　   冒泡排序的思想就是利用的比较交换，利用循环将第 i 小或者大的元素归位，归位操作利用的是对 n 个元素中相邻的两个进行比较，如果顺序正确就不交换，如果顺序错误就进行位置的交换。通过重复的循环访问数组，直到没有可以交换的元素，那么整个排序就已经完成了。</p>
 <p>​       冒泡排序性能分析：</p>
 <p>1.空间效率：仅使用常数个辅助单元，空间复杂度为Ο(1)。</p>
 <p>2.时间效率：最坏情况与平均情况均为Ο(n²)。</p>
-<hr />
+<hr>
 <p><strong>2.快速排序：</strong></p>
-<p>​</p>
+<p>​        </p>
 <p>​        快速排序使用分治法（Divide and conquer）策略来把一个串行（list）分为两个子串行（sub-lists）。</p>
 <p>​        快速排序又是一种分而治之思想在排序算法上的典型应用。本质上来看，快速排序应该算是在冒泡排序基础上的递归分治法。</p>
-<hr />
+<hr>
 <p>实现步骤：</p>
 <p>1.从数列中挑出一个元素，称为 “基准”（pivot）;</p>
 <p>2.重新排序数列，所有元素比基准值小的摆放在基准前面，所有元 素比基准值大的摆在基准的                 后面（相同的数可以到任一边）。在这个 分区退出之后，该基准就处于数列的中间位置。这个称为分区操   作；</p>
 <p>3.递归地把小于基准值元素的子数列和大于基准值元素的子数列排序；</p>
-<hr />
+<hr>
 <p>​           快速排序的最坏运行情况是 O(n²)，比如说顺序数列的快排。但它的平摊期望时间是 O(nlogn)，且 O(nlogn) 记号中隐含的常数因子很小，比复杂度稳定等于 O(nlogn) 的归并排序要小很多。所以，对绝大多数顺序性较弱的随机数列而言，快速排序总是优于归并排序。</p>
-<hr />
-<h4 id="效率对比"><a class="markdownIt-Anchor" href="#效率对比"></a> 效率对比</h4>
-<h5 id="生成了一万个随机数后利用两种排序法的时间对比"><a class="markdownIt-Anchor" href="#生成了一万个随机数后利用两种排序法的时间对比"></a> 生成了一万个随机数后利用两种排序法的时间对比</h5>
-<h6 id="快速排序算法"><a class="markdownIt-Anchor" href="#快速排序算法"></a> 快速排序算法:</h6>
-<p>​         <img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/1.png" srcset="/img/loading.gif" lazyload alt="快速排序时间" /></p>
-<h6 id="冒泡排序算法"><a class="markdownIt-Anchor" href="#冒泡排序算法"></a> 冒泡排序算法：</h6>
-<p>​          <img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/2.png" srcset="/img/loading.gif" lazyload alt="冒泡排序时间" /></p>
-<hr />
-<h4 id="完整代码实现"><a class="markdownIt-Anchor" href="#完整代码实现"></a> 完整代码实现</h4>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/time.h&gt;</span></span><br><br><span class="hljs-comment">//数组两个元素交换函数</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *a,<span class="hljs-keyword">int</span> *b)</span></span>&#123;<br>    <span class="hljs-keyword">int</span> t;<br>    t=*a;<br>    *a=*b;<br>    *b=t;<br>&#125;<br><br><span class="hljs-comment">//快速排序算法</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Quicksort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *a,<span class="hljs-keyword">int</span> left,<span class="hljs-keyword">int</span> right)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(left&gt;=right)<br>        <span class="hljs-keyword">return</span>;<br>    <span class="hljs-keyword">int</span> pivot = a[right];<br>     <span class="hljs-keyword">int</span> m=left,n=right<span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">while</span>(m&lt;n)&#123;<br>        <span class="hljs-keyword">while</span>(a[m] &lt; pivot &amp;&amp; m&lt;n)<br>            m++;<br>        <span class="hljs-keyword">while</span>(a[n] &gt;= pivot &amp;&amp; m&lt;n)<br>            n--;<br>        swap(&amp;a[m], &amp;a[n]);<br>    &#125;<br>        <span class="hljs-keyword">if</span>(a[m]&gt;=a[right])<br>            swap(&amp;a[m], &amp;a[right]);<br>        <span class="hljs-keyword">else</span><br>            m++;<br>        <span class="hljs-keyword">if</span>(m)<br>            Quicksort(a, left, m - <span class="hljs-number">1</span>);<br>            Quicksort(a, m + <span class="hljs-number">1</span>, right);<br><br>&#125;<br><br><span class="hljs-comment">//快速排序算法标准接口</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Quick_Sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *a,<span class="hljs-keyword">int</span> n)</span></span>&#123;<br>    Quicksort(a,<span class="hljs-number">0</span>,n<span class="hljs-number">-1</span>);<br>&#125;<br><br><span class="hljs-comment">//冒泡算法</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Bubble_Sort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *a,<span class="hljs-keyword">int</span> n)</span></span>&#123;<br>    <span class="hljs-keyword">int</span> i ,p ;<br>    <span class="hljs-keyword">int</span> flag = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(p=n<span class="hljs-number">-1</span>;p&gt;=<span class="hljs-number">0</span>;p--)&#123;<br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;p;i++)&#123;<br>            <span class="hljs-keyword">if</span>(a[i] &gt; a[i+<span class="hljs-number">1</span>])&#123;<br>                swap(&amp;a[i],&amp;a[i+<span class="hljs-number">1</span>]);<br>                flag = <span class="hljs-number">1</span>;<span class="hljs-comment">//标识发生变化</span><br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(flag == <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;<span class="hljs-comment">//全程无交换</span><br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">timeval</span> <span class="hljs-title">start</span>, <span class="hljs-title">end</span>;</span><br>    gettimeofday(&amp;start, <span class="hljs-literal">NULL</span>);<br>    <span class="hljs-keyword">int</span> L[<span class="hljs-number">10000</span>];<br>    <span class="hljs-keyword">int</span> i;<br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10000</span>;i++)&#123;<br>        L[i] = rand();<br>    &#125;<br>    <span class="hljs-comment">//Quick_Sort(L,10000);</span><br>    <span class="hljs-comment">//printf(&quot;the quick complete in &quot;);</span><br>    Bubble_Sort(L,<span class="hljs-number">10000</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;the bubble complete in &quot;</span>);<br>    gettimeofday(&amp;end, <span class="hljs-literal">NULL</span>);<br>    <span class="hljs-keyword">long</span> elapsed = (end.tv_sec - start.tv_sec)*<span class="hljs-number">1000000.0</span> + end.tv_usec - start.tv_usec;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.ld ms elapsed\n&quot;</span>, elapsed);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-<h4 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h4>
-<p>​         <strong>快速排序算法在运行时间上明显少于冒泡排序算法运行时间。</strong></p>
+<hr>
+<h4 id="效率对比"><a href="#效率对比" class="headerlink" title="效率对比"></a>效率对比</h4><h5 id="生成了一万个随机数后利用两种排序法的时间对比"><a href="#生成了一万个随机数后利用两种排序法的时间对比" class="headerlink" title="生成了一万个随机数后利用两种排序法的时间对比"></a>生成了一万个随机数后利用两种排序法的时间对比</h5><h6 id="快速排序算法"><a href="#快速排序算法" class="headerlink" title="快速排序算法:"></a>快速排序算法:</h6><p>​         <img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/1.png" srcset="/img/loading.gif" lazyload alt="快速排序时间">  </p>
+<h6 id="冒泡排序算法："><a href="#冒泡排序算法：" class="headerlink" title="冒泡排序算法："></a>冒泡排序算法：</h6><p>​          <img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/2.png" srcset="/img/loading.gif" lazyload alt="冒泡排序时间">  </p>
+<hr>
+<h4 id="完整代码实现"><a href="#完整代码实现" class="headerlink" title="完整代码实现"></a>完整代码实现</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/time.h&gt;</span></span><br><br><span class="hljs-comment">//数组两个元素交换函数</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">swap</span><span class="hljs-params">(<span class="hljs-type">int</span> *a,<span class="hljs-type">int</span> *b)</span>&#123;<br>    <span class="hljs-type">int</span> t;<br>    t=*a;<br>    *a=*b;<br>    *b=t;<br>&#125;<br><br><span class="hljs-comment">//快速排序算法</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">Quicksort</span><span class="hljs-params">(<span class="hljs-type">int</span> *a,<span class="hljs-type">int</span> left,<span class="hljs-type">int</span> right)</span>&#123;<br>    <span class="hljs-keyword">if</span>(left&gt;=right)<br>        <span class="hljs-keyword">return</span>;<br>    <span class="hljs-type">int</span> pivot = a[right];<br>     <span class="hljs-type">int</span> m=left,n=right<span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">while</span>(m&lt;n)&#123;<br>        <span class="hljs-keyword">while</span>(a[m] &lt; pivot &amp;&amp; m&lt;n)<br>            m++;<br>        <span class="hljs-keyword">while</span>(a[n] &gt;= pivot &amp;&amp; m&lt;n)<br>            n--;<br>        swap(&amp;a[m], &amp;a[n]);<br>    &#125;<br>        <span class="hljs-keyword">if</span>(a[m]&gt;=a[right])<br>            swap(&amp;a[m], &amp;a[right]);<br>        <span class="hljs-keyword">else</span><br>            m++;<br>        <span class="hljs-keyword">if</span>(m)<br>            Quicksort(a, left, m - <span class="hljs-number">1</span>);<br>            Quicksort(a, m + <span class="hljs-number">1</span>, right);<br><br>&#125;<br><br><span class="hljs-comment">//快速排序算法标准接口</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">Quick_Sort</span><span class="hljs-params">(<span class="hljs-type">int</span> *a,<span class="hljs-type">int</span> n)</span>&#123;<br>    Quicksort(a,<span class="hljs-number">0</span>,n<span class="hljs-number">-1</span>);<br>&#125;<br><br><span class="hljs-comment">//冒泡算法</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">Bubble_Sort</span><span class="hljs-params">(<span class="hljs-type">int</span> *a,<span class="hljs-type">int</span> n)</span>&#123;<br>    <span class="hljs-type">int</span> i ,p ;<br>    <span class="hljs-type">int</span> flag = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(p=n<span class="hljs-number">-1</span>;p&gt;=<span class="hljs-number">0</span>;p--)&#123;<br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;p;i++)&#123;<br>            <span class="hljs-keyword">if</span>(a[i] &gt; a[i+<span class="hljs-number">1</span>])&#123;<br>                swap(&amp;a[i],&amp;a[i+<span class="hljs-number">1</span>]);<br>                flag = <span class="hljs-number">1</span>;<span class="hljs-comment">//标识发生变化</span><br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(flag == <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;<span class="hljs-comment">//全程无交换</span><br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//主函数</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">timeval</span> <span class="hljs-title">start</span>, <span class="hljs-title">end</span>;</span><br>    gettimeofday(&amp;start, <span class="hljs-literal">NULL</span>);<br>    <span class="hljs-type">int</span> L[<span class="hljs-number">10000</span>];<br>    <span class="hljs-type">int</span> i;<br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10000</span>;i++)&#123;<br>        L[i] = rand();<br>    &#125;<br>    <span class="hljs-comment">//Quick_Sort(L,10000);</span><br>    <span class="hljs-comment">//printf(&quot;the quick complete in &quot;);</span><br>    Bubble_Sort(L,<span class="hljs-number">10000</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;the bubble complete in &quot;</span>);<br>    gettimeofday(&amp;end, <span class="hljs-literal">NULL</span>);<br>    <span class="hljs-type">long</span> elapsed = (end.tv_sec - start.tv_sec)*<span class="hljs-number">1000000.0</span> + end.tv_usec - start.tv_usec;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.ld ms elapsed\n&quot;</span>, elapsed);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>​         <strong>快速排序算法在运行时间上明显少于冒泡排序算法运行时间。</strong>  </p>
 
                 
               </div>
@@ -427,21 +421,23 @@
         </div>
       
       
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
             
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
             
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
+          </div>
         </div>
-      </div>
+      
     </div>
     <div class="license-icon iconfont"></div>
   </div>
@@ -475,8 +471,10 @@
             </div>
 
             
-  <article id="comments" lazyload>
-    
+  
+  
+    <article id="comments" lazyload>
+      
   <div id="gitalk-container"></div>
   <script type="text/javascript">
     Fluid.utils.loadComments('#gitalk-container', function() {
@@ -496,7 +494,8 @@
   <noscript>Please enable JavaScript to view the comments</noscript>
 
 
-  </article>
+    </article>
+  
 
 
           </article>
@@ -508,7 +507,10 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -651,22 +653,34 @@
     var boardCtn = jQuery('#board-ctn');
     var boardTop = boardCtn.offset().top;
 
-    window.tocbot.init({
+    window.tocbot.init(Object.assign({
       tocSelector     : '#toc-body',
       contentSelector : '.markdown-body',
-      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
       linkClass       : 'tocbot-link',
       activeLinkClass : 'tocbot-active-link',
       listClass       : 'tocbot-list',
       isCollapsedClass: 'tocbot-is-collapsed',
       collapsibleClass: 'tocbot-is-collapsible',
-      collapseDepth   : CONFIG.toc.collapseDepth || 0,
       scrollSmooth    : true,
-      headingsOffset  : -boardTop
-    });
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
     if (toc.find('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
     }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
   });
 </script>
 
@@ -695,6 +709,21 @@
       window.anchors.options.class = 'anchorjs-link-left';
     }
     window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
   });
 </script>
 
@@ -739,7 +768,6 @@
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":300,"height":600},"mobile":{"show":false}});</script></body>
 </html>

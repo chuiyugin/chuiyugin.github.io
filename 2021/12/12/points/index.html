@@ -75,7 +75,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"3ab6987a72dcf290bd1498abd234c736","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"3ab6987a72dcf290bd1498abd234c736","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -120,7 +120,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body>
@@ -153,7 +153,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
-                首页
+                <span>首页</span>
               </a>
             </li>
           
@@ -165,7 +165,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/">
                 <i class="iconfont icon-archive-fill"></i>
-                归档
+                <span>归档</span>
               </a>
             </li>
           
@@ -177,7 +177,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/">
                 <i class="iconfont icon-category-fill"></i>
-                分类
+                <span>分类</span>
               </a>
             </li>
           
@@ -189,7 +189,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/">
                 <i class="iconfont icon-tags-fill"></i>
-                标签
+                <span>标签</span>
               </a>
             </li>
           
@@ -201,7 +201,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/">
                 <i class="iconfont icon-user-fill"></i>
-                关于
+                <span>关于</span>
               </a>
             </li>
           
@@ -213,7 +213,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/links/">
                 <i class="iconfont icon-link-fill"></i>
-                链接
+                <span>链接</span>
               </a>
             </li>
           
@@ -221,15 +221,16 @@
         
           <li class="nav-item" id="search-btn">
             <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+              <i class="iconfont icon-search"></i>
             </a>
           </li>
           
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
           </li>
         
       </ul>
@@ -330,16 +331,11 @@
             
               <div class="markdown-body">
                 
-                <h3 id="题目描述"><a class="markdownIt-Anchor" href="#题目描述"></a> 题目描述</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/7.png" srcset="/img/loading.gif" lazyload alt=" " /></p>
-<h3 id="示例输入"><a class="markdownIt-Anchor" href="#示例输入"></a> 示例输入</h3>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>第一个输入为有几个点，其下输入为点的坐标<br><span class="hljs-number">3</span><br><br><span class="hljs-number">1</span> <span class="hljs-number">1</span><br><br><span class="hljs-number">3</span> <span class="hljs-number">4</span><br><br><span class="hljs-number">2</span> <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
-<h3 id="实现原理"><a class="markdownIt-Anchor" href="#实现原理"></a> 实现原理</h3>
-<p>​        本次示例程序使用10000个点来测试分治法的效率，利用分治法求10000个点中的最小点对，首先将一万个点按照x的大小从小到大排序，若x相同，则按照y的大小排序，得到有序排列的一万个点，再取数组中间值的元素将一万个点分为s1和s2两部分，先分别求出s1和s2两部分的最小点对取其最小值，再与跨越s1和s2的点对距离进行对比，这里有筛选条件为当奋力在s1和s2两边的点如果x轴或者y轴到中间点的距离必须小于或等于s1与s2两部分点的最小值，即形成一个矩形内取点，通过不断递归得到最小点对。设置全局变量记录最小点对的坐标即可，经测试可以在1s内得到最小点对。</p>
-<h3 id="示例结果"><a class="markdownIt-Anchor" href="#示例结果"></a> 示例结果</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/6.png" srcset="/img/loading.gif" lazyload alt=" " /></p>
-<h3 id="完整代码实现"><a class="markdownIt-Anchor" href="#完整代码实现"></a> 完整代码实现</h3>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;math.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/time.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> INF 99999</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 10000</span><br><br><span class="hljs-keyword">int</span> m,t;<br><span class="hljs-keyword">int</span> temp[N];<span class="hljs-comment">//储存宽度为d的点</span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span> &#123;</span><br>    <span class="hljs-keyword">double</span> x;<br>    <span class="hljs-keyword">double</span> y;<br>&#125;point[N];<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">compar</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span>* a, <span class="hljs-keyword">const</span> <span class="hljs-keyword">void</span>* b)</span><span class="hljs-comment">//用来比较两个元素的函数，即函数指针（回调函数）</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span> <span class="hljs-title">A</span> =</span> *(struct node*)a;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span> <span class="hljs-title">B</span> =</span> *(struct node*)b;<br>    <span class="hljs-keyword">if</span> (A.x != B.x)<br>        <span class="hljs-keyword">return</span> A.x - B.x;<span class="hljs-comment">//按照x从小到大的顺序排序</span><br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> A.y - B.y;<span class="hljs-comment">//当x相等的时候，按照y的从大到小的顺序排序</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">Min_distance</span><span class="hljs-params">(<span class="hljs-keyword">double</span> left, <span class="hljs-keyword">double</span> right)</span><span class="hljs-comment">//返回距离的大小关系</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> left &lt; right ? left : right;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">distance</span><span class="hljs-params">(<span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right)</span><span class="hljs-comment">//计算两点距离的函数</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">sqrt</span>((point[left].x - point[right].x) * (point[left].x - point[right].x) + ((point[left].y - point[right].y) * (point[left].y - point[right].y)));<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">Closest_Pair</span><span class="hljs-params">(<span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">double</span> End_dis = INF;<span class="hljs-comment">//距离的初始值,无穷大</span><br>    <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>, k = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">if</span> (left == right)<span class="hljs-comment">//只有一个点的时候，返回无穷大</span><br>        <span class="hljs-keyword">return</span> End_dis;<br><br>    <span class="hljs-keyword">if</span> (right - left == <span class="hljs-number">1</span>)<span class="hljs-comment">// 刚好两个点的时候，返回两点的距离</span><br>        <span class="hljs-keyword">return</span> distance(left, right);<br><br>    <span class="hljs-keyword">int</span> mid = (left + right) / <span class="hljs-number">2</span>;<span class="hljs-comment">//大于或等于三个点的时候</span><br><br>    <span class="hljs-keyword">double</span> distance_left = Closest_Pair(left, mid);<span class="hljs-comment">//左边递归</span><br>    <span class="hljs-keyword">double</span> distancer_ight = Closest_Pair(mid + <span class="hljs-number">1</span>, right);<span class="hljs-comment">//右边递归</span><br><br>    End_dis = Min_distance(distance_left, distancer_ight);<span class="hljs-comment">//比较左右两边点对距离，找出其中的最小值</span><br><br><br>    <span class="hljs-keyword">for</span> (i = left; i &lt;= right; i++)<span class="hljs-comment">//找出符合要求的距离mid横坐标小于等于d的点</span><br>    &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">fabs</span>(point[mid].x - point[i].x) &lt;= End_dis)<br>            temp[k++] = i;<span class="hljs-comment">//temp用于储存符合要求的点的序号</span><br>    &#125;<br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= k - <span class="hljs-number">1</span>; i++)<span class="hljs-comment">//通过纵坐标寻找最短距离</span><br>        <span class="hljs-keyword">for</span> (j = i + <span class="hljs-number">1</span>; j &lt;= k - <span class="hljs-number">1</span> &amp;&amp; j &lt; i + <span class="hljs-number">7</span>; j++)<br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">fabs</span>(point[temp[j]].y - point[temp[i]].y) &lt; End_dis)<br>            &#123;<br>                <span class="hljs-keyword">if</span>(End_dis&gt;=distance(temp[i], temp[j]))<br>                &#123;<br>                    m=temp[i];<br>                    t=temp[j];<br>                &#125;<br>                <span class="hljs-keyword">else</span> m = left,t = right;<br>                End_dis = Min_distance(End_dis, distance(temp[i], temp[j]));<br>            &#125;<br>    <span class="hljs-keyword">return</span> End_dis;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">timeval</span> <span class="hljs-title">start</span>, <span class="hljs-title">end</span>;</span><br>    <span class="hljs-keyword">int</span> n;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);<br>    <span class="hljs-keyword">double</span> a;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lf %lf&quot;</span>, &amp;point[i].x, &amp;point[i].y);<br>        gettimeofday(&amp;start, <span class="hljs-literal">NULL</span>);<br>        qsort(point, n, <span class="hljs-keyword">sizeof</span>(point[<span class="hljs-number">0</span>]), compar);<br>        a = Closest_Pair(<span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);<br>        gettimeofday(&amp;end, <span class="hljs-literal">NULL</span>);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;the shortest distance is:%.10lf\n&quot;</span>, a);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;the co-ordinates of the pair of points is:\n%.10lf %.10lf\n&quot;</span>,point[m].x,point[m].y);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.10lf %.10lf\n&quot;</span>,point[t].x,point[t].y);<br>        <span class="hljs-keyword">long</span> elapsed = (end.tv_sec - start.tv_sec)*<span class="hljs-number">1000000.0</span> + end.tv_usec - start.tv_usec;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.ld ms elapsed\n&quot;</span>, elapsed);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+                <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p> <img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/7.png" srcset="/img/loading.gif" lazyload alt=" ">  </p>
+<h3 id="示例输入"><a href="#示例输入" class="headerlink" title="示例输入"></a>示例输入</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>第一个输入为有几个点，其下输入为点的坐标<br><span class="hljs-number">3</span><br><br><span class="hljs-number">1</span> <span class="hljs-number">1</span><br><br><span class="hljs-number">3</span> <span class="hljs-number">4</span><br><br><span class="hljs-number">2</span> <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p>​        本次示例程序使用10000个点来测试分治法的效率，利用分治法求10000个点中的最小点对，首先将一万个点按照x的大小从小到大排序，若x相同，则按照y的大小排序，得到有序排列的一万个点，再取数组中间值的元素将一万个点分为s1和s2两部分，先分别求出s1和s2两部分的最小点对取其最小值，再与跨越s1和s2的点对距离进行对比，这里有筛选条件为当奋力在s1和s2两边的点如果x轴或者y轴到中间点的距离必须小于或等于s1与s2两部分点的最小值，即形成一个矩形内取点，通过不断递归得到最小点对。设置全局变量记录最小点对的坐标即可，经测试可以在1s内得到最小点对。  </p>
+<h3 id="示例结果"><a href="#示例结果" class="headerlink" title="示例结果"></a>示例结果</h3><p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/6.png" srcset="/img/loading.gif" lazyload alt=" "></p>
+<h3 id="完整代码实现"><a href="#完整代码实现" class="headerlink" title="完整代码实现"></a>完整代码实现</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;math.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/time.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> INF 99999</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> N 10000</span><br><br><span class="hljs-type">int</span> m,t;<br><span class="hljs-type">int</span> temp[N];<span class="hljs-comment">//储存宽度为d的点</span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span> &#123;</span><br>    <span class="hljs-type">double</span> x;<br>    <span class="hljs-type">double</span> y;<br>&#125;point[N];<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">compar</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">void</span>* a, <span class="hljs-type">const</span> <span class="hljs-type">void</span>* b)</span><span class="hljs-comment">//用来比较两个元素的函数，即函数指针（回调函数）</span><br>&#123;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span> <span class="hljs-title">A</span> =</span> *(<span class="hljs-keyword">struct</span> node*)a;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node</span> <span class="hljs-title">B</span> =</span> *(<span class="hljs-keyword">struct</span> node*)b;<br>    <span class="hljs-keyword">if</span> (A.x != B.x)<br>        <span class="hljs-keyword">return</span> A.x - B.x;<span class="hljs-comment">//按照x从小到大的顺序排序</span><br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> A.y - B.y;<span class="hljs-comment">//当x相等的时候，按照y的从大到小的顺序排序</span><br>&#125;<br><br><span class="hljs-type">double</span> <span class="hljs-title function_">Min_distance</span><span class="hljs-params">(<span class="hljs-type">double</span> left, <span class="hljs-type">double</span> right)</span><span class="hljs-comment">//返回距离的大小关系</span><br>&#123;<br>    <span class="hljs-keyword">return</span> left &lt; right ? left : right;<br>&#125;<br><br><span class="hljs-type">double</span> <span class="hljs-title function_">distance</span><span class="hljs-params">(<span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right)</span><span class="hljs-comment">//计算两点距离的函数</span><br>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">sqrt</span>((point[left].x - point[right].x) * (point[left].x - point[right].x) + ((point[left].y - point[right].y) * (point[left].y - point[right].y)));<br>&#125;<br><br><span class="hljs-type">double</span> <span class="hljs-title function_">Closest_Pair</span><span class="hljs-params">(<span class="hljs-type">int</span> left, <span class="hljs-type">int</span> right)</span><br>&#123;<br>    <span class="hljs-type">double</span> End_dis = INF;<span class="hljs-comment">//距离的初始值,无穷大</span><br>    <span class="hljs-type">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>, k = <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">if</span> (left == right)<span class="hljs-comment">//只有一个点的时候，返回无穷大</span><br>        <span class="hljs-keyword">return</span> End_dis;<br><br>    <span class="hljs-keyword">if</span> (right - left == <span class="hljs-number">1</span>)<span class="hljs-comment">// 刚好两个点的时候，返回两点的距离</span><br>        <span class="hljs-keyword">return</span> distance(left, right);<br><br>    <span class="hljs-type">int</span> mid = (left + right) / <span class="hljs-number">2</span>;<span class="hljs-comment">//大于或等于三个点的时候</span><br><br>    <span class="hljs-type">double</span> distance_left = Closest_Pair(left, mid);<span class="hljs-comment">//左边递归</span><br>    <span class="hljs-type">double</span> distancer_ight = Closest_Pair(mid + <span class="hljs-number">1</span>, right);<span class="hljs-comment">//右边递归</span><br><br>    End_dis = Min_distance(distance_left, distancer_ight);<span class="hljs-comment">//比较左右两边点对距离，找出其中的最小值</span><br><br><br>    <span class="hljs-keyword">for</span> (i = left; i &lt;= right; i++)<span class="hljs-comment">//找出符合要求的距离mid横坐标小于等于d的点</span><br>    &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">fabs</span>(point[mid].x - point[i].x) &lt;= End_dis)<br>            temp[k++] = i;<span class="hljs-comment">//temp用于储存符合要求的点的序号</span><br>    &#125;<br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt;= k - <span class="hljs-number">1</span>; i++)<span class="hljs-comment">//通过纵坐标寻找最短距离</span><br>        <span class="hljs-keyword">for</span> (j = i + <span class="hljs-number">1</span>; j &lt;= k - <span class="hljs-number">1</span> &amp;&amp; j &lt; i + <span class="hljs-number">7</span>; j++)<br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">fabs</span>(point[temp[j]].y - point[temp[i]].y) &lt; End_dis)<br>            &#123;<br>                <span class="hljs-keyword">if</span>(End_dis&gt;=distance(temp[i], temp[j]))<br>                &#123;<br>                    m=temp[i];<br>                    t=temp[j];<br>                &#125;<br>                <span class="hljs-keyword">else</span> m = left,t = right;<br>                End_dis = Min_distance(End_dis, distance(temp[i], temp[j]));<br>            &#125;<br>    <span class="hljs-keyword">return</span> End_dis;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span><br>&#123;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">timeval</span> <span class="hljs-title">start</span>, <span class="hljs-title">end</span>;</span><br>    <span class="hljs-type">int</span> n;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);<br>    <span class="hljs-type">double</span> a;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++)<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lf %lf&quot;</span>, &amp;point[i].x, &amp;point[i].y);<br>        gettimeofday(&amp;start, <span class="hljs-literal">NULL</span>);<br>        qsort(point, n, <span class="hljs-keyword">sizeof</span>(point[<span class="hljs-number">0</span>]), compar);<br>        a = Closest_Pair(<span class="hljs-number">0</span>, n - <span class="hljs-number">1</span>);<br>        gettimeofday(&amp;end, <span class="hljs-literal">NULL</span>);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;the shortest distance is:%.10lf\n&quot;</span>, a);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;the co-ordinates of the pair of points is:\n%.10lf %.10lf\n&quot;</span>,point[m].x,point[m].y);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.10lf %.10lf\n&quot;</span>,point[t].x,point[t].y);<br>        <span class="hljs-type">long</span> elapsed = (end.tv_sec - start.tv_sec)*<span class="hljs-number">1000000.0</span> + end.tv_usec - start.tv_usec;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.ld ms elapsed\n&quot;</span>, elapsed);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -404,21 +400,23 @@
         </div>
       
       
-      <div class="license-meta-item">
-        <div>许可协议</div>
-        <div>
-          
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
             
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
             
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
+          </div>
         </div>
-      </div>
+      
     </div>
     <div class="license-icon iconfont"></div>
   </div>
@@ -452,8 +450,10 @@
             </div>
 
             
-  <article id="comments" lazyload>
-    
+  
+  
+    <article id="comments" lazyload>
+      
   <div id="gitalk-container"></div>
   <script type="text/javascript">
     Fluid.utils.loadComments('#gitalk-container', function() {
@@ -473,7 +473,8 @@
   <noscript>Please enable JavaScript to view the comments</noscript>
 
 
-  </article>
+    </article>
+  
 
 
           </article>
@@ -485,7 +486,10 @@
       
   <aside class="sidebar" style="margin-left: -1rem">
     <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -628,22 +632,34 @@
     var boardCtn = jQuery('#board-ctn');
     var boardTop = boardCtn.offset().top;
 
-    window.tocbot.init({
+    window.tocbot.init(Object.assign({
       tocSelector     : '#toc-body',
       contentSelector : '.markdown-body',
-      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
       linkClass       : 'tocbot-link',
       activeLinkClass : 'tocbot-active-link',
       listClass       : 'tocbot-list',
       isCollapsedClass: 'tocbot-is-collapsed',
       collapsibleClass: 'tocbot-is-collapsible',
-      collapseDepth   : CONFIG.toc.collapseDepth || 0,
       scrollSmooth    : true,
-      headingsOffset  : -boardTop
-    });
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
     if (toc.find('.toc-list-item').length > 0) {
       toc.css('visibility', 'visible');
     }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
   });
 </script>
 
@@ -672,6 +688,21 @@
       window.anchors.options.class = 'anchorjs-link-left';
     }
     window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
   });
 </script>
 
@@ -716,7 +747,6 @@
             all[i].SourceElement().parentNode.className += ' has-jax';
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":300,"height":600},"mobile":{"show":false}});</script></body>
 </html>
