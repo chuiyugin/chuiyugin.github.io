@@ -26,7 +26,7 @@
 <meta property="og:description" content="Vue学习笔记!">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-24T16:15:00.000Z">
-<meta property="article:modified_time" content="2023-04-25T15:51:12.275Z">
+<meta property="article:modified_time" content="2023-04-25T16:28:37.152Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary_large_image">
@@ -272,7 +272,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          865 字
+          2.2k 字
         
       </span>
     
@@ -284,7 +284,7 @@
         
         
           <!-- compatible with older versions-->
-          3 分钟
+          7 分钟
         
       </span>
     
@@ -347,6 +347,30 @@
 <li>在HTML访问data属性(<code>v-bind</code>可以简写为<code>:</code>)</li>
 </ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">v-bind:href</span>=<span class="hljs-string">&quot;link&quot;</span>&gt;</span>链接<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="vue数据管理展示列表数据"><a class="markdownIt-Anchor" href="#vue数据管理展示列表数据"></a> Vue数据管理：展示列表数据</h2>
+<ul>
+<li>使用v-for语句生成列表</li>
+<li>index.js</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> app = <span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">createApp</span>(&#123;<br>    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>)&#123;<span class="hljs-comment">//data函数返回数据，可以是任何类型</span><br>        <span class="hljs-keyword">return</span>&#123;<br>            <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;vue&quot;</span>,<br>            <span class="hljs-attr">todos</span>:[<span class="hljs-string">&quot;学习Vue&quot;</span>,<span class="hljs-string">&quot;热爱生活&quot;</span>,<span class="hljs-string">&quot;平安喜乐&quot;</span>],<br>        &#125; <br>    &#125;<br>&#125;);<br>app.<span class="hljs-title function_">mount</span>(<span class="hljs-string">&quot;#app&quot;</span>);<span class="hljs-comment">//使得app成为模板，可以使用模板语法</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>在HTML中生成列表(不带序号)</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot; todo in todos &quot;</span>&gt;</span>&#123;&#123;todo&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>在HTML中生成列表(带序号)</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot; (todo,index) in todos &quot;</span>&gt;</span>&#123;&#123;index+1&#125;&#125; &#123;&#123;todo&#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h3 id="复选框的使用"><a class="markdownIt-Anchor" href="#复选框的使用"></a> 复选框的使用</h3>
+<ul>
+<li>index.js</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> app = <span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">createApp</span>(&#123;<br>    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>)&#123;<span class="hljs-comment">//data函数返回数据，可以是任何类型</span><br>        <span class="hljs-keyword">return</span>&#123;<br>            <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;vue&quot;</span>,<br>            <span class="hljs-comment">//todos:[&quot;学习Vue&quot;,&quot;热爱生活&quot;,&quot;平安喜乐&quot;],</span><br>            <span class="hljs-attr">todos</span>: [<br>                &#123;<br>                  <span class="hljs-attr">content</span>: <span class="hljs-string">&quot;把项目做完&quot;</span>,<br>                  <span class="hljs-attr">complete</span>: <span class="hljs-literal">true</span>,<br>                &#125;,<br>                &#123;<br>                  <span class="hljs-attr">content</span>: <span class="hljs-string">&quot;去超市购物&quot;</span>,<br>                  <span class="hljs-attr">complete</span>: <span class="hljs-literal">false</span>,<br>                &#125;,<br>                &#123;<br>                  <span class="hljs-attr">content</span>: <span class="hljs-string">&quot;看10分钟的书&quot;</span>,<br>                  <span class="hljs-attr">complete</span>: <span class="hljs-literal">false</span>,<br>                &#125;,<br>              ],<br>        &#125; <br>    &#125;<br>&#125;);<br>app.<span class="hljs-title function_">mount</span>(<span class="hljs-string">&quot;#app&quot;</span>);<span class="hljs-comment">//使得app成为模板，可以使用模板语法</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>在HTML中展示复选框</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;app&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">&quot; (todo,index) in todos &quot;</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">:checked</span>=<span class="hljs-string">&quot;todo.complete&quot;</span>&gt;</span> todo.content<br>            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
                 
               </div>
             

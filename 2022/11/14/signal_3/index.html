@@ -365,9 +365,9 @@
 <li>根据<strong>信号的时域处理</strong>的实验得到的<strong>FIR型滤波器系数</strong>，我们只需要重新设计<strong>快速卷积函数</strong>替换原本在<strong>matlab的卷积函数</strong>即可。查阅相关资料我们可以了解到快速卷积的实现可以利用<strong>两次快速傅里叶变换</strong>将<strong>原始音频的采样序列</strong>和<strong>滤波器系数组成的序列</strong>变换为<strong>频域</strong>后相乘，得到其时域卷积下的<strong>频域序列</strong>，再利用<strong>快速傅里叶逆变换转换</strong>为<strong>时域</strong>即可。这个过程总共使用了<strong>三次快速傅里叶变换</strong>，从上述图片的结果可以看出，快速卷积和Matlab卷积函数实现的<strong>滤波效果基本一致</strong>。</li>
 </ul>
 <h3 id="数字信号处理教程推荐"><a class="markdownIt-Anchor" href="#数字信号处理教程推荐"></a> 数字信号处理教程推荐</h3>
-<style>.bbplayer{width: 100%; max-width: 850px; margin: auto}</style><div class="bbplayer"><iframe class="bbplayer" id="mmedia-JpdWucGyeoQLFJpQ" src="https://player.bilibili.com/player.html?bvid=BV127411M7BU&page=1&high_quality=1&danmaku=false" allowfullscreen="allowfullscreen" scrolling="no" border="0" frameborder="0" framespacing="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts allow-popups"></iframe></div><script> document.getElementById("mmedia-JpdWucGyeoQLFJpQ").style.height=document.getElementById("mmedia-JpdWucGyeoQLFJpQ").scrollWidth*0.76+"px";
+<style>.bbplayer{width: 100%; max-width: 850px; margin: auto}</style><div class="bbplayer"><iframe class="bbplayer" id="mmedia-CwVJViESlPQmBPrl" src="https://player.bilibili.com/player.html?bvid=BV127411M7BU&page=1&high_quality=1&danmaku=false" allowfullscreen="allowfullscreen" scrolling="no" border="0" frameborder="0" framespacing="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts allow-popups"></iframe></div><script> document.getElementById("mmedia-CwVJViESlPQmBPrl").style.height=document.getElementById("mmedia-CwVJViESlPQmBPrl").scrollWidth*0.76+"px";
     window.onresize = function(){
-      document.getElementById("mmedia-JpdWucGyeoQLFJpQ").style.height=document.getElementById("mmedia-JpdWucGyeoQLFJpQ").scrollWidth*0.76+"px";
+      document.getElementById("mmedia-CwVJViESlPQmBPrl").style.height=document.getElementById("mmedia-CwVJViESlPQmBPrl").scrollWidth*0.76+"px";
     }; </script>
 
                 
