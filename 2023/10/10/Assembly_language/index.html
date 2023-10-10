@@ -18,22 +18,25 @@
   <meta name="author" content="Mr.CHUI">
   <meta name="keywords" content="">
   
-    <meta name="description" content="算法笔记的学习与分享总结!">
+    <meta name="description" content="汇编语言的学习与分享总结!">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法笔记">
-<meta property="og:url" content="http://example.com/2023/10/08/algorithm2/index.html">
+<meta property="og:title" content="汇编语言">
+<meta property="og:url" content="http://example.com/2023/10/10/Assembly_language/index.html">
 <meta property="og:site_name" content="CHUI YUGIN">
-<meta property="og:description" content="算法笔记的学习与分享总结!">
+<meta property="og:description" content="汇编语言的学习与分享总结!">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-10-08T07:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-08T07:01:25.314Z">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310101250059.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310101250451.png">
+<meta property="article:published_time" content="2023-10-10T05:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-10T04:51:57.328Z">
 <meta property="article:author" content="Mr.CHUI">
-<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="汇编语言]">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310101250059.png">
   
   
   
-  <title>算法笔记 - CHUI YUGIN</title>
+  <title>汇编语言 - CHUI YUGIN</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -243,7 +246,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="算法笔记"></span>
+            <span id="subtitle" data-typed-text="汇编语言"></span>
           
         </div>
 
@@ -259,8 +262,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-08 15:00" pubdate>
-          2023年10月8日 下午
+        <time datetime="2023-10-10 13:00" pubdate>
+          2023年10月10日 下午
         </time>
       </span>
     
@@ -272,7 +275,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          4 字
+          403 字
         
       </span>
     
@@ -284,7 +287,7 @@
         
         
           <!-- compatible with older versions-->
-          1 分钟
+          2 分钟
         
       </span>
     
@@ -322,12 +325,39 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">算法笔记</h1>
+            <h1 style="display: none">汇编语言</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="算法笔记"><a class="markdownIt-Anchor" href="#算法笔记"></a> 算法笔记</h1>
+                <h1 id="汇编语言"><a class="markdownIt-Anchor" href="#汇编语言"></a> 汇编语言</h1>
+<h2 id="第二章-寄存器"><a class="markdownIt-Anchor" href="#第二章-寄存器"></a> 第二章 寄存器</h2>
+<p>一个典型的CPU由<strong>运算器</strong>、<strong>控制器</strong>、<strong>寄存器</strong>等器件组成，这些器件靠<strong>内部总线</strong>相连。</p>
+<p>区分<strong>内部总线</strong>与<strong>外部总线</strong>：</p>
+<ul>
+<li><strong>内部总线</strong>实现CPU<strong>内部各个器件</strong>之间的联系。</li>
+<li><strong>外部总线</strong>实现<strong>CPU和主板上其他器件</strong>的联系。</li>
+</ul>
+<p>简单而言，在CPU中：</p>
+<ul>
+<li>运算器进行信息处理；</li>
+<li>寄存器进行信息存储；</li>
+<li>控制器控制各种器件进行工作；</li>
+<li>内部总线连接各种器件，在它们之间进行数据传送；</li>
+</ul>
+<p>其中，寄存器是CPU中程序员可以用<strong>指令读写</strong>的部件，可以通过改变各种寄存器中的内容来实现对CPU的控制。</p>
+<h3 id="通用寄存器"><a class="markdownIt-Anchor" href="#通用寄存器"></a> 通用寄存器</h3>
+<p>8086CPU中所有寄存器都是16位的，可以存放<strong>两个字节</strong>的数据。</p>
+<p>存放一般性数据的寄存器成为通用寄存器，有AX、BX、CX、DX四个通用寄存器。</p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310101250059.png" srcset="/img/loading.gif" lazyload alt="image-20231005151203591" /></p>
+<p>为了保证与上一代的8位寄存器兼容，8086CPU中的通用寄存器AX、BX、CX、DX都可以分为两个可以独立使用的8位寄存器。</p>
+<ul>
+<li>AX可分为AH和AL；</li>
+<li>BX可分为BH和BL；</li>
+<li>CX可分为CH和CL；</li>
+<li>DX可分为DH和DL；</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310101250451.png" srcset="/img/loading.gif" lazyload alt="image-20231005151510399" /></p>
 
                 
               </div>
@@ -346,7 +376,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="category-chain-item">数据结构</a>
+  <a href="/categories/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" class="category-chain-item">汇编语言</a>
   
   
 
@@ -361,7 +391,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#数据结构</a>
+        <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/">#汇编语言]</a>
       
     </div>
   
@@ -373,8 +403,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>算法笔记</div>
-      <div>http://example.com/2023/10/08/algorithm2/</div>
+      <div>汇编语言</div>
+      <div>http://example.com/2023/10/10/Assembly_language/</div>
     </div>
     <div class="license-meta">
       
@@ -386,7 +416,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月8日</div>
+          <div>2023年10月10日</div>
         </div>
       
       
@@ -418,18 +448,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/10/Assembly_language/" title="汇编语言">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">汇编语言</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/04/Deep_laerning/" title="深度学习简要笔记">
-                        <span class="hidden-mobile">深度学习简要笔记</span>
+                      <a href="/2023/10/08/algorithm2/" title="算法笔记">
+                        <span class="hidden-mobile">算法笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -452,7 +476,7 @@
         var options = Object.assign(
           {"clientID":"5879fef477aebfb46fe6","clientSecret":"c6ddf310da089b6eade5be010238bbfc1507e2d9","repo":"blog-comments","owner":"chuiyugin","admin":["chuiyugin"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":false,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token"},
           {
-            id: '8f378f33f9ab268fe9026241989a0548'
+            id: '62d8c4b144bdad80b00f2a641526d87b'
           }
         )
         var gitalk = new Gitalk(options);
