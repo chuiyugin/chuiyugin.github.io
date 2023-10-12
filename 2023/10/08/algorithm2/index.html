@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310102009603.png">
 <meta property="article:published_time" content="2023-10-08T07:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-10T12:29:01.203Z">
+<meta property="article:modified_time" content="2023-10-12T11:39:32.666Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary_large_image">
@@ -274,7 +274,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          543 字
+          1.2k 字
         
       </span>
     
@@ -286,7 +286,7 @@
         
         
           <!-- compatible with older versions-->
-          2 分钟
+          4 分钟
         
       </span>
     
@@ -366,10 +366,45 @@
 </ul>
 </li>
 </ul>
-<h5 id="整型"><a class="markdownIt-Anchor" href="#整型"></a> 整型</h5>
+<h5 id="整型int"><a class="markdownIt-Anchor" href="#整型int"></a> 整型(int)</h5>
 <ul>
 <li>对于整型<code>int</code>而言，一个整数占<strong>32bit</strong>，即<strong>4个Byte</strong>，一般绝对值在$$10^9$$范围以内的整数都可以定义为<strong>int型</strong>。</li>
 </ul>
+<h5 id="长整型long-long"><a class="markdownIt-Anchor" href="#长整型long-long"></a> 长整型(long long)</h5>
+<ul>
+<li>对于长整型<code>long long</code>而言，一个整数占<strong>64bit</strong>，即<strong>8个Byte</strong>，如果需要的整数取值范围超过<strong>2147483647</strong>(超过$$10^{10}$$)就需要使用<strong>长整型</strong>。</li>
+</ul>
+<h5 id="浮点型"><a class="markdownIt-Anchor" href="#浮点型"></a> 浮点型</h5>
+<ul>
+<li><code>%f</code>是**单精度浮点型(<code>float</code>)<strong>和</strong>双精度浮点型(<code>double</code>)**的输出格式</li>
+<li>对于浮点型而言，一般不需要使用**<code>float</code><strong>，碰到浮点型都应该使用</strong><code>double</code>**来进行存储。</li>
+</ul>
+<h5 id="字符型"><a class="markdownIt-Anchor" href="#字符型"></a> 字符型</h5>
+<h6 id="字符变量和字符常量"><a class="markdownIt-Anchor" href="#字符变量和字符常量"></a> 字符变量和字符常量</h6>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">char</span> c;<br><span class="hljs-type">char</span> c = <span class="hljs-string">&#x27;e&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>从上面的程序中可以看出来，第一段的<code>c</code>被成为<strong>字符变量</strong>，对于带单引号的<code>‘e’</code>则被称为<strong>字符常量</strong>，而且必须是<strong>单个字符</strong>。</li>
+<li><strong>小写字母</strong>比<strong>大写字母</strong>的<strong>ASCII码值</strong>大<strong>32</strong>。</li>
+<li><code>%c</code>是<code>char</code>型的输出格式。</li>
+</ul>
+<h6 id="转义字符"><a class="markdownIt-Anchor" href="#转义字符"></a> 转义字符</h6>
+<ul>
+<li><strong>ASCII码</strong>中有一部分是<strong>控制字符</strong>，是<strong>不可显示</strong>的。</li>
+</ul>
+<ul>
+<li>比较常用的转义字符：</li>
+</ul>
+<blockquote>
+<p>\n 表示换行</p>
+<p>\0 表示空字符NULL，其ASCII码为0，要注意 \0 不是空格</p>
+</blockquote>
+<h6 id="字符串常量"><a class="markdownIt-Anchor" href="#字符串常量"></a> 字符串常量</h6>
+<p>字符串常量可以作为初值赋给字符串数组，并且使用<code>%s</code>的格式输出。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">char</span> str[<span class="hljs-number">25</span>] = <span class="hljs-string">&quot;this is the char test&quot;</span>;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,str);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-keyword">this</span> <span class="hljs-keyword">is</span> the <span class="hljs-built_in">char</span> test<br></code></pre></td></tr></table></figure>
+<h5 id="布尔型"><a class="markdownIt-Anchor" href="#布尔型"></a> 布尔型</h5>
+<p>布尔型变量只能是<strong>true(真、非零)<strong>和</strong>false(假、零)</strong>。</p>
 
                 
               </div>
