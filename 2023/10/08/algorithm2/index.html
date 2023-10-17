@@ -32,8 +32,15 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310122048285.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310131437646.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310131513505.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171623893.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171624875.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171624551.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171628441.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171630802.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171634133.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171634463.png">
 <meta property="article:published_time" content="2023-10-08T07:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-13T10:30:48.500Z">
+<meta property="article:modified_time" content="2023-10-17T08:46:07.759Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary_large_image">
@@ -280,7 +287,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.5k 字
+          2.8k 字
         
       </span>
     
@@ -292,7 +299,7 @@
         
         
           <!-- compatible with older versions-->
-          8 分钟
+          9 分钟
         
       </span>
     
@@ -335,50 +342,66 @@
             
               <div class="markdown-body">
                 
-                <h1 id="算法笔记"><a href="#算法笔记" class="headerlink" title="算法笔记"></a>算法笔记</h1><h2 id="C-C-快速入门"><a href="#C-C-快速入门" class="headerlink" title="C/C++快速入门"></a>C/C++快速入门</h2><h3 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h3><ul>
+                <h1 id="算法笔记"><a class="markdownIt-Anchor" href="#算法笔记"></a> 算法笔记</h1>
+<h2 id="cc快速入门"><a class="markdownIt-Anchor" href="#cc快速入门"></a> C/C++快速入门</h2>
+<h3 id="头文件"><a class="markdownIt-Anchor" href="#头文件"></a> 头文件</h3>
+<ul>
 <li>当我们忘记函数包含在哪个头文件下时或者头文件包含较多时，可以使用这个万能头文件来代替。但这个头文件也有缺点，最明显的是使用后<strong>编译时间太长</strong>。另外，由于 <code>include＜bits/stdc++.h＞</code>不是C++的标准头文件，所以会<strong>有少部分编译器不支持</strong>。因此建议使用<strong>标准头文件</strong>！</li>
 </ul>
-<h3 id="主函数"><a href="#主函数" class="headerlink" title="主函数"></a>主函数</h3><ul>
+<h3 id="主函数"><a class="markdownIt-Anchor" href="#主函数"></a> 主函数</h3>
+<ul>
 <li>主函数是一个程序的入口位置，整个程序从主函数开始执行，而且一个程序最多只能有一个主函数。</li>
 </ul>
-<h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><h4 id="变量的定义"><a href="#变量的定义" class="headerlink" title="变量的定义"></a>变量的定义</h4><ul>
+<h3 id="基本数据类型"><a class="markdownIt-Anchor" href="#基本数据类型"></a> 基本数据类型</h3>
+<h4 id="变量的定义"><a class="markdownIt-Anchor" href="#变量的定义"></a> 变量的定义</h4>
+<ul>
 <li>变量是在程序运行过程中<strong>其值可以改变的量</strong>，需要在<strong>定义</strong>之后才可以使用。</li>
 </ul>
-<h4 id="变量的类型"><a href="#变量的类型" class="headerlink" title="变量的类型"></a>变量的类型</h4><h5 id="基本数据类型-1"><a href="#基本数据类型-1" class="headerlink" title="基本数据类型"></a>基本数据类型</h5><ul>
+<h4 id="变量的类型"><a class="markdownIt-Anchor" href="#变量的类型"></a> 变量的类型</h4>
+<h5 id="基本数据类型-2"><a class="markdownIt-Anchor" href="#基本数据类型-2"></a> 基本数据类型</h5>
+<ul>
 <li>基本数据类型分为<strong>整型、浮点型、字符型和布尔型</strong>。</li>
 </ul>
-<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310102009603.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310102009603.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <ul>
 <li>注意在计算机系统中不管正数与负数的表示和存储都是以<strong>补码</strong>的形式。</li>
 <li><strong>原码</strong>的表示为：第一位表示符号（0为正，1为负），其余位表示数值。</li>
-<li><strong>反码</strong>的表示方法分为正数和负数两种：<ul>
+<li><strong>反码</strong>的表示方法分为正数和负数两种：
+<ul>
 <li>正数的反码等于原码本身。</li>
 <li>负数的反码是在其原码的基础上，符号位不变（即首位不变），其余各位按位取反。</li>
 </ul>
 </li>
-<li><strong>补码</strong>的表示方法同样分为正数和负数两种：<ul>
+<li><strong>补码</strong>的表示方法同样分为正数和负数两种：
+<ul>
 <li>正数的补码是其原码本身。</li>
 <li>负数的补码是在其原码的基础上，符号位不变，其余各位按位取反后加1（即在反码的基础上加1）。</li>
 </ul>
 </li>
 </ul>
-<h5 id="整型-int"><a href="#整型-int" class="headerlink" title="整型(int)"></a>整型(int)</h5><ul>
-<li>对于整型<code>int</code>而言，一个整数占<strong>32bit</strong>，即<strong>4个Byte</strong>，一般绝对值在<script type="math/tex">10^9</script>范围以内的整数都可以定义为<strong>int型</strong>。</li>
+<h5 id="整型int"><a class="markdownIt-Anchor" href="#整型int"></a> 整型(int)</h5>
+<ul>
+<li>对于整型<code>int</code>而言，一个整数占<strong>32bit</strong>，即<strong>4个Byte</strong>，一般绝对值在$$10^9$$范围以内的整数都可以定义为<strong>int型</strong>。</li>
 </ul>
-<h5 id="长整型-long-long"><a href="#长整型-long-long" class="headerlink" title="长整型(long long)"></a>长整型(long long)</h5><ul>
-<li>对于长整型<code>long long</code>而言，一个整数占<strong>64bit</strong>，即<strong>8个Byte</strong>，如果需要的整数取值范围超过<strong>2147483647</strong>(超过<script type="math/tex">10^{10}</script>)就需要使用<strong>长整型</strong>。</li>
+<h5 id="长整型long-long"><a class="markdownIt-Anchor" href="#长整型long-long"></a> 长整型(long long)</h5>
+<ul>
+<li>对于长整型<code>long long</code>而言，一个整数占<strong>64bit</strong>，即<strong>8个Byte</strong>，如果需要的整数取值范围超过<strong>2147483647</strong>(超过$$10^{10}$$)就需要使用<strong>长整型</strong>。</li>
 </ul>
-<h5 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h5><ul>
+<h5 id="浮点型"><a class="markdownIt-Anchor" href="#浮点型"></a> 浮点型</h5>
+<ul>
 <li><code>%f</code>是<strong>单精度浮点型</strong>(<code>float</code>)和<strong>双精度浮点型</strong>(<code>double</code>)的输出格式</li>
 <li>对于浮点型而言，一般不需要使用<code>float</code>，碰到浮点型都应该使用<code>double</code>来进行存储。</li>
 </ul>
-<h5 id="字符型"><a href="#字符型" class="headerlink" title="字符型"></a>字符型</h5><h6 id="字符变量和字符常量"><a href="#字符变量和字符常量" class="headerlink" title="字符变量和字符常量"></a>字符变量和字符常量</h6><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">char</span> c;<br><span class="hljs-type">char</span> c = <span class="hljs-string">&#x27;e&#x27;</span>;<br></code></pre></td></tr></table></figure>
+<h5 id="字符型"><a class="markdownIt-Anchor" href="#字符型"></a> 字符型</h5>
+<h6 id="字符变量和字符常量"><a class="markdownIt-Anchor" href="#字符变量和字符常量"></a> 字符变量和字符常量</h6>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">char</span> c;<br><span class="hljs-type">char</span> c = <span class="hljs-string">&#x27;e&#x27;</span>;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>从上面的程序中可以看出来，第一段的<code>c</code>被成为<strong>字符变量</strong>，对于带单引号的<code>‘e’</code>则被称为<strong>字符常量</strong>，而且必须是<strong>单个字符</strong>。</li>
 <li><strong>小写字母</strong>比<strong>大写字母</strong>的<strong>ASCII码值</strong>大<strong>32</strong>。</li>
 <li><code>%c</code>是<code>char</code>型的输出格式。</li>
 </ul>
-<h6 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h6><ul>
+<h6 id="转义字符"><a class="markdownIt-Anchor" href="#转义字符"></a> 转义字符</h6>
+<ul>
 <li><strong>ASCII码</strong>中有一部分是<strong>控制字符</strong>，是<strong>不可显示</strong>的。</li>
 </ul>
 <ul>
@@ -388,16 +411,20 @@
 <p>\n 表示换行</p>
 <p>\0 表示空字符NULL，其ASCII码为0，要注意 \0 不是空格</p>
 </blockquote>
-<h6 id="字符串常量"><a href="#字符串常量" class="headerlink" title="字符串常量"></a>字符串常量</h6><p>字符串常量可以作为初值赋给字符串数组，并且使用<code>%s</code>的格式输出。</p>
+<h6 id="字符串常量"><a class="markdownIt-Anchor" href="#字符串常量"></a> 字符串常量</h6>
+<p>字符串常量可以作为初值赋给字符串数组，并且使用<code>%s</code>的格式输出。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">char</span> str[<span class="hljs-number">25</span>] = <span class="hljs-string">&quot;this is the char test&quot;</span>;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,str);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>输出结果：</p>
 <figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-keyword">this</span> <span class="hljs-keyword">is</span> the <span class="hljs-built_in">char</span> test<br></code></pre></td></tr></table></figure>
-<h5 id="布尔型"><a href="#布尔型" class="headerlink" title="布尔型"></a>布尔型</h5><p>布尔型变量只能是<strong>true(真、非零)</strong>和<strong>false(假、零)</strong>。</p>
-<h4 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h4><p>强制类型转换的格式如下：</p>
+<h5 id="布尔型"><a class="markdownIt-Anchor" href="#布尔型"></a> 布尔型</h5>
+<p>布尔型变量只能是<strong>true(真、非零)<strong>和</strong>false(假、零)</strong>。</p>
+<h4 id="强制类型转换"><a class="markdownIt-Anchor" href="#强制类型转换"></a> 强制类型转换</h4>
+<p>强制类型转换的格式如下：</p>
 <blockquote>
 <p>(新类型名)变量名</p>
 </blockquote>
-<h4 id="符号常量和const常量"><a href="#符号常量和const常量" class="headerlink" title="符号常量和const常量"></a>符号常量和const常量</h4><ul>
+<h4 id="符号常量和const常量"><a class="markdownIt-Anchor" href="#符号常量和const常量"></a> 符号常量和const常量</h4>
+<ul>
 <li>符号常量通俗而言就是替换，也称为“宏定义”。</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">define</span> 标识符 常量</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> pi 3.14</span><br></code></pre></td></tr></table></figure>
@@ -408,26 +435,40 @@
 <blockquote>
 <p>这两种写法都被称为常量，一旦确定其值后将无法改变。</p>
 </blockquote>
-<h4 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h4><h5 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h5><p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310122043030.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h5 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h5><p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310122044294.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h5 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h5><p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310122045903.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h5 id="条件运算符"><a href="#条件运算符" class="headerlink" title="条件运算符"></a>条件运算符</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">A : B ? C<br></code></pre></td></tr></table></figure>
+<h4 id="运算符"><a class="markdownIt-Anchor" href="#运算符"></a> 运算符</h4>
+<h5 id="算术运算符"><a class="markdownIt-Anchor" href="#算术运算符"></a> 算术运算符</h5>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310122043030.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h5 id="关系运算符"><a class="markdownIt-Anchor" href="#关系运算符"></a> 关系运算符</h5>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310122044294.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h5 id="逻辑运算符"><a class="markdownIt-Anchor" href="#逻辑运算符"></a> 逻辑运算符</h5>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310122045903.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h5 id="条件运算符"><a class="markdownIt-Anchor" href="#条件运算符"></a> 条件运算符</h5>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">A : B ? C<br></code></pre></td></tr></table></figure>
 <ul>
 <li>如果A为真，执行并返回B的结果；如果A为假，那么执行并返回C的结果。</li>
 </ul>
-<h5 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h5><p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310122048285.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h3 id="顺序结构"><a href="#顺序结构" class="headerlink" title="顺序结构"></a>顺序结构</h3><h4 id="使用scanf和printf输入-输出"><a href="#使用scanf和printf输入-输出" class="headerlink" title="使用scanf和printf输入/输出"></a>使用scanf和printf输入/输出</h4><h5 id="scanf格式符"><a href="#scanf格式符" class="headerlink" title="scanf格式符"></a>scanf格式符</h5><p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310131437646.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="位运算符"><a class="markdownIt-Anchor" href="#位运算符"></a> 位运算符</h5>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310122048285.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h3 id="顺序结构"><a class="markdownIt-Anchor" href="#顺序结构"></a> 顺序结构</h3>
+<h4 id="使用scanf和printf输入输出"><a class="markdownIt-Anchor" href="#使用scanf和printf输入输出"></a> 使用scanf和printf输入/输出</h4>
+<h5 id="scanf格式符"><a class="markdownIt-Anchor" href="#scanf格式符"></a> scanf格式符</h5>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310131437646.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <ul>
-<li><p>注意上表中最后一行，数组名称本身就代表了这个数组第一个元素的地址，所以不需要加取地址运算符。因此在<code>scanf</code>中，除了<code>char</code>数组整个输入的情况不加<code>&amp;</code>之外，其他变量类型都需要加<code>&amp;</code>。</p>
+<li>
+<p>注意上表中最后一行，数组名称本身就代表了这个数组第一个元素的地址，所以不需要加取地址运算符。因此在<code>scanf</code>中，除了<code>char</code>数组整个输入的情况不加<code>&amp;</code>之外，其他变量类型都需要加<code>&amp;</code>。</p>
 </li>
-<li><p>注意字符数组使用<code>%s</code>读入的时候以<strong>空格</strong>和<strong>换行</strong>为读入结束的标志。</p>
+<li>
+<p>注意字符数组使用<code>%s</code>读入的时候以<strong>空格</strong>和<strong>换行</strong>为读入结束的标志。</p>
 </li>
 </ul>
-<h5 id="printf格式符"><a href="#printf格式符" class="headerlink" title="printf格式符"></a>printf格式符</h5><p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310131513505.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="printf格式符"><a class="markdownIt-Anchor" href="#printf格式符"></a> printf格式符</h5>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310131513505.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <ul>
 <li>对于<code>double</code>类型的变量，其在<code>printf</code>中的输出格式变成了<code>%f</code>，而在<code>scanf</code>中却是<code>%lf</code>。</li>
 </ul>
-<h5 id="三种实用的输出格式"><a href="#三种实用的输出格式" class="headerlink" title="三种实用的输出格式"></a>三种实用的输出格式</h5><h6 id="md"><a href="#md" class="headerlink" title="%md"></a>%md</h6><ul>
+<h5 id="三种实用的输出格式"><a class="markdownIt-Anchor" href="#三种实用的输出格式"></a> 三种实用的输出格式</h5>
+<h6 id="md"><a class="markdownIt-Anchor" href="#md"></a> %md</h6>
+<ul>
 <li><code>%md</code>可以使不足<strong>m</strong>位的<code>int</code>型变量以<strong>m</strong>位进行右对齐输出，其中高位用<strong>空格</strong>补齐，如果变量本身超过<strong>m</strong>位，则保持原样。</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> a = <span class="hljs-number">123</span>;<br>    <span class="hljs-type">int</span> b = <span class="hljs-number">12345678</span>;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%5d\n&quot;</span>,a);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%5d\n&quot;</span>,b);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -435,7 +476,8 @@
 <li>输出：</li>
 </ul>
 <figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">  <span class="hljs-number">123</span><br><span class="hljs-number">12345678</span><br></code></pre></td></tr></table></figure>
-<h6 id="0md"><a href="#0md" class="headerlink" title="%0md"></a>%0md</h6><ul>
+<h6 id="0md"><a class="markdownIt-Anchor" href="#0md"></a> %0md</h6>
+<ul>
 <li><code>%0md</code>只是在<code>%md</code>中间多加了<strong>0</strong>。和<code>%md</code>的唯一不同在于当变量不足<strong>m</strong>位时，将在前面补足够数量的<strong>0</strong>而不是空格。</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> a = <span class="hljs-number">123</span>;<br>    <span class="hljs-type">int</span> b = <span class="hljs-number">12345678</span>;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%05d\n&quot;</span>,a);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%05d\n&quot;</span>,b);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -443,18 +485,22 @@
 <li>输出：</li>
 </ul>
 <figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns"><span class="hljs-number">00123</span><br><span class="hljs-number">12345678</span><br></code></pre></td></tr></table></figure>
-<h6 id="mf"><a href="#mf" class="headerlink" title="%.mf"></a>%.mf</h6><ul>
-<li>%.mf可以让浮点数保留m位小数输出，精度是“四舍六入五成双”，具体而言为：<ul>
-<li>5前为<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/奇数/0?fromModule=lemma_inlink">奇数</a>，舍5入1；</li>
+<h6 id="mf"><a class="markdownIt-Anchor" href="#mf"></a> %.mf</h6>
+<ul>
+<li>%.mf可以让浮点数保留m位小数输出，精度是“四舍六入五成双”，具体而言为：
+<ul>
+<li>5前为<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%A5%87%E6%95%B0/0?fromModule=lemma_inlink">奇数</a>，舍5入1；</li>
 <li>5前为偶数，舍5不进（0是偶数）。</li>
 </ul>
 </li>
 </ul>
-<h4 id="使用getchar-和putchar-输入-输出字符"><a href="#使用getchar-和putchar-输入-输出字符" class="headerlink" title="使用getchar()和putchar()输入/输出字符"></a>使用getchar()和putchar()输入/输出字符</h4><ul>
+<h4 id="使用getchar和putchar输入输出字符"><a class="markdownIt-Anchor" href="#使用getchar和putchar输入输出字符"></a> 使用getchar()和putchar()输入/输出字符</h4>
+<ul>
 <li><code>getchar()</code>用来输入单个字符，<code>putchar()</code>用来输出单个字符。</li>
 <li><code>getchar()</code>可以识别并读入换行符。</li>
 </ul>
-<h4 id="typedef"><a href="#typedef" class="headerlink" title="typedef"></a>typedef</h4><ul>
+<h4 id="typedef"><a class="markdownIt-Anchor" href="#typedef"></a> typedef</h4>
+<ul>
 <li><code>typedef</code>能够给复杂的数据类型起一个别名，这样在使用过程中就可以使用别名来替换原来的写法。</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> LL;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    LL a = <span class="hljs-number">123456789123454321</span>;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>,a);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -462,6 +508,36 @@
 <li>输出：</li>
 </ul>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">123456789123454321<br></code></pre></td></tr></table></figure>
+<h3 id="选择结构"><a class="markdownIt-Anchor" href="#选择结构"></a> 选择结构</h3>
+<h4 id="if语句"><a class="markdownIt-Anchor" href="#if语句"></a> if语句</h4>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171623893.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h4 id="if语句的嵌套"><a class="markdownIt-Anchor" href="#if语句的嵌套"></a> if语句的嵌套</h4>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171624875.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h4 id="switch语句"><a class="markdownIt-Anchor" href="#switch语句"></a> switch语句</h4>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171624551.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h3 id="循环结构"><a class="markdownIt-Anchor" href="#循环结构"></a> 循环结构</h3>
+<h4 id="while语句"><a class="markdownIt-Anchor" href="#while语句"></a> while语句</h4>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171628441.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>在while语句中，只要条件A成立就一直执行省略号里面的内容。</li>
+</ul>
+<h4 id="dowhile语句"><a class="markdownIt-Anchor" href="#dowhile语句"></a> do…while语句</h4>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171630802.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>do…while语句会先执行省略号中的内容一次，然后才判断<strong>条件A</strong>是否<strong>成立</strong>，如果<strong>条件A</strong>成立，就继续反复执行省略号中的内容，直到某一次条件A<strong>不再成立</strong>，则退出循环。</li>
+</ul>
+<h4 id="for语句"><a class="markdownIt-Anchor" href="#for语句"></a> for语句</h4>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171634133.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>for语句的具体格式如下：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171634463.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h4 id="break和continue语句"><a class="markdownIt-Anchor" href="#break和continue语句"></a> break和continue语句</h4>
+<ul>
+<li><code>break</code>语句不仅可以强制退出<code>switch</code>语句，而且break同样可以退出循环语句，即可以在需要的条件下直接退出循环。</li>
+<li><code>continue</code>语句的作用和<code>break</code>语句的作用有点相似，它可以在需要的地方临时结束循环的<strong>当前轮回</strong>，然后进入<strong>下一轮回</strong>。</li>
+</ul>
+<h3 id="数组"><a class="markdownIt-Anchor" href="#数组"></a> 数组</h3>
 
                 
               </div>
