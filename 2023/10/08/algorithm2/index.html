@@ -40,8 +40,10 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171634133.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310171634463.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310182107408.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310221521845.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310221535589.png">
 <meta property="article:published_time" content="2023-10-08T07:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-19T03:55:29.519Z">
+<meta property="article:modified_time" content="2023-10-22T08:22:08.738Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary_large_image">
@@ -288,7 +290,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3.9k 字
+          6.7k 字
         
       </span>
     
@@ -300,7 +302,7 @@
         
         
           <!-- compatible with older versions-->
-          13 分钟
+          21 分钟
         
       </span>
     
@@ -584,6 +586,127 @@
 <li>和普通数组一样，字符数组也可以采用循环的方法初始化；</li>
 <li>除此之外，字符数组也可以通过<strong>直接赋值字符串</strong>来进行初始化（<strong>仅限于初始化</strong>，程序的其他位置不允许这样直接赋值整个字符串）</li>
 </ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">char</span> str[<span class="hljs-number">10</span>] = <span class="hljs-string">&quot;YUGIN!&quot;</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">6</span>;i++)<br>    &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c&quot;</span>,str[i]);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出：</li>
+</ul>
+<figure class="highlight erlang-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs erlang-repl">YUGIN!<br></code></pre></td></tr></table></figure>
+<h5 id="字符数组的输入输出"><a class="markdownIt-Anchor" href="#字符数组的输入输出"></a> 字符数组的输入输出</h5>
+<h6 id="scanf输入printf输出"><a class="markdownIt-Anchor" href="#scanf输入printf输出"></a> scanf输入，printf输出</h6>
+<ul>
+<li>
+<p><code>scanf</code>和<code>printf</code>对字符类型有<code>%c</code>和<code>%s</code>两种格式，其中<code>%c</code>用来输入<strong>单个字符</strong>，<code>%s</code>用来输入<strong>一个字符串</strong>并存在<strong>字符数组</strong>中。</p>
+</li>
+<li>
+<p><code>%c</code>格式能够识别<strong>空格</strong>和<strong>换行符</strong>并将其输入，<code>%s</code>通过<strong>空格</strong>或<strong>换行符</strong>来识别<strong>一个字符串的结束</strong>。</p>
+</li>
+<li>
+<p><code>scanf</code>在使用<code>%s</code>时，后面对应的数组名是不需要加<code>&amp;</code><strong>取地址运算符</strong>的。</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">char</span> str[<span class="hljs-number">10</span>];<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>,str);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,str);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输入输出：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">输入：<span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span> <span class="hljs-built_in">test</span><br>输出：<span class="hljs-built_in">test</span><br></code></pre></td></tr></table></figure>
+<h6 id="getchar输入putchar输出"><a class="markdownIt-Anchor" href="#getchar输入putchar输出"></a> getchar输入，putchar输出</h6>
+<ul>
+<li><code>getchar</code>和<code>putchar</code>分别用来输入和输出<strong>单个字符</strong>；</li>
+<li>输入和输出示例：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">char</span> a;<br>    a=<span class="hljs-built_in">getchar</span>();<br>    <span class="hljs-built_in">getchar</span>();<span class="hljs-comment">//可以用作吸收某些字符</span><br>    <span class="hljs-built_in">putchar</span>(a);<br>    <span class="hljs-built_in">putchar</span>(<span class="hljs-string">&#x27;\n&#x27;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h6 id="gets输入puts输出"><a class="markdownIt-Anchor" href="#gets输入puts输出"></a> gets输入，puts输出</h6>
+<ul>
+<li><code>gets</code>用来输入<strong>一行字符串</strong>（即<strong>一个一维数组</strong>，只有遇到<code>\n</code>时结束）</li>
+<li><code>puts</code>用来输出一行字符串（即一个一维数组，只有遇到<code>\n</code>时结束）</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">char</span> a[<span class="hljs-number">20</span>];<br>    <span class="hljs-type">char</span> b[<span class="hljs-number">4</span>][<span class="hljs-number">10</span>];<br>    <span class="hljs-built_in">gets</span>(a);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">2</span>;i++)<br>    &#123;<br>        <span class="hljs-built_in">gets</span>(b[i]);<br>    &#125;<br>    <span class="hljs-built_in">puts</span>(a);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">2</span>;i++)<br>    &#123;<br>        <span class="hljs-built_in">puts</span>(b[i]);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输入输出示例：</li>
+</ul>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ada">输入：<br>this <span class="hljs-keyword">is</span> <br>yugin<span class="hljs-symbol">&#x27;s</span><br>blog<br>输出：<br>this <span class="hljs-keyword">is</span> <br>yugin<span class="hljs-symbol">&#x27;s</span><br>blog<br></code></pre></td></tr></table></figure>
+<h5 id="字符数组的存放方式"><a class="markdownIt-Anchor" href="#字符数组的存放方式"></a> 字符数组的存放方式</h5>
+<ul>
+<li>由于<strong>字符数组</strong>是由若干个<code>char</code>类型的元素组成，因此<strong>字符数组</strong>的每一位都是一个<code>char</code>字符。</li>
+<li>在<strong>一维数组</strong>（或是<strong>二维数组的第二维</strong>）的末尾都有一个<strong>空字符</strong><code>\0</code>，用于表示存放的<strong>字符串的结尾</strong>。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310221521845.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>特别注意：<strong>空字符</strong><code>\0</code>的<strong>ASCII</strong>码为<strong>0</strong>，即空字符<code>NULL</code>，会占用一个<strong>字符位</strong>，因此在初始化的时候<strong>数组长度</strong>至少比<strong>字符串长度</strong>多一个长度。</li>
+<li>如果不是使用<code>scanf</code>函数的<code>%s</code>格式或<code>gets</code>函数输入字符串（例如使用<code>getchar</code>），则需要手动在字符数组最后加入<code>\0</code>，否则输出字符串会因为无法识别字符串末尾而输出<strong>乱码</strong>。</li>
+</ul>
+<h4 id="stringh头文件"><a class="markdownIt-Anchor" href="#stringh头文件"></a> string.h头文件</h4>
+<ul>
+<li><code>string.h</code>头文件包含了许多用于字符数组的函数。</li>
+</ul>
+<h5 id="strlen函数"><a class="markdownIt-Anchor" href="#strlen函数"></a> strlen()函数</h5>
+<ul>
+<li><code>strlen()</code>函数可以得到字符数组中第一个<code>\0</code>前的字符的个数并返回，其格式如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">len = <span class="hljs-built_in">strlen</span>(字符数组)；<br></code></pre></td></tr></table></figure>
+<h5 id="strcmp函数"><a class="markdownIt-Anchor" href="#strcmp函数"></a> strcmp()函数</h5>
+<ul>
+<li>strcmp函数返回两个字符串大小的比较结果，比较原则是字典序，其格式如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">cmp = <span class="hljs-built_in">strcmp</span>(字符数组<span class="hljs-number">1</span>，字符数组<span class="hljs-number">2</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>字典序的解释：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310221535589.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h5 id="strcpy函数"><a class="markdownIt-Anchor" href="#strcpy函数"></a> strcpy()函数</h5>
+<ul>
+<li><code>strcpy()</code>函数可以把一个字符串复制给另一个字符串，其格式如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-built_in">strcpy</span>(字符数组<span class="hljs-number">1</span>,字符数组<span class="hljs-number">2</span>);<br><span class="hljs-built_in">puts</span>(字符数组<span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>注意：是把<strong>字符数组2</strong>复制给<strong>字符数组1</strong>，包括<strong>结束符</strong><code>\0</code>；</li>
+</ul>
+<h5 id="strcat函数"><a class="markdownIt-Anchor" href="#strcat函数"></a> strcat()函数</h5>
+<ul>
+<li><code>strcat()</code>可以把一个字符串接到另一个字符串后面，其格式如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-built_in">strcpy</span>(字符数组<span class="hljs-number">1</span>,字符数组<span class="hljs-number">2</span>);<br><span class="hljs-built_in">puts</span>(字符数组<span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
+<ul>
+<li>注意：是把<strong>字符数组2</strong>接到<strong>字符数组1</strong>后面；</li>
+</ul>
+<h5 id="sscanf和sprintf"><a class="markdownIt-Anchor" href="#sscanf和sprintf"></a> sscanf()和sprintf()</h5>
+<ul>
+<li>
+<p><code>sscanf()</code>和<code>sprintf()</code>是处理字符串问题的利器！</p>
+</li>
+<li>
+<p><code>sscanf()</code>和<code>sprintf()</code>的使用格式如下：</p>
+</li>
+</ul>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lisp">sscanf(<span class="hljs-name">str</span>,<span class="hljs-string">&quot;%d&quot;</span>,<span class="hljs-symbol">&amp;n</span>)<span class="hljs-comment">;</span><br>sprintf(<span class="hljs-name">str</span>,<span class="hljs-string">&quot;%d&quot;</span>,n)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面<code>sscanf()</code>写法的作用是把字符数组<code>str</code>的中的内容以<code>&quot;%d&quot;</code>的格式写到<code>n</code>中（<strong>从左到右</strong>）。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">char</span> a[<span class="hljs-number">20</span>] = <span class="hljs-string">&quot;123&quot;</span>;<br>    <span class="hljs-type">int</span> n=<span class="hljs-number">0</span>;<br>    <span class="hljs-built_in">sscanf</span>(a,<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,n);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">123<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面<code>sprintf()</code>写法的作用是把<code>n</code>以<code>&quot;%d&quot;</code>的格式写到<code>str</code>字符数组中（<strong>从右到左</strong>）。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">char</span> a[<span class="hljs-number">20</span>];<br>    <span class="hljs-type">int</span> n=<span class="hljs-number">123433</span>;<br>    <span class="hljs-built_in">sprintf</span>(a,<span class="hljs-string">&quot;%d&quot;</span>,n);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,a);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">123433<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面的仅仅是简单的应用，实际上<code>sscanf()</code>和<code>sprintf()</code>可以进行更加复杂的字符串处理：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">char</span> str[<span class="hljs-number">100</span>];<br>    <span class="hljs-type">int</span> n=<span class="hljs-number">520</span>;<br>    <span class="hljs-type">double</span> db=<span class="hljs-number">2002.080512121</span>;<br>    <span class="hljs-type">char</span> str2[<span class="hljs-number">20</span>]=<span class="hljs-string">&quot;yugin!&quot;</span>;<br>    <span class="hljs-type">char</span> str3[<span class="hljs-number">20</span>]=<span class="hljs-string">&quot;I&quot;</span>;<br>    <span class="hljs-built_in">sprintf</span>(str,<span class="hljs-string">&quot;%s%d%s,%.4f&quot;</span>,str3,n,str2,db);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,str);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出：</li>
+</ul>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">I520yugin</span>!,<span class="hljs-number">2002</span>.<span class="hljs-number">0805</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>最后指出，<code>sscanf()</code>和<code>sprintf()</code>也可以支持正则表达式，则许多字符串问题将迎刃而解。</li>
+</ul>
+<h3 id="函数"><a class="markdownIt-Anchor" href="#函数"></a> 函数</h3>
 
                 
               </div>
