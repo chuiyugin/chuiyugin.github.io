@@ -45,7 +45,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310221718986.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310221723044.png">
 <meta property="article:published_time" content="2023-10-08T07:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-22T09:42:12.287Z">
+<meta property="article:modified_time" content="2023-10-23T12:28:48.734Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary_large_image">
@@ -292,7 +292,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          7.7k 字
+          8.6k 字
         
       </span>
     
@@ -304,7 +304,7 @@
         
         
           <!-- compatible with older versions-->
-          25 分钟
+          28 分钟
         
       </span>
     
@@ -760,6 +760,42 @@
 </ul>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">6<br></code></pre></td></tr></table></figure>
 <h3 id="指针"><a class="markdownIt-Anchor" href="#指针"></a> 指针</h3>
+<h4 id="什么是指针"><a class="markdownIt-Anchor" href="#什么是指针"></a> 什么是指针</h4>
+<ul>
+<li>在C语言中，<strong>指针</strong>就是<strong>内存地址</strong>，<strong>指针变量</strong>是指用来<strong>存放内存地址的变量</strong>。</li>
+<li>在C/C++语言中，<strong>指针</strong>一般被认为是<strong>指针变量</strong>，指针变量的内容存储的是<strong>其指向的对象的首地址</strong>，指向的对象可以是<strong>变量</strong>（指针变量也是变量），<strong>数组</strong>，<strong>函数</strong>等<strong>占据存储空间的实体</strong>。</li>
+<li>只要在变量前面加上<code>&amp;</code>，就表示变量的地址。</li>
+<li>指针是一个<code>unsigned</code>类型的函数。</li>
+</ul>
+<h4 id="指针变量"><a class="markdownIt-Anchor" href="#指针变量"></a> 指针变量</h4>
+<ul>
+<li>指针变量是用来存放指针（或者可以理解为地址）。</li>
+<li>在某种数据类型后加<code>*</code>来表示这是一个指针变量，定义如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> *p;<br><span class="hljs-type">double</span> *p;<br><span class="hljs-type">char</span> *p;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>给指针变量赋值的方式一般是把变量的地址取出来，然后赋给对应类型的指针变量：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-type">int</span> a;<br><span class="hljs-type">int</span> *p = &amp;a;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>如果<code>p</code>是指针（即<code>p</code>保存的是某个数据类型的地址），则<code>*p</code>就是这个地址所存放的元素：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> a;<br>    <span class="hljs-type">int</span> *p = &amp;a;<br>    a=<span class="hljs-number">233</span>;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,*p);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">233<br></code></pre></td></tr></table></figure>
+<ul>
+<li>指针变量也可以进行加减法，其中<strong>减法</strong>的结果是两个地址偏移的距离。</li>
+<li>例如，对于<code>int*</code>类型的指针变量<code>p</code>而言，<code>p+1</code>是指<code>p</code>所指的int型变量的下一个<code>int</code>型变量地址，这个所谓的“下一个”是跨越了一整个<code>int</code>型（即<strong>4Byte</strong>）。</li>
+<li>指针变量也支持自增和自减的操作，示例如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> a;<br>    <span class="hljs-type">int</span> *p = &amp;a;<br>    a=<span class="hljs-number">233</span>;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,p);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,p+<span class="hljs-number">1</span>);<br>    p++;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,p);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出：</li>
+</ul>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dns"><span class="hljs-number">113245364</span><br><span class="hljs-number">113245368</span><br><span class="hljs-number">113245368</span><br></code></pre></td></tr></table></figure>
+<h4 id="指针与数组"><a class="markdownIt-Anchor" href="#指针与数组"></a> 指针与数组</h4>
 
                 
               </div>
