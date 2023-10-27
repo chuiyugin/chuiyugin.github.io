@@ -45,7 +45,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310221718986.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310221723044.png">
 <meta property="article:published_time" content="2023-10-08T07:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-26T13:02:06.766Z">
+<meta property="article:modified_time" content="2023-10-27T09:58:38.908Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary_large_image">
@@ -292,7 +292,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          13k 字
+          16k 字
         
       </span>
     
@@ -304,7 +304,7 @@
         
         
           <!-- compatible with older versions-->
-          43 分钟
+          52 分钟
         
       </span>
     
@@ -973,6 +973,98 @@
 <li>例如下面一道例题：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//题目：输入一行字符串，然后直接输出这行字符串本身。</span><br><span class="hljs-comment">//输入描述：一行由大小写字母或空格组成的字符串，至少一个字符，不超过50个字符。</span><br><span class="hljs-comment">//输出描述：原样输出输入的字符串。</span><br><span class="hljs-comment">//**************************样例**************************</span><br><span class="hljs-comment">//输入：Huo Zhe Bu Jiu Shi Cang Cu Na Li You De Liao Ni Wo</span><br><span class="hljs-comment">//输出：Huo Zhe Bu Jiu Shi Cang Cu Na Li You De Liao Ni Wo</span><br><span class="hljs-comment">//**************************代码**************************</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MAX_LEN = <span class="hljs-number">1000000</span>;<br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">char</span> str[MAX_LEN];<br>    cin.<span class="hljs-built_in">getline</span>(str,MAX_LEN);<span class="hljs-comment">//由gets(str);函数换成了cin.getline(str,MAX_LEN);</span><br>    <span class="hljs-built_in">puts</span>(str);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="再谈sscanf和sprintf"><a class="markdownIt-Anchor" href="#再谈sscanf和sprintf"></a> 再谈sscanf()和sprintf()</h3>
+<h4 id="关于sscanf"><a class="markdownIt-Anchor" href="#关于sscanf"></a> 关于sscanf()</h4>
+<ul>
+<li>
+<p><code>sscanf</code>是C语言标准库中的一个函数，用于从字符串中读取格式化输入。在C<ins>中也可以使用<code>sscanf</code>函数，但更常用的是使用C</ins>标准库中的<code>stringstream</code>类来进行字符串解析。</p>
+</li>
+<li>
+<p><code>sscanf</code>函数的原型如下：</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">sscanf</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span>* str, <span class="hljs-type">const</span> <span class="hljs-type">char</span>* format, ...)</span></span>;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>其中，<code>str</code>是要解析的字符串，<code>format</code>是格式化字符串，用于指定解析的规则，<code>...</code>是可变参数列表，用于接收解析出来的数据。</p>
+</li>
+<li>
+<p>与之相似的函数还有<code>scanf</code>和<code>fscanf</code>。其中，<code>scanf</code>从标准输入（通常是键盘）读取数据，而<code>fscanf</code>从文件中读取数据。</p>
+</li>
+</ul>
+<p>在使用<code>sscanf</code>函数时，需要注意以下几点：</p>
+<ul>
+<li><code>format</code>字符串中可以包含格式说明符，如 <code>%d</code>, <code>%f</code>, <code>%s</code>, <code>%c</code>, <code>%x</code>, <code>%o</code>, <code>%u</code>, <code>%e</code>, <code>%g</code>, <code>%p</code>, <code>%n</code>, 等等。</li>
+<li><code>format</code>字符串中可以包含空格、制表符、换行符等空白字符，用于跳过输入字符串中的空白字符。</li>
+<li><code>format</code>字符串中可以包含方括号 <code>[]</code>，用于指定一个字符集合。例如，<code>%[a-z]</code> 表示匹配小写字母。</li>
+<li><code>format</code>字符串中可以包含星号 <code>*</code>，表示跳过该项输入。</li>
+<li><code>sscanf()</code> 函数<strong>返回成功匹配并赋值的个数</strong>。如果返回值小于参数个数，则表示解析失败。</li>
+</ul>
+<p>基于最后一条性质可以实现下述例题：</p>
+<ul>
+<li>题目描述：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs css">给定一个字符串，它可能是以下三种格式中的一种：<br><br><span class="hljs-selector-tag">A</span> is greater than <span class="hljs-selector-tag">B</span><br><span class="hljs-selector-tag">A</span> is equal <span class="hljs-selector-tag">to</span> <span class="hljs-selector-tag">B</span> plus C<br>No Information<br>其中前两种情况中的<span class="hljs-selector-tag">A</span>、<span class="hljs-selector-tag">B</span>、C均为正整数，而第三种情况中没有数字。请确认字符串代表的信息是否从算术上成立，如果成立，那么输出Yes；否则输出No；如果是第三种情况，那么输出三个问号（即???）。<br><br>注：<br><br><span class="hljs-number">1</span>、请将字符串整行读入后使用sscanf函数进行处理<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输入描述：</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">一行满足题意的字符串，其中<span class="hljs-selector-tag">A</span>、<span class="hljs-selector-tag">B</span>、C为不超过<span class="hljs-number">100</span>的正整数。<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出描述：</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby">根据题意输出<span class="hljs-title class_">Yes</span>、<span class="hljs-title class_">No</span>或<span class="hljs-string">??</span><span class="hljs-string">?。</span><br></code></pre></td></tr></table></figure>
+<ul>
+<li>样例：</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">**<span class="hljs-emphasis">*样例1*</span>**</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span>**<br>输入:<br>10 is greater than 5<br>输出:<br>Yes<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">**<span class="hljs-emphasis">*样例2*</span>**</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span>**<br>输入:<br>6 is equal to 1 plus 3<br>输出:<br>No<br><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">**<span class="hljs-emphasis">*样例3*</span>**</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span><span class="hljs-strong">****</span>**<br>输入:<br>No Information<br>输出:<br>???<br></code></pre></td></tr></table></figure>
+<ul>
+<li>实现代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MAX_LEN = <span class="hljs-number">1000</span>;<br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> A = <span class="hljs-number">0</span>,B = <span class="hljs-number">0</span>,C = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">char</span> str[MAX_LEN];<br>    cin.<span class="hljs-built_in">getline</span>(str,MAX_LEN);<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">sscanf</span>(str,<span class="hljs-string">&quot;%d is greater than %d&quot;</span>,&amp;A,&amp;B) == <span class="hljs-number">2</span>)<span class="hljs-comment">//利用sscanf() 函数返回成功匹配并赋值的个数。</span><br>    &#123;<br>       <span class="hljs-keyword">if</span>(A&gt;B)<br>       &#123;<br>           <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Yes&quot;</span>);<br>       &#125;<br>       <span class="hljs-keyword">else</span><br>       &#123;<br>           <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;No&quot;</span>);<br>       &#125;<br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-built_in">sscanf</span>(str,<span class="hljs-string">&quot;%d is equal to %d plus %d&quot;</span>,&amp;A,&amp;B,&amp;C) == <span class="hljs-number">3</span>)<span class="hljs-comment">//利用sscanf() 函数返回成功匹配并赋值的个数。</span><br>    &#123;<br>        <span class="hljs-keyword">if</span>(A==B+C)<br>        &#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Yes&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;No&quot;</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">else</span><br>    &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;???&quot;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>总结：利用<code>sscanf()</code> 函数返回成功匹配并赋值的个数，从而能够很好地解决问题。</li>
+</ul>
+<h4 id="关于sprintf"><a class="markdownIt-Anchor" href="#关于sprintf"></a> 关于sprintf()</h4>
+<ul>
+<li>
+<p><code>sprintf</code>是C语言标准库中的一个函数，用于将格式化的数据写入字符串中。在C<ins>中也可以使用<code>sprintf</code>函数，但更常用的是使用C</ins>标准库中的<code>ostringstream</code>类来进行字符串解析。</p>
+</li>
+<li>
+<p><code>sprintf</code>函数的原型如下：</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">sprintf</span><span class="hljs-params">(<span class="hljs-type">char</span> *str, <span class="hljs-type">const</span> <span class="hljs-type">char</span> *format, ...)</span>;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>其中，<code>str</code>是要写入的字符串，<code>format</code>是格式化字符串，用于指定写入的规则，<code>...</code>是可变参数列表，用于接收要写入的数据。</p>
+</li>
+<li>
+<p>与之相似的函数还有<code>printf</code>和<code>fprintf</code>。其中，<code>printf</code>将输出写入标准输出（通常是屏幕），而<code>fprintf</code>将输出写入文件。</p>
+</li>
+</ul>
+<p>在使用<code>sprintf</code>函数时，需要注意以下几点：</p>
+<ul>
+<li><code>format</code>字符串中可以包含格式说明符，如 <code>%d</code>, <code>%f</code>, <code>%s</code>, <code>%c</code>, <code>%x</code>, <code>%o</code>, <code>%u</code>, <code>%e</code>, <code>%g</code>, <code>%p</code>, <code>%n</code>, 等等。</li>
+<li><code>format</code>字符串中可以包含空格、制表符、换行符等空白字符，用于控制输出格式。</li>
+<li><code>format</code>字符串中可以包含方括号 <code>[]</code>，用于指定一个字符集合。例如，<code>%[a-z]</code> 表示匹配小写字母。</li>
+<li><code>sprintf()</code> **函数返回成功写入的字符数。**如果返回值小于0，则表示写入失败。</li>
+</ul>
+<p>例题：<a target="_blank" rel="noopener" href="https://sunnywhy.com/sfbj/2/5/37">sprintf函数</a></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MAX_LEN = <span class="hljs-number">1000</span>;<br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">char</span> str[MAX_LEN];<br>    <span class="hljs-type">int</span> year,month,day,hour,minute,second;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d %d %d %d %d %d&quot;</span>,&amp;year,&amp;month,&amp;day,&amp;hour,&amp;minute,&amp;second);<br>    <span class="hljs-built_in">sprintf</span>(str,<span class="hljs-string">&quot;%04d-%02d-%02d %02d:%02d:%02d&quot;</span>,year,month,day,hour,minute,second);<span class="hljs-comment">//注意此处的ssprintf()函数注释将需要的字符串写入到字符串数组中</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,str);<span class="hljs-comment">//注意此处字符串数组需要采用printf()函数进行输出</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>总结：</p>
+</li>
+<li>
+<p>注意代码中的<code>ssprintf()</code>函数注释<strong>将需要的字符串写入到字符串数组</strong>中；</p>
+</li>
+<li>
+<p>注意代码最后的输出字符串数组需要采用<code>printf()</code>函数进行输出。</p>
+</li>
+</ul>
 <h3 id="简单模拟"><a class="markdownIt-Anchor" href="#简单模拟"></a> 简单模拟</h3>
 
                 
