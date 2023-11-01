@@ -46,8 +46,9 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310221723044.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310311125587.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310311132044.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311011059055.png">
 <meta property="article:published_time" content="2023-10-08T07:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-31T09:42:45.590Z">
+<meta property="article:modified_time" content="2023-11-01T03:28:45.583Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary_large_image">
@@ -294,7 +295,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          28k 字
+          29k 字
         
       </span>
     
@@ -306,7 +307,7 @@
         
         
           <!-- compatible with older versions-->
-          88 分钟
+          90 分钟
         
       </span>
     
@@ -1251,6 +1252,23 @@
 <li>本章先介绍<strong>两种</strong>基础的排序算法：<strong>选择排序</strong>与<strong>插入排序</strong>。</li>
 </ul>
 <h4 id="选择排序"><a class="markdownIt-Anchor" href="#选择排序"></a> 选择排序</h4>
+<ul>
+<li><strong>简单选择排序</strong>：对于一个序列<code>A</code>中的元素<code>A[1]-A[n]</code>，令<code>i</code>从<code>1</code>到<code>n</code>枚举，进行<code>n</code>趟操作，每趟从待排序部分<code>[i,n]</code>中选择最小元素，令其与待排序部分的第一个元素<code>A[i]</code>进行交换，这样元素<code>A[i]</code>就会与当前有序区间<code>[1,i-1]</code>形成新的有序区间<code>[1,i]</code>。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311011059055.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>
+<p>总共需要进行n趟操作(1&lt;=i&lt;=n)，每趟操作选出待排序部分[i,n]中的最小元素，令其与A[i]交换。总复杂度为$$O(n^2)$$</p>
+</li>
+<li>
+<p>实现代码：</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//选择排序函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">select_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> list[],<span class="hljs-type">int</span> num)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> min_num,k,temp;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;num;i++)<br>    &#123;<br>        min_num=list[i];<br>        k=i;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=i;j&lt;num;j++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(list[j]&lt;min_num)<br>            &#123;<br>                min_num = list[j];<br>                k=j;<br>            &#125;<br>        &#125;<br>        temp=list[i];<br>        list[i]=min_num;<br>        list[k]=temp;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="插入排序"><a class="markdownIt-Anchor" href="#插入排序"></a> 插入排序</h4>
+<ul>
+<li><strong>直接插入排序</strong>：对于一个序列<code>A</code>中的元素<code>A[1]-A[n]</code>，</li>
+</ul>
 
                 
               </div>
