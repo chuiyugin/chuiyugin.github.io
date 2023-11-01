@@ -47,8 +47,10 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310311125587.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310311132044.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311011059055.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311011319809.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311011319528.png">
 <meta property="article:published_time" content="2023-10-08T07:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-01T03:28:45.583Z">
+<meta property="article:modified_time" content="2023-11-01T05:58:18.263Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary_large_image">
@@ -307,7 +309,7 @@
         
         
           <!-- compatible with older versions-->
-          90 分钟
+          91 分钟
         
       </span>
     
@@ -1267,8 +1269,16 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//选择排序函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">select_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> list[],<span class="hljs-type">int</span> num)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> min_num,k,temp;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;num;i++)<br>    &#123;<br>        min_num=list[i];<br>        k=i;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=i;j&lt;num;j++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(list[j]&lt;min_num)<br>            &#123;<br>                min_num = list[j];<br>                k=j;<br>            &#125;<br>        &#125;<br>        temp=list[i];<br>        list[i]=min_num;<br>        list[k]=temp;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="插入排序"><a class="markdownIt-Anchor" href="#插入排序"></a> 插入排序</h4>
 <ul>
-<li><strong>直接插入排序</strong>：对于一个序列<code>A</code>中的元素<code>A[1]-A[n]</code>，</li>
+<li><strong>直接插入排序</strong>：对于一个序列<code>A</code>中的元素<code>A[1]-A[n]</code>，令<code>i</code>从<code>1</code>到<code>n-1</code>枚举，进行<code>n-1</code>趟操作。假设某一趟时，序列<code>A</code>的前<code>i-1</code>个元素<code>A[1]-A[i-1]</code>已经有序，而范围<code>[i,n]</code>还未有序，那么该趟从范围<code>[1,i-1]</code>中寻找某个位置<code>j</code>，使得将<code>A[i]</code>插入位置<code>j</code>后(此时<code>A[j]-A[i-1]</code>会后移一位至<code>A[j+1]-A[i]</code>)，范围<code>[1,i]</code>有序。</li>
+<li>思想如下图所示：</li>
 </ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311011319809.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311011319528.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>实现代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//插入排序函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">insert_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> list[],<span class="hljs-type">int</span> num)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> temp,j;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;num;i++)<span class="hljs-comment">//进行n-1趟</span><br>    &#123;<br>        temp=list[i];<br>        j=i;<br>        <span class="hljs-keyword">while</span>(j&gt;<span class="hljs-number">0</span>&amp;&amp;temp&lt;list[j<span class="hljs-number">-1</span>])<span class="hljs-comment">//只要temp小于前一个元素list[j-1]</span><br>        &#123;<br>            list[j]=list[j<span class="hljs-number">-1</span>];<span class="hljs-comment">//把list[j-1]移到list[j]</span><br>            j--;<br>        &#125;<br>        list[j]=temp;<span class="hljs-comment">//插入位置为j</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="排序题与sort函数的应用"><a class="markdownIt-Anchor" href="#排序题与sort函数的应用"></a> 排序题与sort函数的应用</h4>
 
                 
               </div>
