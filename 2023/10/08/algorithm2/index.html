@@ -50,7 +50,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311011319809.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311011319528.png">
 <meta property="article:published_time" content="2023-10-08T07:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-02T09:00:07.272Z">
+<meta property="article:modified_time" content="2023-11-02T12:23:28.166Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary_large_image">
@@ -297,7 +297,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          34k 字
+          36k 字
         
       </span>
     
@@ -309,7 +309,7 @@
         
         
           <!-- compatible with older versions-->
-          107 分钟
+          112 分钟
         
       </span>
     
@@ -1331,7 +1331,7 @@
 <ul>
 <li>总结：注意一下<strong>字符串数组的比较函数</strong>的写法，以及这道题目局部（考场）排名的大小需要减去<code>sum</code>值。</li>
 </ul>
-<p>例题：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805342720868352/exam/problems/994805474338127872?type=7&amp;page=0">B1025 PAT Ranking</a></p>
+<p>例题：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805342720868352/exam/problems/994805474338127872?type=7&amp;page=0">A1025 PAT Ranking</a></p>
 <ul>
 <li>代码：</li>
 </ul>
@@ -1384,6 +1384,24 @@
 <ul>
 <li>再增加不同的字符代码编写方式<strong>同理</strong>；</li>
 </ul>
+<p>例题：<a target="_blank" rel="noopener" href="https://sunnywhy.com/sfbj/4/2/105">字符串出现次数</a></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MAXN = <span class="hljs-number">1010</span>;<br><span class="hljs-type">char</span> str[MAXN][<span class="hljs-number">5</span>];<br><span class="hljs-type">int</span> hashTable[<span class="hljs-number">26</span>*<span class="hljs-number">26</span>*<span class="hljs-number">26</span>+<span class="hljs-number">10</span>]=&#123;<span class="hljs-number">0</span>&#125;;<br><span class="hljs-comment">//字符串转Hash函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">HashFunc</span><span class="hljs-params">(<span class="hljs-type">char</span> s[],<span class="hljs-type">int</span> len)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> id=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;len;i++)<br>    &#123;<br>        id=id*<span class="hljs-number">26</span>+(s[i]-<span class="hljs-string">&#x27;A&#x27;</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> id;<br>&#125;<br><br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> n,m;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>,str[i]);<br>        hashTable[<span class="hljs-built_in">HashFunc</span>(str[i],<span class="hljs-number">3</span>)]++;<br>    &#125;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;m);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;m;i++)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%s&quot;</span>,str[i]);<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,hashTable[<span class="hljs-built_in">HashFunc</span>(str[i],<span class="hljs-number">3</span>)]);<br>        <span class="hljs-keyword">if</span>(i!=m<span class="hljs-number">-1</span>)<br>        &#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot; &quot;</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>总结：该题直接给出字符串散列的处理方法！重点掌握字符串转整数函数的编写和应用。</li>
+</ul>
+<p>例题：<a target="_blank" rel="noopener" href="https://sunnywhy.com/sfbj/4/2/104">2-SUM-hash</a></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MAXN = <span class="hljs-number">1000001</span>;<br><span class="hljs-type">int</span> num[MAXN]=&#123;<span class="hljs-number">0</span>&#125;,hashTable[MAXN]=&#123;<span class="hljs-number">0</span>&#125;;<br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> n,k;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d %d&quot;</span>,&amp;n,&amp;k);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)<br>    &#123;<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;num[i]);<br>        hashTable[num[i]]++;<br>    &#125;<br>    <span class="hljs-type">int</span> ans=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(k-num[i]&gt;=<span class="hljs-number">0</span>&amp;&amp;hashTable[k-num[i]])<br>        &#123;<br>            ans++;<br>        &#125;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,ans/<span class="hljs-number">2</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>总结：这道题目的巧妙之处在于通过用求和值<code>k</code>减去<code>a</code>后的值<code>b</code>是否还在<strong>哈希表</strong>中来判断是否满足条件。这样巧妙利用了<strong>空间换时间</strong>的设想，只用一次循环即可完成！最后注意最终结果需要再<code>÷2</code>！</li>
+</ul>
+<h3 id="递归"><a class="markdownIt-Anchor" href="#递归"></a> 递归</h3>
+<h4 id="分治"><a class="markdownIt-Anchor" href="#分治"></a> 分治</h4>
 
                 
               </div>
