@@ -53,7 +53,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311041755805.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311041758963.png">
 <meta property="article:published_time" content="2023-10-08T07:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-04T09:58:35.376Z">
+<meta property="article:modified_time" content="2023-11-05T03:38:31.483Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary_large_image">
@@ -300,7 +300,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          37k 字
+          38k 字
         
       </span>
     
@@ -312,7 +312,7 @@
         
         
           <!-- compatible with older versions-->
-          115 分钟
+          120 分钟
         
       </span>
     
@@ -1453,9 +1453,43 @@
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311041755805.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <ul>
-<li>例题-&gt;全排列问题：</li>
+<li>例题-&gt;<strong>全排列问题</strong>：</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311041758963.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li><strong>思路</strong>：</li>
+<li>从递归的角度考虑，把问题描述成：“输出<strong>1 - n</strong>这<strong>n</strong>个整数的全排列”，那么它就可以分解成若干个子问题：
+<ul>
+<li>输出以1开头的全排列：<code>(1,2,3)</code>、<code>(1,3,2)</code>;</li>
+<li>输出以2开头的全排列：<code>(2,1,3)</code>、<code>(2,3,1)</code>;</li>
+<li>输出以3开头的全排列：<code>(3,1,2)</code>、<code>(3,2,1)</code>;</li>
+<li>以此类推…直到第n个。</li>
+</ul>
+</li>
+<li>由此，不妨设定一个数组<code>p[MAXN]</code>用于存放当前的排列;</li>
+<li>再设定一个散列数组<code>bool HashTable[MAXN]=&#123;false&#125;;</code>用于指示当前元素k是否在数组<code>p</code>中，
+<ul>
+<li>如果已经存在于<code>p</code>中时<code>HashTable[k]=true;</code></li>
+<li>如果不存在于<code>p</code>中时<code>HashTable[k]=false;</code></li>
+</ul>
+</li>
+<li>因为要按照<strong>字典序</strong>对全排列进行输出，我们需要按顺序往数组<code>p</code>中第1位到n位中填入数字。</li>
+<li>不妨假设我们当前已经填好了<code>p[1]-p[index]</code>部分的数字，下一步需要填<code>P[index+1]</code>这个位置的数字。</li>
+<li>显然需要从1-n中枚举有哪些数字还没有在<code>p[1]-p[index]</code>部分，即满足<code>HashTable[k]==false</code>这个条件，那么就将该数字填入<code>p[index]</code>中。</li>
+<li>然后将<code>HashTable[k]=true</code>，表示<code>k</code>这个数据已经填入了数组<code>p</code>中。</li>
+<li>然后可以像上述步骤一样处理<code>index+2</code>的数据，即<code>p[1]-p[index+1]</code>已经填好，即进行递归-&gt;重复执行<code>Full_permutation(index+1);</code>直到后续<strong>递归完成</strong>。</li>
+<li>当递归完成后，需要再将<code>HashTable[k]=false</code>，以便后续能够继续使用这个数据。</li>
+<li>最后<strong>递归边界</strong>显然是当<code>index</code>到达<code>n+1</code>时，说明数组<code>p</code>中的第<strong>1 - n</strong>位都已经填好了，只需要按顺序进行输出即可。</li>
+<li>下面是当<code>n=3</code>时候的代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-comment">//全排列递归函数变量定义</span><br><span class="hljs-type">const</span>  <span class="hljs-type">int</span> MAXN = <span class="hljs-number">20</span>;<br><span class="hljs-type">int</span> n;<span class="hljs-comment">//输出index-n的全排列</span><br><span class="hljs-type">int</span> p[MAXN];<br><span class="hljs-type">bool</span> HashTable[MAXN]=&#123;<span class="hljs-literal">false</span>&#125;;<br><span class="hljs-comment">//全排列递归函数</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Full_permutation</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//递归边界</span><br>    <span class="hljs-keyword">if</span>(index==n+<span class="hljs-number">1</span>)<br>    &#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)<br>        &#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,p[i]);<br>        &#125;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>        <span class="hljs-keyword">return</span> ;<br>    &#125;<br>    <span class="hljs-comment">//递归式</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> k=<span class="hljs-number">1</span>;k&lt;=n;k++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(!HashTable[k])<span class="hljs-comment">//HashTable[k]==false-&gt;说明该元素还没有被用上</span><br>        &#123;<br>            p[index]=k;<span class="hljs-comment">//处理这一种情况</span><br>            HashTable[k] = <span class="hljs-literal">true</span>;<span class="hljs-comment">//到这里说明假设1到index已经排好</span><br>            <span class="hljs-comment">//递归进入函数再排index+1之后的部分</span><br>            <span class="hljs-built_in">Full_permutation</span>(index+<span class="hljs-number">1</span>);<br>            <span class="hljs-comment">//递归返回结束后循环还没有结束，继续处理下一循环的问题</span><br>            HashTable[k] = <span class="hljs-literal">false</span>;<span class="hljs-comment">//已经处理完p[index]=k;这一种情况，还原状态</span><br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    n=<span class="hljs-number">3</span>;<br>    <span class="hljs-built_in">Full_permutation</span>(<span class="hljs-number">1</span>);<span class="hljs-comment">//index从1开始</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs">123<br>132<br>213<br>231<br>312<br>321<br></code></pre></td></tr></table></figure>
+<ul>
+<li>例题-&gt;<strong>n皇后问题</strong>：</li>
+</ul>
 
                 
               </div>
