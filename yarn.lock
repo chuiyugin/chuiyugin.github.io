@@ -1565,7 +1565,7 @@ hexo-tag-mmedia@^1.1.7:
     json5 "^2.2.0"
     utility "^1.17.0"
 
-hexo-theme-fluid@^1.8.12:
+hexo-theme-fluid@^1.9.4:
   version "1.9.4"
   resolved "https://registry.yarnpkg.com/hexo-theme-fluid/-/hexo-theme-fluid-1.9.4.tgz#a83dc3e2d24fb74bec2bb32c15b544c055e3445f"
   integrity sha512-EaXUh4J6mQZjzKnyNtYHt0U0rIIlGJMsiT+IYHhKXnNrQyaOqMz3H9QC7+o37yzssARiPG3Uc0RtHn3S1DRLoQ==
