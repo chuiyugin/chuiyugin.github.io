@@ -27,7 +27,7 @@
     "hexo-renderer-mathjax": "^0.6.0",
     "hexo-renderer-stylus": "^2.0.0",
     "hexo-server": "^2.0.0",
-    "hexo-tag-mmedia": "^1.1.7",
+    "hexo-tag-mmedia": "^1.2.1",
     "hexo-theme-fluid": "^1.8.12",
     "hexo-theme-landscape": "^0.0.3",
     "live2d-widget-model-hijiki": "^1.0.5",
