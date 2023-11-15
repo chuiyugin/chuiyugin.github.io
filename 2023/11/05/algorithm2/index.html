@@ -58,7 +58,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311071535777.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311102020016.jpeg">
 <meta property="article:published_time" content="2023-11-05T12:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-15T03:49:54.257Z">
+<meta property="article:modified_time" content="2023-11-15T08:38:18.015Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="算法">
@@ -306,7 +306,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          50k 字
+          51k 字
         
       </span>
     
@@ -318,7 +318,7 @@
         
         
           <!-- compatible with older versions-->
-          156 分钟
+          159 分钟
         
       </span>
     
@@ -1293,6 +1293,43 @@
 <li>与第一种定义方法不同，上述写法的一维长度已经固定为 <code>arraySize</code>，另一维才是“变长”的；</li>
 <li>而第二种写法两个维度都是“变长”的。</li>
 </ul>
+<h3 id="vector-容器内元素的访问"><a class="markdownIt-Anchor" href="#vector-容器内元素的访问"></a> vector 容器内元素的访问</h3>
+<p>vector 一般有一下两种访问方式：</p>
+<ol>
+<li>通过下标访问</li>
+<li>通过迭代器访问</li>
+</ol>
+<h4 id="通过下标访问"><a class="markdownIt-Anchor" href="#通过下标访问"></a> 通过下标访问</h4>
+<ul>
+<li>与访问普通数组一样，对于一个定义为 <code>vector&lt;int&gt; vi;</code> 的 <code>vector</code> 的容器而言，直接访问 <code>vi[index]</code> 即可（如 <code>vi[0]</code>、<code>vi[1]</code>）。</li>
+<li>当然，下标是从 <code>0</code> 到 <code>vi.size ()-1</code>,否则访问超出这个范围内的元素可能会运行出错。</li>
+</ul>
+<h4 id="通过迭代器访问"><a class="markdownIt-Anchor" href="#通过迭代器访问"></a> 通过迭代器访问</h4>
+<ul>
+<li>迭代器 (iterator)可以理解为一种类似<strong>指针</strong>的东西，其定义如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp">vector&lt;<span class="hljs-keyword">typename</span>&gt;::iterator it;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这样 <code>it</code> 就是一个 <code>vector&lt;typename&gt;::iterator</code> 型的变量，其中 <code>typename</code> 就是定义 <code>vector</code> 时填写的类型。</li>
+<li>得到迭代器 <code>it</code>，就可以通过 <code>*it</code> 来访问 <code>vector</code> 里的元素。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp">vector&lt;<span class="hljs-type">int</span>&gt; vi;<br><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">5</span>;i++)<br>&#123;<br>	vi.<span class="hljs-built_in">push_back</span>(i);<span class="hljs-comment">//vi.push_back(i);是在vi的末尾添加元素i，即添加1 2 3 4 5</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可以通过类似下标和指针访问数组的方式来访问容器内的元素：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    vector&lt;<span class="hljs-type">int</span>&gt; vi;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">5</span>;i++)<br>    &#123;<br>        vi.<span class="hljs-built_in">push_back</span>(i);<span class="hljs-comment">//vi.push_back(i);是在vi的末尾添加元素i，即添加1 2 3 4 5</span><br>    &#125;<br>    <span class="hljs-comment">//vi.begin()为取vi的首元素地址，而it指向这个地址</span><br>    vector&lt;<span class="hljs-type">int</span>&gt;::iterator it = vi.<span class="hljs-built_in">begin</span>();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">5</span>;i++)<br><br>    &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,*(it+i));<span class="hljs-comment">//输出vi[i]</span><br>    &#125;<br>    <span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;pause&quot;</span>);    <span class="hljs-comment">// 防止运行后自动退出，需头文件stdlib.h</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出结果：</li>
+</ul>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span><span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">5</span> <br></code></pre></td></tr></table></figure>
+<ul>
+<li>从上述程序不难看出，<code>vi[i]</code>和<code>*(vi.begin()+i)</code>是等价的。</li>
+<li>关于 <code>vector</code> 两个函数的说明：</li>
+</ul>
+<ol>
+<li><code>vi.begin()</code> 函数的作用是为取 vi 的首元素地址；</li>
+<li><code>vi.end()</code> 函数的作用是取尾元素地址的<strong>下一个地址</strong>，<code>end()</code> 作为迭代器的末尾标志，不存储任何元素。</li>
+</ol>
 <h2 id="算法初步"><a class="markdownIt-Anchor" href="#算法初步"></a> 算法初步</h2>
 <h3 id="排序"><a class="markdownIt-Anchor" href="#排序"></a> 排序</h3>
 <ul>
