@@ -328,26 +328,17 @@
             
               <div class="markdown-body">
                 
-                <h1 id="打包exe应用程序"><a class="markdownIt-Anchor" href="#打包exe应用程序"></a> 打包.exe应用程序</h1>
-<h2 id="用python打包exe应用程序-pyinstaller"><a class="markdownIt-Anchor" href="#用python打包exe应用程序-pyinstaller"></a> 用python打包exe应用程序-PyInstaller</h2>
-<h3 id="1-pyinstaller简介"><a class="markdownIt-Anchor" href="#1-pyinstaller简介"></a> <strong>1、PyInstaller简介</strong></h3>
-<p>PyInstaller是一个跨平台的Python应用打包工具，支持 Windows/Linux/MacOS三大主流平台，能够把 Python 脚本及其所在的 Python 解释器打包成可执行文件，从而允许最终用户在无需安装 Python 的情况下执行应用程序。<br />
-PyInstaller 制作出来的执行文件并不是跨平台的，如果需要为不同平台打包，就要在相应平台上运行PyInstaller进行打包。</p>
-<h3 id="2-pyinstaller安装"><a class="markdownIt-Anchor" href="#2-pyinstaller安装"></a> <strong>2、PyInstaller安装</strong></h3>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple Pyinstaller<br></code></pre></td></tr></table></figure>
-<h3 id="3参数含义"><a class="markdownIt-Anchor" href="#3参数含义"></a> 3.参数含义</h3>
-<p><strong>-F</strong> 表示生成单个可执行文件</p>
+                <h1 id="打包-exe应用程序"><a href="#打包-exe应用程序" class="headerlink" title="打包.exe应用程序"></a>打包.exe应用程序</h1><h2 id="用python打包exe应用程序-PyInstaller"><a href="#用python打包exe应用程序-PyInstaller" class="headerlink" title="用python打包exe应用程序-PyInstaller"></a>用python打包exe应用程序-PyInstaller</h2><h3 id="1、PyInstaller简介"><a href="#1、PyInstaller简介" class="headerlink" title="1、PyInstaller简介"></a><strong>1、PyInstaller简介</strong></h3><p>PyInstaller是一个跨平台的Python应用打包工具，支持 Windows/Linux/MacOS三大主流平台，能够把 Python 脚本及其所在的 Python 解释器打包成可执行文件，从而允许最终用户在无需安装 Python 的情况下执行应用程序。<br>PyInstaller 制作出来的执行文件并不是跨平台的，如果需要为不同平台打包，就要在相应平台上运行PyInstaller进行打包。</p>
+<h3 id="2、PyInstaller安装"><a href="#2、PyInstaller安装" class="headerlink" title="2、PyInstaller安装"></a><strong>2、PyInstaller安装</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple Pyinstaller<br></code></pre></td></tr></table></figure>
+<h3 id="3-参数含义"><a href="#3-参数含义" class="headerlink" title="3.参数含义"></a>3.参数含义</h3><p><strong>-F</strong> 表示生成单个可执行文件</p>
 <p><strong>-w</strong> 表示去掉控制台窗口，这在GUI界面时非常有用。不过如果是命令行程序的话那就把这个选项删除吧！</p>
 <p><strong>-p</strong> 表示你自己自定义需要加载的类路径，一般情况下用不到</p>
 <p><strong>-i</strong> 表示可执行文件的图标</p>
-<h3 id="4示例"><a class="markdownIt-Anchor" href="#4示例"></a> 4.示例</h3>
-<p>在<code>.py</code>和<code>.ico</code>文件夹下打开终端</p>
+<h3 id="4-示例"><a href="#4-示例" class="headerlink" title="4.示例"></a>4.示例</h3><p>在<code>.py</code>和<code>.ico</code>文件夹下打开终端</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">pyinstaller -F -<span class="hljs-selector-tag">i</span> ./fac<span class="hljs-selector-class">.ico</span> tree.py<br></code></pre></td></tr></table></figure>
 <p>这个时候多了很多文件和文件夹，dist目录就是我们打包好的地方。使用-w只生成<code>.exe</code>文件</p>
-<h2 id="python使得exe文件运行完保留"><a class="markdownIt-Anchor" href="#python使得exe文件运行完保留"></a> PYTHON使得.exe文件运行完保留</h2>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br>os.system(<span class="hljs-string">&quot;pause&quot;</span>)<br></code></pre></td></tr></table></figure>
-<h2 id="c使得exe文件运行完保留"><a class="markdownIt-Anchor" href="#c使得exe文件运行完保留"></a> C++使得.exe文件运行完保留</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;Pause&quot;</span>);<span class="hljs-comment">//生成的exe运行完程序保留，点任意键结束</span><br></code></pre></td></tr></table></figure>
+<h2 id="PYTHON使得-exe文件运行完保留"><a href="#PYTHON使得-exe文件运行完保留" class="headerlink" title="PYTHON使得.exe文件运行完保留"></a>PYTHON使得.exe文件运行完保留</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br>os.system(<span class="hljs-string">&quot;pause&quot;</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="C-使得-exe文件运行完保留"><a href="#C-使得-exe文件运行完保留" class="headerlink" title="C++使得.exe文件运行完保留"></a>C++使得.exe文件运行完保留</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;Pause&quot;</span>);<span class="hljs-comment">//生成的exe运行完程序保留，点任意键结束</span><br></code></pre></td></tr></table></figure>
 
                 
               </div>
