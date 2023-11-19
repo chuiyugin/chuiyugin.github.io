@@ -58,7 +58,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311071535777.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311102020016.jpeg">
 <meta property="article:published_time" content="2023-11-05T12:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-19T11:59:33.016Z">
+<meta property="article:modified_time" content="2023-11-19T14:15:29.064Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="算法">
@@ -306,7 +306,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          65k 字
+          66k 字
         
       </span>
     
@@ -318,7 +318,7 @@
         
         
           <!-- compatible with older versions-->
-          203 分钟
+          206 分钟
         
       </span>
     
@@ -1543,6 +1543,30 @@
 <li>输出：</li>
 </ul>
 <figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">1 </span><span class="hljs-number">2</span> <br></code></pre></td></tr></table></figure>
+<h5 id="size-2"><a class="markdownIt-Anchor" href="#size-2"></a> size()</h5>
+<ul>
+<li><code>size()</code> 用来获取 set 内的元素个数，时间复杂度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>。示例如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;set&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    set&lt;<span class="hljs-type">int</span>&gt; st;<br>    st.<span class="hljs-built_in">insert</span>(<span class="hljs-number">3</span>);<span class="hljs-comment">//insert(x)将x插入set中</span><br>    st.<span class="hljs-built_in">insert</span>(<span class="hljs-number">5</span>);<br>    st.<span class="hljs-built_in">insert</span>(<span class="hljs-number">2</span>);<br>    st.<span class="hljs-built_in">insert</span>(<span class="hljs-number">3</span>);<br>    st.<span class="hljs-built_in">insert</span>(<span class="hljs-number">1</span>);<br>    st.<span class="hljs-built_in">insert</span>(<span class="hljs-number">4</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,st.<span class="hljs-built_in">size</span>());<br>    <span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;pause&quot;</span>);<span class="hljs-comment">// 防止运行后自动退出，需头文件stdlib.h</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">5<br></code></pre></td></tr></table></figure>
+<h5 id="clear-2"><a class="markdownIt-Anchor" href="#clear-2"></a> clear()</h5>
+<ul>
+<li><code>clear()</code> 用来清空 set 内的所有元素，时间复杂度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(N)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span>，其中 <code>N</code> 为 <code>set</code> 内的元素个数。示例如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;set&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    set&lt;<span class="hljs-type">int</span>&gt; st;<br>    st.<span class="hljs-built_in">insert</span>(<span class="hljs-number">3</span>);<span class="hljs-comment">//insert(x)将x插入set中</span><br>    st.<span class="hljs-built_in">insert</span>(<span class="hljs-number">5</span>);<br>    st.<span class="hljs-built_in">insert</span>(<span class="hljs-number">2</span>);<br>    st.<span class="hljs-built_in">insert</span>(<span class="hljs-number">3</span>);<br>    st.<span class="hljs-built_in">insert</span>(<span class="hljs-number">1</span>);<br>    st.<span class="hljs-built_in">insert</span>(<span class="hljs-number">4</span>);<br>    st.<span class="hljs-built_in">clear</span>();<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,st.<span class="hljs-built_in">size</span>());<br>    <span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;pause&quot;</span>);<span class="hljs-comment">// 防止运行后自动退出，需头文件stdlib.h</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出：</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">0<br></code></pre></td></tr></table></figure>
+<h3 id="set-的常见用途"><a class="markdownIt-Anchor" href="#set-的常见用途"></a> set 的常见用途</h3>
+<ol>
+<li><code>set</code> 最主要的作用是<strong>自动去重并按照升序排序</strong>，因此碰到需要去重但是却不方便直接开数组的情况，可以尝试用 <code>set</code> 解决。</li>
+<li><code>set</code> 中元素是唯一的，如果需要处理<strong>不唯一</strong>的情况，则需要使用 <code>multiset</code>。</li>
+<li>C++11 标准中还增加了 <code>unordered_set</code>,以散列代替 <code>set</code> 内部的红黑树（一种自平衡二叉查找树）实现，使其可以用来处理<strong>只去重但不排序</strong>的需求，速度比 <code>set</code> 快很多！</li>
+</ol>
 <h2 id="算法初步"><a class="markdownIt-Anchor" href="#算法初步"></a> 算法初步</h2>
 <h3 id="排序"><a class="markdownIt-Anchor" href="#排序"></a> 排序</h3>
 <ul>
