@@ -332,31 +332,21 @@
             
               <div class="markdown-body">
                 
-                <h1 id="实验题目"><a class="markdownIt-Anchor" href="#实验题目"></a> 实验题目</h1>
-<h2 id="题目一"><a class="markdownIt-Anchor" href="#题目一"></a> 题目一</h2>
-<h3 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目：</h3>
-<p>定义一个数组类，编写成员函数实现以下功能：</p>
+                <h1 id="实验题目"><a href="#实验题目" class="headerlink" title="实验题目"></a>实验题目</h1><h2 id="题目一"><a href="#题目一" class="headerlink" title="题目一"></a>题目一</h2><h3 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h3><p>定义一个数组类，编写成员函数实现以下功能：</p>
 <ol>
-<li>
-<p>随机生成函数RandomArray（int n, int max）:随机生成一个一维整数数组，数组长度为n，元素值不超过max；</p>
+<li><p>随机生成函数RandomArray（int n, int max）:随机生成一个一维整数数组，数组长度为n，元素值不超过max；</p>
 </li>
-<li>
-<p>判断函数CheckOrder（）：判断数组中元素是否按升序排练，若是返回1，否返回0；</p>
+<li><p>判断函数CheckOrder（）：判断数组中元素是否按升序排练，若是返回1，否返回0；</p>
 </li>
-<li>
-<p>数组和函数Sum（）：计算数组和。</p>
+<li><p>数组和函数Sum（）：计算数组和。</p>
 </li>
-<li>
-<p>判断某个元素函数CheckKey（int key）：找到数组中的某个值（key），若有返回1，无返回0；</p>
+<li><p>判断某个元素函数CheckKey（int key）：找到数组中的某个值（key），若有返回1，无返回0；</p>
 </li>
-<li>
-<p>编写main函数，调用测试以上功能；</p>
+<li><p>编写main函数，调用测试以上功能；</p>
 </li>
 </ol>
-<h3 id="运行结果"><a class="markdownIt-Anchor" href="#运行结果"></a> 运行结果：</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/java1.png" srcset="/img/loading.gif" lazyload alt=" " /></p>
-<h3 id="源代码"><a class="markdownIt-Anchor" href="#源代码"></a> 源代码：</h3>
-<ul>
+<h3 id="运行结果："><a href="#运行结果：" class="headerlink" title="运行结果："></a>运行结果：</h3><p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/java1.png" srcset="/img/loading.gif" lazyload alt=" "></p>
+<h3 id="源代码："><a href="#源代码：" class="headerlink" title="源代码："></a>源代码：</h3><ul>
 <li>定义数组类</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.company;<br><span class="hljs-keyword">import</span> java.util.Random;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Array</span> &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> n;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> max;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span>[] arr;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Array</span><span class="hljs-params">()</span>&#123;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Array</span><span class="hljs-params">(<span class="hljs-type">int</span> n,<span class="hljs-type">int</span> max)</span>&#123;<br>        <span class="hljs-built_in">this</span>.n=n;<br>        <span class="hljs-built_in">this</span>.max=max;<br>        <span class="hljs-comment">//arr = new int[n];</span><br>    &#125;<br><br>    <span class="hljs-comment">//生成随机数</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getRandomNumberInRange</span><span class="hljs-params">(<span class="hljs-type">int</span> min, <span class="hljs-type">int</span> max)</span> &#123;<br>        <span class="hljs-keyword">if</span> (min &gt;= max) &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;max must be greater than min&quot;</span>);<br>        &#125;<br>        <span class="hljs-type">Random</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();<br>        <span class="hljs-keyword">return</span> r.nextInt((max - min) + <span class="hljs-number">1</span>) + min;<br>    &#125;<br><br>    <span class="hljs-comment">//随机数组</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">RandomArray</span><span class="hljs-params">(<span class="hljs-type">int</span> n,<span class="hljs-type">int</span> max)</span>&#123;<br>        arr = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[n];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;arr.length;i++)<br>        &#123;<br>            <span class="hljs-comment">//public int[] arr = new int[n];</span><br>            arr[i]=getRandomNumberInRange(<span class="hljs-number">0</span>,max);<br>        &#125;<br>        System.out.println(<span class="hljs-string">&quot;元素值不超过 &quot;</span>+max);<br>        System.out.println(<span class="hljs-string">&quot;数组长度是 &quot;</span>+arr.length);<br>    &#125;<br><br>    <span class="hljs-comment">//判断升序</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">CheckOrder</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">right1</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;arr.length-<span class="hljs-number">1</span>;i++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(arr[i]&gt;arr[i+<span class="hljs-number">1</span>])<br>            &#123;<br>              right1=<span class="hljs-number">0</span>;<br>            &#125;<br>            <span class="hljs-keyword">else</span> right1=<span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> right1;<br>    &#125;<br><br>    <span class="hljs-comment">//计算和</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">sum</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">int</span> sum1=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;arr.length;i++)<br>        &#123;<br>            sum1+=arr[i];<br>        &#125;<br>        <span class="hljs-keyword">return</span> sum1;<br>    &#125;<br><br>    <span class="hljs-comment">//判断函数</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">CheckKey</span><span class="hljs-params">(<span class="hljs-type">int</span> key)</span>&#123;<br>        <span class="hljs-type">int</span> right1=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;arr.length;i++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(arr[i]==key)<br>            &#123;<br>                right1=<span class="hljs-number">1</span>;<br>            &#125;<br>            <span class="hljs-keyword">else</span> right1=<span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> right1;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
@@ -364,39 +354,29 @@
 <li>主函数</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.company;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>	<span class="hljs-comment">// write your code here</span><br>        <span class="hljs-type">Array</span> <span class="hljs-variable">array</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Array</span>(<span class="hljs-number">10</span>,<span class="hljs-number">10</span>);<br>        array.RandomArray(<span class="hljs-number">5</span>,<span class="hljs-number">50</span>);<br>        System.out.println(<span class="hljs-string">&quot;判断数组是否有值 &quot;</span>+array.CheckKey(<span class="hljs-number">1</span>));<br>        System.out.println(<span class="hljs-string">&quot;判断数组是否升序 &quot;</span>+array.CheckOrder());<br>        System.out.println(<span class="hljs-string">&quot;数组元素的和 &quot;</span>+array.sum());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="题目二"><a class="markdownIt-Anchor" href="#题目二"></a> 题目二</h2>
-<h3 id="题目-2"><a class="markdownIt-Anchor" href="#题目-2"></a> 题目：</h3>
-<p>编写程序，求圆柱体的体积CylinderVolume:</p>
+<h2 id="题目二"><a href="#题目二" class="headerlink" title="题目二"></a>题目二</h2><h3 id="题目：-1"><a href="#题目：-1" class="headerlink" title="题目："></a>题目：</h3><p>编写程序，求圆柱体的体积CylinderVolume:</p>
 <ol>
-<li>
-<p>设计一个计算圆面积的接口area，包含计算面积的方法bottomArea；</p>
+<li><p>设计一个计算圆面积的接口area，包含计算面积的方法bottomArea；</p>
 </li>
-<li>
-<p>设计一个圆柱体类Cylinder实现接口area，包含</p>
+<li><p>设计一个圆柱体类Cylinder实现接口area，包含</p>
 </li>
 </ol>
 <ul>
-<li>
-<p>包含成员变量：高度，半径；</p>
+<li><p>包含成员变量：高度，半径；</p>
 </li>
-<li>
-<p>实现构造方法，对成员变量进行赋值；</p>
+<li><p>实现构造方法，对成员变量进行赋值；</p>
 </li>
-<li>
-<p>实现圆柱体底面积成员方法area；</p>
+<li><p>实现圆柱体底面积成员方法area；</p>
 </li>
-<li>
-<p>实现计算圆柱体体积的成员方法volume；</p>
+<li><p>实现计算圆柱体体积的成员方法volume；</p>
 </li>
 </ul>
-<ol start="3">
+<ol>
 <li>编写测试类计算圆柱体体积。</li>
 </ol>
-<h3 id="运行结果-2"><a class="markdownIt-Anchor" href="#运行结果-2"></a> 运行结果：</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/java2.png" srcset="/img/loading.gif" lazyload alt=" " /></p>
-<h3 id="源代码-2"><a class="markdownIt-Anchor" href="#源代码-2"></a> 源代码：</h3>
-<ul>
-<li>计算圆面积的接口area</li>
+<h3 id="运行结果：-1"><a href="#运行结果：-1" class="headerlink" title="运行结果："></a>运行结果：</h3><p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/java2.png" srcset="/img/loading.gif" lazyload alt=" "></p>
+<h3 id="源代码：-1"><a href="#源代码：-1" class="headerlink" title="源代码："></a>源代码：</h3><ul>
+<li>计算圆面积的接口area  </li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.company;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">area</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">bottomArea</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
@@ -407,22 +387,20 @@
 <li>主函数</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.company;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Main</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>	<span class="hljs-comment">// write your code here</span><br>        <span class="hljs-type">int</span> h=<span class="hljs-number">2</span>;<br>        <span class="hljs-type">int</span> r=<span class="hljs-number">2</span>;<br>        <span class="hljs-type">Cylinder</span> <span class="hljs-variable">cylinder</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Cylinder</span>(<span class="hljs-number">2</span>,<span class="hljs-number">2</span>);<br>        System.out.println(<span class="hljs-string">&quot;高度&quot;</span>+h+<span class="hljs-string">&quot; 半径&quot;</span>+r);<span class="hljs-comment">//接口方法</span><br>        System.out.println(<span class="hljs-string">&quot;接口方法面积&quot;</span>+cylinder.bottomArea());<span class="hljs-comment">//接口方法</span><br>        System.out.println(<span class="hljs-string">&quot;成员方法面积&quot;</span>+cylinder.area());<span class="hljs-comment">//成员方法</span><br>        System.out.println(<span class="hljs-string">&quot;成员方法体积&quot;</span>+cylinder.volume());<span class="hljs-comment">//成员方法</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h2 id="题目三"><a class="markdownIt-Anchor" href="#题目三"></a> 题目三</h2>
-<h3 id="题目-3"><a class="markdownIt-Anchor" href="#题目-3"></a> 题目：</h3>
-<ol>
+<h2 id="题目三"><a href="#题目三" class="headerlink" title="题目三"></a>题目三</h2><h3 id="题目：-2"><a href="#题目：-2" class="headerlink" title="题目："></a>题目：</h3><ol>
 <li>定义一个父类Animal类</li>
 </ol>
 <p>属性：kind(种类)</p>
 <p>方法：创建带参（kind为参数）构造方法</p>
 <p>创建cry():void方法</p>
-<ol start="2">
+<ol>
 <li>编写三个具体的子类Cat类、Dog类、Sheep类</li>
 </ol>
 <p>分别重写父类中的 cry() 方法，输出信息分别为</p>
 <p>Cat类：小猫的叫声：喵喵喵~~~</p>
 <p>Dog类：小狗的叫声：汪汪汪~~~</p>
 <p>Sheep类：小羊的叫声：咩咩咩~~~</p>
-<ol start="3">
+<ol>
 <li>编写测试类，首先生成长度为5的父类对象数组，然后通过循环依次向数组中存入数据，现设定存储规则为：</li>
 </ol>
 <p>a) 每次随机产生一个0~2的正整数</p>
@@ -430,10 +408,8 @@
 <p>c) 若数值为 1，则生成一个 Dog 类的对象，存入数组</p>
 <p>d) 若数值为 2，则生成一个 Sheep 类的对象，存入数组</p>
 <p>最后循环输出数组成员，并分别调用 cry() 方法。</p>
-<h3 id="运行结果-3"><a class="markdownIt-Anchor" href="#运行结果-3"></a> 运行结果:</h3>
-<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/java3.png" srcset="/img/loading.gif" lazyload alt=" " /></p>
-<h3 id="源代码-3"><a class="markdownIt-Anchor" href="#源代码-3"></a> 源代码：</h3>
-<ul>
+<h3 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果:"></a>运行结果:</h3><p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/java3.png" srcset="/img/loading.gif" lazyload alt=" "></p>
+<h3 id="源代码：-2"><a href="#源代码：-2" class="headerlink" title="源代码："></a>源代码：</h3><ul>
 <li>父类（动物）</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.company;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Animal</span> &#123;<br><br>    <span class="hljs-keyword">protected</span> String kind;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Animal</span><span class="hljs-params">()</span>&#123;<br><br>    &#125;<br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Animal</span><span class="hljs-params">(String kind)</span>&#123;<br>          <span class="hljs-built_in">this</span>.kind=kind;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">cry</span><span class="hljs-params">()</span>&#123;<br><br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
