@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui6.png">
 <meta property="article:published_time" content="2022-10-28T13:48:00.000Z">
-<meta property="article:modified_time" content="2023-11-18T13:22:47.000Z">
+<meta property="article:modified_time" content="2023-11-23T11:13:25.000Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="JAVA">
 <meta property="article:tag" content="程序设计">
@@ -336,18 +336,20 @@
             
               <div class="markdown-body">
                 
-                <h1 id="实验题目"><a href="#实验题目" class="headerlink" title="实验题目"></a>实验题目</h1><h2 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h2><p>模拟实现以下商品管理业务系统，商品管理系统的整体功能有：</p>
+                <h1 id="实验题目"><a class="markdownIt-Anchor" href="#实验题目"></a> 实验题目</h1>
+<h2 id="题目"><a class="markdownIt-Anchor" href="#题目"></a> 题目：</h2>
+<p>模拟实现以下商品管理业务系统，商品管理系统的整体功能有：</p>
 <blockquote>
 <p>注：商品数据存储在一个数据库中(用静态HashMap来模拟)，MySQL</p>
 </blockquote>
 <p>1、用户可以通过输入商品信息来向库中添加商品，如：</p>
-<p> <strong>idname,price,库存数量  p01,透明胶带,8.8,1000</strong></p>
+<p><strong>idname,price,库存数量  p01,透明胶带,8.8,1000</strong></p>
 <p>2、用户可以查看数据库中所有的商品</p>
 <p>3、用户可以通过输入一个id来查看一个商品</p>
 <p>4、用户可以通过输入一个name来查看一个商品</p>
 <p>5、用户可以通过输入一个价格范围（比如： 100-&gt;200）来查看符合条件的商品</p>
 <p>6、用户可以通过输入一个id来从数据库中删除一个商品</p>
-<p> 额外添加的需求:</p>
+<p>额外添加的需求:</p>
 <p>7、用户可以通过指定一个id来修改一个商品的名称</p>
 <p>8、用户可以通过制定一个id来修改一个商品的价格</p>
 <p>9、用户可以通过制定一个id来修改一个商品的库存数量</p>
@@ -358,14 +360,16 @@
 <blockquote>
 <p>注：交互层打印菜单的过程很麻烦，可以不写交互层，只要完成service层的接口及实现类， dao层的接口及实现类即可。</p>
 </blockquote>
-<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<h3 id="准备工作"><a class="markdownIt-Anchor" href="#准备工作"></a> 准备工作</h3>
+<ul>
 <li>需要完成这个项目，不仅需要有一定的Java基础知识，还需要掌握一定的数据库的操作和Java GUI的设计，对于这方面内容，推荐读者阅读《MySql必知必会》这本书入门数据库的基本操作。在构建项目的时候还需要勤查百度和相关文档。为了让没有相关基础的读者快速掌握关于该项目中的一些简单操作，在此推荐B站中的三个视频供大家参考：</li>
 <li>Java图像界面编程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1wh411d7it/?p=51">Java图形界面编程</a></li>
 <li>MySQL数据库SQL语言入门：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1YY411s7Nk/?vd_source=ef77f99dbf6da2761d373027f1ca87d7">MySQL数据库SQL语言入门</a></li>
 <li>Java语言连接操作MySQL数据库，JDBC技术：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV13F411z7Ls/?vd_source=ef77f99dbf6da2761d373027f1ca87d7">Java语言连接操作MySQL数据库，JDBC技术</a></li>
 <li>当然，视频的作用只是辅助快速入门，关键还是需要多查询文档和百度。</li>
 </ul>
-<h3 id="程序设计"><a href="#程序设计" class="headerlink" title="程序设计"></a>程序设计</h3><ul>
+<h3 id="程序设计"><a class="markdownIt-Anchor" href="#程序设计"></a> 程序设计</h3>
+<ul>
 <li>首先建立与数据库的连接并获取数据</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> service;<br><br><span class="hljs-keyword">import</span> java.sql.*;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">getData</span> &#123;<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">        通过id和name搜索</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span>  List&lt;Object&gt; <span class="hljs-title function_">search</span><span class="hljs-params">(String My_id)</span> &#123;<br><br>        <span class="hljs-comment">//创建列表</span><br>        List&lt;Object&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Object&gt;();<br><br>        <span class="hljs-type">Connection</span> <span class="hljs-variable">connection</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">Statement</span> <span class="hljs-variable">statement</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">ResultSet</span> <span class="hljs-variable">resultset</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">PreparedStatement</span> <span class="hljs-variable">ps</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><br>        <span class="hljs-comment">//System.out.println(&quot;输入要搜索商品的id或者name：&quot;);</span><br>        <span class="hljs-comment">//Scanner sc1 = new Scanner(System.in);</span><br>        <span class="hljs-comment">//String search = sc1.nextLine();</span><br><br>        <span class="hljs-keyword">try</span> &#123;<br>            Class.forName(<span class="hljs-string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);<br>            <span class="hljs-keyword">try</span> &#123;<br><br>                connection = DriverManager.getConnection(<span class="hljs-string">&quot;jdbc:mysql://localhost:3306/goods&quot;</span>,<span class="hljs-string">&quot;root&quot;</span>,<span class="hljs-string">&quot;1234&quot;</span>);<br><br>                statement = connection.createStatement();<br>                <span class="hljs-type">String</span> <span class="hljs-variable">sql</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;select * from goods where id =? or name = ?&quot;</span>;<br>                ps=connection.prepareStatement(sql);<span class="hljs-comment">//添加数据预处理</span><br>                ps.setString(<span class="hljs-number">1</span>, My_id);<br>                ps.setString(<span class="hljs-number">2</span>, My_id);<br>                resultset = ps.executeQuery();<br><br>                <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>                <span class="hljs-keyword">while</span>(resultset.next())&#123;<br>                    <span class="hljs-type">String</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> resultset.getString(<span class="hljs-string">&quot;id&quot;</span>);<br>                    list.add(i,id);<br>                    i++;<br>                    <span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> resultset.getString(<span class="hljs-string">&quot;name&quot;</span>);<br>                    list.add(i,name);<br>                    i++;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">price</span> <span class="hljs-operator">=</span> resultset.getInt(<span class="hljs-string">&quot;price&quot;</span>);<br>                    list.add(i,price);<br>                    i++;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> resultset.getInt(<span class="hljs-string">&quot;num&quot;</span>);<br>                    list.add(i,num);<br>                    i++;<br>                    <span class="hljs-comment">//System.out.println(&quot;id:&quot;+id+&quot;   &quot;+&quot;name:&quot;+name+&quot;   &quot;+&quot;price:&quot;+price+&quot;   &quot;+&quot;num:&quot;+num);</span><br>                &#125;<br>            &#125; <span class="hljs-keyword">catch</span> (SQLException e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>        &#125; <span class="hljs-keyword">catch</span> (ClassNotFoundException e) &#123;<br>            e.printStackTrace();<br>        &#125;<span class="hljs-keyword">finally</span>&#123;<br>            close(connection);<br>            close(statement);<br>            close(resultset);<br>        &#125;<br>        <span class="hljs-keyword">return</span> list;<br>    &#125;<br><br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">            关闭连接</span><br><span class="hljs-comment">            */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">close</span><span class="hljs-params">(AutoCloseable autoCloseable)</span>&#123;<br>        <span class="hljs-keyword">if</span>(autoCloseable != <span class="hljs-literal">null</span>)&#123;<br>            <span class="hljs-keyword">try</span><br>            &#123;<br>                autoCloseable.close();<br>            &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -385,54 +389,72 @@
 <li>筛选数据</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> gui.service;<br><br><span class="hljs-keyword">import</span> java.sql.*;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.List;<br><span class="hljs-keyword">import</span> java.util.Scanner;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">chooseData</span> &#123;<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">        通过id和name搜索</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> List&lt;Object&gt; <span class="hljs-title function_">search</span><span class="hljs-params">(String My_data)</span> &#123;<br><br>        <span class="hljs-comment">//创建列表</span><br>        List&lt;Object&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Object&gt;();<br><br>        <span class="hljs-type">Connection</span> <span class="hljs-variable">connection</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">Statement</span> <span class="hljs-variable">statement</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">ResultSet</span> <span class="hljs-variable">resultset</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-type">PreparedStatement</span> <span class="hljs-variable">ps</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><br><br>        <span class="hljs-keyword">try</span> &#123;<br>            Class.forName(<span class="hljs-string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);<br>            <span class="hljs-keyword">try</span> &#123;<br><br>                connection = DriverManager.getConnection(<span class="hljs-string">&quot;jdbc:mysql://localhost:3306/goods&quot;</span>,<span class="hljs-string">&quot;root&quot;</span>,<span class="hljs-string">&quot;1234&quot;</span>);<br><br><span class="hljs-comment">//                if(connection != null)&#123;</span><br><span class="hljs-comment">//                    System.out.println(&quot;连接成功&quot;+connection);</span><br><span class="hljs-comment">//                    connection.close();</span><br><span class="hljs-comment">//                &#125;</span><br>                statement = connection.createStatement();<br>                <span class="hljs-type">String</span> <span class="hljs-variable">sql</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;select * from goods where id =? or name = ?&quot;</span>;<br>                ps=connection.prepareStatement(sql);<span class="hljs-comment">//添加数据预处理</span><br>                ps.setString(<span class="hljs-number">1</span>, My_data);<br>                ps.setString(<span class="hljs-number">2</span>, My_data);<br>                resultset = ps.executeQuery();<br><br>                <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>                <span class="hljs-keyword">while</span>(resultset.next())&#123;<br>                    <span class="hljs-type">String</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> resultset.getString(<span class="hljs-string">&quot;id&quot;</span>);<br>                    list.add(i,id);<br>                    i++;<br>                    <span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> resultset.getString(<span class="hljs-string">&quot;name&quot;</span>);<br>                    list.add(i,name);<br>                    i++;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">price</span> <span class="hljs-operator">=</span> resultset.getInt(<span class="hljs-string">&quot;price&quot;</span>);<br>                    list.add(i,price);<br>                    i++;<br>                    <span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> resultset.getInt(<span class="hljs-string">&quot;num&quot;</span>);<br>                    list.add(i,num);<br>                    i++;<br>                    <span class="hljs-comment">//System.out.println(&quot;id:&quot;+id+&quot;   &quot;+&quot;name:&quot;+name+&quot;   &quot;+&quot;price:&quot;+price+&quot;   &quot;+&quot;num:&quot;+num);</span><br>                &#125;<br><br>            &#125; <span class="hljs-keyword">catch</span> (SQLException e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>        &#125; <span class="hljs-keyword">catch</span> (ClassNotFoundException e) &#123;<br>            e.printStackTrace();<br>        &#125;<span class="hljs-keyword">finally</span>&#123;<br>            close(connection);<br>            close(statement);<br>            close(resultset);<br>        &#125;<br>        <span class="hljs-keyword">return</span> list;<br>    &#125;<br><br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">               关闭连接</span><br><span class="hljs-comment">               */</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">close</span><span class="hljs-params">(AutoCloseable autoCloseable)</span>&#123;<br>        <span class="hljs-keyword">if</span>(autoCloseable != <span class="hljs-literal">null</span>)&#123;<br>            <span class="hljs-keyword">try</span><br>            &#123;<br>                autoCloseable.close();<br>            &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                e.printStackTrace();<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="Swing组件GUI设计"><a href="#Swing组件GUI设计" class="headerlink" title="Swing组件GUI设计"></a>Swing组件GUI设计</h3><ul>
-<li><p>该层主要采用<strong>Swing类</strong>的各种组件和方法实现图形用户界面,并且下载了相应的主题优化了组件的外观，使其达到精美的效果！</p>
+<h3 id="swing组件gui设计"><a class="markdownIt-Anchor" href="#swing组件gui设计"></a> Swing组件GUI设计</h3>
+<ul>
+<li>
+<p>该层主要采用<strong>Swing类</strong>的各种组件和方法实现图形用户界面,并且下载了相应的主题优化了组件的外观，使其达到精美的效果！</p>
 </li>
-<li><p>使用<strong>JFrame</strong>作为面板组件的载体。</p>
+<li>
+<p>使用<strong>JFrame</strong>作为面板组件的载体。</p>
 </li>
-<li>使用<strong>JPanel</strong>组件作为基础组件的载体，并且设置面板的大小，位置以及布局方式。</li>
-<li>使用<strong>JBox</strong>打包对应组件为一个完整的整体，并确定竖直和横向的排布。</li>
-<li>使用<strong>JLabel、JTextField、JButton、JPassword、JSplit</strong>等基本组件并且设置其<strong>格式</strong>，包括<strong>颜色</strong>、<strong>大小</strong>、<strong>位置</strong>等。</li>
-<li>因为需要为交互的组件添加<strong>监视器</strong>来实现<strong>动态响应</strong>，最终组合<strong>JFrame</strong>的内容为总体系统。</li>
+<li>
+<p>使用<strong>JPanel</strong>组件作为基础组件的载体，并且设置面板的大小，位置以及布局方式。</p>
+</li>
+<li>
+<p>使用<strong>JBox</strong>打包对应组件为一个完整的整体，并确定竖直和横向的排布。</p>
+</li>
+<li>
+<p>使用<strong>JLabel、JTextField、JButton、JPassword、JSplit</strong>等基本组件并且设置其<strong>格式</strong>，包括<strong>颜色</strong>、<strong>大小</strong>、<strong>位置</strong>等。</p>
+</li>
+<li>
+<p>因为需要为交互的组件添加<strong>监视器</strong>来实现<strong>动态响应</strong>，最终组合<strong>JFrame</strong>的内容为总体系统。</p>
+</li>
 </ul>
-<h3 id="项目展示"><a href="#项目展示" class="headerlink" title="项目展示"></a>项目展示</h3><ul>
+<h3 id="项目展示"><a class="markdownIt-Anchor" href="#项目展示"></a> 项目展示</h3>
+<ul>
 <li>登录界面                   用户名:root                    密码:1234</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui1.png" srcset="/img/loading.gif" lazyload alt=" "></p>
+<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui1.png" srcset="/img/loading.gif" lazyload alt=" " /></p>
 <ul>
 <li>数据管理界面，基本功能模块和数据表格显示</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui2.png" srcset="/img/loading.gif" lazyload alt=" "></p>
+<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui2.png" srcset="/img/loading.gif" lazyload alt=" " /></p>
 <ul>
 <li>添加数据功能</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui3.png" srcset="/img/loading.gif" lazyload alt=" "></p>
+<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui3.png" srcset="/img/loading.gif" lazyload alt=" " /></p>
 <ul>
 <li>修改数据功能</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui4.png" srcset="/img/loading.gif" lazyload alt=" "></p>
+<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui4.png" srcset="/img/loading.gif" lazyload alt=" " /></p>
 <ul>
 <li>数据筛选功能</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui5.png" srcset="/img/loading.gif" lazyload alt=" "></p>
+<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui5.png" srcset="/img/loading.gif" lazyload alt=" " /></p>
 <ul>
 <li>页眉部分拓展功能</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui.png" srcset="/img/loading.gif" lazyload alt=" "></p>
+<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui.png" srcset="/img/loading.gif" lazyload alt=" " /></p>
 <ul>
 <li>关于作者界面</li>
 </ul>
-<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui6.png" srcset="/img/loading.gif" lazyload alt=" "></p>
-<h3 id="项目下载"><a href="#项目下载" class="headerlink" title="项目下载"></a>项目下载</h3><ul>
-<li><p>由于本项目代码量巨大，详细工程就不展示在本博客中，同时为了促进大家相互学习和共同进步，在此提供公开版项目供大家使用，一起进步！</p>
+<p><img src="https://cdn.jsdelivr.net/gh/chuiyugin/imgbed/gui6.png" srcset="/img/loading.gif" lazyload alt=" " /></p>
+<h3 id="项目下载"><a class="markdownIt-Anchor" href="#项目下载"></a> 项目下载</h3>
+<ul>
+<li>
+<p>由于本项目代码量巨大，详细工程就不展示在本博客中，同时为了促进大家相互学习和共同进步，在此提供公开版项目供大家使用，一起进步！</p>
 </li>
-<li><p>公开版项目是精简了一些冗余的外观，尽量保留原汁原味JavaGUI，更加关注后台数据处理和交互的过程！读者可以根据初始GUI进行深度定制，随时随地制作出合你心意的作品。鉴于本人水平有限，本项目依然有很多不足之处，欢迎大家在下方评论区留言指正！</p>
+<li>
+<p>公开版项目是精简了一些冗余的外观，尽量保留原汁原味JavaGUI，更加关注后台数据处理和交互的过程！读者可以根据初始GUI进行深度定制，随时随地制作出合你心意的作品。鉴于本人水平有限，本项目依然有很多不足之处，欢迎大家在下方评论区留言指正！</p>
 </li>
-<li><p>本公开版项目能够直接运行Main.java即可，若连接数据库，读者需要首先自行在本机安装MySql并将相关内容在service文件夹即业务逻辑层修改部分代码才可完美运行。</p>
+<li>
+<p>本公开版项目能够直接运行Main.java即可，若连接数据库，读者需要首先自行在本机安装MySql并将相关内容在service文件夹即业务逻辑层修改部分代码才可完美运行。</p>
 </li>
-<li><p>本项目所有功能已经测试通过，如仍然有Bug欢迎指正！</p>
+<li>
+<p>本项目所有功能已经测试通过，如仍然有Bug欢迎指正！</p>
 </li>
-<li><p>下载连接：<a target="_blank" rel="noopener" href="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-bc82cde5-9df0-4e04-8d4f-a0e9e1bd241b/9220f08e-f2ed-484f-b9b1-60f13b8ea3ba.zip">公开版项目点此下载</a></p>
+<li>
+<p>下载连接：<a target="_blank" rel="noopener" href="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-bc82cde5-9df0-4e04-8d4f-a0e9e1bd241b/9220f08e-f2ed-484f-b9b1-60f13b8ea3ba.zip">公开版项目点此下载</a></p>
 </li>
 </ul>
 
