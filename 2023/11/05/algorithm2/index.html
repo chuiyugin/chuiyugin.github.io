@@ -59,7 +59,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231125141921.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202311102020016.jpeg">
 <meta property="article:published_time" content="2023-11-05T12:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-26T12:35:10.231Z">
+<meta property="article:modified_time" content="2023-11-26T12:46:03.679Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="算法">
@@ -307,7 +307,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          99k 字
+          100k 字
         
       </span>
     
@@ -319,7 +319,7 @@
         
         
           <!-- compatible with older versions-->
-          309 分钟
+          312 分钟
         
       </span>
     
@@ -2225,6 +2225,20 @@
 <li>关于这两种用法见下述例子。</li>
 </ul>
 <h4 id="pair-中元素的访问"><a class="markdownIt-Anchor" href="#pair-中元素的访问"></a> pair 中元素的访问</h4>
+<ul>
+<li><code>pair</code> 中只有两个元素，分别是 <code>first</code> 和 <code>second</code>，只需要按照正常结构体的方式去访问即可，示例如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stack&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;utility&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    pair&lt;string , <span class="hljs-type">int</span>&gt; p;<br>    p.first = <span class="hljs-string">&quot;yugin!&quot;</span>;<br>    p.second = <span class="hljs-number">5</span>;<br>    cout &lt;&lt; p.first &lt;&lt; <span class="hljs-string">&quot; &quot;</span> &lt;&lt; p.second &lt;&lt; endl;<br>    p = <span class="hljs-built_in">make_pair</span>(<span class="hljs-string">&quot;chui yugin!&quot;</span>,<span class="hljs-number">88</span>);<br>    cout &lt;&lt; p.first &lt;&lt; <span class="hljs-string">&quot; &quot;</span> &lt;&lt; p.second &lt;&lt; endl;<br>    p = <span class="hljs-built_in">pair</span>&lt;string , <span class="hljs-type">int</span>&gt;(<span class="hljs-string">&quot;chui yugin yep!&quot;</span>,<span class="hljs-number">888</span>);<br>    cout &lt;&lt; p.first &lt;&lt; <span class="hljs-string">&quot; &quot;</span> &lt;&lt; p.second &lt;&lt; endl;<br>    <span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;pause&quot;</span>);<span class="hljs-comment">// 防止运行后自动退出，需头文件stdlib.h</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>输出：</li>
+</ul>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">yugin! 5<br>chui yugin! 88<br>chui yugin yep! 888<br></code></pre></td></tr></table></figure>
+<h4 id="pair-常用函数实例解析"><a class="markdownIt-Anchor" href="#pair-常用函数实例解析"></a> pair 常用函数实例解析</h4>
+<h5 id="比较操作数"><a class="markdownIt-Anchor" href="#比较操作数"></a> 比较操作数</h5>
+<ul>
+<li>两个 <code>pair</code> 类型数据可以直接使用 <code>==</code>、<code>!=</code>、<code>&lt;</code>、<code>&lt;=</code>、<code>&gt;</code>、<code>&gt;=</code> 比较大小，比较规则是先以 <code>first</code> 的大小作为标准，只有当 <code>first</code> 相等时才去判断 <code>second</code> 的大小。示例如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br></code></pre></td></tr></table></figure>
 <h2 id="算法初步"><a class="markdownIt-Anchor" href="#算法初步"></a> 算法初步</h2>
 <h3 id="排序"><a class="markdownIt-Anchor" href="#排序"></a> 排序</h3>
 <ul>
