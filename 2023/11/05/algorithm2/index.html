@@ -74,7 +74,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231203123942.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231203124543.png">
 <meta property="article:published_time" content="2023-11-05T12:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-03T04:46:02.969Z">
+<meta property="article:modified_time" content="2023-12-03T06:37:47.810Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="算法">
@@ -2177,11 +2177,11 @@
 </ol>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231202141728.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ol>
-<li>如果 <code>A[mid]&gt;x</code>，说明元素 x 在 <code>mid</code> 位置的左边，因此往左子区间 <code>[left, mid-1]</code> 继续查找。</li>
+<li>如果 <code>A[mid]&gt;x</code>，说明元素 <code>x</code> 在 <code>mid</code> 位置的左边，因此往左子区间 <code>[left, mid-1]</code> 继续查找。</li>
 </ol>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231202142141.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ol>
-<li>如果 <code>A[mid]&lt;x</code>，说明元素 x 在 <code>mid</code> 位置的右边，因此往右子区间 <code>[mid+1, right]</code> 继续查找。</li>
+<li>如果 <code>A[mid]&lt;x</code>，说明元素 <code>x</code> 在 <code>mid</code> 位置的右边，因此往右子区间 <code>[mid+1, right]</code> 继续查找。</li>
 </ol>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231202142301.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ul>
@@ -2191,42 +2191,42 @@
 <li>首先是 <code>11</code> 的查询过程，令 <code>left=1</code>、<code>right=10</code>，表示当前查询的下标范围：</li>
 </ul>
 <ol>
-<li><code>[left, right]=[1,10]</code>，因此下标中点 <code>mid=(left+right)/2=5</code>。由于 <code>A[mid]=A[5]=15</code>，而 <code>15&gt;11</code>，说明需要在 <code>[left, mid-1]</code> 继续查找，因此令 <code>right=mid-1=4</code>。</li>
+<li><code>[left,right]=[1,10]</code>，因此下标中点 <code>mid=(left+right)/2=5</code>。由于 <code>A[mid]=A[5]=15</code>，而 <code>15&gt;11</code>，说明需要在 <code>[left,mid-1]</code> 继续查找，因此令 <code>right=mid-1=4</code>。</li>
 </ol>
-<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231202143556.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231202143556.png" srcset="/img/loading.gif" lazyload alt="|525"></p>
 <ol>
-<li><code>[left, right]=[1,4]</code>，因此下标中点 <code>mid=(left+right)/2=2</code>。由于 <code>A[mid]=A[2]=7</code>，而 <code>7&lt;11</code>，说明需要在 <code>[mid+1, right]</code> 继续查找，因此令 <code>left=mid+1=3</code>。 </li>
+<li><code>[left,right]=[1,4]</code>，因此下标中点 <code>mid=(left+right)/2=2</code>。由于 <code>A[mid]=A[2]=7</code>，而 <code>7&lt;11</code>，说明需要在 <code>[mid+1,right]</code> 继续查找，因此令 <code>left=mid+1=3</code>。 </li>
 </ol>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231202143824.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ol>
-<li><code>[left, right]=[3,4]</code>，因此下标中点 <code>mid=(left+right)/2=3</code>。由于 <code>A[mid]=A[3]=8</code>，而 <code>8&lt;11</code>，说明需要在 <code>[mid+1, right]</code> 继续查找，因此令 <code>left=mid+1=4</code>。 </li>
+<li><code>[left,right]=[3,4]</code>，因此下标中点 <code>mid=(left+right)/2=3</code>。由于 <code>A[mid]=A[3]=8</code>，而 <code>8&lt;11</code>，说明需要在 <code>[mid+1,right]</code> 继续查找，因此令 <code>left=mid+1=4</code>。 </li>
 </ol>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231202144010.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ol>
-<li><code>[left, right]=[4,4]</code>，因此下标中点 <code>mid=(left+right)/2=4</code>。由于 <code>A[mid]=A[4]=11</code>，而 <code>11==11</code>，说明找到了欲查询的数字，因此结束算法，返回下标 4。</li>
+<li><code>[left,right]=[4,4]</code>，因此下标中点 <code>mid=(left+right)/2=4</code>。由于 <code>A[mid]=A[4]=11</code>，而 <code>11==11</code>，说明找到了欲查询的数字，因此结束算法，返回下标 4。</li>
 </ol>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231202144206.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ul>
 <li>接下来是 <code>34</code> 的查询过程，同样令 <code>left=1</code>、<code>right=10</code>：</li>
 </ul>
 <ol>
-<li><code>[left, right]=[1,10]</code>，因此下标中点 <code>mid=(left+right)/2=5</code>。由于 <code>A[mid]=A[5]=15</code>，而 <code>15&lt;34</code>，说明需要在 <code>[mid+1, right]</code> 继续查找，因此令 <code>left=mid+1=6</code>。</li>
+<li><code>[left,right]=[1,10]</code>，因此下标中点 <code>mid=(left+right)/2=5</code>。由于 <code>A[mid]=A[5]=15</code>，而 <code>15&lt;34</code>，说明需要在 <code>[mid+1,right]</code> 继续查找，因此令 <code>left=mid+1=6</code>。</li>
 </ol>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231202144543.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ol>
-<li><code>[left, right]=[6,10]</code>，因此下标中点 <code>mid=(left+right)/2=8</code>。由于 <code>A[mid]=A[8]=52</code>，而 <code>52&gt;34</code>，说明需要在 <code>[left, mid-1]</code> 继续查找，因此令 <code>right=mid-1=7</code>。</li>
+<li><code>[left,right]=[6,10]</code>，因此下标中点 <code>mid=(left+right)/2=8</code>。由于 <code>A[mid]=A[8]=52</code>，而 <code>52&gt;34</code>，说明需要在 <code>[left,mid-1]</code> 继续查找，因此令 <code>right=mid-1=7</code>。</li>
 </ol>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231202144805.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ol>
-<li><code>[left, right]=[6,7]</code>，因此下标中点 <code>mid=(left+right)/2=6</code>。由于 <code>A[mid]=A[6]=21</code>，而 <code>21&lt;34</code>，说明需要在 <code>[mid+1, right]</code> 继续查找，因此令 <code>left=mid+1=7</code>。</li>
+<li><code>[left,right]=[6,7]</code>，因此下标中点 <code>mid=(left+right)/2=6</code>。由于 <code>A[mid]=A[6]=21</code>，而 <code>21&lt;34</code>，说明需要在 <code>[mid+1,right]</code> 继续查找，因此令 <code>left=mid+1=7</code>。</li>
 </ol>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231202145014.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ol>
-<li><code>[left, right]=[7,7]</code>，因此下标中点 <code>mid=(left+right)/2=7</code>。由于 <code>A[mid]=A[7]=33</code>，而 <code>33&lt;34</code>，说明需要在 <code>[mid+1, right]</code> 继续查找，因此令 <code>left=mid+1=8</code>。</li>
+<li><code>[left,right]=[7,7]</code>，因此下标中点 <code>mid=(left+right)/2=7</code>。由于 <code>A[mid]=A[7]=33</code>，而 <code>33&lt;34</code>，说明需要在 <code>[mid+1,right]</code> 继续查找，因此令 <code>left=mid+1=8</code>。</li>
 </ol>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231202145422.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ol>
-<li><code>[left, right]=[8,7]</code>，由于 <code>left&gt;right</code>，因此查找失败，说明序列不存在 <code>34</code>。</li>
+<li><code>[left,right]=[8,7]</code>，由于 <code>left&gt;right</code>，因此查找失败，说明序列不存在 <code>34</code>。</li>
 </ol>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231202145614.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ul>
@@ -2255,7 +2255,8 @@
 </ol>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231203124543.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ul>
-<li>由此可以写出对应代码：</li>
+<li>由此可以写出对应代码：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br></code></pre></td></tr></table></figure>
+</li>
 </ul>
 
                 
