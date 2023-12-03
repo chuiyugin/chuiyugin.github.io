@@ -73,8 +73,10 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231202145614.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231203123942.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231203124543.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231203194559.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231203195313.png">
 <meta property="article:published_time" content="2023-11-05T12:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-03T08:07:01.916Z">
+<meta property="article:modified_time" content="2023-12-03T12:21:25.020Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="算法">
@@ -322,7 +324,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          122k 字
+          123k 字
         
       </span>
     
@@ -334,7 +336,7 @@
         
         
           <!-- compatible with older versions-->
-          383 分钟
+          385 分钟
         
       </span>
     
@@ -2271,7 +2273,24 @@
 </ol>
 <ul>
 <li>首先，二分下界是 <code>0</code> 是显然的，但是二分上界是 <code>n-1</code> 还是 <code>n</code> 呢？</li>
-<li>考虑到欲查询元素有可能比序列中的所有元素都要大，此时应当返回 <code>n</code>（假设它存在，它应该在的位置），因此二分上界是 <code>n</code>，故二分的初始区间为 <code>[left,right]=[0,n]</code>。</li>
+<li><p>考虑到欲查询元素有可能比序列中的所有元素都要大，此时应当返回 <code>n</code>（假设它存在，它应该在的位置），因此二分上界是 <code>n</code>，故二分的初始区间为 <code>[left,right]=[0,n]</code>。</p>
+</li>
+<li><p>接下来考虑第二个小问题：<strong>求序列中第一个大于 x 的元素的位置。</strong></p>
+</li>
+<li>做法是类似的：</li>
+<li>假设当前区间 <code>[left,right]</code>，那么可以根据 <code>mid</code> 位置的元素与欲查询元素 <code>x</code> 的大小来判断应当往哪个子区间继续查找：</li>
+</ul>
+<ol>
+<li>如果 <code>A[mid]&gt;x</code>，说明第一个大于 <code>x</code> 的元素的位置一定在 <code>mid</code> 处或 <code>mid</code> 的左侧，应往左子区间 <code>[left,mid]</code> 继续查询。</li>
+</ol>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231203194559.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<ol>
+<li>如果 <code>A[mid]≤x</code>，说明第一个大于 <code>x</code> 的元素的位置一定在 <code>mid</code> 的右侧，应往右子区间 <code>[mid+1,right]</code> 继续查询。</li>
+</ol>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231203195313.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<ul>
+<li>于是可以写出寻找<strong>第一个大于</strong> <code>x</code> 的函数代码：<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//A[]为递增序列，x为欲查询数，函数返回第一个大于x的元素位置</span><br><span class="hljs-comment">//二分区间为左闭右闭[left,right]，传入初值为[0,n]</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">upper_bound</span><span class="hljs-params">(<span class="hljs-type">int</span> A[],<span class="hljs-type">int</span> left,<span class="hljs-type">int</span> right,<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> mid; <span class="hljs-comment">//mid为left和right的中点</span><br>    <span class="hljs-keyword">while</span>(left&lt;right)<span class="hljs-comment">//对[left,right]来说，left==right意味着找到唯一位置</span><br>    &#123;<br>        mid = (left+right)/<span class="hljs-number">2</span>;<span class="hljs-comment">//取中点</span><br>        <span class="hljs-keyword">if</span>(A[mid]&gt;x)<span class="hljs-comment">//中间的数大于x</span><br>        &#123;<br>            right = mid;<span class="hljs-comment">//往左区间[left,mid]查找</span><br>        &#125;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            left = mid + <span class="hljs-number">1</span>;<span class="hljs-comment">//往右子区间[mid+1,right]查找</span><br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> left;<span class="hljs-comment">//返回L的位置</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>不难发现，和 <code>lower_bound</code> 函数的代码相比，<code>upper_bound</code> 函数只是把代码中的 <code>A[mid]≥x</code> 改成了 <code>A[mid]&gt;x</code>，其他完全相同。</li>
 </ul>
 
                 
