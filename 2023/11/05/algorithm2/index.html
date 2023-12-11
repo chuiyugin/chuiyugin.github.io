@@ -104,7 +104,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231210143332.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231210143550.png">
 <meta property="article:published_time" content="2023-11-05T12:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-10T12:32:42.468Z">
+<meta property="article:modified_time" content="2023-12-11T08:52:56.781Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="算法">
@@ -352,7 +352,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          160k 字
+          162k 字
         
       </span>
     
@@ -364,7 +364,7 @@
         
         
           <!-- compatible with older versions-->
-          502 分钟
+          508 分钟
         
       </span>
     
@@ -3799,6 +3799,46 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <ol>
 <li>在程序中<strong>一次性</strong>计算出所有需要用到的结果，之后通过查询直接取这些结果。</li>
 </ol>
+<ul>
+<li>这个是最常用到的用法，例如在一个需要查询大量 <code>Fibonacci</code> 数 <code>F(n)</code> 的问题中，显然每次从头开始计算是非常耗时的，对 <code>Q</code> 次查询会产生 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>Q</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nQ)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal">Q</span><span class="mclose">)</span></span></span></span> 的时间复杂度；</li>
+<li>而如果进行预处理，即把所有 <code>Fibonacci</code> 数预先计算并存在数组中，那么每次查询就只需要 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span> 的时间复杂度，对 <code>Q</code> 次查询就只需要 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mi>Q</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n+Q)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">Q</span><span class="mclose">)</span></span></span></span> 的时间复杂度（其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> 是预处理的时间）。</li>
+</ul>
+<ol start="2">
+<li>在程序 <code>B</code> 分一次或多次计算出所有需要用到的结果，手工把结果写在程序 <code>A</code> 的数组中，然后在程序 <code>A</code> 中就可以直接使用这些结果。</li>
+</ol>
+<ul>
+<li>这种用法一般是当程序的一部分过程消耗的时间过多，或是没有想到好的算法，因此在另一个程序中使用暴力算法求出结果，这样就能直接在原程序中使用这些结果。</li>
+<li>例如对 <code>n</code> 皇后问题来说，如果使用的算法不好，就容易超时，而可以在本地用程序计算出对所有 <code>n</code> 来说的 <code>n</code> 皇后方案数，然后把算出的结果直接写在数组中，就可以根据题目输入的 <code>n</code> 来直接出结果。</li>
+</ul>
+<ol start="3">
+<li>对一些感觉不会做的题目，先用暴力程序计算小范围数据的结果，然后找规律，或许就能发现一些“蛛丝马迹”。</li>
+</ol>
+<ul>
+<li>这种用法在数据范围非常大时容易用到，因为这样的题目可能不是用直接能想到的算法来解决的，而需要寻找一些规律才能得到结果。</li>
+</ul>
+<h4 id="活用递推"><a class="markdownIt-Anchor" href="#活用递推"></a> 活用递推</h4>
+<ul>
+<li>有很多题目需要细心考虑过程中是否可能存在递推关系，如果能找到这样的递推关系，就能够使时间复杂度下降不少。</li>
+<li>例如就一类涉及序列的题目来说，假如序列的每一位所需要计算的值都可以通过该位左右两侧的结果计算得到，那么就可以考虑所谓的“左右两侧的结果”是否能通过递推进行预处理得到，这样在后面就不必反复求解。</li>
+</ul>
+<p>例题：<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805260223102976/exam/problems/994805282389999616?type=7&amp;page=0">PAT B1040</a>、<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805342720868352/exam/problems/994805373582557184?type=7&amp;page=0">PAT A1093</a></p>
+<ul>
+<li>思路：</li>
+<li>本题直接进行暴力求解会超时；</li>
+<li>因此需要换一个角度思考，对于一个确定位置的字符 <code>A</code> 来说，以它形成的 <code>PAT</code> 的个数等于它左边 <code>P</code> 的个数乘以它右边 <code>T</code> 的个数。</li>
+<li>例如对于字符串 <code>APPAPT</code> 的中间那个字符 <code>A</code> 来说，它左边有两个 <code>P</code>，右边有一个 <code>T</code>，因此这个 <code>A</code> 能形成的 <code>PAT</code> 的个数就是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mn>1</mn><mo>=</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">2×1=2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span></span></span></span>。</li>
+<li>于是问题就转换为，对于字符串中的每个 <code>A</code>，计算它左边 <code>P</code> 的个数与它右边 <code>T</code> 的个数的乘积，然后把所有 <code>A</code> 的这个乘积相加就是答案。</li>
+<li>如何比较快地获得每一位左边 <code>P</code> 的个数？</li>
+<li>只需要设定一个数组 <code>int leftNumP[MAX]</code>，使用变量 <code>numP</code> 记录每一位左边 <code>P</code> 的个数（含当前位，下同）。于是只需要 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>e</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(len)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> 的时间复杂度就能统计出 <code>leftNumP</code> 数组。</li>
+<li>以同样的方法可以计算出每个字符 <code>A</code> 右边 <code>T</code> 的个数。</li>
+<li>为了节省代码量,不妨在统计每个字符 <code>A</code> 右边 <code>T</code> 的个数的过程中直接计算答案 <code>ans</code>。</li>
+<li>具体做法是：</li>
+<li>定义一个变量 <code>numT</code>，记录当前累计右边 <code>T</code> 的个数。从右往左遍历字符串，如果当前位 <code>i</code> 是字符 <code>T</code>，那么令变量 <code>numT++;</code>。</li>
+<li>否则，如果当前位 <code>i</code> 是 <code>A</code>，那么令 <code>ans=(ans+leftNumP[i]*numT)%MOD;</code>！</li>
+<li>代码如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stack&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;utility&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;climits&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MAX = <span class="hljs-number">100010</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> MOD = <span class="hljs-number">1000000007</span>;<br><br><span class="hljs-comment">//变量定义</span><br><span class="hljs-type">int</span> leftNumP[MAX] = &#123;<span class="hljs-number">0</span>&#125;;<br>string str;<br><br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    cin &gt;&gt; str;<span class="hljs-comment">//读入字符串</span><br>    <span class="hljs-type">int</span> len = str.<span class="hljs-built_in">length</span>();<br>    <span class="hljs-type">int</span> numP = <span class="hljs-number">0</span>,numT = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;len;i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(str[i]==<span class="hljs-string">&#x27;P&#x27;</span>)<br>            numP++;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(str[i]==<span class="hljs-string">&#x27;A&#x27;</span>)<br>        &#123;<br>            leftNumP[i]=numP;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=len<span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;i--)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(str[i]==<span class="hljs-string">&#x27;T&#x27;</span>)<br>            numT++;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(str[i]==<span class="hljs-string">&#x27;A&#x27;</span>)<br>        &#123;<br>            ans = (ans+leftNumP[i]*numT)%MOD;<br>        &#125;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans);<br>    <span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;pause&quot;</span>);<span class="hljs-comment">// 防止运行后自动退出，需头文件stdlib.h</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="随机选择算法"><a class="markdownIt-Anchor" href="#随机选择算法"></a> 随机选择算法</h4>
 
                 
               </div>
