@@ -105,7 +105,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231210143550.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231215150527.png">
 <meta property="article:published_time" content="2023-11-05T12:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-15T07:38:41.254Z">
+<meta property="article:modified_time" content="2023-12-15T12:46:02.949Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="算法">
@@ -353,7 +353,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          174k 字
+          175k 字
         
       </span>
     
@@ -365,7 +365,7 @@
         
         
           <!-- compatible with older versions-->
-          545 分钟
+          547 分钟
         
       </span>
     
@@ -4005,7 +4005,37 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <ul>
 <li>总结：简单题，与上述最小公倍数分析相同！</li>
 </ul>
-
+<h3 id="分数的四则运算"><a class="markdownIt-Anchor" href="#分数的四则运算"></a> 分数的四则运算</h3>
+<ul>
+<li>所谓分数的四则运算是指，给定两个分数的分子和分母，求它们加减乘除的结果。</li>
+</ul>
+<h4 id="分数的表示和化简"><a class="markdownIt-Anchor" href="#分数的表示和化简"></a> 分数的表示和化简</h4>
+<h5 id="分数的表示"><a class="markdownIt-Anchor" href="#分数的表示"></a> 分数的表示</h5>
+<ul>
+<li>对一个分数来说，最简洁的写法就是写成<strong>假分数</strong>的形式，即无论分子比分母大或者小，都保留其原数。因此可以使用一个结构体来存储这种只有分子和分母的分数：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Fraction</span> <span class="hljs-comment">//分数</span><br>&#123;<br>	<span class="hljs-type">int</span> up,down;<span class="hljs-comment">//分子、分母</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>于是就可以定义 <code>Fraction</code> 类型的变量来表示分数，或者定义数组来表示一堆分数。其中需要对这种表示制订三项规则：</li>
+</ul>
+<ol>
+<li>使 <code>down</code> 为非负数。如果分数为负，那么令分子 <code>up</code> 为负即可。</li>
+<li>如果该分数恰好为 <code>0</code>，那么规定其分子为 <code>0</code>，分母为 <code>1</code>。</li>
+<li>分子和分母没有除了 1 以外的公约数。</li>
+</ol>
+<h5 id="分数的化简"><a class="markdownIt-Anchor" href="#分数的化简"></a> 分数的化简</h5>
+<ul>
+<li>分数的化简主要用来使 <code>Fraction</code> 变量满足分数表示的三项规定，因此化简步骤也分为以下三步：</li>
+</ul>
+<ol>
+<li>如果分母 <code>down</code> 为负数，那么令分子 <code>up</code> 和分母 <code>down</code> 都变为相反数。</li>
+<li>如果分子 <code>up</code> 为 <code>0</code>，那么令分母 <code>down</code> 为 <code>1</code>。</li>
+<li>约分：求出分子<strong>绝对值</strong>与分母<strong>绝对值</strong>的最大公约数 <code>d</code>,然后令分子分母同时除以 <code>d</code>。</li>
+</ol>
+<ul>
+<li>代码如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">Fraction <span class="hljs-title">reduction</span><span class="hljs-params">(Fraction result)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span>(result.down &lt; <span class="hljs-number">0</span>)<span class="hljs-comment">//分母为负数，令分子和分母都变为相反数</span><br>	&#123;<br>		result.up = -result.up;<br>		result.down = -result.down;<br>	&#125;<br>	<span class="hljs-keyword">if</span>(result.up == <span class="hljs-number">0</span>)<span class="hljs-comment">//如果分子为0</span><br>	&#123;<br>		result.down = <span class="hljs-number">1</span>;<span class="hljs-comment">//令分母为1</span><br>	&#125;<br>	<span class="hljs-keyword">else</span><span class="hljs-comment">//如果分子不为0，进行约分</span><br>	&#123;<br>		<span class="hljs-type">int</span> d = <span class="hljs-built_in">gcd</span>(<span class="hljs-built_in">abs</span>(result.up),<span class="hljs-built_in">abs</span>(result.down));<span class="hljs-comment">//分子分母的最大公约数</span><br>		result.up /= d;<br>		result.down /= d;<br>	&#125;<br>	<span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
