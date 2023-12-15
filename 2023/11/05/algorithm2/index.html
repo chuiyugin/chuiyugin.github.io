@@ -103,8 +103,9 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231210143218.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231210143332.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231210143550.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231215150527.png">
 <meta property="article:published_time" content="2023-11-05T12:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-14T12:50:41.777Z">
+<meta property="article:modified_time" content="2023-12-15T07:10:50.088Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="算法">
@@ -352,7 +353,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          171k 字
+          173k 字
         
       </span>
     
@@ -364,7 +365,7 @@
         
         
           <!-- compatible with older versions-->
-          536 分钟
+          542 分钟
         
       </span>
     
@@ -3927,6 +3928,73 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 </ul>
 <h3 id="最大公约数与最小公倍数"><a class="markdownIt-Anchor" href="#最大公约数与最小公倍数"></a> 最大公约数与最小公倍数</h3>
 <h4 id="最大公约数"><a class="markdownIt-Anchor" href="#最大公约数"></a> 最大公约数</h4>
+<ul>
+<li>正整数 <code>a</code> 和 <code>b</code> 的最大公约数是指 <code>a</code> 与 <code>b</code> 的所有公约数中最大的那个公约数，例如 <code>4</code> 和 <code>6</code> 的最大公约数为 <code>2</code>，<code>3</code> 和 <code>9</code> 的最大公约数为 <code>3</code>。</li>
+<li>一般用 <code>gcd(a,b)</code> 来表示 <code>a</code> 和 <code>b</code> 的最大公约数，而求解最大公约数常用<strong>欧几里得算法</strong>（即<strong>辗转相除法</strong>）。</li>
+<li>欧几里得算法基于下面这个定理：</li>
+<li>设 <code>a</code>、<code>b</code> 均为正整数，则 <code>gcd(a,b)=gcd(b,a%b)</code>:</li>
+</ul>
+<hr />
+<blockquote>
+<p>证明：设 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mi>k</mi><mi>b</mi><mo>+</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">a=kb+r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span></span></span></span>，其中 <code>k</code> 和 <code>r</code> 分别为 <code>a</code> 除以 <code>b</code> 得到的商和余数。<br />
+则有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mi>a</mi><mo>−</mo><mi>k</mi><mi>b</mi></mrow><annotation encoding="application/x-tex">r=a-kb</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">b</span></span></span></span> 成立。<br />
+设 <code>d</code> 为 <code>a</code> 和 <code>b</code> 的一个公约数，<br />
+那么由 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>=</mo><mi>a</mi><mo>−</mo><mi>k</mi><mi>b</mi></mrow><annotation encoding="application/x-tex">r=a-kb</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">b</span></span></span></span>，得 <code>d</code> 也是 <code>r</code> 的一个约数。<br />
+因此 <code>d</code> 是 <code>b</code> 和 <code>r</code> 的一个公约数。<br />
+又由 <code>r=a%b</code>，得 <code>d</code> 为 <code>b</code> 和 <code>a%b</code> 的一个公约数。<br />
+因此 <code>d</code> 既是 <code>a</code> 和 <code>b</code> 的公约数，也是 <code>b</code> 和 <code>a%b</code> 的公约数。<br />
+由 <code>d</code> 的任意性，得 <code>a</code> 和 <code>b</code> 的公约数都是 <code>b</code> 和 <code>a%b</code> 的公约数。<br />
+由 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mi>k</mi><mi>b</mi><mo>+</mo><mi>r</mi></mrow><annotation encoding="application/x-tex">a=kb+r</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span></span></span></span> 同理可证 <code>b</code> 和 <code>a%b</code> 的公约数都是 <code>a</code> 和 <code>b</code> 的公约数。<br />
+因此 <code>a</code> 和 <code>b</code> 的公约数与 <code>b</code> 和 <code>a%b</code> 的公约数全部相等，故其最大公约数也相等，<br />
+即有 <code>gcd(a,b)=gcd(b,a%b)</code>。<br />
+证毕！</p>
+</blockquote>
+<hr />
+<ul>
+<li>由上面定理可以发现：</li>
+<li>如果 <code>a&lt;b</code>，那么定理的结果就是将 <code>a</code> 和 <code>b</code> 交换。</li>
+<li>如果 <code>a&gt;b</code>，那么通过这个定理总可以将数据规模变小，并且减少得非常快。</li>
+<li>这样似乎可以很快得到结果，另外还需要一个东西：</li>
+<li><strong>递归边界</strong>，即数据规模减少到什么程度使得可以算出结果来。</li>
+<li>显而易见，<code>0</code> 和任意一个整数 <code>a</code> 的最大公约数都是 <code>a</code>（注意：不是 <code>0</code>），此结论可以当作递归边界。</li>
+<li>因此很容易想到将其写成递归的形式，因为递归的两个关键已经得到：</li>
+</ul>
+<ol>
+<li>递归式：<code>gcd(a,b)=gcd(b,a%b)</code></li>
+<li>递归边界：<code>gcd(a,b)=a</code></li>
+</ol>
+<ul>
+<li>于是可以得到下面的求解最大公约数的代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">gcd</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span>(b==<span class="hljs-number">0</span>)<br>		<span class="hljs-keyword">return</span> a;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-built_in">gcd</span>(b,a%b);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>更加简洁的写法是：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">gcd</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> !b ? a : <span class="hljs-built_in">gcd</span>(b,a%b);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>上面两段代码意义相同，可以自行选择。</li>
+</ul>
+<p>例题：<a target="_blank" rel="noopener" href="https://sunnywhy.com/sfbj/5/2/193">最大公约数</a></p>
+<ul>
+<li>代码:</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stack&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;utility&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;climits&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ctime&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sstream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-comment">//求解最大公约数函数（递归写法）</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">gcd</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span>(b==<span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> a;<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">gcd</span>(b,a%b);<br>&#125;<br><br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> a,b,ans;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d %d&quot;</span>,&amp;a,&amp;b);<br>    ans = <span class="hljs-built_in">gcd</span>(a,b);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans);<br>    <span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;pause&quot;</span>);<span class="hljs-comment">// 防止运行后自动退出，需头文件stdlib.h</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>总结：简单题，与上述分析相同！</li>
+</ul>
+<h4 id="最小公倍数"><a class="markdownIt-Anchor" href="#最小公倍数"></a> 最小公倍数</h4>
+<ul>
+<li>正整数 <code>a</code> 与 <code>b</code> 的最小公倍数是指 <code>a</code> 与 <code>b</code> 的所有公倍数中最小的那个公倍数，例如 <code>4</code> 和 <code>6</code> 的最小公倍数为 <code>12</code>，<code>3</code> 和 <code>9</code> 的最小公倍数是 <code>9</code>。</li>
+<li>一般用 <code>lcm(a,b)</code> 来表示 <code>a</code> 和 <code>b</code> 的最小公倍数。</li>
+<li>最小公倍数的求解在最大公约数的基础上进行，当得到 <code>a</code> 和 <code>b</code> 的最大公约数 <code>d</code> 之后，可以马上得到 <code>a</code> 和 <code>b</code> 的最小公倍数 <code>a*b/d</code>，这个公式通过集合可以很好地理解，如下图所示：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231215150527.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>由上图很容易发现，<code>a</code> 和 <code>b</code> 的最大公约数即集合 <code>a</code> 与集合 <code>b</code> 的交集，而最小公倍数为集合 <code>a</code> 和集合 <code>b</code> 的并集。</li>
+<li>要得到并集，由于 <code>a*b</code> 会使公因子部分多计算一次，因此需要除掉一次公因子，于是就得到了 <code>a</code> 与 <code>b</code> 的最小公倍数 <code>a*b/d</code>。</li>
+<li>由于 <code>a*b</code> 在实际计算时有可能溢出，因此更恰当的写法是 <code>a/d*b</code>。</li>
+<li>由于 <code>d</code> 是 <code>a</code> 和 <code>b</code> 的最大公约数，因此 <code>a/d</code> 一定可以整除。</li>
+</ul>
 
                 
               </div>
