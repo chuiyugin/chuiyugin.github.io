@@ -105,7 +105,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231210143550.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231215150527.png">
 <meta property="article:published_time" content="2023-11-05T12:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-16T07:43:35.095Z">
+<meta property="article:modified_time" content="2023-12-16T13:17:00.249Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="算法">
@@ -353,7 +353,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          177k 字
+          178k 字
         
       </span>
     
@@ -365,7 +365,7 @@
         
         
           <!-- compatible with older versions-->
-          554 分钟
+          558 分钟
         
       </span>
     
@@ -4014,7 +4014,7 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <ul>
 <li>对一个分数来说，最简洁的写法就是写成<strong>假分数</strong>的形式，即无论分子比分母大或者小，都保留其原数。因此可以使用一个结构体来存储这种只有分子和分母的分数：</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Fraction</span> <span class="hljs-comment">//分数</span><br>&#123;<br>	<span class="hljs-type">int</span> up,down;<span class="hljs-comment">//分子、分母</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Fraction</span> <span class="hljs-comment">//分数</span><br>&#123;<br>	<span class="hljs-type">int</span> up,down;<span class="hljs-comment">//分子、分母</span><br>&#125;;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>于是就可以定义 <code>Fraction</code> 类型的变量来表示分数，或者定义数组来表示一堆分数。其中需要对这种表示制订三项规则：</li>
 </ul>
@@ -4098,6 +4098,48 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <li><strong>强调</strong>：由于分数的乘法和除法的过程中可能使分子或者分母超过 <code>int</code> 型的表示范围，因此一般情况下，分子和分母应当使用 <code>long long</code> 型变量来存储。</li>
 </ul>
 <h3 id="素数"><a class="markdownIt-Anchor" href="#素数"></a> 素数</h3>
+<ul>
+<li>素数又称为质数，是指除了 <code>1</code> 和本身之外，不能被其他数整除的一类数。</li>
+<li>即对给定的正整数 <code>n</code>，如果对任意的正整数 <code>a</code> (<code>1&lt;a&lt;n</code>)，都有 <code>n%a!=0</code> 成立，那么称 <code>n</code> 是素数；</li>
+<li>否则，如果存在 <code>a</code> (<code>1&lt;a&lt;n</code>)，使得 <code>n%a==0</code>，那么称 <code>n</code> 为合数。</li>
+<li>应特别注意的是，<code>1</code> 既不是<strong>素数</strong>，也不是<strong>合数</strong>。</li>
+<li>本节将解决两个问题：</li>
+</ul>
+<ol>
+<li>如何判断给定的正整数 <code>n</code> 是否为质数；</li>
+<li>如何在较短的时间内得到 <code>1~n</code> 内的素数表。</li>
+</ol>
+<h4 id="素数的判断"><a class="markdownIt-Anchor" href="#素数的判断"></a> 素数的判断</h4>
+<ul>
+<li>从素数的定义可以知道，一个整数需要被判断为素数，需要判断 <code>n</code> 是否能被 <code>2,3……,n-1</code> 中的一个整除。</li>
+<li>只有 <code>2,3……,n-1</code> 都不能整除 <code>n</code>，<code>n</code> 才能判定为素数，而只要有一个能整除 <code>n</code> 的数出现，<code>n</code> 就可以判定为非素数。</li>
+<li>上述判定方法没有问题，复杂度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>，但在许多情况下，判定素数只是整个算法中的一部分，这时候 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> 的复杂度有点大，需要更加快速的判定方法。</li>
+<li>注意到如果在 <code>2~n-1</code> 中存在 <code>n</code> 的约数，不妨设为 <code>k</code>，即 <code>n%k==0</code>，那么由 <code>k*(n/k)==n</code> 可知，<code>n/k</code> 也是 <code>n</code> 的一个约数，且 <code>k</code> 与 <code>n/k</code> 中一定满足其中一个小于 <code>sqrt(n)</code> 、另一个大于 <code>sqrt(n)</code>，其中 <code>sqrt(n)</code> 为根号 <code>n</code>。</li>
+<li>这启发我们，只需要判定 <code>n</code> 能否被 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo separator="true">,</mo><mo>…</mo><mo>…</mo><mo separator="true">,</mo><mo stretchy="false">⌊</mo><msqrt><mi>n</mi></msqrt><mo stretchy="false">⌋</mo></mrow><annotation encoding="application/x-tex">2,3,……,\lfloor{\sqrt{n}}\rfloor</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.05028em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">⌊</span><span class="mord"><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8002800000000001em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord" style="padding-left:0.833em;"><span class="mord mathnormal">n</span></span></span><span style="top:-2.76028em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.23972em;"><span></span></span></span></span></span></span><span class="mclose">⌋</span></span></span></span> 中的一个整除（其中 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">⌊</mo><mi>x</mi><mo stretchy="false">⌋</mo></mrow><annotation encoding="application/x-tex">\lfloor{x}\rfloor</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⌊</span><span class="mord"><span class="mord mathnormal">x</span></span><span class="mclose">⌋</span></span></span></span> 表示对 <code>x</code> 向下取整），即可判定 <code>n</code> 是否为素数。该算法的复杂度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>s</mi><mi>q</mi><mi>r</mi><mi>t</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(sqrt(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span>。</li>
+<li>代码如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//判断是否为素数</span><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isPrime</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span>(n&lt;=<span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<span class="hljs-comment">//特判</span><br>    <span class="hljs-type">int</span> sqr = (<span class="hljs-type">int</span>)<span class="hljs-built_in">sqrt</span>(<span class="hljs-number">1.0</span>*n);<span class="hljs-comment">//根号n</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">2</span>;i&lt;=sqr;i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(n%i==<span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>在上述代码中，<code>sqrt</code> 的作用为一个浮点数取整，需要添加 <code>#include &lt;cmath&gt;</code>。由于 <code>sqrt</code> 的参数要求是浮点数，因此在 <code>n</code> 前面前面乘以 <code>1.0</code> 来使其成为浮点型。</li>
+<li>如果 <code>n</code> 没有接近 <code>int</code> 型变量的范围上界，那么可以有更为简单的写法：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//判断是否为素数</span><br><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">isPrime</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span>(n&lt;=<span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<span class="hljs-comment">//特判</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">2</span>;i*i&lt;=n;i++)<br>    &#123;<br>        <span class="hljs-keyword">if</span>(n%i==<span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>这样写会当 <code>n</code> 接近 <code>int</code> 型变量的范围上界时导致 <code>i*i</code> 溢出（当然 <code>n</code> 在 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><msup><mn>0</mn><mn>9</mn></msup></mrow><annotation encoding="application/x-tex">10^9</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">9</span></span></span></span></span></span></span></span></span></span></span> 以内都会是安全的），解决的办法是将 <code>i</code> 定义为 <code>long long</code> 型，这样就不会溢出了。</li>
+<li>但是更加推荐使用开根号的写法，会更加安全。<s>测试</s></li>
+</ul>
+<h4 id="素数表的获取"><a class="markdownIt-Anchor" href="#素数表的获取"></a> 素数表的获取</h4>
 
                 
               </div>
