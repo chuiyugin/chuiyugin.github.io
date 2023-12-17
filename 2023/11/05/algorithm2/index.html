@@ -105,7 +105,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231210143550.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20231215150527.png">
 <meta property="article:published_time" content="2023-11-05T12:00:00.000Z">
-<meta property="article:modified_time" content="2023-12-17T05:52:19.051Z">
+<meta property="article:modified_time" content="2023-12-17T05:58:47.252Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="算法">
@@ -4203,27 +4203,28 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
 <li>下面将介绍一种更加高效的算法，它的时间复杂度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nloglogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>。</li>
 <li>“<strong>筛法</strong>”是众多筛法中最简单且最容易理解的一种，即 <code>Eratosthenes</code> 筛法。更优的欧拉筛法可以达到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> 的时间复杂度，此处不予赘述。</li>
 <li>素数筛法的关键就在一个“筛”字。算法从小到达枚举所有数，对每一个素数，筛去它的所有倍数，剩下的就是素数。</li>
-<li>下面看一个例子，求 <code>1~15</code> 中的所有素数：</li>
-<li>① <code>2</code> 是素数（唯一需要事先确定），因此筛去所有 <code>2</code> 的倍数，即 <code>4、6、8、10、12、14</code>。</li>
+<li>下面看一个例子，求 <code>1~15</code> 中的所有素数：<br />
+① <code>2</code> 是素数（唯一需要事先确定），因此筛去所有 <code>2</code> 的倍数，即 <code>4、6、8、10、12、14</code>。</li>
 </ul>
 <center>2 3 <del>4</del> 5 <del>6</del> 7 <del>6</del> 9 <del>10</del> 11 <del>12</del> 13 <del>14</del> 15 </center>
-+ ②`3` 没有被前面的步骤筛去，因此 `3` 是素数，筛去所有 `3` 的倍数，即 `6、9、12、15`。
+② `3` 没有被前面的步骤筛去,因此 `3` 是素数,筛去所有 `3` 的倍数,即 `6、9、12、15`。
 <center>2 3 <del>4</del> 5 <del>6</del> 7 <del>8</del> <del>9</del> <del>10</del> 11 <del>12</del> 13 <del>14</del> <del>15</del> </center>
-+ ③ `4` 已经在①中被筛去，因此 `4` 不是素数。
-+ ④ `5` 没有被前面的步骤筛去，因此 `5` 是素数，筛去所有 `5` 的倍数，即 `10、15`。
+③ `4` 已经在①中被筛去，因此 `4` 不是素数。
+④ `5` 没有被前面的步骤筛去，因此 `5` 是素数，筛去所有 `5` 的倍数，即 `10、15`。
 <center>2 3 <del>4</del> 5 <del>6</del> 7 <del>8</del> <del>9</del> <del>10</del> 11 <del>12</del> 13 <del>14</del> <del>15</del> </center>
-+ ⑤ `6` 已经在①中被筛去，因此 `6` 不是素数。
-+ ⑥ `7` 没有被前面的步骤筛去，因此 `7` 是素数，筛去所有 `7` 的倍数，即 `14`。
+⑤ `6` 已经在①中被筛去，因此 `6` 不是素数。
+⑥ `7` 没有被前面的步骤筛去，因此 `7` 是素数，筛去所有 `7` 的倍数，即 `14`。
 <center>2 3 <del>4</del> 5 <del>6</del> 7 <del>8</del> <del>9</del> <del>10</del> 11 <del>12</del> 13 <del>14</del> <del>15</del> </center>
-+ ⑦ `8` 已经在①中被筛去，因此 `8` 不是素数。
-+ ⑧ `9` 已经在②中被筛去，因此 `9` 不是素数。
-+ ⑨ `10` 已经在①中被筛去，因此 `10` 不是素数。
-+ ⑩ `11` 没有被前面的步骤筛去，因此 `11` 是素数，筛去所有 `11` 的倍数，但是 `15` 以内没有。
-+ ⑪ `12` 已经在①中被筛去，因此 `12` 不是素数。
-+ ⑫ `13` 没有被前面的步骤筛去，因此 `13` 是素数，筛去所有 `13` 的倍数，但是 `15` 以内没有。
-+ ⑬ `14` 已经在⑥中被筛去，因此 `14` 不是素数。
-+ ⑭ `15` 已经在②中被筛去，因此 `15` 不是素数。
+⑦ `8` 已经在①中被筛去，因此 `8` 不是素数。
+⑧ `9` 已经在②中被筛去，因此 `9` 不是素数。
+⑨ `10` 已经在①中被筛去，因此 `10` 不是素数。
+⑩ `11` 没有被前面的步骤筛去，因此 `11` 是素数，筛去所有 `11` 的倍数，但是 `15` 以内没有。
+⑪ `12` 已经在①中被筛去，因此 `12` 不是素数。
+⑫ `13` 没有被前面的步骤筛去，因此 `13` 是素数，筛去所有 `13` 的倍数，但是 `15` 以内没有。
+⑬ `14` 已经在⑥中被筛去，因此 `14` 不是素数。
+⑭ `15` 已经在②中被筛去，因此 `15` 不是素数。
 + 至此，1~15 内的所有素数已经全部得到，即 `2、3、5、7、11、13`。
++ 由上面的例子可以发现，当从小到大到达某数 `a` 时，如果 a 没有被前面步骤的数筛去
                 
               </div>
             
