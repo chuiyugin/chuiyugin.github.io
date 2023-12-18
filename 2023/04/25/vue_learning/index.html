@@ -71,7 +71,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"3ab6987a72dcf290bd1498abd234c736","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"3ab6987a72dcf290bd1498abd234c736","google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -107,8 +107,6 @@
 
   
 
-  
-
 
 
   
@@ -116,7 +114,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
 
 
 <body>
@@ -147,7 +145,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -159,7 +157,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -171,7 +169,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -183,7 +181,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -195,7 +193,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -207,7 +205,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/links/">
+              <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
                 <span>链接</span>
               </a>
@@ -272,7 +270,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.2k 字
+          611 字
         
       </span>
     
@@ -284,7 +282,7 @@
         
         
           <!-- compatible with older versions-->
-          7 分钟
+          2 分钟
         
       </span>
     
@@ -321,8 +319,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">Vue学习笔记</h1>
+            <h1 id="seo-header">Vue学习笔记</h1>
             
             
               <div class="markdown-body">
@@ -332,7 +329,7 @@
 <ul>
 <li>index.js</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> app = <span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">createApp</span>(&#123;<br>    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>)&#123;<span class="hljs-comment">//data函数返回数据，可以是任何类型</span><br>        <span class="hljs-keyword">return</span>&#123;<br>            <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;vue&quot;</span>,<br>            <span class="hljs-attr">address</span>:&#123;<br>                <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;my_vue&quot;</span>,<br>            &#125;<br>        &#125; <br>    &#125;<br>&#125;);<br>app.<span class="hljs-title function_">mount</span>(<span class="hljs-string">&quot;#app&quot;</span>);<span class="hljs-comment">//使得app成为模板，可以使用模板语法</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> app = Vue.createApp(&#123;<br>    <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span>&#123;<span class="hljs-comment">//data函数返回数据，可以是任何类型</span><br>        <span class="hljs-keyword">return</span>&#123;<br>            <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;vue&quot;</span>,<br>            <span class="hljs-attr">address</span>:&#123;<br>                <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;my_vue&quot;</span>,<br>            &#125;<br>        &#125; <br>    &#125;<br>&#125;);<br>app.mount(<span class="hljs-string">&quot;#app&quot;</span>);<span class="hljs-comment">//使得app成为模板，可以使用模板语法</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>HTML使用模板语法展示返回的数据</li>
 </ul>
@@ -342,7 +339,7 @@
 <li>指令：是vue提供的一组可以直接在html模板中使用的特殊属性，例如：<code>v-bind</code>、<code>v-for</code>、<code>v-if</code>，用于实现数据绑定、循环、条件判断等。</li>
 <li>index.js</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> app = <span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">createApp</span>(&#123;<br>    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>)&#123;<span class="hljs-comment">//data函数返回数据，可以是任何类型</span><br>        <span class="hljs-keyword">return</span>&#123;<br>            <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;vue&quot;</span>,<br>            <span class="hljs-attr">link</span>:<span class="hljs-string">&quot;https://chuiyugin.github.io/&quot;</span>,<br>        &#125; <br>    &#125;<br>&#125;);<br>app.<span class="hljs-title function_">mount</span>(<span class="hljs-string">&quot;#app&quot;</span>);<span class="hljs-comment">//使得app成为模板，可以使用模板语法</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> app = Vue.createApp(&#123;<br>    <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span>&#123;<span class="hljs-comment">//data函数返回数据，可以是任何类型</span><br>        <span class="hljs-keyword">return</span>&#123;<br>            <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;vue&quot;</span>,<br>            <span class="hljs-attr">link</span>:<span class="hljs-string">&quot;https://chuiyugin.github.io/&quot;</span>,<br>        &#125; <br>    &#125;<br>&#125;);<br>app.mount(<span class="hljs-string">&quot;#app&quot;</span>);<span class="hljs-comment">//使得app成为模板，可以使用模板语法</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>在HTML访问data属性(<code>v-bind</code>可以简写为<code>:</code>)</li>
 </ul>
@@ -352,7 +349,7 @@
 <li>使用v-for语句生成列表</li>
 <li>index.js</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> app = <span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">createApp</span>(&#123;<br>    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>)&#123;<span class="hljs-comment">//data函数返回数据，可以是任何类型</span><br>        <span class="hljs-keyword">return</span>&#123;<br>            <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;vue&quot;</span>,<br>            <span class="hljs-attr">todos</span>:[<span class="hljs-string">&quot;学习Vue&quot;</span>,<span class="hljs-string">&quot;热爱生活&quot;</span>,<span class="hljs-string">&quot;平安喜乐&quot;</span>],<br>        &#125; <br>    &#125;<br>&#125;);<br>app.<span class="hljs-title function_">mount</span>(<span class="hljs-string">&quot;#app&quot;</span>);<span class="hljs-comment">//使得app成为模板，可以使用模板语法</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> app = Vue.createApp(&#123;<br>    <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span>&#123;<span class="hljs-comment">//data函数返回数据，可以是任何类型</span><br>        <span class="hljs-keyword">return</span>&#123;<br>            <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;vue&quot;</span>,<br>            <span class="hljs-attr">todos</span>:[<span class="hljs-string">&quot;学习Vue&quot;</span>,<span class="hljs-string">&quot;热爱生活&quot;</span>,<span class="hljs-string">&quot;平安喜乐&quot;</span>],<br>        &#125; <br>    &#125;<br>&#125;);<br>app.mount(<span class="hljs-string">&quot;#app&quot;</span>);<span class="hljs-comment">//使得app成为模板，可以使用模板语法</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>在HTML中生成列表(不带序号)</li>
 </ul>
@@ -365,7 +362,7 @@
 <ul>
 <li>index.js</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> app = <span class="hljs-title class_">Vue</span>.<span class="hljs-title function_">createApp</span>(&#123;<br>    <span class="hljs-title function_">data</span>(<span class="hljs-params"></span>)&#123;<span class="hljs-comment">//data函数返回数据，可以是任何类型</span><br>        <span class="hljs-keyword">return</span>&#123;<br>            <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;vue&quot;</span>,<br>            <span class="hljs-comment">//todos:[&quot;学习Vue&quot;,&quot;热爱生活&quot;,&quot;平安喜乐&quot;],</span><br>            <span class="hljs-attr">todos</span>: [<br>                &#123;<br>                  <span class="hljs-attr">content</span>: <span class="hljs-string">&quot;把项目做完&quot;</span>,<br>                  <span class="hljs-attr">complete</span>: <span class="hljs-literal">true</span>,<br>                &#125;,<br>                &#123;<br>                  <span class="hljs-attr">content</span>: <span class="hljs-string">&quot;去超市购物&quot;</span>,<br>                  <span class="hljs-attr">complete</span>: <span class="hljs-literal">false</span>,<br>                &#125;,<br>                &#123;<br>                  <span class="hljs-attr">content</span>: <span class="hljs-string">&quot;看10分钟的书&quot;</span>,<br>                  <span class="hljs-attr">complete</span>: <span class="hljs-literal">false</span>,<br>                &#125;,<br>              ],<br>        &#125; <br>    &#125;<br>&#125;);<br>app.<span class="hljs-title function_">mount</span>(<span class="hljs-string">&quot;#app&quot;</span>);<span class="hljs-comment">//使得app成为模板，可以使用模板语法</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> app = Vue.createApp(&#123;<br>    <span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span>&#123;<span class="hljs-comment">//data函数返回数据，可以是任何类型</span><br>        <span class="hljs-keyword">return</span>&#123;<br>            <span class="hljs-attr">name</span>:<span class="hljs-string">&quot;vue&quot;</span>,<br>            <span class="hljs-comment">//todos:[&quot;学习Vue&quot;,&quot;热爱生活&quot;,&quot;平安喜乐&quot;],</span><br>            <span class="hljs-attr">todos</span>: [<br>                &#123;<br>                  <span class="hljs-attr">content</span>: <span class="hljs-string">&quot;把项目做完&quot;</span>,<br>                  <span class="hljs-attr">complete</span>: <span class="hljs-literal">true</span>,<br>                &#125;,<br>                &#123;<br>                  <span class="hljs-attr">content</span>: <span class="hljs-string">&quot;去超市购物&quot;</span>,<br>                  <span class="hljs-attr">complete</span>: <span class="hljs-literal">false</span>,<br>                &#125;,<br>                &#123;<br>                  <span class="hljs-attr">content</span>: <span class="hljs-string">&quot;看10分钟的书&quot;</span>,<br>                  <span class="hljs-attr">complete</span>: <span class="hljs-literal">false</span>,<br>                &#125;,<br>              ],<br>        &#125; <br>    &#125;<br>&#125;);<br>app.mount(<span class="hljs-string">&quot;#app&quot;</span>);<span class="hljs-comment">//使得app成为模板，可以使用模板语法</span><br></code></pre></td></tr></table></figure>
 <ul>
 <li>在HTML中展示复选框</li>
 </ul>
@@ -403,7 +400,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Vue/">#Vue</a>
+        <a href="/tags/Vue/" class="print-no-link">#Vue</a>
       
     </div>
   
@@ -439,7 +436,7 @@
             
               
               
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
                   <span class="hint--top hint--rounded" aria-label="BY - 署名">
                     <i class="iconfont icon-by"></i>
                   </span>
