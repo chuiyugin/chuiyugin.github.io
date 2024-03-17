@@ -62,7 +62,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240225220304.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202401261711079.png">
 <meta property="article:published_time" content="2024-01-20T04:00:00.000Z">
-<meta property="article:modified_time" content="2024-02-25T14:03:13.617Z">
+<meta property="article:modified_time" content="2024-03-17T14:44:03.578Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202401201153967.png">
@@ -617,7 +617,7 @@
 <ul>
 <li>ONU：光纤网络单元（Optical Network Unit）。ONU 属于接入网的用户侧设备，为用户提供电话、数据通信、图像等各种 UNI 接口。</li>
 <li>Non-RT RIC（non-real time RIC）和准实时 Near-RT RIC（near-real time RIC）：RIC分为非实时Non-RT RIC（non-real time RIC）和准实时Near-RT RIC（near-real time RIC）。准实时 RIC 下沉在无线接入网侧通过 E2 接口与CU/DU相连。准实时RIC的功能包括利用AI的能力进行无线资源管理、移动性管理、无线连接管理、切换管理以及无线QoS管理等。非实时RIC则定义在核心网MANO体系中，通过A1接口与准实时RIC连接。其主要功能在于基于AI的业务与策略管理，高层业务流程优化以及帮助准实时RIC离线训练AI模型等。O-RAN的RIC目前还正在标准完善和早期试验中。相对于 3GPP NWDAF，O-RAN RIC离成熟商用还有较大差距。</li>
-<li>块衰落(block fading)与快、慢(slow or fast fading)是不同概念。在现代无线通信中，发送数据通常分割成数据块进行传送。当假定信道在该数据块内部不发生变化时，即：若信道传输特性在固定个字符周期上保持不变，但保持时间比总发送时间要小得多，则可称信道是块衰落的。显然block fading可以认为是一种特殊的slow fading。</li>
+<li>块衰落 (block fading)与快、慢 (slow or fast fading)是不同概念。在现代无线通信中，发送数据通常分割成数据块进行传送。当假定信道在该数据块内部不发生变化时，即：若信道传输特性在固定个字符周期上保持不变，但保持时间比总发送时间要小得多，则可称信道是块衰落的。显然 block fading 可以认为是一种特殊的 slow fading。</li>
 </ul>
 
                 
@@ -1008,20 +1008,5 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":300,"height":600},"mobile":{"show":false}});</script></body>
 </html>
