@@ -25,14 +25,17 @@
 <meta property="og:site_name" content="CHUI YUGIN">
 <meta property="og:description" content="汇编语言的学习与分享总结!">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240712162944.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240712163105.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310101250059.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310101250451.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240712160854.png">
 <meta property="article:published_time" content="2023-10-10T05:00:00.000Z">
-<meta property="article:modified_time" content="2024-07-05T03:25:53.998Z">
+<meta property="article:modified_time" content="2024-07-12T08:31:33.463Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310101250059.png">
+<meta name="twitter:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240712162944.png">
   
   
   
@@ -273,7 +276,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          517 字
+          790 字
         
       </span>
     
@@ -285,7 +288,7 @@
         
         
           <!-- compatible with older versions-->
-          2 分钟
+          3 分钟
         
       </span>
     
@@ -328,6 +331,28 @@
               <div class="markdown-body">
                 
                 <h1 id="汇编语言"><a class="markdownIt-Anchor" href="#汇编语言"></a> 汇编语言</h1>
+<h2 id="第一章-基础知识"><a class="markdownIt-Anchor" href="#第一章-基础知识"></a> 第一章 基础知识</h2>
+<h3 id="内存的读写和地址空间"><a class="markdownIt-Anchor" href="#内存的读写和地址空间"></a> 内存的读写和地址空间</h3>
+<h4 id="cpu-对存储器的读写"><a class="markdownIt-Anchor" href="#cpu-对存储器的读写"></a> CPU 对存储器的读写</h4>
+<p>CPU 想要进行数据的读写，必须和外部器件进行三类信息的交互：</p>
+<ul>
+<li>存储单元的地址（<strong>地址信息</strong>）</li>
+<li>器件的选择，读或写命令（<strong>控制信息</strong>）</li>
+<li>读或写的数据（<strong>数据信息</strong>）</li>
+</ul>
+<h4 id="内存地址空间"><a class="markdownIt-Anchor" href="#内存地址空间"></a> 内存地址空间</h4>
+<ul>
+<li>定义：CPU 地址总线宽度为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span></span></span></span>，寻址空间为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>N</mi></msup></mrow><annotation encoding="application/x-tex">2^{N}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8413309999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span></span></span></span></span></span></span></span></span> 字节。</li>
+<li>举例：8086 CPU 的地址总线宽度为 20，那么可以寻址的内存单位个数为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>20</mn></msup></mrow><annotation encoding="application/x-tex">2^{20}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span></span> =1 MB，称其内存地址空间为 1 MB。</li>
+<li>将各类存储器看作一个逻辑存储器（<strong>统一编址</strong>）</li>
+<li>所有的物理存储器被看作一个由若干存储单元组成的逻辑存储器；</li>
+<li>每个物理存储器在这个逻辑存储器中占有一个地址段，即一段地址空间。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240712162944.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>举例：8086 PC 机的内存地址空间分配基本情况：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240712163105.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <h2 id="第二章-寄存器"><a class="markdownIt-Anchor" href="#第二章-寄存器"></a> 第二章 寄存器</h2>
 <p>一个典型的CPU由<strong>运算器</strong>、<strong>控制器</strong>、<strong>寄存器</strong>等器件组成，这些器件靠<strong>内部总线</strong>相连。</p>
 <p>区分<strong>内部总线</strong>与<strong>外部总线</strong>：</p>
@@ -372,6 +397,11 @@
 </ul>
 </li>
 </ul>
+<h3 id="几条汇编指令"><a class="markdownIt-Anchor" href="#几条汇编指令"></a> 几条汇编指令</h3>
+<ul>
+<li>通过汇编指令控制 CPU 进行工作，下表有常见的几条指令：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240712160854.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 
                 
               </div>
