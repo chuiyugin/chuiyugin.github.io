@@ -21,7 +21,7 @@
     <meta name="description" content="汇编语言的学习与分享总结!">
 <meta property="og:type" content="article">
 <meta property="og:title" content="汇编语言">
-<meta property="og:url" content="http://example.com/2023/10/10/Assembly_language/index.html">
+<meta property="og:url" content="http://example.com/2024/07/01/Assembly_language/index.html">
 <meta property="og:site_name" content="CHUI YUGIN">
 <meta property="og:description" content="汇编语言的学习与分享总结!">
 <meta property="og:locale" content="zh_CN">
@@ -31,8 +31,13 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310101250059.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202310101250451.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240712160854.png">
-<meta property="article:published_time" content="2023-10-10T05:00:00.000Z">
-<meta property="article:modified_time" content="2024-07-12T13:28:30.868Z">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240713213811.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240713213948.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240713215522.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240713215903.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240713220232.png">
+<meta property="article:published_time" content="2024-07-01T14:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-13T14:04:55.018Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary_large_image">
@@ -264,8 +269,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-10 13:00" pubdate>
-          2023年10月10日 下午
+        <time datetime="2024-07-01 22:00" pubdate>
+          2024年7月1日 晚上
         </time>
       </span>
     
@@ -277,7 +282,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          790 字
+          1.1k 字
         
       </span>
     
@@ -289,7 +294,7 @@
         
         
           <!-- compatible with older versions-->
-          3 分钟
+          4 分钟
         
       </span>
     
@@ -404,6 +409,49 @@
 <li>通过汇编指令控制 CPU 进行工作，下表有常见的几条指令：</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240712160854.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>注意：汇编语言<strong>不区分</strong>大小写</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240713213811.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240713213948.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h3 id="确定物理地址的方法"><a class="markdownIt-Anchor" href="#确定物理地址的方法"></a> 确定物理地址的方法</h3>
+<h4 id="物理地址"><a class="markdownIt-Anchor" href="#物理地址"></a> 物理地址</h4>
+<ul>
+<li>CPU 访问内存单元时要给出内存单元的地址。</li>
+<li>所有的内存单元构成的存储空间是一个一维的线性空间。</li>
+<li>每一个内存单元在这个空间中都有唯一的地址，这个唯一的地址称为<strong>物理地址</strong>。</li>
+</ul>
+<h4 id="8086-cpu-物理地址示例"><a class="markdownIt-Anchor" href="#8086-cpu-物理地址示例"></a> 8086 CPU 物理地址示例</h4>
+<h5 id="示例"><a class="markdownIt-Anchor" href="#示例"></a> 示例</h5>
+<ul>
+<li>8086 CPU 有 <code>20位</code> 地址总线，可传送 <code>20位</code> 地址，寻址能力为 <code>1M</code>。</li>
+<li>8086 是 <code>16位</code> 结构的 CPU
+<ul>
+<li>运算器一次<strong>最多</strong>可以处理 <code>16位</code> 的数据，寄存器的最大宽度为 <code>16位</code>。</li>
+<li>在 8086 CPU 内部处理的、传输、暂存的地址也是 <code>16位</code>，寻址能力也只有 <code>64KB</code>！</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240713215522.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h5 id="解决方案"><a class="markdownIt-Anchor" href="#解决方案"></a> 解决方案</h5>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240713215903.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>方法：物理地址=段地址×16+偏移地址</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240713220232.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h5 id="本质含义"><a class="markdownIt-Anchor" href="#本质含义"></a> 本质含义</h5>
+<ul>
+<li>要解决的问题：
+<ul>
+<li>用<strong>两个 16 位</strong>的地址（段地址、偏移地址），相加得到一个 <code>20位</code> 的物理地址。</li>
+</ul>
+</li>
+<li>本质含义：
+<ul>
+<li>CPU 在访问内存时，用一个基础地址（段地址×16）和一个相对于基础地址的偏移地址相加，给出内存单元的物理地址。</li>
+</ul>
+</li>
+</ul>
 
                 
               </div>
@@ -450,7 +498,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>汇编语言</div>
-      <div>http://example.com/2023/10/10/Assembly_language/</div>
+      <div>http://example.com/2024/07/01/Assembly_language/</div>
     </div>
     <div class="license-meta">
       
@@ -462,7 +510,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月10日</div>
+          <div>2024年7月1日</div>
         </div>
       
       
@@ -494,18 +542,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/11/05/algorithm2/" title="算法笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">算法笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/04/Deep_laerning/" title="深度学习简要笔记">
-                        <span class="hidden-mobile">深度学习简要笔记</span>
+                      <a href="/2024/01/20/5g_1/" title="5G和移动通信笔记">
+                        <span class="hidden-mobile">5G和移动通信笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -528,7 +570,7 @@
         var options = Object.assign(
           {"clientID":"5879fef477aebfb46fe6","clientSecret":"c6ddf310da089b6eade5be010238bbfc1507e2d9","repo":"blog-comments","owner":"chuiyugin","admin":["chuiyugin"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":false,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token"},
           {
-            id: '62d8c4b144bdad80b00f2a641526d87b'
+            id: '24cc7816d0886f35ba95584c6ba8d3df'
           }
         )
         var gitalk = new Gitalk(options);
