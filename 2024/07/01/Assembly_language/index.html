@@ -76,8 +76,15 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240721140008.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240721140034.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240721140401.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723211951.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723213103.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723213434.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723214406.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723215237.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723215155.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723215518.png">
 <meta property="article:published_time" content="2024-07-01T14:00:00.000Z">
-<meta property="article:modified_time" content="2024-07-21T06:04:08.974Z">
+<meta property="article:modified_time" content="2024-07-23T13:55:25.130Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary_large_image">
@@ -322,7 +329,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.9k 字
+          3k 字
         
       </span>
     
@@ -692,6 +699,34 @@
 <li><code>PSP</code> 的头两个字节是 <code>CD 20</code>，用 debug 加载 <code>t1.exe</code> 文件，查看 <code>PSP</code> 的内容。</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240721140401.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h2 id="第四章-bx和-loop-指令"><a class="markdownIt-Anchor" href="#第四章-bx和-loop-指令"></a> 第四章 [BX]和 Loop 指令</h2>
+<h3 id="的规定与-的约定"><a class="markdownIt-Anchor" href="#的规定与-的约定"></a> […] 的规定与 (…) 的约定</h3>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723211951.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h3 id="再约定idata-表示常量"><a class="markdownIt-Anchor" href="#再约定idata-表示常量"></a> 再约定：idata 表示常量</h3>
+<ul>
+<li>例如：
+<ul>
+<li><code>mov ax,[idata]</code> ：代表 <code>mov ax,[1]</code> 、<code>mov ax,[2]</code> 、<code>mov ax,[3]</code> …</li>
+<li><code>mov bx,idata</code> ：代表 <code>mov bx,1</code> 、<code>mov bx,2</code> 、<code>mov bx,3</code> …</li>
+<li><code>mov ds,idata</code> ：代表 <code>mov ds,1</code> 、<code>mov ds,2</code> … (但都是非法指令）</li>
+</ul>
+</li>
+</ul>
+<h3 id="loop-指令"><a class="markdownIt-Anchor" href="#loop-指令"></a> Loop 指令</h3>
+<h4 id="loop-指令要点"><a class="markdownIt-Anchor" href="#loop-指令要点"></a> Loop 指令要点</h4>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723213103.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h4 id="loop-指令编程实例"><a class="markdownIt-Anchor" href="#loop-指令编程实例"></a> Loop 指令编程实例</h4>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723213434.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723214406.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h4 id="运行示例程序"><a class="markdownIt-Anchor" href="#运行示例程序"></a> 运行示例程序</h4>
+<h5 id="debug-执行程序"><a class="markdownIt-Anchor" href="#debug-执行程序"></a> Debug 执行程序</h5>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723215237.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>标号 <code>s</code> ，用于标识地址，在程序写入内存中会直接转换为地址。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723215155.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h4 id="t-命令-p-命令和-g-命令的区别"><a class="markdownIt-Anchor" href="#t-命令-p-命令和-g-命令的区别"></a> t 命令、p 命令和 g 命令的区别</h4>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723215518.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 
                 
               </div>
