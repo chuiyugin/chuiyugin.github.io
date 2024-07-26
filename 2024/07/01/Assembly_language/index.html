@@ -83,8 +83,19 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723215237.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723215155.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723215518.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726141501.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726141818.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726150728.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726150828.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726151542.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726151641.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726221031.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726222057.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726222146.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726222311.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726222335.png">
 <meta property="article:published_time" content="2024-07-01T14:00:00.000Z">
-<meta property="article:modified_time" content="2024-07-23T13:55:25.130Z">
+<meta property="article:modified_time" content="2024-07-26T14:23:40.892Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary_large_image">
@@ -329,7 +340,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3k 字
+          3.5k 字
         
       </span>
     
@@ -341,7 +352,7 @@
         
         
           <!-- compatible with older versions-->
-          10 分钟
+          12 分钟
         
       </span>
     
@@ -727,6 +738,85 @@
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723215155.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <h4 id="t-命令-p-命令和-g-命令的区别"><a class="markdownIt-Anchor" href="#t-命令-p-命令和-g-命令的区别"></a> t 命令、p 命令和 g 命令的区别</h4>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240723215518.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h3 id="段前缀"><a class="markdownIt-Anchor" href="#段前缀"></a> 段前缀</h3>
+<h4 id="一个异常现象及对策"><a class="markdownIt-Anchor" href="#一个异常现象及对策"></a> 一个“异常”现象及对策</h4>
+<ul>
+<li>现象：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726141501.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>对策：
+<ul>
+<li>在 <code>[idata]</code> 前显式地写上段寄存器，例 <code>mov al,ds:[bx]</code>。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726141818.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>这些出现在访问内存单元的指令中，用于<strong>显式</strong>地指明内存单元的段地址的 <code>ds:</code> 、<code>cs:</code> 、 <code>ss:</code> 或 <code>es:</code> ”，在汇编语言中称为<strong>段前缀</strong>。</li>
+</ul>
+<h4 id="访问连续的内存单元-loop-和-bx-联手"><a class="markdownIt-Anchor" href="#访问连续的内存单元-loop-和-bx-联手"></a> 访问连续的内存单元 —— Loop 和 [bx] 联手</h4>
+<ul>
+<li>问题：计算 <code>ffff:0~ffff:b</code> 字节单元中的数据的和，结果存储在 <code>dx</code> 中。</li>
+<li>分析：
+<ul>
+<li>运算后的结果是否会超出 <code>dx</code> 所能存储的范围？
+<ul>
+<li><code>ffff:0～ffff:b</code> 内存单元中的数据是字节型数据，范围在 <code>0～255</code> 之间，<code>12</code> 个这样的数据相加，结果不会大于 <code>65535</code>，可以在 <code>dx</code> 中存放下。</li>
+</ul>
+</li>
+<li>是否可以将 <code>ffff:0～ffff:b</code> 中的数据直接累加到 <code>dx</code> 中？<code>add dx,ds:[addr]</code> ; <code>(dx)=(dx)+</code>?
+<ul>
+<li>期望：取出内存中的 8 位数据进行相加；实际：取出的是内存中的 16 位数据。</li>
+</ul>
+</li>
+<li>是否可以将 <code>ffff:0～ffff:b</code> 中的数据直接累加到 <code>dl</code> 中？<code>add dl,ds:[addr]</code> ;<code>(dl)=(dl)+</code>?
+<ul>
+<li>期望：取出内存中的 8 位数据相加；实际：取出的是内存中的 8 位数据，但很有可能造成进位丢失。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对策：取出 8 位数据，加到 16 位的寄存器</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">mov al,ds:[addr] <br>mov ah,0 <br>add dx,ax<br></code></pre></td></tr></table></figure>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726150728.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>代码：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726150828.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h4 id="段前缀的使用"><a class="markdownIt-Anchor" href="#段前缀的使用"></a> 段前缀的使用</h4>
+<ul>
+<li>问题：将内存 <code>ffff:0~ffff:b</code> 中的数据拷贝到 <code>0:200~0:20b</code> 单元中。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726151542.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>代码：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726151641.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>说明：
+<ul>
+<li>使用 <code>es</code> 存放目标空间 <code>0:200~0:20b</code> 的段地址，用 <code>ds</code> 存放原始空间 <code>ffff:0~ffff:b</code> 的段地址。</li>
+<li>在访问内存单元的指令 <code>mov es:[bx],al</code> 中，显式地用附加段前缀 <code>es:</code> 给出单元的段地址，这样就不必在循环中重复设置 <code>ds</code>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="上述程序的问题"><a class="markdownIt-Anchor" href="#上述程序的问题"></a> 上述程序的问题</h4>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726221031.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h5 id="解决方案-2"><a class="markdownIt-Anchor" href="#解决方案-2"></a> 解决方案</h5>
+<ul>
+<li>将数据直接写在代码段中：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726222057.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h5 id="上述程序存在问题"><a class="markdownIt-Anchor" href="#上述程序存在问题"></a> 上述程序存在问题</h5>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726222146.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h5 id="改进方案"><a class="markdownIt-Anchor" href="#改进方案"></a> 改进方案</h5>
+<ul>
+<li>定义一个标号 <code>start</code>，指示代码开始的位置。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726222311.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240726222335.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 
                 
               </div>
