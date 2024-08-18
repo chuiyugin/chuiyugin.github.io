@@ -101,8 +101,14 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240729173335.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240729185016.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240729211331.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818123246.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818124008.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818125437.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818125503.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818125533.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818125601.png">
 <meta property="article:published_time" content="2024-07-01T14:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-17T07:51:09.820Z">
+<meta property="article:modified_time" content="2024-08-18T04:56:06.481Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary_large_image">
@@ -347,7 +353,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3.8k 字
+          3.9k 字
         
       </span>
     
@@ -359,7 +365,7 @@
         
         
           <!-- compatible with older versions-->
-          12 分钟
+          13 分钟
         
       </span>
     
@@ -859,6 +865,29 @@
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240729211331.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <h2 id="第六章-更灵活的定位内存地址的方法"><a class="markdownIt-Anchor" href="#第六章-更灵活的定位内存地址的方法"></a> 第六章 更灵活的定位内存地址的方法</h2>
 <h3 id="处理字符问题"><a class="markdownIt-Anchor" href="#处理字符问题"></a> 处理字符问题</h3>
+<ul>
+<li>在汇编程序中，用 <code>'……'</code> 的方式指明<strong>数据是以字符的形式给出</strong>的，编译器将把它们转化为相对应的 <code>ASCII</code> 码。</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs assembly">assume cs:code,ds:data<br><br>data segment<br> db &#x27;yuGin&#x27;<br> db &#x27;Chui&#x27;<br>data ends<br><br>code segment <br>start: mov al,&#x27;a&#x27;<br>	   mov bl,&#x27;b&#x27;<br><br>	   mov ax,4c00h <br>	   int 21h <br>code ends <br>end start<br></code></pre></td></tr></table></figure>
+<ul>
+<li>编译为可执行文件，并用 <code>Debug</code> 加载查看 <code>data</code> 段中的内容：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818123246.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>说明：
+<ul>
+<li>先用 <code>r</code> 命令分析一下 <code>data</code> 段的地址，因为 <code>DS=075A</code>，需要加上一个 <code>256</code> 字节称为<strong>程序段前缀（PSP）的数据区</strong>，从 <code>256</code> 字节处向后的空间存放的是程序。</li>
+<li>用 <code>d</code> 命令查看 <code>data</code> 段，<code>Debug</code> 以十六进制数码和 <code>ASCII</code> 码字符形式展示其中的内容。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818124008.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h3 id="大小写转换问题"><a class="markdownIt-Anchor" href="#大小写转换问题"></a> 大小写转换问题</h3>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818125437.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818125503.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818125533.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818125601.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 
                 
               </div>
