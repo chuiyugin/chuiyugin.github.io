@@ -107,8 +107,10 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818125503.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818125533.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818125601.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240819171406.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240819172155.png">
 <meta property="article:published_time" content="2024-07-01T14:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-18T04:56:06.481Z">
+<meta property="article:modified_time" content="2024-08-19T09:22:02.518Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="汇编语言">
 <meta name="twitter:card" content="summary_large_image">
@@ -353,7 +355,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3.9k 字
+          4.1k 字
         
       </span>
     
@@ -888,6 +890,28 @@
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818125503.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818125533.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240818125601.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h3 id="bxidata-方式寻址"><a class="markdownIt-Anchor" href="#bxidata-方式寻址"></a> [bx+idata] 方式寻址</h3>
+<h4 id="bxidata-的含义"><a class="markdownIt-Anchor" href="#bxidata-的含义"></a> [bx+idata] 的含义</h4>
+<ul>
+<li><code>[bx+idata]</code> 是表示一个内存单元，它的偏移地址为 <code>(bx)+idata</code>（<code>bx</code> 中的数值加上 <code>idata</code>）。</li>
+<li><code>mov ax,[bx+200]</code> / <code>mov ax, [200+bx]</code> 的含义：
+<ul>
+<li>将一个内存单元的内容送入 <code>ax</code>，</li>
+<li>这个内存单元的长度为 <code>2</code> 字节（字单元），存放一个字，</li>
+<li>内存单元的段地址在 <code>ds</code> 中，偏移地址为 <code>200</code> 加上 <code>bx</code> 中的数值，</li>
+<li>数学化的描述为： <code>(ax)=((ds)*16+200+(bx))</code>；</li>
+</ul>
+</li>
+<li>指令 <code>mov ax,[bx+200]</code> 的其他写法（常用）：
+<ul>
+<li><code>mov ax,[200+bx]</code>，</li>
+<li><code>mov ax,200[bx]</code>，</li>
+<li><code>mov ax,[bx].200</code>；</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240819171406.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20240819172155.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 
                 
               </div>
