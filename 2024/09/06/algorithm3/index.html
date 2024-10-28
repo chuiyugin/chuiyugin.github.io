@@ -27,8 +27,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202409061059275.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202409071557509.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202410282000775.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202410282028147.png">
 <meta property="article:published_time" content="2024-09-06T02:30:00.000Z">
-<meta property="article:modified_time" content="2024-10-28T02:18:15.273Z">
+<meta property="article:modified_time" content="2024-10-28T14:14:28.492Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="数据结构">
 <meta property="article:tag" content="算法">
@@ -274,7 +276,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.9k 字
+          3.5k 字
         
       </span>
     
@@ -286,7 +288,7 @@
         
         
           <!-- compatible with older versions-->
-          9 分钟
+          11 分钟
         
       </span>
     
@@ -457,6 +459,70 @@
 </li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stack&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;utility&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;map&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;climits&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;ctime&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sstream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-comment">//定义变量</span><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">105</span>;<br><span class="hljs-keyword">int</span> n; <span class="hljs-comment">//输出index-n的全排列</span><br><span class="hljs-keyword">int</span> p[MAXN];<br><span class="hljs-keyword">bool</span> HashTable[MAXN] = &#123;<span class="hljs-literal">false</span>&#125;;<br><br><span class="hljs-comment">//判断是否合法出栈序列函数</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isValidSeq</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *array)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">int</span> num, pointer = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">bool</span> flag = <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; j++)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (pointer &lt; array[j])<br>        &#123;<br>            pointer = array[j];<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            num = array[j];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = j + <span class="hljs-number">1</span>; k &lt;= n; k++)<br>            &#123;<br>                <span class="hljs-keyword">if</span> ((array[k - <span class="hljs-number">1</span>] &lt; array[k] || num &lt; array[k]) &amp;&amp; pointer &gt; array[k])<br>                &#123;<br>                    flag = <span class="hljs-literal">false</span>;<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> flag;<br>&#125;<br><br><span class="hljs-comment">//生成全排列数据并判断是否合法出栈序列函数</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Full_permutation</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//递归边界</span><br>    <span class="hljs-keyword">if</span> (index == n + <span class="hljs-number">1</span>)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isValidSeq</span>(p) == <span class="hljs-literal">true</span>)<br>        &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; n; i++)<br>            &#123;<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>, p[i]);<br>            &#125;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, p[n]);<br>        &#125;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-comment">//递归式</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span>; k &lt;= n; k++)<br>    &#123;<br>        <span class="hljs-keyword">if</span> (!HashTable[k]) <span class="hljs-comment">// HashTable[k]==false-&gt;说明该元素还没有被用上</span><br>        &#123;<br>            p[index] = k;        <span class="hljs-comment">//处理这一种情况</span><br>            HashTable[k] = <span class="hljs-literal">true</span>; <span class="hljs-comment">//到这里说明假设1到index已经排好</span><br>            <span class="hljs-comment">//递归进入函数再排index+1之后的部分</span><br>            <span class="hljs-built_in">Full_permutation</span>(index + <span class="hljs-number">1</span>);<br>            <span class="hljs-comment">//递归返回结束后循环还没有结束，继续处理下一循环的问题</span><br>            HashTable[k] = <span class="hljs-literal">false</span>; <span class="hljs-comment">//已经处理完p[index]=k;这一种情况，还原状态</span><br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//主函数</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);<br>    <span class="hljs-built_in">Full_permutation</span>(<span class="hljs-number">1</span>);<br>    <span class="hljs-built_in">system</span>(<span class="hljs-string">&quot;pause&quot;</span>); <span class="hljs-comment">// 防止运行后自动退出，需头文件stdlib.h</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="队列的应用"><a class="markdownIt-Anchor" href="#队列的应用"></a> 队列的应用</h3>
+<ul>
+<li>队列是一种先进先出的数据结构。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202410282000775.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<ul>
+<li>一般而言，需要一个队首指针 <code>front</code> 来指向队首元素的前一个位置，而使用一个队尾指针 <code>rear</code> 来指向队尾元素。
+<ul>
+<li>当使用链表来实现队列时，则为 <code>int*</code> 型变量的指针。</li>
+<li>当使用数组来实现队列时，队首指针 <code>front</code> 和队尾指针 <code>rear</code> 为 <code>int</code> 型变量（数组下标从 <code>0</code> 开始），其示例如下图所示：</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202410282028147.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>接下来将使用数组 <code>q[]</code> 来实现队列并介绍队列的常用操作：</li>
+</ul>
+<h4 id="清空clear"><a class="markdownIt-Anchor" href="#清空clear"></a> 清空（clear）</h4>
+<ul>
+<li>使用数组来实现队列时，初始状态为 <code>front=-1</code>、<code>rear=-1</code>，上图中第一步 <code>rear</code> 指向 <code>0</code> 是因为此时队列已经有一个元素了，如果没有元素，<code>rear</code> 应当是指向 <code>-1</code> 的位置。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">clear</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	front = rear = <span class="hljs-number">-1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="获取队列内的元素个数size"><a class="markdownIt-Anchor" href="#获取队列内的元素个数size"></a> 获取队列内的元素个数（size）</h4>
+<ul>
+<li>显然 <code>rear-front</code> 即为队列内的元素个数。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">size</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> rear - front;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="判空empty"><a class="markdownIt-Anchor" href="#判空empty"></a> 判空（empty）</h4>
+<ul>
+<li>判定队列为空的条件为 <code>front==rear</code>.</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">empty</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span>(front == rear)<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>	<span class="hljs-keyword">else</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="入队push"><a class="markdownIt-Anchor" href="#入队push"></a> 入队（push）</h4>
+<ul>
+<li>由于队尾指针 <code>rear</code> 指向队尾元素，因此把元素入队时，需要先 <code>++rear</code>，然后再将数据存放到 <code>rear</code> 指向的位置。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>	q[++rear] = x;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="出队pop"><a class="markdownIt-Anchor" href="#出队pop"></a> 出队（pop）</h4>
+<ul>
+<li>可以直接把队首指针 <code>front++</code> 来实现出队的效果。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	front++;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="取队首元素get_front"><a class="markdownIt-Anchor" href="#取队首元素get_front"></a> 取队首元素（get_front）</h4>
+<ul>
+<li>由于队首指针 <code>front</code> 指向的是队首元素的前一个元素，因此 <code>front+1</code> 才是队首元素的位置。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">get_front</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> q[front+<span class="hljs-number">1</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="取队尾元素get_rear"><a class="markdownIt-Anchor" href="#取队尾元素get_rear"></a> 取队尾元素（get_rear）</h4>
+<ul>
+<li>由于队尾指针 <code>rear</code> 指向的是队尾元素，因此可以直接访问 <code>rear</code> 的位置。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">get_rear</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">return</span> q[rear];<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h4>
+<ul>
+<li>与栈类似，<code>pop ()</code> 函数、<code>get_front()</code> 函数、<code>get_rear()</code> 函数之前必须先使用 <code>empty ()</code> 函数判断队列是否为空。</li>
+<li>同样的，可以使用 <code>C++ STL</code> 中的 <code>queue</code> 容器来非常容易地使用队列。</li>
+<li>另外，由于 <code>STL</code> 中没有实现队列的清空，因此需要使用一个 <code>while</code> 循环反复 <code>pop</code> 出元素直至队列为空。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">while</span>(!q.<span class="hljs-built_in">empty</span>())<br>&#123;<br>	q.pop;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>更加常用的是重新定义一个队列以实现队列的清空，<code>STL</code> 中 <code>queue</code> 进行定义的时间复杂度和 <code>stack</code> 一样都是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span> 。</li>
+</ul>
+<h3 id="链表处理"><a class="markdownIt-Anchor" href="#链表处理"></a> 链表处理</h3>
+<h4 id="链表的概念"><a class="markdownIt-Anchor" href="#链表的概念"></a> 链表的概念</h4>
 
                 
               </div>
