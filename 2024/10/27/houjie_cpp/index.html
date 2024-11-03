@@ -26,8 +26,16 @@
 <meta property="og:description" content="C++、编程语言">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202410281102136.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031557563.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031618944.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031718666.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031738262.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031742123.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031746875.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031746434.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031802200.png">
 <meta property="article:published_time" content="2024-10-27T14:20:00.000Z">
-<meta property="article:modified_time" content="2024-10-30T03:48:03.501Z">
+<meta property="article:modified_time" content="2024-11-03T10:02:56.431Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="C++语言">
 <meta name="twitter:card" content="summary_large_image">
@@ -272,7 +280,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.6k 字
+          1.9k 字
         
       </span>
     
@@ -284,7 +292,7 @@
         
         
           <!-- compatible with older versions-->
-          5 分钟
+          7 分钟
         
       </span>
     
@@ -453,6 +461,45 @@
 <ul>
 <li>解释如下：在创建了相同 <code>class</code> 的两个 <code>objects</code> （是 <code>c1</code> 和 <code>c2</code>）是互为友元的。</li>
 </ul>
+<h2 id="操作符重载与临时对象"><a class="markdownIt-Anchor" href="#操作符重载与临时对象"></a> 操作符重载与临时对象</h2>
+<h3 id="操作符重载之一成员函数this"><a class="markdownIt-Anchor" href="#操作符重载之一成员函数this"></a> 操作符重载之一：成员函数（this）</h3>
+<ul>
+<li>在 <code>class</code> 中实现操作符的重载：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">inline</span> complex&amp;<br>__doapl(complex* ths, <span class="hljs-keyword">const</span> complex&amp; r)<br>&#123;<br>	ths-&gt;re += r.re;<br>	ths-&gt;im += r.im;<br>	<span class="hljs-keyword">return</span> *ths;<br>&#125;<br><span class="hljs-keyword">inline</span> complex&amp;<br>complex::<span class="hljs-keyword">operator</span> += (<span class="hljs-keyword">const</span> complex&amp; r)<br>&#123;<br>	<span class="hljs-keyword">return</span> __doapl (<span class="hljs-keyword">this</span>, r);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>需要注意，<code>this</code> 是隐藏参数，不需要写在函数参数传递的过程中：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031557563.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h4 id="return-by-reference-语法分析"><a class="markdownIt-Anchor" href="#return-by-reference-语法分析"></a> return by reference 语法分析</h4>
+<ul>
+<li>传递者无需知道接收者是以引用的形式接收</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031618944.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h3 id="操作符重载之二非成员函数无-this"><a class="markdownIt-Anchor" href="#操作符重载之二非成员函数无-this"></a> 操作符重载之二：非成员函数（无 this）</h3>
+<ul>
+<li>为了应付用户的三种用法，对应开发三种函数；</li>
+<li>与<strong>成员函数</strong>方式的区别在于<strong>非成员函数</strong>采用的是全局函数（<code>global</code>）：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031718666.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>可以看出，上面的函数绝对不可以采用<strong>返回引用</strong>的形式，因为它们返回的必定是个本地对象（<code>local object</code>）。</li>
+<li>同时，<code>typename()</code> 创建的是<strong>临时对象</strong>，小括号中没有参数就是默认值。例如 <code>int(5)</code> 等，表明其是临时的，生命周期很短，在下一行便结束。在上述的例子中也有体现：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031738262.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li><code>“+”</code>表示正，<code>“-”</code>表示负的情况：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031742123.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>判断两个复数是否相等（两种情况<code>==</code>和<code>!=</code>）：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031746875.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031746434.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>输出运算符 <code>“&lt;&lt;”</code> 也称为流插入运算符，是一个二目运算符，该操作符的重载具有特殊用法：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031802200.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 
                 
               </div>
