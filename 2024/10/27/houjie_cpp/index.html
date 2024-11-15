@@ -39,8 +39,17 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411142228928.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411142248922.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411142249036.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151446636.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151450878.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151453950.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151500963.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151501010.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151509422.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151517633.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151515975.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151517543.png">
 <meta property="article:published_time" content="2024-10-27T14:20:00.000Z">
-<meta property="article:modified_time" content="2024-11-14T14:50:40.815Z">
+<meta property="article:modified_time" content="2024-11-15T07:27:54.442Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="C++语言">
 <meta name="twitter:card" content="summary_large_image">
@@ -285,7 +294,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.4k 字
+          2.9k 字
         
       </span>
     
@@ -297,7 +306,7 @@
         
         
           <!-- compatible with older versions-->
-          8 分钟
+          9 分钟
         
       </span>
     
@@ -503,6 +512,7 @@
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031746434.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <ul>
 <li>输出运算符 <code>“&lt;&lt;”</code> 也称为流插入运算符，是一个二目运算符，该操作符的重载具有特殊用法：</li>
+<li>该操作符重载的过程是将重载函数<strong>右边的参数</strong>作用到<strong>左边的参数</strong>中：</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411031802200.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <h2 id="带指针的class用法"><a class="markdownIt-Anchor" href="#带指针的class用法"></a> 带指针的class用法</h2>
@@ -520,7 +530,7 @@
 <ul>
 <li>析构函数（释放掉不用的动态内存）</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">inline</span><br>String::~<span class="hljs-built_in">String</span>() &#123;<br>	<span class="hljs-keyword">delete</span>[] m_data;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">inline</span><br>String::~<span class="hljs-built_in">String</span>() &#123;<br>	<span class="hljs-keyword">delete</span>[] m_data;<span class="hljs-comment">//前面new带有[]则delete时候也要带有[]</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>创建对象和使用</li>
 <li>大括号 <code>“&#123;&#125;”</code> 内表示其作用域，离开作用域后<strong>析构函数</strong>自然被调用</li>
@@ -561,6 +571,52 @@
 <ul>
 <li>检测自我赋值不止为了效率还有安全性。</li>
 </ul>
+<h5 id="output-函数"><a class="markdownIt-Anchor" href="#output-函数"></a> output 函数</h5>
+<ul>
+<li><code>output</code> 函数，其中操作符 <code>&lt;&lt;</code> 的重载是将其重载函数的右边参数作用到左边参数，必须写成非成员函数（即全局函数）：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream.h&gt;</span></span><br>ostream&amp; <span class="hljs-keyword">operator</span> &lt;&lt; (ostream&amp; os, <span class="hljs-keyword">const</span> String&amp; str)<br>&#123;<br>	os &lt;&lt; str.<span class="hljs-built_in">get_c_str</span>();<span class="hljs-comment">//传递字符串指针（该函数写在String类的内联函数中）</span><br>	<span class="hljs-keyword">return</span> os;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>output</code> 函数的调用：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">&#123;<br>	<span class="hljs-function">String <span class="hljs-title">s1</span><span class="hljs-params">(<span class="hljs-string">&quot;hello &quot;</span>)</span></span>;<br>	cout &lt;&lt; s1;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="栈stack和堆heap"><a class="markdownIt-Anchor" href="#栈stack和堆heap"></a> 栈（stack）和堆（heap）</h4>
+<ul>
+<li>栈（<code>stack</code>）是存在于是某作用域（<code>scope</code>）的一块內存空间（<code>memory space</code>）。例如在调用函数时，函数本身即会形成一个 <code>stack</code> 用来存放它所接收的参数，以及返回地址。在函数本体 (<code>function body</code>) 内声明的任何变量，其所使用的內存块都取自上述 <code>stack</code>。</li>
+<li>堆（<code>heap</code>），或 <code>system heap</code>，是指由操作系统提供的一块 <code>global</code> 內存空间，程序可动态分配 (<code>dynamic allocated</code>) 从某内存中获得若干区块 (<code>blocks</code>)。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151446636.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li><code>c1</code> 便是所谓的 <code>stack object</code>，其生命在作用域 (<code>scope</code>) 结束之际结束。这种作用域內的 <code>object</code>，又称为 <code>auto object</code>，因为它会被<strong>析构函数</strong>自动清理。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151450878.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li><code>c2</code> 便是所谓的 <code>static object</code>，其生命在作用域 (<code>scope</code>) 结束之后仍然存在，直到整个程序结束。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151453950.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li><code>c3</code> 便是所谓的 <code>global object</code>，其生命在整个程序结束之后才结束。也可以把它视为一种 <code>static object</code>，其作用域是<strong>整个程序</strong>。</li>
+</ul>
+<h5 id="heap-objects-的生命周期"><a class="markdownIt-Anchor" href="#heap-objects-的生命周期"></a> heap objects 的生命周期</h5>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151500963.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li><code>P</code> 所指的便是 <code>heap object</code>，其生命在它被 <code>delete</code> 之际结束。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151501010.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>以上出现内存泄漏 ( <code>memory leak</code> )，因为当作用域结束，<code>p</code> 所指的 <code>heap object</code> 仍然存在，但指针 <code>p</code> 的生命却结束了，作用域之外再也看不到 <code>p</code> (也就没机会 <code>delete p</code>）。</li>
+</ul>
+<h5 id="new-和-delete-的具体机制"><a class="markdownIt-Anchor" href="#new-和-delete-的具体机制"></a> new 和 delete 的具体机制</h5>
+<ul>
+<li><code>new</code>：先分配 <code>memory</code>, 再调用构造函数</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151509422.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151517633.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>delete：先调用析构函数，再释放 <code>memory</code></li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151515975.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151517543.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 
                 
               </div>
