@@ -50,7 +50,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411151517543.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411152240380.png">
 <meta property="article:published_time" content="2024-10-27T14:20:00.000Z">
-<meta property="article:modified_time" content="2024-11-15T14:40:41.188Z">
+<meta property="article:modified_time" content="2024-11-16T03:45:34.412Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="C++语言">
 <meta name="twitter:card" content="summary_large_image">
@@ -563,15 +563,16 @@
 <ul>
 <li>拷贝赋值函数代码</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">inline</span><br>String&amp; String::<span class="hljs-keyword">operator</span>=(<span class="hljs-keyword">const</span> String&amp; str)<br>&#123;<br>	<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == &amp;str)<span class="hljs-comment">//检测自我赋值</span><br>		<span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;<br>		<br>	<span class="hljs-keyword">delete</span>[] m_data;<br>	m_data = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[ <span class="hljs-built_in">strlen</span>(str.m_data) + <span class="hljs-number">1</span> ];<br>	<span class="hljs-built_in">strcpy</span>(m_data, str.m_data);<br>	<span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">inline</span><br>String&amp; String::<span class="hljs-keyword">operator</span>=(<span class="hljs-keyword">const</span> String&amp; str)<br>&#123;<br>	<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == &amp;str)<span class="hljs-comment">//检测自我赋值</span><br>		<span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;<br>		<br>	<span class="hljs-keyword">delete</span>[] m_data;<br>	m_data = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[ <span class="hljs-built_in">strlen</span>(str.m_data) + <span class="hljs-number">1</span> ];<br>	<span class="hljs-built_in">strcpy</span>(m_data, str.m_data);<br>	<span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;<span class="hljs-comment">//保证可以连等，如 s1=s2=s3;</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
-<li>一定要在拷贝赋值函数中加入<strong>检测自我赋值</strong>：</li>
+<li>一定要在拷贝赋值函数中加入<strong>检测自我赋值</strong>，检测自我赋值不止为了效率还有安全性：</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411142248922.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411142249036.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 <ul>
-<li>检测自我赋值不止为了效率还有安全性。</li>
+<li>拷贝赋值函数的调用</li>
 </ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp">&#123;<br>	<span class="hljs-function">String <span class="hljs-title">s1</span><span class="hljs-params">(<span class="hljs-string">&quot;hello &quot;</span>)</span></span>;<br>	String s2 = s1;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h5 id="output-函数"><a class="markdownIt-Anchor" href="#output-函数"></a> output 函数</h5>
 <ul>
 <li><code>output</code> 函数，其中操作符 <code>&lt;&lt;</code> 的重载是将其重载函数的右边参数作用到左边参数，必须写成非成员函数（即全局函数）：</li>
