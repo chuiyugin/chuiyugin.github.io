@@ -28,8 +28,16 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411161550613.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411161605508.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411161606580.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171814947.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171817282.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171820446.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171830090.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171830816.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171831104.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171831993.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171840477.png">
 <meta property="article:published_time" content="2024-11-16T07:40:00.000Z">
-<meta property="article:modified_time" content="2024-11-16T08:07:50.691Z">
+<meta property="article:modified_time" content="2024-11-17T10:41:01.611Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="误差理论">
 <meta name="twitter:card" content="summary_large_image">
@@ -274,7 +282,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          154 字
+          536 字
         
       </span>
     
@@ -286,7 +294,7 @@
         
         
           <!-- compatible with older versions-->
-          1 分钟
+          2 分钟
         
       </span>
     
@@ -363,6 +371,62 @@
 </ul>
 </li>
 </ul>
+<h4 id="随机误差的基本性质"><a class="markdownIt-Anchor" href="#随机误差的基本性质"></a> 随机误差的基本性质</h4>
+<ul>
+<li>随机误差的<strong>大小和方向都不固定</strong>，也无法精确测量或校正，但它的规律性是在<strong>大量观测数据</strong>中表现出来的统计规律。在<strong>多次</strong>测量的过程中，产生的随机误差具有以下规律:
+<ul>
+<li>对称性: 绝对值相等的正误差与负误差出现的概率相同。</li>
+<li>单峰性: 绝对值小的误差比绝对值大的误差出现的概率大。</li>
+<li>有界性: 绝对值很大的误差出现的概率接近于零，即随机误差的绝对值不会超过一定界限。</li>
+<li>抵偿性: 当测量次数 <code>n→∞</code> 时，全部误差的代数和趋于零。</li>
+</ul>
+</li>
+</ul>
+<h4 id="随机误差的分布特征"><a class="markdownIt-Anchor" href="#随机误差的分布特征"></a> 随机误差的分布特征</h4>
+<ul>
+<li>随机误差的分布特征有：
+<ul>
+<li>正态分布</li>
+<li>t 分布</li>
+<li>非均匀分布等</li>
+</ul>
+</li>
+</ul>
+<h4 id="随机误差的数字特征"><a class="markdownIt-Anchor" href="#随机误差的数字特征"></a> 随机误差的数字特征</h4>
+<h5 id="数学期望"><a class="markdownIt-Anchor" href="#数学期望"></a> 数学期望</h5>
+<ul>
+<li>算术平均值为数学期望的估计值：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171814947.png" srcset="/img/loading.gif" lazyload alt="算术平均值" /></p>
+<h5 id="标准差"><a class="markdownIt-Anchor" href="#标准差"></a> 标准差</h5>
+<ul>
+<li>离散数据标准差的估计值：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171817282.png" srcset="/img/loading.gif" lazyload alt="标准差" /></p>
+<ul>
+<li>由于真值无法得知，因此测量数据的误差不能准确给出，因此不能够按照上述式子求得标准差，必须结合测量数据对标准差进行合理估计，通常采用贝塞尔公式进行估计。</li>
+<li>贝塞尔公式：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171820446.png" srcset="/img/loading.gif" lazyload alt="贝塞尔公式" /></p>
+<ul>
+<li>贝赛尔公式估算条件：测量次数 <code>n</code> 比较大。</li>
+</ul>
+<h5 id="标准差的其他估算方法"><a class="markdownIt-Anchor" href="#标准差的其他估算方法"></a> 标准差的其他估算方法</h5>
+<ul>
+<li>别捷尔斯法</li>
+<li>极差法</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171830090.png" srcset="/img/loading.gif" lazyload alt="极差法概念" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171830816.png" srcset="/img/loading.gif" lazyload alt="极差法例题" /></p>
+<ul>
+<li>最大误差法：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171831104.png" srcset="/img/loading.gif" lazyload alt="最大误差法理论" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171831993.png" srcset="/img/loading.gif" lazyload alt="最大误差法例题" /></p>
+<ul>
+<li>四种计算方法的优缺点：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171840477.png" srcset="/img/loading.gif" lazyload alt="四种计算方法的优缺点" /></p>
 
                 
               </div>
