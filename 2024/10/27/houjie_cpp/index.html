@@ -55,8 +55,12 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411162253922.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411162259978.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411162304335.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411181144192.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411181148548.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411181150532.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411181152957.png">
 <meta property="article:published_time" content="2024-10-27T14:20:00.000Z">
-<meta property="article:modified_time" content="2024-11-16T15:14:34.611Z">
+<meta property="article:modified_time" content="2024-11-18T03:52:45.314Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面向对象">
 <meta name="twitter:card" content="summary_large_image">
@@ -301,7 +305,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3.5k 字
+          3.7k 字
         
       </span>
     
@@ -677,6 +681,26 @@
 <li>命名空间（<code>namespace</code>）是一种将标识符组织在一起的方式，用于防止名字冲突。</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411162304335.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h2 id="组合与继承"><a class="markdownIt-Anchor" href="#组合与继承"></a> 组合与继承</h2>
+<h3 id="组合composition"><a class="markdownIt-Anchor" href="#组合composition"></a> 组合（composition）</h3>
+<ul>
+<li>组合（<code>composition</code>）指的是一个对象<strong>拥有</strong>并可以控制另一个对象的生命周期。在 <code>class</code> 中的例子如下：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411181144192.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>利用设计模式中的<strong>适配器模式</strong>书写，表示 <code>queue</code> 类拥有 <code>deque</code> 类，且 <code>deque</code> 类的功能比 <code>queue</code> 类更加齐全，只需要把 <code>deque</code> 类稍加改造便可实现 <code>queue</code> 类的功能，例子如下：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411181148548.png" srcset="/img/loading.gif" lazyload alt="适配器模式" /></p>
+<h4 id="组合的内存占用计算"><a class="markdownIt-Anchor" href="#组合的内存占用计算"></a> 组合的内存占用计算</h4>
+<ul>
+<li>组合的内存占用需要把其拥有和部分的内存全部加上来进行计算。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411181150532.png" srcset="/img/loading.gif" lazyload alt="内存占用计算" /></p>
+<h4 id="组合关系下的构造函数和析构函数"><a class="markdownIt-Anchor" href="#组合关系下的构造函数和析构函数"></a> 组合关系下的构造函数和析构函数</h4>
+<ul>
+<li>组合关系下构造为&quot;由内而外&quot;，析构为&quot;由外而内&quot;。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411181152957.png" srcset="/img/loading.gif" lazyload alt="" /></p>
 
                 
               </div>
