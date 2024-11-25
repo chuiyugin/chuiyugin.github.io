@@ -62,8 +62,16 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411181607642.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411181621554.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411181623036.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411211140693.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411251510497.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411251525156.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411251533204.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411251611721.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411251612407.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411251613443.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411251613200.png">
 <meta property="article:published_time" content="2024-10-27T14:20:00.000Z">
-<meta property="article:modified_time" content="2024-11-18T08:24:02.066Z">
+<meta property="article:modified_time" content="2024-11-25T08:13:35.496Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面向对象">
 <meta name="twitter:card" content="summary_large_image">
@@ -308,7 +316,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          4k 字
+          4.9k 字
         
       </span>
     
@@ -320,7 +328,7 @@
         
         
           <!-- compatible with older versions-->
-          13 分钟
+          16 分钟
         
       </span>
     
@@ -723,6 +731,54 @@
 <li>在继承关系下，派生类的构造函数为&quot;由内而外&quot;，析构函数为&quot;由外而内&quot;。</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411181623036.png" srcset="/img/loading.gif" lazyload alt="继承关系下的构造和析构" /></p>
+<h4 id="继承下的虚函数virtual-functions"><a class="markdownIt-Anchor" href="#继承下的虚函数virtual-functions"></a> 继承下的虚函数（virtual functions）</h4>
+<ul>
+<li>类中的函数有以下三种分类：
+<ul>
+<li>非虚函数（<code>non-virtual</code>）: 你不希望派生类（<code>derived class</code>）重新定义（<code>override</code>，覆写）它；</li>
+<li>虚函数（<code>virtual</code>）：你希望派生类（<code>derived class</code>）重新定义（<code>override</code>，覆写）它，而且你对它已经有默认定义。语法是在函数名和函数类声明前面加上 <code>virtual</code> 字样；</li>
+<li>纯虚函数（<code>pure virtual</code>）：你希望派生类（<code>derived class</code>）一定要重新定义（<code>override</code>，覆写）它，而且你对它没有有默认定义。语法除了在函数类声明前面加上 <code>virtual</code> 字样，还要在函数类声明的最后加上 <code>=0</code>。</li>
+</ul>
+</li>
+<li>代码示例：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Shape</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">draw</span><span class="hljs-params">( )</span> <span class="hljs-keyword">const</span> </span>= <span class="hljs-number">0</span>;<span class="hljs-comment">//纯虚函数</span><br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">error</span><span class="hljs-params">(<span class="hljs-keyword">const</span> std::string&amp; msg)</span></span>;<span class="hljs-comment">//虚函数</span><br>	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">objectID</span><span class="hljs-params">( )</span> <span class="hljs-keyword">const</span></span>;<span class="hljs-comment">//非虚函数</span><br>	...<br>&#125;;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Rectangle</span>:</span> <span class="hljs-keyword">public</span> Shape &#123; ... &#125;;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ellipse</span>:</span> <span class="hljs-keyword">public</span> Shape &#123; ... &#125;;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>虚函数的执行步骤，属于设计模式中的模板方法（<code>Template Method</code>）：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411211140693.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>具体实现代码示例：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-comment">//这是前期就写好的类</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CDocument</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OnFileOpen</span><span class="hljs-params">()</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-comment">//每个cout输出代表一个实际动作</span><br>		cout &lt;&lt; <span class="hljs-string">&quot;dialog...&quot;</span> &lt;&lt; endl;<br>		cout &lt;&lt; <span class="hljs-string">&quot;check file status...&quot;</span> &lt;&lt; endl;<br>		cout &lt;&lt; <span class="hljs-string">&quot;open file...&quot;</span> &lt;&lt; endl;<br>		<span class="hljs-built_in">Serialize</span>();<br>		cout &lt;&lt; <span class="hljs-string">&quot;close file...&quot;</span> &lt;&lt; endl;<br>		cout &lt;&lt; <span class="hljs-string">&quot;update all views...&quot;</span> &lt;&lt; endl;<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Serialize</span><span class="hljs-params">()</span> </span>&#123; &#125;;<br>&#125;;<br><br><span class="hljs-comment">//后期根据要求对虚函数进行覆写</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CMyDoc</span> :</span> <span class="hljs-keyword">public</span> CDocument<br>&#123;<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Serialize</span><span class="hljs-params">()</span></span><br><span class="hljs-function">	</span>&#123;<br>		<span class="hljs-comment">//对虚函数进行覆写</span><br>		cout &lt;&lt; <span class="hljs-string">&quot;CMyDoc::Serialize()&quot;</span> &lt;&lt; endl;<br>	&#125;<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	CMyDoc myDoc; <span class="hljs-comment">//假设对应[File/Open]</span><br>	myDoc.<span class="hljs-built_in">OnFileOpen</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="继承和组合关系下的构造和析构"><a class="markdownIt-Anchor" href="#继承和组合关系下的构造和析构"></a> 继承和组合关系下的构造和析构</h4>
+<ul>
+<li>构造由内而外，析构由外而内。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411251510497.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h4 id="委托加继承的设计模式"><a class="markdownIt-Anchor" href="#委托加继承的设计模式"></a> 委托加继承的设计模式</h4>
+<ul>
+<li>观察者模式 (<code>observer pattern</code>)：定义对象之间的一对多依赖关系, 这样当一个对象改变状态时, 它的所有依赖项都会自动得到通知和更新。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411251525156.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>组合模式（<code>Composite</code>）属于结构型模式（<code>Structural Pattern</code>）的一种。</li>
+<li>结构型模式（<code>Structural Pattern</code>）描述如何将类或者对象结合在一起形成更大的结构，就像搭积木，可以通过简单积木的组合形成复杂的、功能更为强大的结构。</li>
+<li>结构型模式可以分为类结构型模式和对象结构型模式：
+<ul>
+<li>类结构型模式关心类的组合，由多个类可以组合成一个更大的系统，在类结构型模式中一般只存在继承关系和实现关系。</li>
+<li>对象结构型模式关心类与对象的组合，通过关联关系使得在一个类中定义另一个类的实例对象，然后通过该对象调用其方法。根据“合成复用原则”，在系统中尽量使用关联关系来替代继承关系，因此大部分结构型模式都是对象结构型模式。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411251533204.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>原型（<code>Prototype</code>）模式是一种创建型设计模式，用于通过复制（克隆）现有的对象来创建新对象，而不是通过直接实例化对象。该模式尤其适合在创建对象的成本较高或对象结构较复杂时使用。在原型模式中，每个对象都会有一个“原型”，通过克隆原型来创建新的对象，而不是通过类的构造函数。这样可以减少对构造函数的依赖，并且可以动态地生成新对象。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411251611721.png" srcset="/img/loading.gif" lazyload alt="原型模式" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411251612407.png" srcset="/img/loading.gif" lazyload alt="原型模式" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411251613443.png" srcset="/img/loading.gif" lazyload alt="原型模式" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411251613200.png" srcset="/img/loading.gif" lazyload alt="原型模式" /></p>
 
                 
               </div>
