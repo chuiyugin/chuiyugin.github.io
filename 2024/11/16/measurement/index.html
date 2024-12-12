@@ -1,0 +1,1075 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/4.png">
+  <link rel="icon" href="/img/4.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Mr.CHUI">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="计量方法与误差理论知识汇总！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计量方法与误差理论">
+<meta property="og:url" content="http://example.com/2024/11/16/measurement/index.html">
+<meta property="og:site_name" content="CHUI YUGIN">
+<meta property="og:description" content="计量方法与误差理论知识汇总！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411161550613.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411161605508.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411161606580.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171814947.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171817282.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171820446.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171830090.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171830816.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171831104.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171831993.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171840477.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411172118051.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411172120867.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411172121469.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202221945.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202223699.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202224912.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202226913.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202227886.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202228761.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202229204.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202230441.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241206164800.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241206171212.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241206171528.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241206171554.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241206171630.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241210103424.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241210103804.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241210104016.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241210104449.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241210104653.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241210104733.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211104747.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211104857.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211105804.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211110849.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211111017.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211111212.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211111318.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211111501.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211111633.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241212104843.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241212104919.png">
+<meta property="article:published_time" content="2024-11-16T07:40:00.000Z">
+<meta property="article:modified_time" content="2024-12-12T11:57:10.017Z">
+<meta property="article:author" content="Mr.CHUI">
+<meta property="article:tag" content="误差理论">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411161550613.png">
+  
+  
+  
+  <title>计量方法与误差理论 - CHUI YUGIN</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":true,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"3ab6987a72dcf290bd1498abd234c736","google":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"gtag":null},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?3ab6987a72dcf290bd1498abd234c736";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Mr.CHUI</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>链接</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/1.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="计量方法与误差理论"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Mr.CHUI
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-11-16 15:40" pubdate>
+          2024年11月16日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          7 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">计量方法与误差理论</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="计量方法与误差理论"><a class="markdownIt-Anchor" href="#计量方法与误差理论"></a> 计量方法与误差理论</h1>
+<h2 id="误差部分"><a class="markdownIt-Anchor" href="#误差部分"></a> 误差部分</h2>
+<h3 id="经典误差理论"><a class="markdownIt-Anchor" href="#经典误差理论"></a> 经典误差理论</h3>
+<h4 id="误差的基本概念"><a class="markdownIt-Anchor" href="#误差的基本概念"></a> 误差的基本概念</h4>
+<ul>
+<li>真值：在一定条件下被测量的真实数值（通常用字母 <code>A</code> 表示真值），测量的目的就是为了获得真值。</li>
+<li>绝对误差：由测量所得到的<strong>被测量值</strong>与其<strong>真值</strong>之差。</li>
+<li>相对误差：由<strong>绝对误差</strong>作为分母。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411161550613.png" srcset="/img/loading.gif" lazyload alt="相对误差" /></p>
+<ul>
+<li>分贝误差：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411161605508.png" srcset="/img/loading.gif" lazyload alt="分贝误差" /></p>
+<ul>
+<li>分贝：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411161606580.png" srcset="/img/loading.gif" lazyload alt="分贝" /></p>
+<ul>
+<li>误差分类：
+<ul>
+<li>随机误差：统计特性、计算方法、评价标准、不可消除</li>
+</ul>
+</li>
+<li>系统误差：
+<ul>
+<li>消除或者减弱的方法、各类判据</li>
+</ul>
+</li>
+<li>粗大误差：
+<ul>
+<li>测量误差</li>
+</ul>
+</li>
+</ul>
+<h4 id="随机误差"><a class="markdownIt-Anchor" href="#随机误差"></a> 随机误差</h4>
+<h5 id="随机误差的基本性质"><a class="markdownIt-Anchor" href="#随机误差的基本性质"></a> 随机误差的基本性质</h5>
+<ul>
+<li>随机误差的<strong>大小和方向都不固定</strong>，也无法精确测量或校正，但它的规律性是在<strong>大量观测数据</strong>中表现出来的统计规律。在<strong>多次</strong>测量的过程中，产生的随机误差具有以下规律:
+<ul>
+<li>对称性: 绝对值相等的正误差与负误差出现的概率相同。</li>
+<li>单峰性: 绝对值小的误差比绝对值大的误差出现的概率大。</li>
+<li>有界性: 绝对值很大的误差出现的概率接近于零，即随机误差的绝对值不会超过一定界限。</li>
+<li>抵偿性: 当测量次数 <code>n→∞</code> 时，全部误差的代数和趋于零。</li>
+</ul>
+</li>
+</ul>
+<h5 id="随机误差的分布特征"><a class="markdownIt-Anchor" href="#随机误差的分布特征"></a> 随机误差的分布特征</h5>
+<ul>
+<li>随机误差的分布特征有：
+<ul>
+<li>正态分布</li>
+<li>t 分布</li>
+<li>非均匀分布等</li>
+</ul>
+</li>
+</ul>
+<h5 id="随机误差的数字特征"><a class="markdownIt-Anchor" href="#随机误差的数字特征"></a> 随机误差的数字特征</h5>
+<h6 id="数学期望"><a class="markdownIt-Anchor" href="#数学期望"></a> 数学期望</h6>
+<ul>
+<li>算术平均值为数学期望的估计值：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171814947.png" srcset="/img/loading.gif" lazyload alt="算术平均值" /></p>
+<h6 id="标准差"><a class="markdownIt-Anchor" href="#标准差"></a> 标准差</h6>
+<ul>
+<li>离散数据标准差的估计值：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171817282.png" srcset="/img/loading.gif" lazyload alt="标准差" /></p>
+<ul>
+<li>由于真值无法得知，因此测量数据的误差不能准确给出，因此不能够按照上述式子求得标准差，必须结合测量数据对标准差进行合理估计，通常采用贝塞尔公式进行估计。</li>
+<li>贝塞尔公式：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171820446.png" srcset="/img/loading.gif" lazyload alt="贝塞尔公式" /></p>
+<ul>
+<li>贝赛尔公式估算条件：测量次数 <code>n</code> 比较大。</li>
+</ul>
+<h6 id="标准差的其他估算方法"><a class="markdownIt-Anchor" href="#标准差的其他估算方法"></a> 标准差的其他估算方法</h6>
+<ul>
+<li>别捷尔斯法</li>
+<li>极差法</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171830090.png" srcset="/img/loading.gif" lazyload alt="极差法概念" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171830816.png" srcset="/img/loading.gif" lazyload alt="极差法例题" /></p>
+<ul>
+<li>最大误差法：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171831104.png" srcset="/img/loading.gif" lazyload alt="最大误差法理论" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171831993.png" srcset="/img/loading.gif" lazyload alt="最大误差法例题" /></p>
+<ul>
+<li>四种计算方法的优缺点：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411171840477.png" srcset="/img/loading.gif" lazyload alt="四种计算方法的优缺点" /></p>
+<h6 id="多次测量结果的精度指标"><a class="markdownIt-Anchor" href="#多次测量结果的精度指标"></a> 多次测量结果的精度指标</h6>
+<ul>
+<li>多次测量的算术平均值的标准差：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411172118051.png" srcset="/img/loading.gif" lazyload alt="多次测量的算术平均值的标准差" /></p>
+<ul>
+<li>算术平均值的精度指标（常用的有 4 个）：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411172120867.png" srcset="/img/loading.gif" lazyload alt="算术平均值的精度指标" /></p>
+<ul>
+<li>总结：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411172121469.png" srcset="/img/loading.gif" lazyload alt="总结" /></p>
+<h5 id="非等精度测量"><a class="markdownIt-Anchor" href="#非等精度测量"></a> 非等精度测量</h5>
+<h6 id="权的概念"><a class="markdownIt-Anchor" href="#权的概念"></a> 权的概念</h6>
+<ul>
+<li>“权”可以理解为各组测量结果相对的可信赖程度，测量结果越可靠，其“权”越大，即可靠性越大的测量结果在最后结果中所占的比重越大。</li>
+</ul>
+<h6 id="方差已知"><a class="markdownIt-Anchor" href="#方差已知"></a> 方差已知</h6>
+<ul>
+<li>权与方差成反比！权表示相对可靠程度，是一个无量纲的数，允许给各组的权数同时增大或者减小若干倍，而比例关系不变。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202221945.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h6 id="多次重复测量的权"><a class="markdownIt-Anchor" href="#多次重复测量的权"></a> 多次重复测量的权</h6>
+<ul>
+<li>以多组重复测量为例，测量次数决定权值，即</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202223699.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h6 id="加权平均表达式"><a class="markdownIt-Anchor" href="#加权平均表达式"></a> 加权平均表达式</h6>
+<ul>
+<li>知道权值便可以求加权平均表达式：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202224912.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h6 id="加权平均的精度参数"><a class="markdownIt-Anchor" href="#加权平均的精度参数"></a> 加权平均的精度参数</h6>
+<ul>
+<li>误差合成原理：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202226913.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>总结：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202227886.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h6 id="例题"><a class="markdownIt-Anchor" href="#例题"></a> 例题</h6>
+<ul>
+<li>已知方差：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202228761.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<ul>
+<li>方差未知，知道测量次数：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202229204.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202411202230441.png" srcset="/img/loading.gif" lazyload alt="" /></p>
+<h4 id="系统误差"><a class="markdownIt-Anchor" href="#系统误差"></a> 系统误差</h4>
+<h5 id="系统误差产生原因"><a class="markdownIt-Anchor" href="#系统误差产生原因"></a> 系统误差产生原因</h5>
+<ul>
+<li>测量装置方面的因素：计量校准后发现的偏差、仪器设计原理缺陷、仪器制造和安装的不正确等。</li>
+<li>环境方面的因素：测量时的实际温度对标准温度的偏差、测量过程中的温度、湿度按一定规律变化的误差等。</li>
+<li>测量方法的因素：采用近似的测量方法或计算公式引起的误差等。</li>
+<li>测量人员的因素：测量人员固有的测量习性引起的误差等。</li>
+</ul>
+<h5 id="系统误差的分类和特征"><a class="markdownIt-Anchor" href="#系统误差的分类和特征"></a> 系统误差的分类和特征</h5>
+<ul>
+<li>定值系统误差：在同一条件下，多次测量同一测量值时，误差的绝对值和正负符号保持不变。</li>
+<li>变值系统误差：变化系统误差指在整个测量过程中，误差的大小和方向随测试的某一个或某几个因素按确定的函数规律而变化，可分为三种：
+<ul>
+<li>线性系差（累进系差）：在整个测量过程中，随某因素而线性递增或递减的系统误差。如温度线性变化引起的误差。</li>
+<li>周期系差：在整个测量过程中，随某因素作周期变化的系统误差。如齿轮传动引起的正弦误差。</li>
+<li>复杂系差：在整个测量过程中， 随某因素变化，误差按确定的更为复杂的规律变化，称其为复杂规律变化的系统误差。</li>
+</ul>
+</li>
+</ul>
+<h5 id="系统误差的减小和消除"><a class="markdownIt-Anchor" href="#系统误差的减小和消除"></a> 系统误差的减小和消除</h5>
+<h6 id="主要途径"><a class="markdownIt-Anchor" href="#主要途径"></a> 主要途径</h6>
+<ul>
+<li>从测量方法上消除；</li>
+<li>测量数据的处理，掌握系差的大小，引入修正值。</li>
+</ul>
+<h6 id="定值系差消除"><a class="markdownIt-Anchor" href="#定值系差消除"></a> 定值系差消除</h6>
+<ul>
+<li>替代法
+<ul>
+<li>对被测量进行一次测量，使仪器上得到某一状态（如指针指示零位，显示某一示值）。然后在相同的测量条件下，以标准量代替被测量，调整标准量值的大小，尽量使仪器达到与被测量相同的状态，此时的标准量就等于被测量。如：用电桥测电阻，用标准可变电阻代替被测量。</li>
+</ul>
+</li>
+<li>交换法
+<ul>
+<li>在一次测量后，将某些测量条件交换一下，再进行一次测量。抵消法或反向补偿法就属于一种交换法，即先在有定值系差状态下进行一次测量，再在该定值系差相反的状态下进行第二次测量。两次测量的平均值使定值系差完全被抵消。</li>
+</ul>
+</li>
+<li>零示法
+<ul>
+<li>将待测量与标准的已知量比较，当二者作用相等时，测量装置的指示器读数为零。它可以消除指示器不准所造成的系统误差。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241206164800.png" srcset="/img/loading.gif" lazyload alt="用零示法测电压" /></p>
+<ul>
+<li>微差法
+<ul>
+<li>实际测量中标准量不一定是连续可调的，这时只要标准量与被测量的差别较小，那么它们的作用相互抵消的结果也会使指示仪表的误差对测量的影响大大减弱。（利用微差法可以达到很高的精度，即使测量精度不高。）</li>
+</ul>
+</li>
+</ul>
+<h5 id="粗大误差"><a class="markdownIt-Anchor" href="#粗大误差"></a> 粗大误差</h5>
+<ul>
+<li>粗大误差：疏忽误差、过失误差。</li>
+</ul>
+<h6 id="判别"><a class="markdownIt-Anchor" href="#判别"></a> 判别</h6>
+<ul>
+<li>不能不知原因不加分析就轻易舍弃测量列中最大或最小的数据。</li>
+<li>对怀疑是粗大误差而又不明原因的数据，应按照统计学方法进行判别。</li>
+</ul>
+<h6 id="处理方法"><a class="markdownIt-Anchor" href="#处理方法"></a> 处理方法</h6>
+<ul>
+<li>莱特准则：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241206171212.png" srcset="/img/loading.gif" lazyload alt="莱特准则" /></p>
+<h5 id="例题-2"><a class="markdownIt-Anchor" href="#例题-2"></a> 例题</h5>
+<ul>
+<li>题目：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241206171528.png" srcset="/img/loading.gif" lazyload alt="题目" /></p>
+<ul>
+<li>解答：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241206171554.png" srcset="/img/loading.gif" lazyload alt="解答-1" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241206171630.png" srcset="/img/loading.gif" lazyload alt="解答-2" /></p>
+<h3 id="误差的合成与分配"><a class="markdownIt-Anchor" href="#误差的合成与分配"></a> 误差的合成与分配</h3>
+<h4 id="误差的合成传递"><a class="markdownIt-Anchor" href="#误差的合成传递"></a> 误差的合成（传递）</h4>
+<ul>
+<li>函数的系统误差公式：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241210103424.png" srcset="/img/loading.gif" lazyload alt="函数的系统误差公式" /></p>
+<ul>
+<li>函数标准差的合成公式（一般对下述式子开根号应用）：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241210103804.png" srcset="/img/loading.gif" lazyload alt="函数标准差的合成公式" /></p>
+<ul>
+<li>若各测量值之间相互独立，可以简化为如下形式：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241210104016.png" srcset="/img/loading.gif" lazyload alt="各测量值之间相互独立" /></p>
+<ul>
+<li>极限误差的合成公式：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241210104449.png" srcset="/img/loading.gif" lazyload alt="极限误差的合成公式" /></p>
+<h4 id="误差的分配"><a class="markdownIt-Anchor" href="#误差的分配"></a> 误差的分配</h4>
+<ul>
+<li>按等作用原则分配误差：</li>
+<li>标准差分配（偏导取绝对值）：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241210104653.png" srcset="/img/loading.gif" lazyload alt="标准差分配" /></p>
+<ul>
+<li>极限误差分配（偏导取绝对值）：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241210104733.png" srcset="/img/loading.gif" lazyload alt="极限误差分配" /></p>
+<h3 id="不确定度理论"><a class="markdownIt-Anchor" href="#不确定度理论"></a> 不确定度理论</h3>
+<h4 id="a-类标准不确定度和自由度"><a class="markdownIt-Anchor" href="#a-类标准不确定度和自由度"></a> A 类标准不确定度和自由度</h4>
+<ul>
+<li>A 类评定是用统计分析法评定，其标准不确定度 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">u</span></span></span></span> 等同于由系列观测值获得的标准差；</li>
+<li>单次测量值，则其不确定度为：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211104747.png" srcset="/img/loading.gif" lazyload alt="单次测量值的不确定度" /></p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> 次测量值，则其不确定度为：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211104857.png" srcset="/img/loading.gif" lazyload alt="n次测量值的不确定度" /></p>
+<ul>
+<li>A 类自由度：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211105804.png" srcset="/img/loading.gif" lazyload alt="A 类自由度" /></p>
+<h4 id="b-类标准不确定度和自由度"><a class="markdownIt-Anchor" href="#b-类标准不确定度和自由度"></a> B 类标准不确定度和自由度</h4>
+<ul>
+<li>B 类评定不用统计分析法，而是基于其他方法估计概率分布或分布假设来评定标准差并得到标准不确定度（一般含有经验、资料、说明书等字眼）；</li>
+<li>B 类标准不确定度主要分为下列几种情况：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211110849.png" srcset="/img/loading.gif" lazyload alt="B 类标准不确定度的主要几种情况" /></p>
+<ul>
+<li>B 类自由度：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211111017.png" srcset="/img/loading.gif" lazyload alt="B 类自由度" /></p>
+<h4 id="测量不确定度的合成"><a class="markdownIt-Anchor" href="#测量不确定度的合成"></a> 测量不确定度的合成</h4>
+<ul>
+<li>合成标准不确定度公式：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211111212.png" srcset="/img/loading.gif" lazyload alt="合成标准不确定度公式" /></p>
+<ul>
+<li>如果相互独立，则上述式子可以简化为：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211111318.png" srcset="/img/loading.gif" lazyload alt="相互独立的合成不确定度公式" /></p>
+<ul>
+<li>展伸不确定度：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211111501.png" srcset="/img/loading.gif" lazyload alt="展伸不确定度" /></p>
+<ul>
+<li>合成不确定度的自由度：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241211111633.png" srcset="/img/loading.gif" lazyload alt="合成不确定度的自由度" /></p>
+<h3 id="最小二乘法"><a class="markdownIt-Anchor" href="#最小二乘法"></a> 最小二乘法</h3>
+<ul>
+<li>最小二乘法理论结合例题：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241212104843.png" srcset="/img/loading.gif" lazyload alt="最小二乘法例题" /></p>
+<ul>
+<li>解答：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20241212104919.png" srcset="/img/loading.gif" lazyload alt="最小二乘法解答" /></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AF%AF%E5%B7%AE%E7%90%86%E8%AE%BA/" class="category-chain-item">误差理论</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AF%AF%E5%B7%AE%E7%90%86%E8%AE%BA/" class="print-no-link">#误差理论</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>计量方法与误差理论</div>
+      <div>http://example.com/2024/11/16/measurement/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Mr.CHUI</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年11月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/10/27/houjie_cpp/" title="侯捷 C++学习笔记之面向对象高级编程（一）">
+                        <span class="hidden-mobile">侯捷 C++学习笔记之面向对象高级编程（一）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"5879fef477aebfb46fe6","clientSecret":"c6ddf310da089b6eade5be010238bbfc1507e2d9","repo":"blog-comments","owner":"chuiyugin","admin":["chuiyugin"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":false,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token"},
+          {
+            id: 'd5b85440a26021bca1f68831ef64b669'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":300,"height":600},"mobile":{"show":false}});</script></body>
+</html>
