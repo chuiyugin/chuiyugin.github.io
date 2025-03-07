@@ -39,8 +39,14 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250306214228.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250306215019.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250306215404.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250307135147.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250307135625.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250307140826.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250307143420.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250307143447.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250307144134.png">
 <meta property="article:published_time" content="2025-02-28T06:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-06T13:54:17.087Z">
+<meta property="article:modified_time" content="2025-03-07T06:41:56.488Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面向对象">
 <meta name="twitter:card" content="summary_large_image">
@@ -285,7 +291,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.5k 字
+          1.9k 字
         
       </span>
     
@@ -297,7 +303,7 @@
         
         
           <!-- compatible with older versions-->
-          5 分钟
+          6 分钟
         
       </span>
     
@@ -464,6 +470,40 @@
 <li>不是模板模板参数的情况：</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250306215404.png" srcset="/img/loading.gif" lazyload alt="不是模板模板参数的情况" /></p>
+<h2 id="c-11-新特性三个主题简介"><a class="markdownIt-Anchor" href="#c-11-新特性三个主题简介"></a> C++ 11 新特性三个主题简介</h2>
+<h3 id="variadic-templates数量不定的模板参数"><a class="markdownIt-Anchor" href="#variadic-templates数量不定的模板参数"></a> variadic templates，数量不定的模板参数</h3>
+<ul>
+<li>数量不定的模板参数的语法是在模板声明中使用省略号（<code>...</code>）来表示参数的数量是不确定的。例如：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span>... Types&gt;</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">function</span><span class="hljs-params">(<span class="hljs-type">const</span> Types&amp;... args)</span> </span>&#123;<br>    <span class="hljs-comment">// 函数体</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>完整代码示例：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T, <span class="hljs-keyword">typename</span>... Types&gt;</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-type">const</span> T&amp; firstArg, <span class="hljs-type">const</span> Types&amp;... args)</span> </span>&#123;<br>    cout &lt;&lt; firstArg &lt;&lt; endl;<br>    <span class="hljs-built_in">print</span>(args...); <span class="hljs-comment">// 递归调用自身，传递剩余参数</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-built_in">print</span>(<span class="hljs-number">7.5</span>, <span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-number">100</span>, <span class="hljs-number">43</span>); <span class="hljs-comment">// 输出: 7.5 hello 100 43</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>可以用 <code>sizeof... (args)</code> 来获取 <code>args</code> 内具多少元素：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250307135147.png" srcset="/img/loading.gif" lazyload alt="数量不定的模板参数" /></p>
+<h3 id="auto"><a class="markdownIt-Anchor" href="#auto"></a> auto</h3>
+<ul>
+<li><code>C++</code> 中的 <code>auto</code> 关键字主要用于自动推导变量的类型。在 <code>C++ 11</code> 及以后的版本中，<code>auto</code> 不再表示存储类型，而是作为一个类型指示符，用于指示编译器自动推导变量的类型。使用 <code>auto</code> 可以简化代码，尤其是在处理复杂类型时，能够减少代码量并提高可读性。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250307135625.png" srcset="/img/loading.gif" lazyload alt="auto" /></p>
+<h3 id="ranged-base-for基于范围的-for-循环"><a class="markdownIt-Anchor" href="#ranged-base-for基于范围的-for-循环"></a> ranged-base for，基于范围的 for 循环</h3>
+<ul>
+<li>基于范围的 <code>for</code> 循环是一种简洁而强大的语法，用于遍历容器（如数组、向量、列表、集合等）。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250307140826.png" srcset="/img/loading.gif" lazyload alt="基于范围的for循环" /></p>
+<h2 id="reference再谈引用"><a class="markdownIt-Anchor" href="#reference再谈引用"></a> reference，再谈引用</h2>
+<ul>
+<li><code>object</code> 和其 <code>reference</code> 的大小相同，地址也相同。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250307143420.png" srcset="/img/loading.gif" lazyload alt="再谈引用1" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250307143447.png" srcset="/img/loading.gif" lazyload alt="再谈引用2" /></p>
+<ul>
+<li>引用（<code>reference</code>）通常不用于声明变量，而用于参数类型（<code>parameters type</code>）和返回类型（<code>return type</code>）的描述。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250307144134.png" srcset="/img/loading.gif" lazyload alt="再谈引用3" /></p>
 
                 
               </div>
