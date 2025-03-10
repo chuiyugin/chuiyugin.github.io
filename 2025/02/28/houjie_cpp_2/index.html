@@ -50,8 +50,20 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250309153050.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250309161038.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250309161849.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310144213.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310145853.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310150432.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310151326.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310151431.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310152522.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310153157.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310153411.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310154749.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310154820.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310154900.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310155449.png">
 <meta property="article:published_time" content="2025-02-28T06:00:00.000Z">
-<meta property="article:modified_time" content="2025-03-09T08:19:02.105Z">
+<meta property="article:modified_time" content="2025-03-10T07:55:03.143Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面向对象">
 <meta name="twitter:card" content="summary_large_image">
@@ -296,7 +308,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.9k 字
+          3.2k 字
         
       </span>
     
@@ -308,7 +320,7 @@
         
         
           <!-- compatible with older versions-->
-          9 分钟
+          11 分钟
         
       </span>
     
@@ -597,6 +609,57 @@
 <li>动态绑定：</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250309161849.png" srcset="/img/loading.gif" lazyload alt="动态绑定汇编示例" /></p>
+<h3 id="谈谈-const"><a class="markdownIt-Anchor" href="#谈谈-const"></a> 谈谈 const</h3>
+<ul>
+<li>常量成员函数：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310144213.png" srcset="/img/loading.gif" lazyload alt="常量成员函数" /></p>
+<ul>
+<li>一个函数通过在其后面加关键字 <code>const</code>，它将被声明为常量函数；</li>
+<li>在 C++，只有将成员函数声明为常量函数才有意义。带有 <code>const</code> 作后缀的常量成员函数又被称为视察者 (<code>inspector</code>)，没有 <code>const</code> 作后缀的非常量成员函数被称为变异者 (<code>mutator</code>)；</li>
+<li>常量函数可以被任何对象调用，而非常量函数则只能被非常量对象调用，不能被常量对象调用；</li>
+<li>在 C++中，一个对象的所有方法都接收一个指向对象本身的隐含的 <code>this</code> 指针，常量方法则获取了一个隐含的常量 <code>this</code> 指针；</li>
+<li>在类中允许存在同名的常量函数和非常量函数，编译器根据调用该函数的对象选择合适的函数：
+<ul>
+<li>当非常量对象调用该函数时，先调用非常量函数；</li>
+<li>当常量对象调用该函数时，只能调用常量函数；</li>
+<li>如果在类中只有常量函数而没有与其同名的非常量函数，则非常量与常量对象都可调用该常量函数。</li>
+</ul>
+</li>
+</ul>
+<h3 id="关于-new-和-delete"><a class="markdownIt-Anchor" href="#关于-new-和-delete"></a> 关于 new 和 delete</h3>
+<ul>
+<li>第一部分关于 <code>new</code> 和 <code>delete</code> 的汇总：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310145853.png" srcset="/img/loading.gif" lazyload alt="关于 new 和 delete" /></p>
+<ul>
+<li>重载全局 <code>new</code> 和全局 <code>delete</code> 以及全局 <code>new[]</code> 和全局 <code>delete[]</code>：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310150432.png" srcset="/img/loading.gif" lazyload alt="重载全局new和全局delete" /></p>
+<ul>
+<li>重载成员 <code>new</code> 和成员 <code>delete</code>：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310151326.png" srcset="/img/loading.gif" lazyload alt="重载成员 new 和成员 delete 1" /></p>
+<ul>
+<li>重载成员 <code>new[]</code> 和成员 <code>delete[]</code>：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310151431.png" srcset="/img/loading.gif" lazyload alt="重载成员 new 和成员 delete 2" /></p>
+<ul>
+<li>设计示例和接口：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310152522.png" srcset="/img/loading.gif" lazyload alt="设计示例和接口1" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310153157.png" srcset="/img/loading.gif" lazyload alt="设计示例和接口2" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310153411.png" srcset="/img/loading.gif" lazyload alt="设计示例和接口3" /></p>
+<ul>
+<li>重载 <code>new()</code>、<code>delete()</code> :</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310154749.png" srcset="/img/loading.gif" lazyload alt="重载 new()、delete() 1" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310154820.png" srcset="/img/loading.gif" lazyload alt="重载 new()、delete() 2" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310154900.png" srcset="/img/loading.gif" lazyload alt="重载 new()、delete() 3" /></p>
+<ul>
+<li>标准库重载 <code>new()</code> 的示例：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250310155449.png" srcset="/img/loading.gif" lazyload alt="标准库重载 new() 的示例" /></p>
 
                 
               </div>
