@@ -34,8 +34,22 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326155451.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326160511.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326160605.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326202710.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326202741.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326203540.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326204701.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326210204.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326210319.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326210426.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326210509.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326210602.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326210830.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326211751.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326212431.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326213123.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326213219.png">
 <meta property="article:published_time" content="2025-03-26T05:30:00.000Z">
-<meta property="article:modified_time" content="2025-03-26T08:16:32.588Z">
+<meta property="article:modified_time" content="2025-03-26T13:32:34.056Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="系统观">
@@ -281,7 +295,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          525 字
+          823 字
         
       </span>
     
@@ -293,7 +307,7 @@
         
         
           <!-- compatible with older versions-->
-          2 分钟
+          3 分钟
         
       </span>
     
@@ -411,6 +425,113 @@
 <li>如果有一项匹配不成功，<code>scanf</code> 会立刻返回。</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326160605.png" srcset="/img/loading.gif" lazyload alt="scanf" /></p>
+<h2 id="整数的编码"><a class="markdownIt-Anchor" href="#整数的编码"></a> 整数的编码</h2>
+<h3 id="有无符号整数"><a class="markdownIt-Anchor" href="#有无符号整数"></a> 有/无符号整数</h3>
+<ul>
+<li>无符号整数：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326202710.png" srcset="/img/loading.gif" lazyload alt="无符号整数" /></p>
+<ul>
+<li>有符号整数：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326202741.png" srcset="/img/loading.gif" lazyload alt="有符号整数" /></p>
+<ul>
+<li>两个性质：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326203540.png" srcset="/img/loading.gif" lazyload alt="两个性质" /></p>
+<ul>
+<li>原码、补码、反码
+<ul>
+<li>
+<p>正数的原码、反码、补码均相同。</p>
+</li>
+<li>
+<p>原码：用最高位表示符号位，其余位表示数值位的编码称为原码。其中，正数的符号位为 0，负数的符号位为 1。</p>
+</li>
+<li>
+<p>负数的反码：把原码的符号位保持不变，数值位逐位取反，即可得原码的反码。</p>
+</li>
+<li>
+<p>负数的补码：在反码的基础上加 1 即得该原码的补码。</p>
+</li>
+<li>
+<p>例如：</p>
+<ul>
+<li>
+<p>+11 的原码为: 0000 1011</p>
+</li>
+<li>
+<p>+11 的反码为: 0000 1011</p>
+</li>
+<li>
+<p>+11 的补码为: 0000 1011</p>
+</li>
+<li>
+<p>-7 的原码为：1000 0111</p>
+</li>
+<li>
+<p>-7 的反码为：1111 1000</p>
+</li>
+<li>
+<p>-7 的补码为：1111 1001</p>
+</li>
+</ul>
+</li>
+<li>
+<p>注意，对补码再求一次补码操作就可得该补码对应的原码。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="浮点数"><a class="markdownIt-Anchor" href="#浮点数"></a> 浮点数</h2>
+<ul>
+<li>浮点数是不精确的</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326204701.png" srcset="/img/loading.gif" lazyload alt="浮点数" /></p>
+<h2 id="字符"><a class="markdownIt-Anchor" href="#字符"></a> 字符</h2>
+<ul>
+<li>字符的编码为 ASCII：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326210204.png" srcset="/img/loading.gif" lazyload alt="ASCII" /></p>
+<ul>
+<li>类型通用的两个特征：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326210319.png" srcset="/img/loading.gif" lazyload alt="类型通用的两个特征" /></p>
+<ul>
+<li>表示值：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326210426.png" srcset="/img/loading.gif" lazyload alt="表示值" /></p>
+<ul>
+<li>支持哪些操作：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326210509.png" srcset="/img/loading.gif" lazyload alt="支持哪些操作" /></p>
+<ul>
+<li>读/写（和用户操作）</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326210602.png" srcset="/img/loading.gif" lazyload alt="读/写（和用户操作）" /></p>
+<ul>
+<li>惯用法：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326210830.png" srcset="/img/loading.gif" lazyload alt="惯用法" /></p>
+<h2 id="类型转换"><a class="markdownIt-Anchor" href="#类型转换"></a> 类型转换</h2>
+<ul>
+<li>隐式转换：不要将有符号整数和无符号整数混合运算</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326211751.png" srcset="/img/loading.gif" lazyload alt="隐式转换" /></p>
+<ul>
+<li>强制转换</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326212431.png" srcset="/img/loading.gif" lazyload alt="强制转换" /></p>
+<h2 id="定义别名"><a class="markdownIt-Anchor" href="#定义别名"></a> 定义别名</h2>
+<ul>
+<li>定义别名的作用</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326213123.png" srcset="/img/loading.gif" lazyload alt="定义别名" /></p>
+<h2 id="sizeof-运算符"><a class="markdownIt-Anchor" href="#sizeof-运算符"></a> sizeof 运算符</h2>
+<ul>
+<li><code>sizeof()</code> 运算符</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326213219.png" srcset="/img/loading.gif" lazyload alt="sizeof()运算符" /></p>
 
                 
               </div>
