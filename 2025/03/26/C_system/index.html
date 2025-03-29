@@ -48,8 +48,10 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326212431.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326213123.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250326213219.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250329145055.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250329150927.png">
 <meta property="article:published_time" content="2025-03-26T05:30:00.000Z">
-<meta property="article:modified_time" content="2025-03-28T08:00:18.368Z">
+<meta property="article:modified_time" content="2025-03-29T07:09:43.553Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="系统观">
@@ -295,7 +297,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          888 字
+          1.1k 字
         
       </span>
     
@@ -307,7 +309,7 @@
         
         
           <!-- compatible with older versions-->
-          3 分钟
+          4 分钟
         
       </span>
     
@@ -548,7 +550,44 @@
 <li>运算符：连接表达式，创建更复杂的表达式</li>
 <li>属性：优先级、结合性</li>
 </ul>
-
+<h2 id="位运算符"><a class="markdownIt-Anchor" href="#位运算符"></a> 位运算符</h2>
+<ul>
+<li><code>i&lt;&lt;n</code>：如果没有溢出，左移 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> 位相当于乘以 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">2^{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span></span>；</li>
+<li><code>i&gt;&gt;n</code>： 右移 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">n</span></span></span></span> 位，相当于除以 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">2^{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span></span></span></span></span>（向下取整）；
+<ul>
+<li>如果 <code>i</code> 是无符号值或者非负值，则在左边补 <code>0</code>；</li>
+<li>如果 <code>i</code> 是负值，其结果是由实现定义的，有可能在左边补 <code>0</code>，也有可能在左边补 <code>1</code>。</li>
+</ul>
+</li>
+<li>为了可移植性，最好仅对无符号数进行移位运算。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250329145055.png" srcset="/img/loading.gif" lazyload alt="位运算符" /></p>
+<h3 id="问题一"><a class="markdownIt-Anchor" href="#问题一"></a> 问题一</h3>
+<ul>
+<li>判断一个数是否奇数：
+<ul>
+<li>需要注意 <code>-1 % 2 == -1</code> ，因此不能使用 <code>n % 2 == 1</code> 来判断。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">bool</span> <span class="hljs-title function_">isOdd</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span><br>&#123;<br>	<span class="hljs-keyword">return</span> (n % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>采用二进制的形式：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">bool</span> <span class="hljs-title function_">isOdd</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span><br>&#123;<br>	<span class="hljs-keyword">return</span> (n &amp; <span class="hljs-number">0x1</span>);<span class="hljs-comment">//奇数的最后一位一定是1，掩码（mask）</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="问题二"><a class="markdownIt-Anchor" href="#问题二"></a> 问题二</h3>
+<ul>
+<li>如何判断一个非 <code>0</code> 整数是否为 <code>2</code> 的幂 <code>（1，2，4，8，16，......）</code> ？
+<ul>
+<li>从二进制中能够看到只有一位为 <code>1</code>，其余都是 <code>0</code>。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250329150927.png" srcset="/img/loading.gif" lazyload alt="问题二" /></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">bool</span> <span class="hljs-title function_">isPowerOf2</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span><br>&#123;<br>	<span class="hljs-keyword">return</span> (n &amp; n<span class="hljs-number">-1</span>) == <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
