@@ -102,8 +102,24 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416152559.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416154414.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416154620.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416191810.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416192436.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416192753.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416195429.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416200223.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416200843.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416204136.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416204226.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416205020.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416210657.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416211333.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416212013.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416212212.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416212331.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416212727.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416213027.png">
 <meta property="article:published_time" content="2025-03-26T05:30:00.000Z">
-<meta property="article:modified_time" content="2025-04-16T07:47:46.555Z">
+<meta property="article:modified_time" content="2025-04-16T13:30:43.853Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="系统观">
@@ -349,7 +365,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3.8k 字
+          4.2k 字
         
       </span>
     
@@ -361,7 +377,7 @@
         
         
           <!-- compatible with older versions-->
-          12 分钟
+          14 分钟
         
       </span>
     
@@ -1087,6 +1103,115 @@
 </li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416154620.png" srcset="/img/loading.gif" lazyload alt="不能写成该形式" /></p>
+<h4 id="声明和初始化"><a class="markdownIt-Anchor" href="#声明和初始化"></a> 声明和初始化</h4>
+<ul>
+<li>注意数组的初始化和字符串的字面值。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416191810.png" srcset="/img/loading.gif" lazyload alt="声明和初始化" /></p>
+<h4 id="读和写和用户交互"><a class="markdownIt-Anchor" href="#读和写和用户交互"></a> 读和写（和用户交互）</h4>
+<ul>
+<li><code>printf()+%s</code> 输出字符串</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416192436.png" srcset="/img/loading.gif" lazyload alt="输出字符串" /></p>
+<ul>
+<li><code>scanf()+%s</code> 读字符串
+<ul>
+<li><code>%s</code> 的匹配规则：
+<ul>
+<li>忽略前置空白的字符，读取字符填入字符数组；</li>
+<li>遇到空白字符结束。</li>
+</ul>
+</li>
+<li>缺点：
+<ul>
+<li>不能够存储空白字符；</li>
+<li>不会检查数组越界。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416192753.png" srcset="/img/loading.gif" lazyload alt="scanf()+%s 读字符串" /></p>
+<ul>
+<li><code>puts()</code> 函数：<code>puts(str);</code> 等价于 <code>printf(&quot;%s\n&quot;,str);</code></li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416195429.png" srcset="/img/loading.gif" lazyload alt="puts() 函数" /></p>
+<ul>
+<li><code>gets()</code> 函数
+<ul>
+<li>从 <code>stdin</code>（标准输入流） 中读取一行数据，传入字符数组，并将 <code>'\n'</code> 替换为 <code>'\0'</code>；</li>
+<li>缺陷：不会检查数组越界。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416200223.png" srcset="/img/loading.gif" lazyload alt="gets() 函数" /></p>
+<ul>
+<li><code>fgets()</code> 函数
+<ul>
+<li>和 <code>gets()</code> 函数的区别：
+<ul>
+<li>会检查是否越界；</li>
+<li>会存储 <code>'\n'</code> 符，并在后面添加 <code>'\0'</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416200843.png" srcset="/img/loading.gif" lazyload alt="fets() 函数" /></p>
+<h3 id="字符串库函数"><a class="markdownIt-Anchor" href="#字符串库函数"></a> 字符串库函数</h3>
+<ul>
+<li>需要引入 <code>#include &lt;string.h&gt;</code> 库。</li>
+</ul>
+<h4 id="strlen"><a class="markdownIt-Anchor" href="#strlen"></a> strlen</h4>
+<ul>
+<li><code>strlen()</code> 的实现和遍历字符串的惯用法：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416204136.png" srcset="/img/loading.gif" lazyload alt="遍历字符串的惯用法" /></p>
+<ul>
+<li><code>strlen()</code> 不会计算 <code>'\0'</code>：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416204226.png" srcset="/img/loading.gif" lazyload alt="计算字符串的长度" /></p>
+<h4 id="strcpy-和-strncpy-函数"><a class="markdownIt-Anchor" href="#strcpy-和-strncpy-函数"></a> strcpy() 和 strncpy() 函数</h4>
+<ul>
+<li><code>strcpy()</code> 函数不检查数组越界，<code>strncpy()</code> 函数要设定最大拷贝的数量。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416205020.png" srcset="/img/loading.gif" lazyload alt="strncpy()函数" /></p>
+<ul>
+<li><code>strcpy()</code> 函数的实现和惯用法：
+<ul>
+<li>将赋值运算符右侧的&quot;表达式”的值赋给左侧的变量，赋值表达式的值就是被赋值的变量的值。</li>
+<li>例如：<code>a=(b=5)</code> 相当于 <code>b=5</code> 和 <code>a=b</code> 两个赋值表达式，因此 <code>a</code> 的值等于 <code>5</code>，整个赋值表达式的值也等于 <code>5</code>。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416210657.png" srcset="/img/loading.gif" lazyload alt="strcpy()的实现和惯用法" /></p>
+<ul>
+<li><code>strncpy()</code> 函数的实现：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416211333.png" srcset="/img/loading.gif" lazyload alt="strncpy()的实现" /></p>
+<h4 id="strcat-和-strncat-函数"><a class="markdownIt-Anchor" href="#strcat-和-strncat-函数"></a> strcat() 和 strncat() 函数</h4>
+<ul>
+<li><code>strcat()</code> 函数不检查数组越界，<code>strncat()</code> 函数要设定最大拷贝的数量。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416212013.png" srcset="/img/loading.gif" lazyload alt="strcat() 和 strncat() 函数的使用" /></p>
+<ul>
+<li><code>strcat()</code> 函数的实现：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416212212.png" srcset="/img/loading.gif" lazyload alt="strcat()函数的实现" /></p>
+<ul>
+<li><code>strncat()</code> 函数的实现：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416212331.png" srcset="/img/loading.gif" lazyload alt="strncat()函数的实现" /></p>
+<h4 id="strcmp函数"><a class="markdownIt-Anchor" href="#strcmp函数"></a> strcmp()函数</h4>
+<ul>
+<li>字符串的比较：<code>strcmp()</code> 函数</li>
+<li>比较规则：字典序（<code>ASCII</code>）</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416212727.png" srcset="/img/loading.gif" lazyload alt="字符串的比较" /></p>
+<ul>
+<li><code>strcmp()</code> 函数的实现：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416213027.png" srcset="/img/loading.gif" lazyload alt="strcmp()函数的实现" /></p>
 
                 
               </div>
