@@ -80,8 +80,30 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250411155946.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250411160139.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250411160254.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416133938.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416134812.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416134930.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416135053.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416135658.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416140224.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416141535.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416141818.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416142057.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416142407.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416142618.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416143530.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416144140.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416144222.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416144603.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416145337.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416145643.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416150744.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416151840.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416152559.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416154414.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416154620.png">
 <meta property="article:published_time" content="2025-03-26T05:30:00.000Z">
-<meta property="article:modified_time" content="2025-04-11T08:03:43.800Z">
+<meta property="article:modified_time" content="2025-04-16T07:47:46.555Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="系统观">
@@ -327,7 +349,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          3k 字
+          3.8k 字
         
       </span>
     
@@ -339,7 +361,7 @@
         
         
           <!-- compatible with older versions-->
-          10 分钟
+          12 分钟
         
       </span>
     
@@ -856,21 +878,48 @@
 <h2 id="指针基础"><a class="markdownIt-Anchor" href="#指针基础"></a> 指针基础</h2>
 <h3 id="内存模型"><a class="markdownIt-Anchor" href="#内存模型"></a> 内存模型</h3>
 <ul>
-<li>指针的内存模型：</li>
+<li>指针的内存模型：
+<ul>
+<li>计算机的最小寻址单位——字节</li>
+<li>变量的地址——变量首字节的地址</li>
+<li>指针——地址</li>
+<li>指针变量——存储地址值的变量</li>
+</ul>
+</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250411131416.png" srcset="/img/loading.gif" lazyload alt="指针的内存模型" /></p>
 <h3 id="指针的操作"><a class="markdownIt-Anchor" href="#指针的操作"></a> 指针的操作</h3>
 <ul>
-<li>指针的定义：</li>
+<li>指针的定义：
+<ul>
+<li>变量名：<code>p</code></li>
+<li>类型：<code>int*</code></li>
+<li>注意事项：声明指针变量时，需要指定它指向对象的类型</li>
+</ul>
+</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250411131533.png" srcset="/img/loading.gif" lazyload alt="指针的定义" /></p>
 <ul>
-<li>指针的两个基本操作：</li>
+<li>指针的两个基本操作：
+<ul>
+<li>取地址运算符：<code>&amp;</code> —— <code>&amp;i</code></li>
+<li>解引用运算符：<code>*</code> ——  <code>*p</code>
+<ul>
+<li>指针变量 <code>p</code> 指向对象的别名</li>
+<li>间接引用——访问内存两次</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250411131714.png" srcset="/img/loading.gif" lazyload alt="指针的两个基本操作" /></p>
 <h3 id="野指针"><a class="markdownIt-Anchor" href="#野指针"></a> 野指针</h3>
 <ul>
-<li>野指针：不知道指向哪块数据。</li>
+<li>野指针：不知道指向哪块数据。
+<ul>
+<li>对野指针进行解引用操作，是未定义行为。</li>
+</ul>
+</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250411155133.png" srcset="/img/loading.gif" lazyload alt="野指针" /></p>
 <ul>
@@ -878,7 +927,7 @@
 <p>如何给指针变量赋值？</p>
 <ul>
 <li><code>int *p = &amp;i;</code></li>
-<li><code>int *q = p;</code></li>
+<li><code>int *q = p;</code> —— 指针变量 <code>p</code>，<code>q</code> 指向同一个对象。</li>
 <li><code>p = NULL;</code>：空指针，不指向任何对象指针。</li>
 </ul>
 </li>
@@ -901,6 +950,143 @@
 </li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250411160254.png" srcset="/img/loading.gif" lazyload alt="指针的应用_2" /></p>
+<h3 id="指针常量和常量指针"><a class="markdownIt-Anchor" href="#指针常量和常量指针"></a> 指针常量和常量指针</h3>
+<ul>
+<li>指针变量 <code>p</code> 对内存 <code>1</code>，内存 <code>2</code> 都有写权限：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416133938.png" srcset="/img/loading.gif" lazyload alt="指针变量" /></p>
+<ul>
+<li>常量指针，对内存 <code>1</code> 有写权限：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416134812.png" srcset="/img/loading.gif" lazyload alt="常量指针" /></p>
+<ul>
+<li>指针常量，对内存 <code>2</code> 有写权限：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416134930.png" srcset="/img/loading.gif" lazyload alt="指针常量" /></p>
+<ul>
+<li>两边加 <code>const</code> 修饰符，对内存 <code>1</code>，内存 <code>2</code> 都没有写权限：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416135053.png" srcset="/img/loading.gif" lazyload alt="两边加const" /></p>
+<ul>
+<li>本质：限制变量的写权限！</li>
+</ul>
+<h3 id="传入参数和传出参数"><a class="markdownIt-Anchor" href="#传入参数和传出参数"></a> 传入参数和传出参数</h3>
+<ul>
+<li>传入参数：在函数里面，不会（不能够）通过指针变量修改它指向的对象：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416135658.png" srcset="/img/loading.gif" lazyload alt="传入参数" /></p>
+<ul>
+<li>传出参数：在函数里面，可以通过指针变量修改它指向的对象！</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416140224.png" srcset="/img/loading.gif" lazyload alt="传出参数" /></p>
+<h3 id="指针的算术运算"><a class="markdownIt-Anchor" href="#指针的算术运算"></a> 指针的算术运算</h3>
+<ul>
+<li>画图表现数组和指针：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416141535.png" srcset="/img/loading.gif" lazyload alt="数组和指针的画图表示" /></p>
+<ul>
+<li>指针加上一个整数，结果还是一个指针：
+<ul>
+<li>指针加上一个整数 <code>n</code>，其含义在于指针向右偏移了 <code>n</code> 个单位；</li>
+<li>单位表示的是对象类型的大小。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416141818.png" srcset="/img/loading.gif" lazyload alt="指针加上整数" /></p>
+<ul>
+<li>指针减去一个整数 <code>n</code>，其含义在于指针向左偏移了 <code>n</code> 个单位：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416142057.png" srcset="/img/loading.gif" lazyload alt="指针减去整数" /></p>
+<ul>
+<li>两个指针相减，结果是一个整数：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416142407.png" srcset="/img/loading.gif" lazyload alt="两个指针相减" /></p>
+<ul>
+<li>根据指针减法，可以定义指针的比较运算：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416142618.png" srcset="/img/loading.gif" lazyload alt="指针的比较运算" /></p>
+<h3 id="指针和数组的关系"><a class="markdownIt-Anchor" href="#指针和数组的关系"></a> 指针和数组的关系</h3>
+<ul>
+<li>采用指针处理数组：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416143530.png" srcset="/img/loading.gif" lazyload alt="指针处理数组" /></p>
+<ul>
+<li><code>*</code> 和 <code>++</code> 的组合，<code>--</code> 同理：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416144140.png" srcset="/img/loading.gif" lazyload alt="指针运算的组合" /></p>
+<ul>
+<li>指针运算的组合的示例：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416144222.png" srcset="/img/loading.gif" lazyload alt="指针运算的组合的示例" /></p>
+<ul>
+<li>在必要的时候，数组可以退化成指向它索引为 <code>0</code> 元素的指针：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416144603.png" srcset="/img/loading.gif" lazyload alt="数组退化示例" /></p>
+<ul>
+<li>
+<p>数组退化的几种情况总结</p>
+<ul>
+<li>数组作为参数：<code>fun(arr);</code></li>
+<li>数组在赋值表达式的右边：<code>int* p = arr;</code></li>
+<li>数组参与算术运算：<code>arr+3;</code></li>
+</ul>
+</li>
+<li>
+<p>指针也支持取下标运算：</p>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416145337.png" srcset="/img/loading.gif" lazyload alt="指针取下标运算" /></p>
+<ul>
+<li>下标可以放到中括号 <code>[]</code> 前面：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416145643.png" srcset="/img/loading.gif" lazyload alt="下标可以放到中括号前面" /></p>
+<h2 id="字符串"><a class="markdownIt-Anchor" href="#字符串"></a> 字符串</h2>
+<h3 id="字符串字面值"><a class="markdownIt-Anchor" href="#字符串字面值"></a> 字符串字面值</h3>
+<ul>
+<li>三种书写方式：
+<ul>
+<li>如第三种方式，如果两个字符串字面值之间仅有空白字符，可以认为这两个字符串字面值是相邻的，相邻的字符串字面值在编译的时候就会拼接成一个字符串字面值。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416150744.png" srcset="/img/loading.gif" lazyload alt="字符串字面值的三种书写方式" /></p>
+<ul>
+<li>内存模型：
+<ul>
+<li>字符串字面值在代码段——不可被修改的。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416151840.png" srcset="/img/loading.gif" lazyload alt="字符串字面值的内存模型" /></p>
+<ul>
+<li>字符串字面值支持的操作：
+<ul>
+<li>常量数组能支持的操作，字符串字面值都支持，例：</li>
+<li>十进制转换为十六进制的函数：</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416152559.png" srcset="/img/loading.gif" lazyload alt="十进制转换为十六进制的函数" /></p>
+<h3 id="字符串变量"><a class="markdownIt-Anchor" href="#字符串变量"></a> 字符串变量</h3>
+<ul>
+<li>总纲：
+<ul>
+<li>C 语言中没有字符串类型—— <code>string</code>、<code>String</code></li>
+<li>C 语言中的字符串依赖字符数组存在！</li>
+<li>C 语言字符串是一种“逻辑类型”。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416154414.png" srcset="/img/loading.gif" lazyload alt="字符串和字符数组" /></p>
+<ul>
+<li>注意事项：
+<ul>
+<li>字符串必须以 <code>'\0'</code> 结尾！</li>
+<li>在 C 语言中求字符串的长度不是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span> 的时间复杂度，不能写成下面的例子：</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250416154620.png" srcset="/img/loading.gif" lazyload alt="不能写成该形式" /></p>
 
                 
               </div>
