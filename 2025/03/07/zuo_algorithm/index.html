@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250407170603.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250420144955.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-04-20T06:51:36.638Z">
+<meta property="article:modified_time" content="2025-04-20T07:14:58.491Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -581,42 +581,7 @@
 <ul>
 <li>代码：</li>
 </ul>
-<pre class="highlight"><code class="cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;
-<span class="hljs-keyword">public</span>:
-
-    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums,<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b)</span>
-    </span>&#123;
-        <span class="hljs-type">int</span> temp = nums[a];
-        nums[a] = nums[b];
-        nums[b] = temp;
-    &#125;
-
-    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">sortColors</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt;&amp; nums)</span> </span>&#123;
-        <span class="hljs-keyword">if</span>(nums.<span class="hljs-built_in">size</span>()==<span class="hljs-number">1</span>)
-            <span class="hljs-keyword">return</span>;
-        <span class="hljs-type">int</span> pre = <span class="hljs-number">-1</span>;<span class="hljs-comment">//数组的前一个区域</span>
-        <span class="hljs-type">int</span> now = <span class="hljs-number">0</span>;
-        <span class="hljs-type">int</span> last = nums.<span class="hljs-built_in">size</span>();<span class="hljs-comment">//数组后的一个数</span>
-
-        <span class="hljs-keyword">while</span>(now&lt;last)
-        &#123;
-            <span class="hljs-keyword">if</span>(nums[now]&lt;<span class="hljs-number">1</span>)
-            &#123;
-                <span class="hljs-built_in">swap</span>(nums,now,pre+<span class="hljs-number">1</span>);
-                pre++;
-                now++;
-            &#125;
-            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(nums[now]&gt;<span class="hljs-number">1</span>)
-            &#123;
-                <span class="hljs-built_in">swap</span>(nums,now,last<span class="hljs-number">-1</span>);
-                last--;
-            &#125;
-            <span class="hljs-keyword">else</span>
-                now++;
-        &#125;
-    &#125;
-&#125;;```
-</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums,<span class="hljs-keyword">int</span> a,<span class="hljs-keyword">int</span> b)</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">int</span> temp = nums[a];<br>        nums[a] = nums[b];<br>        nums[b] = temp;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sortColors</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(nums.<span class="hljs-built_in">size</span>()==<span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span>;<br>        <span class="hljs-keyword">int</span> pre = <span class="hljs-number">-1</span>;<span class="hljs-comment">//数组的前一个区域</span><br>        <span class="hljs-keyword">int</span> now = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> last = nums.<span class="hljs-built_in">size</span>();<span class="hljs-comment">//数组后的一个数</span><br><br>        <span class="hljs-keyword">while</span>(now&lt;last)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(nums[now]&lt;<span class="hljs-number">1</span>)<br>            &#123;<br>                <span class="hljs-built_in">swap</span>(nums,now,pre+<span class="hljs-number">1</span>);<br>                pre++;<br>                now++;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(nums[now]&gt;<span class="hljs-number">1</span>)<br>            &#123;<br>                <span class="hljs-built_in">swap</span>(nums,now,last<span class="hljs-number">-1</span>);<br>                last--;<br>            &#125;<br>            <span class="hljs-keyword">else</span><br>                now++;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
