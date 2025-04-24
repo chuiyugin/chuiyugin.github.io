@@ -136,7 +136,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250418203143.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250418203817.png">
 <meta property="article:published_time" content="2025-03-26T05:30:00.000Z">
-<meta property="article:modified_time" content="2025-04-24T07:30:09.473Z">
+<meta property="article:modified_time" content="2025-04-24T08:19:43.542Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="系统观">
@@ -382,7 +382,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          5k 字
+          5.1k 字
         
       </span>
     
@@ -1255,7 +1255,8 @@
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250417153006.png" srcset="/img/loading.gif" lazyload alt="字符指针数组" /></p>
 <h4 id="命令行参数"><a class="markdownIt-Anchor" href="#命令行参数"></a> 命令行参数</h4>
 <ul>
-<li>命令行参数和从 <code>stdin</code> 读取数据有什么区别？
+<li>命令行参数可以认为是操作系有调用 <code>main()</code> 函数时传递的参数。</li>
+<li>命令行参数和从 <code>stdin</code> （标准输入）读取数据有什么区别？
 <ul>
 <li>命令行参数：程序还未执行；</li>
 <li>从 <code>stdin</code> 读取数据：程序已经运行。</li>
@@ -1271,7 +1272,11 @@
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250418152343.png" srcset="/img/loading.gif" lazyload alt="操作系统与主函数的关系" /></p>
 <ul>
 <li><code>argc</code> : <code>argument count</code>，命令行参数的个数；</li>
-<li><code>argv</code>：<code>argument vector</code> ，命令行参数，字符串第一个参数是可执行程序的路径。</li>
+<li><code>argv</code>：<code>argument vector</code> ，命令行参数，命令行参数都是字符串。
+<ul>
+<li><code>argv[0]</code>：表示可执行程序的路径。</li>
+</ul>
+</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250418152458.png" srcset="/img/loading.gif" lazyload alt="命令行参数代码" /></p>
 <ul>
@@ -1346,7 +1351,7 @@
 <li>因此栈上不能存放很大的数据。</li>
 </ul>
 </li>
-<li>栈空间最好不要放多线程共享的数据。</li>
+<li>每个线程都有自己的栈，所以栈空间最好不要放多线程共享的数据。</li>
 </ul>
 </li>
 </ul>
@@ -1368,7 +1373,7 @@
 <ul>
 <li><code>calloc()</code> 函数的示例代码：</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> *p = <span class="hljs-built_in">calloc</span>(<span class="hljs-number">100</span>,<span class="hljs-built_in">sizeof</span>(<span class="hljs-type">int</span>));<br>	<span class="hljs-keyword">if</span>(p==<span class="hljs-literal">NULL</span>)<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Error: calloc failed\n&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-type">int</span> *p = <span class="hljs-built_in">calloc</span>(<span class="hljs-number">100</span>,<span class="hljs-built_in">sizeof</span>(<span class="hljs-type">int</span>));<br>	<span class="hljs-keyword">if</span>(p==<span class="hljs-literal">NULL</span>)<br>	&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Error: calloc failed\n&quot;</span>);<br>		<span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <ul>
 <li>其中 <code>void*</code> 是通用指针，作用是可以和其它类型指针相互转换。
 <ul>
