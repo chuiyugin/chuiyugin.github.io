@@ -170,8 +170,14 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250427210454.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250427211143.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250427211308.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250428125717.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250428125929.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250428141648.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250428141812.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250428142409.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250428142439.png">
 <meta property="article:published_time" content="2025-03-26T05:30:00.000Z">
-<meta property="article:modified_time" content="2025-04-27T13:13:16.750Z">
+<meta property="article:modified_time" content="2025-04-28T06:24:54.858Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="系统观">
@@ -417,7 +423,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          6.8k 字
+          7k 字
         
       </span>
     
@@ -1729,6 +1735,59 @@
 <li>广度优先搜索（三度好友、队列）。</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250427211308.png" srcset="/img/loading.gif" lazyload alt="广度优先搜索" /></p>
+<h3 id="哈希表"><a class="markdownIt-Anchor" href="#哈希表"></a> 哈希表</h3>
+<h4 id="引入"><a class="markdownIt-Anchor" href="#引入"></a> 引入</h4>
+<ul>
+<li>为什么需要哈希表？</li>
+<li>问题：统计一个文件中，字母出现的次数（不区分大小写）
+<ul>
+<li>可以采用数组来存储，数组下标表示字母，数组的值表示次数。这样的对应关系称为<strong>键值对</strong>（ <code>key-value</code> ）。</li>
+<li>具有以下两点限制：
+<ul>
+<li>键的取值范围很小；</li>
+<li>键可以很容易地转换成数组的下标。</li>
+</ul>
+</li>
+<li>核心问题在于：如果不满足上述的两个限制条件，该如何表示<strong>键值对</strong>（ <code>key-value</code> ）？
+<ul>
+<li>采用哈希表！</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250428125717.png" srcset="/img/loading.gif" lazyload alt="哈希表的引入" /></p>
+<h4 id="模型"><a class="markdownIt-Anchor" href="#模型"></a> 模型</h4>
+<ul>
+<li>同一个哈希表，哈希桶的数据结构可以不一样，但是 <code>key</code> 是唯一的！</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250428125929.png" srcset="/img/loading.gif" lazyload alt="哈希表的模型" /></p>
+<h4 id="基本操作"><a class="markdownIt-Anchor" href="#基本操作"></a> 基本操作</h4>
+<ul>
+<li>增：<code>put(key, val)</code>;</li>
+<li>删：<code>delete(key)</code>;</li>
+<li>查：<code>val = get(key)</code>；</li>
+<li>遍历：依次遍历每一个哈希桶。</li>
+</ul>
+<h4 id="哈希表的实现"><a class="markdownIt-Anchor" href="#哈希表的实现"></a> 哈希表的实现</h4>
+<ul>
+<li>哈希函数（数据的指纹）</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250428141648.png" srcset="/img/loading.gif" lazyload alt="哈希函数" /></p>
+<ul>
+<li>性能高的哈希函数（等概率随机映射）</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250428141812.png" srcset="/img/loading.gif" lazyload alt="性能高的哈希函数" /></p>
+<ul>
+<li>哈希桶（用于解决哈希冲突）
+<ul>
+<li>拉链法</li>
+<li>开放地址法</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250428142409.png" srcset="/img/loading.gif" lazyload alt="拉链法哈希桶" /></p>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250428142439.png" srcset="/img/loading.gif" lazyload alt="开放地址法哈希桶" /></p>
 
                 
               </div>
