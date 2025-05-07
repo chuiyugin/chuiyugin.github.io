@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250407170603.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250420144955.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-07T02:46:19.323Z">
+<meta property="article:modified_time" content="2025-05-07T03:47:28.937Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -275,7 +275,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          8.5k 字
+          8.8k 字
         
       </span>
     
@@ -287,7 +287,7 @@
         
         
           <!-- compatible with older versions-->
-          27 分钟
+          28 分钟
         
       </span>
     
@@ -551,6 +551,30 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyStack</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    queue&lt;<span class="hljs-keyword">int</span>&gt; qu_1;<br>    queue&lt;<span class="hljs-keyword">int</span>&gt; qu_2;<br>    <span class="hljs-built_in">MyStack</span>() &#123;&#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">if</span>(!qu_1.<span class="hljs-built_in">empty</span>())<br>            qu_1.<span class="hljs-built_in">push</span>(x);<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(!qu_2.<span class="hljs-built_in">empty</span>())<br>            qu_2.<span class="hljs-built_in">push</span>(x);<br>        <span class="hljs-keyword">else</span><br>            qu_1.<span class="hljs-built_in">push</span>(x);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span> </span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">int</span> temp;<br>        <span class="hljs-keyword">if</span>(!qu_1.<span class="hljs-built_in">empty</span>())<br>        &#123;<br>            <span class="hljs-keyword">while</span>(qu_1.<span class="hljs-built_in">size</span>()&gt;<span class="hljs-number">1</span>)<br>            &#123;<br>                qu_2.<span class="hljs-built_in">push</span>(qu_1.<span class="hljs-built_in">front</span>());<br>                qu_1.<span class="hljs-built_in">pop</span>();<br>            &#125;<br>            temp = qu_1.<span class="hljs-built_in">front</span>();<br>            qu_1.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-keyword">return</span> temp;<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>        &#123;<br>            <span class="hljs-keyword">while</span>(qu_2.<span class="hljs-built_in">size</span>()&gt;<span class="hljs-number">1</span>)<br>            &#123;<br>                qu_1.<span class="hljs-built_in">push</span>(qu_2.<span class="hljs-built_in">front</span>());<br>                qu_2.<span class="hljs-built_in">pop</span>();<br>            &#125;<br>            temp = qu_2.<span class="hljs-built_in">front</span>();<br>            qu_2.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-keyword">return</span> temp;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">top</span><span class="hljs-params">()</span> </span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">if</span>(!qu_1.<span class="hljs-built_in">empty</span>())<br>            <span class="hljs-keyword">return</span> qu_1.<span class="hljs-built_in">back</span>();<br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-keyword">return</span> qu_2.<span class="hljs-built_in">back</span>();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">empty</span><span class="hljs-params">()</span> </span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">if</span>(qu_1.<span class="hljs-built_in">empty</span>() &amp;&amp; qu_2.<span class="hljs-built_in">empty</span>())<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your MyStack object will be instantiated and called as such:</span><br><span class="hljs-comment"> * MyStack* obj = new MyStack();</span><br><span class="hljs-comment"> * obj-&gt;push(x);</span><br><span class="hljs-comment"> * int param_2 = obj-&gt;pop();</span><br><span class="hljs-comment"> * int param_3 = obj-&gt;top();</span><br><span class="hljs-comment"> * bool param_4 = obj-&gt;empty();</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
+<h3 id="题目三-4"><a class="markdownIt-Anchor" href="#题目三-4"></a> 题目三</h3>
+<ul>
+<li>删除字符串中的所有相邻重复项：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/description/">1047. 删除字符串中的所有相邻重复项</a></li>
+<li>思路：
+<ol>
+<li><strong>初始化一个空栈</strong>：用于存储字符。</li>
+<li><strong>遍历字符串</strong>：
+<ul>
+<li>如果栈为空，或者当前字符与栈顶字符不同，则将当前字符压入栈。</li>
+<li>如果当前字符与栈顶字符相同，则弹出栈顶字符（表示删除这对相邻重复字符）。</li>
+</ul>
+</li>
+<li><strong>构建结果字符串</strong>：
+<ul>
+<li>遍历结束后，栈中剩下的字符就是删除所有相邻重复字符后的结果。</li>
+<li>由于栈是后进先出的，我们需要将栈中的字符<strong>逆序</strong>才能得到正确的顺序。</li>
+<li>字符串逆序采用 <code>reverse(res.begin(),res.end());</code> 函数，需要引入 <code>#include &lt;algorithm&gt;</code> 头文件，该函数可以用于翻转数组、字符串和向量（<code>vector</code>）。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">string <span class="hljs-title">removeDuplicates</span><span class="hljs-params">(string s)</span> </span>&#123;<br>        stack&lt;<span class="hljs-keyword">char</span>&gt; stk;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;s.<span class="hljs-built_in">size</span>();i++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(stk.<span class="hljs-built_in">empty</span>() || s[i] != stk.<span class="hljs-built_in">top</span>())<br>                stk.<span class="hljs-built_in">push</span>(s[i]);<br>            <span class="hljs-keyword">else</span><br>                stk.<span class="hljs-built_in">pop</span>();<br>        &#125;<br>        string res = <span class="hljs-string">&quot;&quot;</span>;<br>        <span class="hljs-keyword">while</span>(!stk.<span class="hljs-built_in">empty</span>())<br>        &#123;<br>            res += stk.<span class="hljs-built_in">top</span>();<br>            stk.<span class="hljs-built_in">pop</span>();<br>        &#125;<br>        <span class="hljs-built_in">reverse</span>(res.<span class="hljs-built_in">begin</span>(),res.<span class="hljs-built_in">end</span>());<span class="hljs-comment">//此时需要反转最终的字符串</span><br>        <span class="hljs-keyword">return</span> res;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="排序问题"><a class="markdownIt-Anchor" href="#排序问题"></a> 排序问题</h2>
 <h3 id="归并排序"><a class="markdownIt-Anchor" href="#归并排序"></a> 归并排序</h3>
 <h4 id="普通归并排序"><a class="markdownIt-Anchor" href="#普通归并排序"></a> 普通归并排序</h4>
