@@ -21,7 +21,7 @@
     <meta name="description" content="C++、编程语言、面向对象高级编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="侯捷 C++学习笔记之面向对象高级编程（一）">
-<meta property="og:url" content="http://example.com/2024/10/27/houjie_cpp_1/index.html">
+<meta property="og:url" content="http://example.com/2024/10/27/houjie_cpp/index.html">
 <meta property="og:site_name" content="CHUI YUGIN">
 <meta property="og:description" content="C++、编程语言、面向对象高级编程">
 <meta property="og:locale" content="zh_CN">
@@ -370,7 +370,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="侯捷-c-学习笔记之面向对象高级编程一"><a class="markdownIt-Anchor" href="#侯捷-c-学习笔记之面向对象高级编程一"></a> 侯捷 C++ 学习笔记之面向对象高级编程（一）</h1>
+                <h1 id="侯捷-c学习笔记之面向对象高级编程一"><a class="markdownIt-Anchor" href="#侯捷-c学习笔记之面向对象高级编程一"></a> 侯捷 C++学习笔记之面向对象高级编程（一）</h1>
 <h2 id="头文件与类的声明"><a class="markdownIt-Anchor" href="#头文件与类的声明"></a> 头文件与类的声明</h2>
 <h3 id="class-template-类模板简介"><a class="markdownIt-Anchor" href="#class-template-类模板简介"></a> class template 类（模板）简介</h3>
 <ul>
@@ -381,10 +381,6 @@
 <li>当我们具体需要使用上面的的类并定义确定的变量类型的时候可以进行如下操作：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">complex&lt;<span class="hljs-keyword">double</span>&gt; <span class="hljs-title">c1</span><span class="hljs-params">(<span class="hljs-number">2.5</span>,<span class="hljs-number">1.5</span>)</span></span>;<br><span class="hljs-function">complex&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">c2</span><span class="hljs-params">(<span class="hljs-number">2</span>,<span class="hljs-number">6</span>)</span></span>;<br></code></pre></td></tr></table></figure>
-<ul>
-<li>其中 <code>typename</code> 和 <code>class</code> 是一样的意思，用法上相同，例如：</li>
-</ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;<br><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;</span><br><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Ref</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Ptr</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <h3 id="inline-内联函数"><a class="markdownIt-Anchor" href="#inline-内联函数"></a> inline （内联）函数</h3>
 <ul>
 <li>若函数在 <code>class</code> 本体内部<strong>定义</strong>（并非声明）完成，就会进入内联函数的候选，但是该函数是否真正变成内联函数由编译器所决定。</li>
@@ -829,7 +825,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>侯捷 C++学习笔记之面向对象高级编程（一）</div>
-      <div>http://example.com/2024/10/27/houjie_cpp_1/</div>
+      <div>http://example.com/2024/10/27/houjie_cpp/</div>
     </div>
     <div class="license-meta">
       
@@ -873,9 +869,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/10/27/houjie_cpp/" title="侯捷 C++学习笔记之面向对象高级编程（一）">
+                      <a href="/2024/11/16/measurement/" title="计量方法与误差理论">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">侯捷 C++学习笔记之面向对象高级编程（一）</span>
+                        <span class="hidden-mobile">计量方法与误差理论</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -883,8 +879,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/06/computer_networks/" title="通信网络系统基础">
-                        <span class="hidden-mobile">通信网络系统基础</span>
+                      <a href="/2024/10/27/houjie_cpp_1/" title="侯捷 C++学习笔记之面向对象高级编程（一）">
+                        <span class="hidden-mobile">侯捷 C++学习笔记之面向对象高级编程（一）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -907,7 +903,7 @@
         var options = Object.assign(
           {"clientID":"5879fef477aebfb46fe6","clientSecret":"c6ddf310da089b6eade5be010238bbfc1507e2d9","repo":"blog-comments","owner":"chuiyugin","admin":["chuiyugin"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":false,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token"},
           {
-            id: '551c2f110c305e2b3a65a096d7b3bdf5'
+            id: 'c71d22b88b0eef36adf13a91850c6166'
           }
         )
         var gitalk = new Gitalk(options);

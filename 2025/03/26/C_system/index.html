@@ -187,8 +187,21 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250430165607.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250430170111.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250430170529.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507163651.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507163814.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507174224.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507174458.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507201313.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507201350.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507201559.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507201641.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507212637.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507212757.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505081108145.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505081110356.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505081112194.png">
 <meta property="article:published_time" content="2025-03-26T05:30:00.000Z">
-<meta property="article:modified_time" content="2025-04-30T12:52:29.000Z">
+<meta property="article:modified_time" content="2025-05-08T03:14:34.546Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="系统观">
@@ -434,7 +447,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          8.9k 字
+          10k 字
         
       </span>
     
@@ -446,7 +459,7 @@
         
         
           <!-- compatible with older versions-->
-          28 分钟
+          32 分钟
         
       </span>
     
@@ -1914,6 +1927,104 @@
 </li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250430170529.png" srcset="/img/loading.gif" lazyload alt="二叉搜索树（BST）" /></p>
+<h4 id="二叉搜索树的实现"><a class="markdownIt-Anchor" href="#二叉搜索树的实现"></a> 二叉搜索树的实现</h4>
+<h5 id="结构"><a class="markdownIt-Anchor" href="#结构"></a> 结构</h5>
+<ul>
+<li>二叉搜索树的结构（ <code>bst.h</code> ）:</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507163651.png" srcset="/img/loading.gif" lazyload alt="二叉搜索树的结构" /></p>
+<h5 id="添加节点"><a class="markdownIt-Anchor" href="#添加节点"></a> 添加节点</h5>
+<ul>
+<li>添加节点：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507163814.png" srcset="/img/loading.gif" lazyload alt="添加节点" /></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//添加一个结点</span><br><span class="hljs-comment">//1、如果key存在则什么也不做</span><br><span class="hljs-comment">//2、如果key不存在，则添加一个结点</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bst_insert</span><span class="hljs-params">(BST* tree,K key)</span></span><br><span class="hljs-function"></span>&#123;<br>    TreeNode* parent = <span class="hljs-literal">NULL</span>;<br>    TreeNode* cur = tree-&gt;root;<br>    <span class="hljs-keyword">int</span> cmp;<span class="hljs-comment">//用于比较，只需要比较一次</span><br>    <span class="hljs-keyword">while</span>(cur!=<span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-comment">//比较</span><br>        cmp = key - cur-&gt;key;<br>        <span class="hljs-keyword">if</span>(cmp &lt; <span class="hljs-number">0</span>) <span class="hljs-comment">//key &lt; cur-&gt;key</span><br>        &#123;<br>            parent = cur;<br>            cur = cur-&gt;left;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(cmp &gt; <span class="hljs-number">0</span>) <span class="hljs-comment">//key &gt; cur-&gt;key</span><br>        &#123;<br>            parent = cur;<br>            cur = cur-&gt;right;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-comment">//key == cur-&gt;key，什么也不做</span><br>            <span class="hljs-keyword">return</span>;<br>    &#125;<span class="hljs-comment">//此时cur == NULL</span><br>    <span class="hljs-comment">//创建树结点</span><br>    TreeNode* new_node = <span class="hljs-built_in">calloc</span>(<span class="hljs-number">1</span>,<span class="hljs-built_in"><span class="hljs-keyword">sizeof</span></span>(TreeNode));<br>    <span class="hljs-keyword">if</span>(new_node == <span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;calloc failed in bst_insert!&quot;</span>);<br>        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-comment">//初始化树节点</span><br>    new_node-&gt;key = key;<br>    <span class="hljs-comment">//链接到树中</span><br>    <span class="hljs-keyword">if</span>(parent == <span class="hljs-literal">NULL</span>)<br>        tree-&gt;root = new_node;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(cmp &lt; <span class="hljs-number">0</span>) <span class="hljs-comment">//在左边插入</span><br>        parent-&gt;left = new_node;<br>    <span class="hljs-keyword">else</span> <span class="hljs-comment">//在右边插入</span><br>    parent-&gt;right = new_node;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h5 id="查找节点"><a class="markdownIt-Anchor" href="#查找节点"></a> 查找节点</h5>
+<ul>
+<li>查找结点与添加节点逻辑类似，代码如下：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//查找一个结点</span><br><span class="hljs-function">TreeNode* <span class="hljs-title">bst_search</span><span class="hljs-params">(BST* tree,K key)</span></span><br><span class="hljs-function"></span>&#123;<br>    TreeNode* cur = tree-&gt;root;<br>    <span class="hljs-keyword">int</span> cmp;<span class="hljs-comment">//用于比较，只需要比较一次</span><br>    <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-comment">//比较</span><br>        cmp = key - cur-&gt;key;<br>        <span class="hljs-keyword">if</span>(cmp &lt; <span class="hljs-number">0</span>) <span class="hljs-comment">//key &lt; cur-&gt;key</span><br>        &#123;<br>            cur = cur-&gt;left;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(cmp &gt; <span class="hljs-number">0</span>) <span class="hljs-comment">//key &gt; cur-&gt;key</span><br>        &#123;<br>            cur = cur-&gt;right;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-comment">//key == cur-&gt;key</span><br>            <span class="hljs-keyword">return</span> cur;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h5 id="遍历节点"><a class="markdownIt-Anchor" href="#遍历节点"></a> 遍历节点</h5>
+<h6 id="广度优先搜索遍历"><a class="markdownIt-Anchor" href="#广度优先搜索遍历"></a> 广度优先搜索遍历</h6>
+<ul>
+<li>广度优先搜索步骤（层次遍历）：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507174224.png" srcset="/img/loading.gif" lazyload alt="广度优先搜索步骤" /></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//层次遍历BST，广度优先搜索</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bst_levellorder</span><span class="hljs-params">(BST* tree)</span></span><br><span class="hljs-function"></span>&#123;<br>    LinkedListQueue* q = <span class="hljs-built_in">create_queue</span>(); <br>    <span class="hljs-comment">//将根节点入队列</span><br>    <span class="hljs-built_in">enqueue</span>(q,tree-&gt;root);<br>    <span class="hljs-comment">//判断队列是否为空</span><br>    <span class="hljs-keyword">while</span>(!<span class="hljs-built_in">is_empty</span>(q))<br>    &#123;<br>        <span class="hljs-keyword">int</span> level_size = q-&gt;size;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;level_size;i++)<br>        &#123;<br>            <span class="hljs-comment">//出队列，遍历这个节点</span><br>            TreeNode* node = <span class="hljs-built_in">dequeue</span>(q);<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,node-&gt;key);<br>            <span class="hljs-comment">//判断是否有左孩子</span><br>            <span class="hljs-keyword">if</span>(node-&gt;left)<br>            &#123;<br>                <span class="hljs-built_in">enqueue</span>(q,node-&gt;left);<br>            &#125;<br>            <span class="hljs-comment">//判断是否有右孩子</span><br>            <span class="hljs-keyword">if</span>(node-&gt;right)<br>            &#123;<br>                <span class="hljs-built_in">enqueue</span>(q,node-&gt;right);<br>            &#125;<br>        &#125;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>    &#125;<span class="hljs-comment">//队列为空了</span><br>    <span class="hljs-built_in">destroy_queue</span>(q);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h6 id="深度优先搜索遍历"><a class="markdownIt-Anchor" href="#深度优先搜索遍历"></a> 深度优先搜索遍历</h6>
+<ul>
+<li>深度优先搜索步骤（前序、中序（二叉排序树）、后序）：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507174458.png" srcset="/img/loading.gif" lazyload alt="深度优先搜索步骤" /></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//中序遍历(二叉排序树)</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bst_inorder</span><span class="hljs-params">(TreeNode* root)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//边界条件</span><br>    <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">NULL</span>)<br>        <span class="hljs-keyword">return</span>;<br>    <span class="hljs-comment">//递归公式</span><br>    <span class="hljs-comment">//遍历左子树</span><br>    <span class="hljs-built_in">bst_inorder</span>(root-&gt;left);<br>    <span class="hljs-comment">//遍历根节点</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,root-&gt;key);<br>    <span class="hljs-comment">//遍历右子树</span><br>    <span class="hljs-built_in">bst_inorder</span>(root-&gt;right);<br>&#125;<br><br><span class="hljs-comment">//先序遍历</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bst_preorder</span><span class="hljs-params">(TreeNode* root)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//边界条件</span><br>    <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">NULL</span>)<br>        <span class="hljs-keyword">return</span>;<br>    <span class="hljs-comment">//递归公式</span><br>    <span class="hljs-comment">//遍历根节点</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,root-&gt;key);<br>    <span class="hljs-comment">//遍历左子树</span><br>    <span class="hljs-built_in">bst_preorder</span>(root-&gt;left);<br>    <span class="hljs-comment">//遍历右子树</span><br>    <span class="hljs-built_in">bst_preorder</span>(root-&gt;right);<br>&#125;<br><br><span class="hljs-comment">//后序遍历</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bst_backorder</span><span class="hljs-params">(TreeNode* root)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">//边界条件</span><br>    <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">NULL</span>)<br>        <span class="hljs-keyword">return</span>;<br>    <span class="hljs-comment">//递归公式</span><br>    <span class="hljs-comment">//遍历左子树</span><br>    <span class="hljs-built_in">bst_backorder</span>(root-&gt;left);<br>    <span class="hljs-comment">//遍历右子树</span><br>    <span class="hljs-built_in">bst_backorder</span>(root-&gt;right);<br>    <span class="hljs-comment">//遍历根节点</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,root-&gt;key);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h6 id="删除二叉搜索树节点"><a class="markdownIt-Anchor" href="#删除二叉搜索树节点"></a> 删除二叉搜索树节点</h6>
+<ul>
+<li>删除度为 0 的情况：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507201313.png" srcset="/img/loading.gif" lazyload alt="删除度为 0 的情况" /></p>
+<ul>
+<li>删除度为 1 的情况：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507201350.png" srcset="/img/loading.gif" lazyload alt="删除度为 1 的情况" /></p>
+<ul>
+<li>删除度为 2 的情况：
+<ul>
+<li>退化成度为 0 或者 1 的情况来处理；</li>
+<li>采用要删除节点的右子树的最小节点来替代当前节点来实现退化！</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507201559.png" srcset="/img/loading.gif" lazyload alt="删除度为 2 的情况" /></p>
+<ul>
+<li>特例：右子树最小节点就是右子树根节点</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507201641.png" srcset="/img/loading.gif" lazyload alt="特例" /></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//删除节点</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bst_delete</span><span class="hljs-params">(BST* tree,K key)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 1.找到要删除的节点</span><br>    TreeNode* parent = <span class="hljs-literal">NULL</span>;<br>    TreeNode* cur = tree-&gt;root;<br>    K cmp;<br>    <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">NULL</span>)<br>    &#123;<br>        cmp = key - cur-&gt;key;<br>        <span class="hljs-keyword">if</span>(cmp &lt; <span class="hljs-number">0</span>) <span class="hljs-comment">//key &lt; cur-&gt;key,向左边找</span><br>        &#123;<br>            parent = cur;<br>            cur = cur-&gt;left;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(cmp &gt; <span class="hljs-number">0</span>)<br>        &#123;<br>            parent = cur;<br>            cur = cur-&gt;right;<br>        &#125;<br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-keyword">break</span>;<br>    &#125;<span class="hljs-comment">//cur == NULL || cur != NULL</span><br>    <span class="hljs-keyword">if</span>(cur == <span class="hljs-literal">NULL</span>)<br>        <span class="hljs-keyword">return</span>;<br>    <span class="hljs-comment">// 2.删除节点</span><br>    <span class="hljs-keyword">if</span>(cur-&gt;left &amp;&amp; cur-&gt;right) <span class="hljs-comment">// 度为2的情况</span><br>    &#123;<br>        <span class="hljs-comment">//退化成度为0或度为1的情况</span><br>        <span class="hljs-comment">//先找右子树的最小节点</span><br>        TreeNode* pr_min = cur;<br>        TreeNode* r_min = cur-&gt;right;<br>        <span class="hljs-keyword">while</span>(r_min-&gt;left != <span class="hljs-literal">NULL</span>)<br>        &#123;<br>            pr_min = r_min;<br>            r_min = r_min-&gt;left;<br>        &#125;<br>        <span class="hljs-comment">//退化过程</span><br>        cur-&gt;key = r_min-&gt;key;<br>        cur = r_min;<br>        parent = pr_min;<br>    &#125;<br>    <span class="hljs-comment">//度为0或1的情况</span><br>    <span class="hljs-comment">//找到唯一的孩子</span><br>    TreeNode* child = cur-&gt;left ? cur-&gt;left : cur-&gt;right;<br>    <span class="hljs-keyword">if</span>(parent == <span class="hljs-literal">NULL</span>) <span class="hljs-comment">// 删除的是根节点</span><br>    &#123;<br>        tree-&gt;root = child;<br>    &#125;<br>    <span class="hljs-keyword">else</span><br>    &#123;<br>        <span class="hljs-comment">//将child链接到parent正确的位置</span><br>        <span class="hljs-comment">//必须重新比较，因为可能出现了退化</span><br>        K cmp = cur-&gt;key - parent-&gt;key;<br>        <span class="hljs-keyword">if</span>(cmp&lt;<span class="hljs-number">0</span>)<br>        &#123;<br>            parent-&gt;left = child;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(cmp&gt;<span class="hljs-number">0</span>)<br>        &#123;<br>            parent-&gt;right = child;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-comment">//注意：特例cmp==0，右子树最小节点就是右子树根节点</span><br>        &#123;<br>            parent-&gt;right = child;<br>        &#125;<br>    &#125;<br>    <span class="hljs-built_in">free</span>(cur);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="二叉搜索树的性能分析"><a class="markdownIt-Anchor" href="#二叉搜索树的性能分析"></a> 二叉搜索树的性能分析</h4>
+<ul>
+<li>缺陷：不能保证 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><mi>g</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(log(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span> 时间复杂度的插入，删除和查找。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507212637.png" srcset="/img/loading.gif" lazyload alt="二叉搜索树的性能分析" /></p>
+<h4 id="平衡二叉搜索树"><a class="markdownIt-Anchor" href="#平衡二叉搜索树"></a> 平衡二叉搜索树</h4>
+<ul>
+<li>AVL树和红黑树的对比：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250507212757.png" srcset="/img/loading.gif" lazyload alt="AVL树和红黑树的对比" /></p>
+<h4 id="红黑树"><a class="markdownIt-Anchor" href="#红黑树"></a> 红黑树</h4>
+<ul>
+<li>红黑树的基础模型是 <strong>2-3-4树</strong>，基于此在二叉树的基础上实现红黑树。</li>
+<li>问题 1：如何表示2-3-4树中的 <code>3-node</code> 和 <code>4-node</code> ？</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505081108145.png" srcset="/img/loading.gif" lazyload alt="如何表示 2-3-4 树中的 3-node 和 4-node？" /></p>
+<ul>
+<li>问题 2：“边”是一种逻辑结构，是不存在的，如何表示“边”的颜色？
+<ul>
+<li>把颜色放入孩子节点中！</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505081110356.png" srcset="/img/loading.gif" lazyload alt="如何表示“边”的颜色？" /></p>
+<ul>
+<li>红黑树的性质：
+<ul>
+<li>2-3-4树的高度 ≤ 红黑树高度 ≤ 2×(2-3-4树的高度)</li>
+<li>因为<strong>黑高平衡</strong>的原因！</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505081112194.png" srcset="/img/loading.gif" lazyload alt="红黑树的性质" /></p>
 
                 
               </div>
