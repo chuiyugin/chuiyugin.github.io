@@ -200,8 +200,20 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505081108145.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505081110356.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505081112194.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111548187.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111553800.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111559381.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111600959.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111602043.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111602529.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111605481.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111612301.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111614706.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111619785.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111621104.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111624460.png">
 <meta property="article:published_time" content="2025-03-26T05:30:00.000Z">
-<meta property="article:modified_time" content="2025-05-10T08:56:51.000Z">
+<meta property="article:modified_time" content="2025-05-11T08:25:04.544Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="C">
 <meta property="article:tag" content="系统观">
@@ -447,7 +459,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          10k 字
+          11k 字
         
       </span>
     
@@ -459,7 +471,7 @@
         
         
           <!-- compatible with older versions-->
-          32 分钟
+          33 分钟
         
       </span>
     
@@ -2025,6 +2037,99 @@
 </li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505081112194.png" srcset="/img/loading.gif" lazyload alt="红黑树的性质" /></p>
+<h2 id="文件流"><a class="markdownIt-Anchor" href="#文件流"></a> 文件流</h2>
+<h3 id="流模型"><a class="markdownIt-Anchor" href="#流模型"></a> 流模型</h3>
+<ul>
+<li>流模型：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111548187.png" srcset="/img/loading.gif" lazyload alt="流模型" /></p>
+<ul>
+<li>
+<p>优点：</p>
+<ul>
+<li>程序员读写文件时，不需要关心文件的位置；</li>
+<li>数据源（<code>data source</code> ）和数据汇（<code>data sink</code> ）是解耦的。</li>
+</ul>
+</li>
+<li>
+<p>程序员视角的文件：</p>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111553800.png" srcset="/img/loading.gif" lazyload alt="程序员视角的文件" /></p>
+<h3 id="前置知识"><a class="markdownIt-Anchor" href="#前置知识"></a> 前置知识</h3>
+<h4 id="缓冲区类型"><a class="markdownIt-Anchor" href="#缓冲区类型"></a> 缓冲区类型</h4>
+<ul>
+<li>缓冲区是以<strong>先进先出</strong>的方式管理数据的，缓冲区分为三种类型：
+<ul>
+<li>满缓冲：当缓冲区为空时，从输入流中读取数据；当缓冲区满时，向输出流写入数据。</li>
+<li>行缓冲：每次从输入流中读取一行数据；每次向输出流中写入一行数据（<code>stdin</code>、<code>stdout</code>）。</li>
+<li>无缓冲：顾名思义，就是没有缓冲区（<code>stderr</code>，输出错误信息）。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111559381.png" srcset="/img/loading.gif" lazyload alt="缓冲区" /></p>
+<h4 id="标准流"><a class="markdownIt-Anchor" href="#标准流"></a> 标准流</h4>
+<ul>
+<li>标准流不需要手动创建，也不需要手动关闭（即其它文件流都是需要手动操作的）。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111600959.png" srcset="/img/loading.gif" lazyload alt="标准流" /></p>
+<h4 id="二进制文件和文本文件"><a class="markdownIt-Anchor" href="#二进制文件和文本文件"></a> 二进制文件和文本文件</h4>
+<ul>
+<li>二进制文件：字节</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111602043.png" srcset="/img/loading.gif" lazyload alt="二进制文件" /></p>
+<ul>
+<li>文本文件：字符</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111602529.png" srcset="/img/loading.gif" lazyload alt="文本文件" /></p>
+<ul>
+<li>二进制文件和文本文件的区别举例：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111605481.png" srcset="/img/loading.gif" lazyload alt="二进制文件和文本文件的区别举例" /></p>
+<h3 id="文件流接口api"><a class="markdownIt-Anchor" href="#文件流接口api"></a> 文件流接口（API）</h3>
+<h4 id="文件流操作步骤"><a class="markdownIt-Anchor" href="#文件流操作步骤"></a> 文件流操作步骤</h4>
+<ul>
+<li>文件流操作步骤如下：
+<ul>
+<li>打开文件流：<code>fopen()</code>；</li>
+<li>读/写文件：统计、转换、加密、解密…</li>
+<li>关闭文件流：<code>fclose()</code>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="打开文件流"><a class="markdownIt-Anchor" href="#打开文件流"></a> 打开文件流</h4>
+<ul>
+<li>打开文件流的函数：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111612301.png" srcset="/img/loading.gif" lazyload alt="打开文件流的函数" /></p>
+<ul>
+<li>文件的路径（<code>filename</code> ）
+<ul>
+<li>绝对路径和相对路径</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111614706.png" srcset="/img/loading.gif" lazyload alt="文件的路径" /></p>
+<ul>
+<li>打开文件的模式
+<ul>
+<li>文件的类型</li>
+<li>对文件的操作（<code>r</code>, <code>w</code>）</li>
+<li>写模式和追加模式是不一样的，如果文件存在，写模式会清空原有数据，而追加模式会在原有数据的后面写入新的内容。</li>
+</ul>
+</li>
+<li>以文本形式打开文件的模式：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111619785.png" srcset="/img/loading.gif" lazyload alt="以文本形式打开文件的模式" /></p>
+<ul>
+<li>以二进制形式打开文件的模式：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111621104.png" srcset="/img/loading.gif" lazyload alt="以二进制形式打开文件的模式" /></p>
+<h4 id="关闭文件流"><a class="markdownIt-Anchor" href="#关闭文件流"></a> 关闭文件流</h4>
+<ul>
+<li>关闭文件流的函数：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202505111624460.png" srcset="/img/loading.gif" lazyload alt="关闭文件流的函数" /></p>
 
                 
               </div>
