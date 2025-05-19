@@ -34,8 +34,16 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519164757.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519165619.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519171201.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519195922.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519200055.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519200152.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519200337.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519200424.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519204706.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519204812.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519210649.png">
 <meta property="article:published_time" content="2025-05-18T08:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-19T09:12:35.355Z">
+<meta property="article:modified_time" content="2025-05-19T13:06:56.610Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="ubuntu">
@@ -281,7 +289,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          782 字
+          1.3k 字
         
       </span>
     
@@ -293,7 +301,7 @@
         
         
           <!-- compatible with older versions-->
-          3 分钟
+          5 分钟
         
       </span>
     
@@ -412,6 +420,59 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// ./test_rmdir dir </span><br>    <span class="hljs-comment">//参数校验</span><br>    <span class="hljs-keyword">if</span>(argc != <span class="hljs-number">2</span>)<br>    &#123;<br>        error(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Usage %s dir&quot;</span>,argv[<span class="hljs-number">0</span>]);<br>    &#125;<br>    <span class="hljs-comment">//功能实现</span><br>    <span class="hljs-keyword">if</span>(rmdir(argv[<span class="hljs-number">1</span>]) == <span class="hljs-number">-1</span>)<br>    &#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;rmdir %s&quot;</span>,argv[<span class="hljs-number">1</span>]);<br>    &#125;<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="目录流"><a class="markdownIt-Anchor" href="#目录流"></a> 目录流</h3>
+<ul>
+<li>使用目录流，可以查看目录中的内容。
+<ul>
+<li>流模型：“流&quot;类似&quot;水流”，顺序访问流中的数据时，是不需要关注位置的。</li>
+<li>目录流与文件流相比，文件流中的基本单位是字符或字节。而目录流中的基本单位是目录项。如下图所示：</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519195922.png" srcset="/img/loading.gif" lazyload alt="目录流模型" /></p>
+<h4 id="打开目录流"><a class="markdownIt-Anchor" href="#打开目录流"></a> 打开目录流</h4>
+<ul>
+<li><code>opendir()</code> 可以打开一个目录，得到一个指向目录流的指针 <code>DIR*</code> 。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519200055.png" srcset="/img/loading.gif" lazyload alt="打开一个目录" /></p>
+<h4 id="关闭目录流"><a class="markdownIt-Anchor" href="#关闭目录流"></a> 关闭目录流</h4>
+<ul>
+<li><code>closedir()</code> 关闭目录流。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519200152.png" srcset="/img/loading.gif" lazyload alt="关闭目录流" /></p>
+<h4 id="读取目录流"><a class="markdownIt-Anchor" href="#读取目录流"></a> 读取目录流</h4>
+<ul>
+<li><code>readdir()</code> 读目录流，得到指向下一个目录项的指针。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519200337.png" srcset="/img/loading.gif" lazyload alt="读取目录流" /></p>
+<ul>
+<li>结构体 <code>dirent</code> 的定义：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519200424.png" srcset="/img/loading.gif" lazyload alt="结构体 dirent 的定义" /></p>
+<ul>
+<li>读取一个目录内的内容并打印的代码：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;dirent.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// ./test_dirent dir</span><br>    <span class="hljs-comment">//参数校验</span><br>    <span class="hljs-keyword">if</span>(argc != <span class="hljs-number">2</span>)<br>    &#123;<br>        error(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Usage %s dir&quot;</span>,argv[<span class="hljs-number">0</span>]);<br>    &#125;<br>    <span class="hljs-comment">//打开目录流</span><br>    DIR* stream = opendir(argv[<span class="hljs-number">1</span>]);<br>    <span class="hljs-keyword">if</span>(!stream)<br>    &#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;opendir %s&quot;</span>,argv[<span class="hljs-number">1</span>]);<br>    &#125;<br>    <span class="hljs-comment">//处理目录流</span><br>    errno = <span class="hljs-number">0</span>; <span class="hljs-comment">// 等于0表示没出错</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">dirent</span>* <span class="hljs-title">pdirent</span>;</span><br>    <span class="hljs-comment">//readdir():读目录流，得到指向下一个目录项的指针。</span><br>    <span class="hljs-keyword">while</span>((pdirent = readdir(stream)) != <span class="hljs-literal">NULL</span>)<br>    &#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;d_info=%ld, d_off=%ld, d_reclen=%hu, d_type=%d, d_name=%s\n&quot;</span>,<br>        pdirent-&gt;d_ino,<br>        pdirent-&gt;d_off,<br>        pdirent-&gt;d_reclen,<br>        pdirent-&gt;d_type,<br>        pdirent-&gt;d_name);<br>    &#125;<br>    <span class="hljs-keyword">if</span>(errno != <span class="hljs-number">0</span>)<br>    &#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;readdir %s&quot;</span>,argv[<span class="hljs-number">1</span>]);<br>    &#125;<br>    <span class="hljs-comment">//关闭目录流</span><br>    closedir(stream);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="文件相关操作"><a class="markdownIt-Anchor" href="#文件相关操作"></a> 文件相关操作</h2>
+<h3 id="打开文件"><a class="markdownIt-Anchor" href="#打开文件"></a> 打开文件</h3>
+<ul>
+<li><code>open()</code> 打开文件。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519204706.png" srcset="/img/loading.gif" lazyload alt="open() 函数的用法" /></p>
+<ul>
+<li>部分 <code>flags</code> 的含义：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519204812.png" srcset="/img/loading.gif" lazyload alt="部分 flags 的含义" /></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// ./test_open file</span><br>    <span class="hljs-comment">//参数校验</span><br>    <span class="hljs-keyword">if</span>(argc != <span class="hljs-number">2</span>)<br>    &#123;<br>        error(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Usage %s file&quot;</span>,argv[<span class="hljs-number">0</span>]);<br>    &#125;<br>    <span class="hljs-comment">//打开文件，获取文件描述符</span><br>    <span class="hljs-type">int</span> fd = open(argv[<span class="hljs-number">1</span>], O_RDWR | O_CREAT);<br>    <span class="hljs-keyword">if</span>(fd == <span class="hljs-number">-1</span>)<br>    &#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;Usage %s&quot;</span>, argv[<span class="hljs-number">1</span>]);<br>    &#125;<br>    <span class="hljs-comment">//打印获取到的文件描述符</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,fd);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="内核管理文件的数据结构"><a class="markdownIt-Anchor" href="#内核管理文件的数据结构"></a> 内核管理文件的数据结构</h3>
+<ul>
+<li>通过库函数 <code>open()</code> 的过程介绍内核管理文件的数据结构：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519210649.png" srcset="/img/loading.gif" lazyload alt="内核管理文件的数据结构" /></p>
+
                 
               </div>
             
