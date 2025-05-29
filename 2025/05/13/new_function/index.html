@@ -26,8 +26,10 @@
 <meta property="og:description" content="Some useful C++ function!">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250513151409.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250517202801.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250518195557.png">
 <meta property="article:published_time" content="2025-05-13T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-15T11:34:55.000Z">
+<meta property="article:modified_time" content="2025-05-29T08:34:18.704Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="库函数">
 <meta name="twitter:card" content="summary_large_image">
@@ -272,7 +274,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          156 字
+          822 字
         
       </span>
     
@@ -284,7 +286,7 @@
         
         
           <!-- compatible with older versions-->
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -338,6 +340,57 @@
 </li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250513151409.png" srcset="/img/loading.gif" lazyload alt="string::resize()" /></p>
+<h2 id="哈希表相关"><a class="markdownIt-Anchor" href="#哈希表相关"></a> 哈希表相关</h2>
+<h3 id="set"><a class="markdownIt-Anchor" href="#set"></a> set</h3>
+<ul>
+<li>在 C++中，<code>set</code> 提供以下三种数据结构，其底层实现以及优劣如下表所示：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250517202801.png" srcset="/img/loading.gif" lazyload alt="set 的三种实现方式" /></p>
+<ul>
+<li><code>std::unordered_set</code> 底层实现为哈希表，<code>std::set</code> 和 <code>std::multiset</code> 的底层实现是红黑树，红黑树是一种平衡二叉搜索树，所以 <code>key</code> 值是有序的，但 <code>key</code> 不可以修改，改动 <code>key</code> 值会导致整棵树的错乱，所以只能删除和增加。</li>
+<li>当我们要使用集合来解决哈希问题的时候，优先使用 <code>unordered_set</code>，因为它的查询和增删效率是最优的，如果需要集合是有序的，那么就用 <code>set</code>，如果要求不仅有序还要有重复数据的话，那么就用 <code>multiset</code>。</li>
+<li>用法示例：
+<ul>
+<li>两个数组的交集：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-arrays/description/">349.两个数组的交集</a></li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">intersection</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums1, vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums2)</span> </span>&#123;<br>        unordered_set&lt;<span class="hljs-keyword">int</span>&gt; res;<br>        <span class="hljs-function">unordered_set&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">nums_1</span><span class="hljs-params">(nums1.begin(),nums1.end())</span></span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;nums2.<span class="hljs-built_in">size</span>(); i++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(nums_1.<span class="hljs-built_in">find</span>(nums2[i])!=nums_1.<span class="hljs-built_in">end</span>())<br>            &#123;<br>                res.<span class="hljs-built_in">insert</span>(nums2[i]);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> vector&lt;<span class="hljs-keyword">int</span>&gt;(res.<span class="hljs-built_in">begin</span>(),res.<span class="hljs-built_in">end</span>());<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>从这题可以学到两种用法：
+<ul>
+<li><code>find()</code>：找到的是对应数据位置的迭代器（迭代器：<code>set&lt;int&gt;::iterator</code>），找不到为 <code>nums_1.end()</code> 。（ <code>nums_1.begin()</code> 表示第一个元素，<code>nums_1.end()</code> 表示最后一个元素的后一位）。</li>
+<li><code>unordered_set&lt;int&gt; nums_1(nums1.begin(), nums1.end());</code>：可以将一个容器的内容直接初始化到另外一个容器中，在末尾也有：<code>return vector&lt;int&gt;(res.begin(),res.end());</code>！</li>
+</ul>
+</li>
+</ul>
+<h3 id="map"><a class="markdownIt-Anchor" href="#map"></a> map</h3>
+<ul>
+<li>在 C++中，<code>map</code> 提供以下三种数据结构，其底层实现以及优劣如下表所示：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250518195557.png" srcset="/img/loading.gif" lazyload alt="map 的三种实现方式" /></p>
+<ul>
+<li><code>std::unordered_map</code> 底层实现为哈希表，<code>std::map</code> 和 <code>std::multimap</code> 的底层实现是红黑树。</li>
+<li>用法示例：
+<ul>
+<li>两数之和：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/two-sum/description/">1.两数之和</a></li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">twoSum</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target)</span> </span>&#123;<br>        unordered_map&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt; mp;<br>        vector&lt;<span class="hljs-keyword">int</span>&gt; ans;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)<br>        &#123;<br>            <span class="hljs-keyword">if</span>(mp.<span class="hljs-built_in">find</span>(target-nums[i]) == mp.<span class="hljs-built_in">end</span>())<br>            &#123;<br>                mp.<span class="hljs-built_in">insert</span>(&#123;nums[i],i&#125;);<span class="hljs-comment">//注意map插入的形式</span><br>            &#125;<br>            <span class="hljs-keyword">else</span><br>            &#123;<br>                ans.<span class="hljs-built_in">push_back</span>(i);<br>                unordered_map&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;::iterator it = mp.<span class="hljs-built_in">find</span>(target-nums[i]);<br>                ans.<span class="hljs-built_in">push_back</span>(it-&gt;second);<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>从这题可以学到两种用法：
+<ul>
+<li>注意 <code>map</code> 的插入用法，<code>mp.insert(&#123;nums[i],i&#125;);</code> 和 <code>mp.insert(pair&lt;int, int&gt;(nums[i], i));</code>，前者需要 <code>C++11</code> 或更高的版本，而后者适用于所有 <code>C++</code> 版本。</li>
+<li>注意 <code>map</code> 的迭代器用法：其中 <code>unordered_map&lt;int,int&gt;::iterator</code> 也可以换成 <code>auto</code>，同样后者需要 <code>C++11</code> 或更高的版本，而前者适用于所有 <code>C++</code> 版本。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">unordered_map&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;::iterator it = mp.<span class="hljs-built_in">find</span>(target-nums[i]);<br>ans.<span class="hljs-built_in">push_back</span>(it-&gt;second);<br></code></pre></td></tr></table></figure>
+<h2 id="栈和队列相关"><a class="markdownIt-Anchor" href="#栈和队列相关"></a> 栈和队列相关</h2>
+<h3 id="双端队列deque"><a class="markdownIt-Anchor" href="#双端队列deque"></a> 双端队列（deque）</h3>
 
                 
               </div>
@@ -428,9 +481,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/05/14/linux_learning/" title="Linux 学习笔记">
+                      <a href="/2025/05/14/linux_learning/" title="Linux 基础学习">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Linux 学习笔记</span>
+                        <span class="hidden-mobile">Linux 基础学习</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
