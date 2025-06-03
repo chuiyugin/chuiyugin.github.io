@@ -42,9 +42,18 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250528165342.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519204706.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519204812.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603171236.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519210649.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603195205.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603195627.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603195750.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603200844.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603200953.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603205059.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603205158.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603205358.png">
 <meta property="article:published_time" content="2025-05-18T08:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-29T14:14:00.000Z">
+<meta property="article:modified_time" content="2025-06-03T12:54:22.407Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="ubuntu">
@@ -290,7 +299,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.6k 字
+          2k 字
         
       </span>
     
@@ -302,7 +311,7 @@
         
         
           <!-- compatible with older versions-->
-          6 分钟
+          7 分钟
         
       </span>
     
@@ -473,9 +482,14 @@
 <h2 id="文件相关操作"><a class="markdownIt-Anchor" href="#文件相关操作"></a> 文件相关操作</h2>
 <h3 id="打开文件"><a class="markdownIt-Anchor" href="#打开文件"></a> 打开文件</h3>
 <ul>
-<li><code>open()</code> 打开文件。</li>
+<li>系统调用 <code>open()</code> 打开文件。
+<ul>
+<li>打开成功：返回新的文件描述符（最小可用的文件描述符）；</li>
+<li>打开失败：返回 <code>-1</code>，设置 <code>errno</code> 。</li>
 </ul>
-<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519204706.png" srcset="/img/loading.gif" lazyload alt="open() 函数的用法" /></p>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519204706.png" srcset="/img/loading.gif" lazyload alt="open() 系统调用的用法" /></p>
 <ul>
 <li>部分 <code>flags</code> 的含义：</li>
 </ul>
@@ -484,11 +498,75 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// ./test_open file</span><br>    <span class="hljs-comment">//参数校验</span><br>    <span class="hljs-keyword">if</span>(argc != <span class="hljs-number">2</span>)<br>    &#123;<br>        error(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Usage %s file&quot;</span>,argv[<span class="hljs-number">0</span>]);<br>    &#125;<br>    <span class="hljs-comment">//打开文件，获取文件描述符</span><br>    <span class="hljs-type">int</span> fd = open(argv[<span class="hljs-number">1</span>], O_RDWR | O_CREAT);<br>    <span class="hljs-keyword">if</span>(fd == <span class="hljs-number">-1</span>)<br>    &#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;Usage %s&quot;</span>, argv[<span class="hljs-number">1</span>]);<br>    &#125;<br>    <span class="hljs-comment">//打印获取到的文件描述符</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,fd);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="内核管理文件的数据结构"><a class="markdownIt-Anchor" href="#内核管理文件的数据结构"></a> 内核管理文件的数据结构</h3>
 <ul>
-<li>通过库函数 <code>open()</code> 的过程介绍内核管理文件的数据结构：</li>
+<li>通过系统调用 <code>open()</code> 的过程介绍内核管理文件的数据结构：
+<ul>
+<li>文件描述符表的数组长度默认是 1024，并且可以进行设置：</li>
 </ul>
-<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519210649.png" srcset="/img/loading.gif" lazyload alt="内核管理文件的数据结构" /></p>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603171236.png" srcset="/img/loading.gif" lazyload alt="文件描述符表的数组长度默认是 1024" /></p>
+<ul>
+<li>系统调用 <code>open()</code> 的内核管理文件流程：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519210649.png" srcset="/img/loading.gif" lazyload alt="open()系统调用内核管理文件流程" /></p>
+<h3 id="关闭文件"><a class="markdownIt-Anchor" href="#关闭文件"></a> 关闭文件</h3>
+<ul>
+<li>系统调用 <code>close()</code> 关闭文件。
+<ul>
+<li>关闭成功：返回 <code>0</code> ；</li>
+<li>关闭失败：返回 <code>-1</code>，设置 <code>errno</code> 。</li>
+</ul>
+</li>
+<li>系统调用 <code>close()</code> 的内核管理文件流程：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603195205.png" srcset="/img/loading.gif" lazyload alt="close()系统调用内核管理文件流程" /></p>
+<h3 id="读取文件"><a class="markdownIt-Anchor" href="#读取文件"></a> 读取文件</h3>
+<ul>
+<li>系统调用 <code>read()</code> 读取文件。
+<ul>
+<li>读取成功：返回实际读取的字节数目（<code>0</code>，表示读取的起始位置在文件末尾）；</li>
+<li>读取失败：返回 <code>-1</code>，设置 <code>errno</code> 。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603195627.png" srcset="/img/loading.gif" lazyload alt="系统调用read()读取文件" /></p>
+<ul>
+<li>系统调用 <code>read()</code> 的内核管理文件流程：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603195750.png" srcset="/img/loading.gif" lazyload alt="read()系统调用内核管理文件流程" /></p>
+<h3 id="写入文件"><a class="markdownIt-Anchor" href="#写入文件"></a> 写入文件</h3>
+<ul>
+<li>系统调用 <code>write()</code> 读取文件。
+<ul>
+<li>写入成功：返回实际写入字节数目（其中 <code>n≤count</code> ）；</li>
+<li>写入失败：返回 <code>-1</code>，设置 <code>errno</code> 。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603200844.png" srcset="/img/loading.gif" lazyload alt="write()系统调用" /></p>
+<ul>
+<li>系统调用 <code>write()</code> 的内核管理文件流程：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603200953.png" srcset="/img/loading.gif" lazyload alt="write()系统调用内核管理文件流程" /></p>
+<h3 id="修改文件偏移量"><a class="markdownIt-Anchor" href="#修改文件偏移量"></a> 修改文件偏移量</h3>
+<ul>
+<li>系统调用 <code>lseek()</code> 修改文件偏移量，本质上就是修改 <code>current file offset (pos)</code> 的数值。
+<ul>
+<li>修改成功：返回文件的位置（距离文件开头的字节数目）；</li>
+<li>修改失败：返回 <code>-1</code>，设置 <code>errno</code> 。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603205059.png" srcset="/img/loading.gif" lazyload alt="系统调用 lseek() 修改文件偏移量" /></p>
+<ul>
+<li>系统调用 <code>lseek()</code> 的内核管理文件流程：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603205158.png" srcset="/img/loading.gif" lazyload alt="系统调用 lseek() 的内核管理文件流程" /></p>
+<ul>
+<li>文件库函数和文件系统调用之间的关系：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603205358.png" srcset="/img/loading.gif" lazyload alt="文件库函数和文件系统调用之间的关系" /></p>
 
                 
               </div>
@@ -880,20 +958,5 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":300,"height":600},"mobile":{"show":false}});</script></body>
 </html>
