@@ -60,8 +60,11 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605162213.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605165212.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605165347.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250606173642.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250606174115.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250606174455.png">
 <meta property="article:published_time" content="2025-05-18T08:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-05T09:39:46.208Z">
+<meta property="article:modified_time" content="2025-06-06T12:39:15.372Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="ubuntu">
@@ -307,7 +310,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          2.5k 字
+          2.9k 字
         
       </span>
     
@@ -319,7 +322,7 @@
         
         
           <!-- compatible with older versions-->
-          8 分钟
+          10 分钟
         
       </span>
     
@@ -637,6 +640,38 @@
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605165347.png" srcset="/img/loading.gif" lazyload alt="打印结果" /></p>
 <h3 id="文件描述符的复制"><a class="markdownIt-Anchor" href="#文件描述符的复制"></a> 文件描述符的复制</h3>
+<ul>
+<li>系统调用 <code>dup()</code> 用于对文件描述符的复制。
+<ul>
+<li>复制成功：返回新的文件描述符；</li>
+<li>复制失败：返回 <code>-1</code>，设置 <code>errno</code>。</li>
+</ul>
+</li>
+<li>其具体用法如下，分为 <code>dup()</code> 和 <code>dup2()</code> 两个系统调用：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250606173642.png" srcset="/img/loading.gif" lazyload alt="两个文件描述符系统调用的具体用法" /></p>
+<ul>
+<li>系统调用 <code>dup()</code> 的内核管理文件流程：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250606174115.png" srcset="/img/loading.gif" lazyload alt="系统调用 dup() 的内核管理文件流程" /></p>
+<ul>
+<li>使用 <code>dup()</code> 函数实现重定向：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// 对 stderr 重定向</span><br>    <span class="hljs-type">int</span> fd = open(<span class="hljs-string">&quot;application.log&quot;</span>, O_RDWR | O_CREAT | O_APPEND, <span class="hljs-number">0664</span>);<br>    <span class="hljs-keyword">if</span> (fd == <span class="hljs-number">-1</span>)&#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;open application.log&quot;</span>);<br>    &#125;<br>    <br>    <span class="hljs-comment">// STDERR_FILENO 标准错误输出的文件描述符</span><br>    write(STDERR_FILENO, <span class="hljs-string">&quot;The first error massage\n&quot;</span>, <span class="hljs-number">24</span>);<br>    <br>    <span class="hljs-comment">//对 stderr 进行重定向</span><br>    close(STDERR_FILENO);<br>    dup(fd);<br>    <br>    write(STDERR_FILENO, <span class="hljs-string">&quot;The second error massage\n&quot;</span>, <span class="hljs-number">25</span>);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>dup2()</code> 函数实现重定向：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// 对 stderr 重定向</span><br>    <span class="hljs-type">int</span> fd = open(<span class="hljs-string">&quot;application.log&quot;</span>, O_RDWR | O_CREAT | O_APPEND, <span class="hljs-number">0664</span>);<br>    <span class="hljs-keyword">if</span> (fd == <span class="hljs-number">-1</span>)&#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;open application.log&quot;</span>);<br>    &#125;<br>    <br>    <span class="hljs-comment">// STDERR_FILENO 标准错误输出的文件描述符</span><br>    write(STDERR_FILENO, <span class="hljs-string">&quot;The first error massage\n&quot;</span>, <span class="hljs-number">24</span>);<br>    <br>    <span class="hljs-comment">//对 stderr 进行重定向</span><br>    <span class="hljs-comment">//close(STDERR_FILENO);</span><br>    <span class="hljs-keyword">if</span>(dup2(fd, STDERR_FILENO) == <span class="hljs-number">-1</span>)&#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;dup2 %d %d&quot;</span>, fd, STDERR_FILENO);<br>    &#125;<br>    <br>    write(STDERR_FILENO, <span class="hljs-string">&quot;The second error massage\n&quot;</span>, <span class="hljs-number">25</span>);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>分别执行完两个代码的运行结果：
+<ul>
+<li>第一个代码重定向 <code>STDERR_FILENO</code> 文件描述符到 <code>application.log</code> 文件，写入一段语句；</li>
+<li>第二个代码同样重定向 <code>STDERR_FILENO</code> 文件描述符到 <code>application.log</code> 文件，写入一段语句。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250606174455.png" srcset="/img/loading.gif" lazyload alt="分别执行完两个代码的运行结果" /></p>
+<h3 id="零拷贝mmap"><a class="markdownIt-Anchor" href="#零拷贝mmap"></a> 零拷贝（mmap）</h3>
 
                 
               </div>
