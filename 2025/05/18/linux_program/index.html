@@ -42,9 +42,34 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250528165342.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519204706.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519204812.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603171236.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519210649.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603195205.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603195627.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603195750.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603200844.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603200953.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603205059.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603205158.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603205358.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605145014.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605145112.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605145633.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605161558.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605161818.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605162213.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605165212.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605165347.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250606173642.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250606174115.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250606174455.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202506071540394.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202506071542883.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202506071600326.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202506071602492.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202506071651605.png">
 <meta property="article:published_time" content="2025-05-18T08:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-28T08:54:14.000Z">
+<meta property="article:modified_time" content="2025-06-07T09:16:07.072Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="ubuntu">
@@ -290,7 +315,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.6k 字
+          3.4k 字
         
       </span>
     
@@ -302,7 +327,7 @@
         
         
           <!-- compatible with older versions-->
-          6 分钟
+          11 分钟
         
       </span>
     
@@ -473,9 +498,14 @@
 <h2 id="文件相关操作"><a class="markdownIt-Anchor" href="#文件相关操作"></a> 文件相关操作</h2>
 <h3 id="打开文件"><a class="markdownIt-Anchor" href="#打开文件"></a> 打开文件</h3>
 <ul>
-<li><code>open()</code> 打开文件。</li>
+<li>系统调用 <code>open()</code> 打开文件。
+<ul>
+<li>打开成功：返回新的文件描述符（最小可用的文件描述符）；</li>
+<li>打开失败：返回 <code>-1</code>，设置 <code>errno</code> 。</li>
 </ul>
-<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519204706.png" srcset="/img/loading.gif" lazyload alt="open() 函数的用法" /></p>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519204706.png" srcset="/img/loading.gif" lazyload alt="open() 系统调用的用法" /></p>
 <ul>
 <li>部分 <code>flags</code> 的含义：</li>
 </ul>
@@ -484,12 +514,197 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span>* argv[])</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// ./test_open file</span><br>    <span class="hljs-comment">//参数校验</span><br>    <span class="hljs-keyword">if</span>(argc != <span class="hljs-number">2</span>)<br>    &#123;<br>        error(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Usage %s file&quot;</span>,argv[<span class="hljs-number">0</span>]);<br>    &#125;<br>    <span class="hljs-comment">//打开文件，获取文件描述符</span><br>    <span class="hljs-keyword">int</span> fd = open(argv[<span class="hljs-number">1</span>], O_RDWR | O_CREAT);<br>    <span class="hljs-keyword">if</span>(fd == <span class="hljs-number">-1</span>)<br>    &#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;Usage %s&quot;</span>, argv[<span class="hljs-number">1</span>]);<br>    &#125;<br>    <span class="hljs-comment">//打印获取到的文件描述符</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,fd);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="内核管理文件的数据结构"><a class="markdownIt-Anchor" href="#内核管理文件的数据结构"></a> 内核管理文件的数据结构</h3>
 <ul>
-<li>通过库函数 <code>open()</code> 的过程介绍内核管理文件的数据结构：</li>
+<li>通过系统调用 <code>open()</code> 的过程介绍内核管理文件的数据结构：
+<ul>
+<li>文件描述符表的数组长度默认是 1024，并且可以进行设置：</li>
 </ul>
-<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519210649.png" srcset="/img/loading.gif" lazyload alt="内核管理文件的数据结构" /></p>
-
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603171236.png" srcset="/img/loading.gif" lazyload alt="文件描述符表的数组长度默认是 1024" /></p>
+<ul>
+<li>系统调用 <code>open()</code> 的内核管理文件流程：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250519210649.png" srcset="/img/loading.gif" lazyload alt="open()系统调用内核管理文件流程" /></p>
+<h3 id="关闭文件"><a class="markdownIt-Anchor" href="#关闭文件"></a> 关闭文件</h3>
+<ul>
+<li>系统调用 <code>close()</code> 关闭文件。
+<ul>
+<li>关闭成功：返回 <code>0</code> ；</li>
+<li>关闭失败：返回 <code>-1</code>，设置 <code>errno</code> 。</li>
+</ul>
+</li>
+<li>系统调用 <code>close()</code> 的内核管理文件流程：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603195205.png" srcset="/img/loading.gif" lazyload alt="close()系统调用内核管理文件流程" /></p>
+<h3 id="读取文件"><a class="markdownIt-Anchor" href="#读取文件"></a> 读取文件</h3>
+<ul>
+<li>系统调用 <code>read()</code> 读取文件。
+<ul>
+<li>读取成功：返回实际读取的字节数目（<code>0</code>，表示读取的起始位置在文件末尾）；</li>
+<li>读取失败：返回 <code>-1</code>，设置 <code>errno</code> 。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603195627.png" srcset="/img/loading.gif" lazyload alt="系统调用read()读取文件" /></p>
+<ul>
+<li>系统调用 <code>read()</code> 的内核管理文件流程：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603195750.png" srcset="/img/loading.gif" lazyload alt="read()系统调用内核管理文件流程" /></p>
+<h3 id="写入文件"><a class="markdownIt-Anchor" href="#写入文件"></a> 写入文件</h3>
+<ul>
+<li>系统调用 <code>write()</code> 读取文件。
+<ul>
+<li>写入成功：返回实际写入字节数目（其中 <code>n≤count</code> ）；</li>
+<li>写入失败：返回 <code>-1</code>，设置 <code>errno</code> 。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603200844.png" srcset="/img/loading.gif" lazyload alt="write()系统调用" /></p>
+<ul>
+<li>系统调用 <code>write()</code> 的内核管理文件流程：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603200953.png" srcset="/img/loading.gif" lazyload alt="write()系统调用内核管理文件流程" /></p>
+<h3 id="修改文件偏移量"><a class="markdownIt-Anchor" href="#修改文件偏移量"></a> 修改文件偏移量</h3>
+<ul>
+<li>系统调用 <code>lseek()</code> 修改文件偏移量，本质上就是修改 <code>current file offset (pos)</code> 的数值。
+<ul>
+<li>修改成功：返回文件的位置（距离文件开头的字节数目）；</li>
+<li>修改失败：返回 <code>-1</code>，设置 <code>errno</code> 。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603205059.png" srcset="/img/loading.gif" lazyload alt="系统调用 lseek() 修改文件偏移量" /></p>
+<ul>
+<li>系统调用 <code>lseek()</code> 的内核管理文件流程：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603205158.png" srcset="/img/loading.gif" lazyload alt="系统调用 lseek() 的内核管理文件流程" /></p>
+<ul>
+<li>文件库函数和文件系统调用之间的关系：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250603205358.png" srcset="/img/loading.gif" lazyload alt="文件库函数和文件系统调用之间的关系" /></p>
+<h3 id="文件描述符和文件流的异同"><a class="markdownIt-Anchor" href="#文件描述符和文件流的异同"></a> 文件描述符和文件流的异同</h3>
+<ul>
+<li>文件描述符的系统调用与文件流的函数：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605145014.png" srcset="/img/loading.gif" lazyload alt="文件描述符的系统调用与文件流的函数" /></p>
+<ul>
+<li>文件描述符和文件流的数据访问流程：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605145112.png" srcset="/img/loading.gif" lazyload alt="文件描述符和文件流的数据访问流程" /></p>
+<h3 id="同步内存中所有已修改的文件数据到储存设备"><a class="markdownIt-Anchor" href="#同步内存中所有已修改的文件数据到储存设备"></a> 同步内存中所有已修改的文件数据到储存设备</h3>
+<ul>
+<li>函数 <code>fsync()</code> 同步内存中所有已修改的文件数据到储存设备。
+<ul>
+<li>将和文件描述符相关联的脏页刷新到磁盘。</li>
+<li>刷新成功：返回 <code>0</code>；</li>
+<li>刷新失败：返回 <code>-1</code> 并设置 <code>errno</code>。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605145633.png" srcset="/img/loading.gif" lazyload alt="系统调用 fsync()" /></p>
+<h3 id="修改文件长度"><a class="markdownIt-Anchor" href="#修改文件长度"></a> 修改文件长度</h3>
+<ul>
+<li>函数 <code>ftruncate()</code> 修改文件长度为 <code>length</code> 个字节大小。</li>
+<li>用法如下：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605161558.png" srcset="/img/loading.gif" lazyload alt="系统调用 ftruncate() 的用法" /></p>
+<ul>
+<li>修改文件的长度有两种情况：
+<ul>
+<li>情况二可能会出现文件空洞的情况，此时数据全为 <code>0</code> 的页不会分配磁盘空间。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605161818.png" srcset="/img/loading.gif" lazyload alt="修改文件的长度的两种情况" /></p>
+<ul>
+<li>使用代码示例：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span>* argv[])</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// ./test_ftruncate file length</span><br>    <span class="hljs-keyword">if</span>(argc != <span class="hljs-number">3</span>)&#123;<br>        error(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Usage: %s file length&quot;</span>, argv[<span class="hljs-number">0</span>]);<br>    &#125;<br>    <br>    <span class="hljs-keyword">off_t</span> length; <span class="hljs-comment">// 要截断的文件长度</span><br>    <span class="hljs-built_in">sscanf</span>(argv[<span class="hljs-number">2</span>], <span class="hljs-string">&quot;%ld&quot;</span>, &amp;length);<br>    <br>    <span class="hljs-keyword">int</span> fd = open(argv[<span class="hljs-number">1</span>], O_RDWR);<br>    <span class="hljs-keyword">if</span>(fd == <span class="hljs-number">-1</span>)&#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;open %s&quot;</span>, argv[<span class="hljs-number">1</span>]);<br>    &#125;<br>    <br>    <span class="hljs-keyword">if</span>(ftruncate(fd, length) == <span class="hljs-number">-1</span>)&#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;ftruncate %d&quot;</span>, fd);<br>    &#125; <span class="hljs-comment">// 截断成功</span><br>    <br>    close(fd);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>关于文件空洞的测试：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605162213.png" srcset="/img/loading.gif" lazyload alt="关于文件空洞的测试" /></p>
+<h3 id="获取文件状态信息"><a class="markdownIt-Anchor" href="#获取文件状态信息"></a> 获取文件状态信息</h3>
+<ul>
+<li>函数 <code>fstat()</code> 用于获取文件状态信息。
+<ul>
+<li>获取成功：返回 <code>0</code>；</li>
+<li>获取失败：返回 <code>-1</code>，设置 <code>errno</code>。</li>
+</ul>
+</li>
+<li>其具体用法和状态信息结构体如下：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605165212.png" srcset="/img/loading.gif" lazyload alt="fstat() 的具体用法和状态信息结构体" /></p>
+<ul>
+<li>代码示例：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span>* argv[])</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// ./test_fstat file</span><br>    <span class="hljs-keyword">if</span>(argc != <span class="hljs-number">2</span>)&#123;<br>        error(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Usage %s file&quot;</span>, argv[<span class="hljs-number">0</span>]);<br>    &#125;<br>    <br>    <span class="hljs-keyword">int</span> fd = open(argv[<span class="hljs-number">1</span>], O_RDONLY);<br>    <span class="hljs-keyword">if</span>(fd == <span class="hljs-number">-1</span>)&#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;open %s&quot;</span>, argv[<span class="hljs-number">1</span>]);<br>    &#125;<br>    <br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">stat</span> <span class="hljs-title">sb</span>;</span> <span class="hljs-comment">// 存储文件元数据信息</span><br>    <span class="hljs-keyword">if</span>(fstat(fd, &amp;sb) == <span class="hljs-number">-1</span>)&#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;fstat %d&quot;</span>, fd);<br>    &#125;<br>    <br>    <span class="hljs-comment">// 打印 struct stat 里面的成员信息</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;st_ino=%ld\nst_mode=%lo\nst_nlink=%ld\nst_size=%ld\nst_blocks=%ld\n&quot;</span>,<br>            (<span class="hljs-keyword">long</span>)sb.st_ino,<br>            (<span class="hljs-keyword">long</span>)sb.st_mode,<br>            (<span class="hljs-keyword">long</span>)sb.st_nlink,<br>            (<span class="hljs-keyword">long</span>)sb.st_size,<br>            (<span class="hljs-keyword">long</span>)sb.st_blocks);<br>            <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>打印结果：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250605165347.png" srcset="/img/loading.gif" lazyload alt="打印结果" /></p>
+<h3 id="文件描述符的复制"><a class="markdownIt-Anchor" href="#文件描述符的复制"></a> 文件描述符的复制</h3>
+<ul>
+<li>系统调用 <code>dup()</code> 用于对文件描述符的复制。
+<ul>
+<li>复制成功：返回新的文件描述符；</li>
+<li>复制失败：返回 <code>-1</code>，设置 <code>errno</code>。</li>
+</ul>
+</li>
+<li>其具体用法如下，分为 <code>dup()</code> 和 <code>dup2()</code> 两个系统调用：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250606173642.png" srcset="/img/loading.gif" lazyload alt="两个文件描述符系统调用的具体用法" /></p>
+<ul>
+<li>系统调用 <code>dup()</code> 的内核管理文件流程：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250606174115.png" srcset="/img/loading.gif" lazyload alt="系统调用 dup() 的内核管理文件流程" /></p>
+<ul>
+<li>使用 <code>dup()</code> 函数实现重定向：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span>* argv[])</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 对 stderr 重定向</span><br>    <span class="hljs-keyword">int</span> fd = open(<span class="hljs-string">&quot;application.log&quot;</span>, O_RDWR | O_CREAT | O_APPEND, <span class="hljs-number">0664</span>);<br>    <span class="hljs-keyword">if</span> (fd == <span class="hljs-number">-1</span>)&#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;open application.log&quot;</span>);<br>    &#125;<br>    <br>    <span class="hljs-comment">// STDERR_FILENO 标准错误输出的文件描述符</span><br>    write(STDERR_FILENO, <span class="hljs-string">&quot;The first error massage\n&quot;</span>, <span class="hljs-number">24</span>);<br>    <br>    <span class="hljs-comment">//对 stderr 进行重定向</span><br>    close(STDERR_FILENO);<br>    dup(fd);<br>    <br>    write(STDERR_FILENO, <span class="hljs-string">&quot;The second error massage\n&quot;</span>, <span class="hljs-number">25</span>);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>dup2()</code> 函数实现重定向：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span>* argv[])</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 对 stderr 重定向</span><br>    <span class="hljs-keyword">int</span> fd = open(<span class="hljs-string">&quot;application.log&quot;</span>, O_RDWR | O_CREAT | O_APPEND, <span class="hljs-number">0664</span>);<br>    <span class="hljs-keyword">if</span> (fd == <span class="hljs-number">-1</span>)&#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;open application.log&quot;</span>);<br>    &#125;<br>    <br>    <span class="hljs-comment">// STDERR_FILENO 标准错误输出的文件描述符</span><br>    write(STDERR_FILENO, <span class="hljs-string">&quot;The first error massage\n&quot;</span>, <span class="hljs-number">24</span>);<br>    <br>    <span class="hljs-comment">//对 stderr 进行重定向</span><br>    <span class="hljs-comment">//close(STDERR_FILENO);</span><br>    <span class="hljs-keyword">if</span>(dup2(fd, STDERR_FILENO) == <span class="hljs-number">-1</span>)&#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;dup2 %d %d&quot;</span>, fd, STDERR_FILENO);<br>    &#125;<br>    <br>    write(STDERR_FILENO, <span class="hljs-string">&quot;The second error massage\n&quot;</span>, <span class="hljs-number">25</span>);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>分别执行完两个代码的运行结果：
+<ul>
+<li>第一个代码重定向 <code>STDERR_FILENO</code> 文件描述符到 <code>application.log</code> 文件，写入一段语句；</li>
+<li>第二个代码同样重定向 <code>STDERR_FILENO</code> 文件描述符到 <code>application.log</code> 文件，写入一段语句。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250606174455.png" srcset="/img/loading.gif" lazyload alt="分别执行完两个代码的运行结果" /></p>
+<h3 id="零拷贝mmap"><a class="markdownIt-Anchor" href="#零拷贝mmap"></a> 零拷贝（mmap）</h3>
+<ul>
+<li>系统调用零拷贝（ <code>mmap()</code> ）能够省去内核态和用户态的内存拷贝。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202506071540394.png" srcset="/img/loading.gif" lazyload alt="零拷贝" /></p>
+<ul>
+<li>系统调用零拷贝（ <code>mmap()</code> ）的工作原理：
+<ul>
+<li>相当于将文件的一部分内存通过 <code>I/O</code> 操作拷贝到物理内存中，并且内核态和用户态共用这部分内存，不再需要重复拷贝。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202506071542883.png" srcset="/img/loading.gif" lazyload alt="image.png" /></p>
+<ul>
+<li>系统调用零拷贝（ <code>mmap()</code> 和 <code>munmap()</code> ）的使用方法：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202506071600326.png" srcset="/img/loading.gif" lazyload alt="系统调用零拷贝 mmap() 和 munmap() 的使用方法" /></p>
+<ul>
+<li>系统调用零拷贝（ <code>mmap()</code> 和 <code>munmap()</code> ）的返回值：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202506071602492.png" srcset="/img/loading.gif" lazyload alt="系统调用零拷贝 mmap() 和 munmap() 的返回值" /></p>
+<ul>
+<li>系统调用零拷贝（ <code>mmap()</code> 和 <code>munmap()</code> ）的复制大文件使用场景：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202506071651605.png" srcset="/img/loading.gif" lazyload alt="系统调用零拷贝 mmap() 和 munmap() 的复制大文件使用场景" /></p>
+<ul>
+<li>代码示例：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/stat.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fcntl.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/mman.h&gt;</span></span><br><br><span class="hljs-comment">// offset 应该是页大小的整数倍</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MMAP_SIZE (4096 * 10)</span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// ./mmap_cp src dst</span><br>    <span class="hljs-keyword">if</span> (argc != <span class="hljs-number">3</span>)&#123;<br>        error(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Usage: %s src dst&quot;</span>, argv[<span class="hljs-number">0</span>]);<br>    &#125;<br>    <br>    <span class="hljs-keyword">int</span> srcfd = open(argv[<span class="hljs-number">1</span>], O_RDONLY);<br>    <span class="hljs-keyword">if</span> (srcfd == <span class="hljs-number">-1</span>)&#123;<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;open %s&quot;</span>, argv[<span class="hljs-number">1</span>]);<br>    &#125;<br>    <span class="hljs-comment">// 需要读写权限</span><br>    <span class="hljs-keyword">int</span> dstfd = open(argv[<span class="hljs-number">2</span>], O_RDWR | O_CREAT | O_TRUNC, <span class="hljs-number">0666</span>);<br>    <span class="hljs-keyword">if</span> (dstfd == <span class="hljs-number">-1</span>)&#123;<br>        close(srcfd);<br>        error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;open %s&quot;</span>, argv[<span class="hljs-number">2</span>]);<br>    &#125;<br>    <span class="hljs-comment">// 1.需要事先知道文件大小</span><br>    <span class="hljs-comment">// 获取src大小</span><br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">stat</span> <span class="hljs-title">sb</span>;</span><br>    fstat(srcfd, &amp;sb);<br>    <span class="hljs-keyword">off_t</span> fsize = sb.st_size;<br>    <span class="hljs-comment">// 将dst文件大小设置为fsize</span><br>    ftruncate(dstfd, fsize); <span class="hljs-comment">// 目标文件大小需要事先固定</span><br>    <span class="hljs-comment">// 设置初始偏移量，表示已经复制的数据</span><br>    <span class="hljs-keyword">off_t</span> offset = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (offset &lt; fsize)<br>    &#123;<br>        <span class="hljs-comment">// 计算映射区长度</span><br>        <span class="hljs-keyword">off_t</span> length;<br>        <span class="hljs-keyword">if</span> (fsize - offset &gt;= MMAP_SIZE)<br>            length = MMAP_SIZE;<br>        <span class="hljs-keyword">else</span><br>            length = fsize - offset;<br>        <span class="hljs-comment">// 映射</span><br>        <span class="hljs-keyword">void</span> *addr1 = mmap(<span class="hljs-literal">NULL</span>, length, PROT_READ, MAP_SHARED, srcfd, offset);<br>        <span class="hljs-keyword">if</span> (addr1 == MAP_FAILED)&#123;<br>            error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;mmap %s&quot;</span>, argv[<span class="hljs-number">1</span>]);<br>        &#125;<br>        <br>        <span class="hljs-keyword">void</span> *addr2 = mmap(<span class="hljs-literal">NULL</span>, length, PROT_READ | PROT_WRITE, MAP_SHARED, dstfd, offset);<br>        <span class="hljs-keyword">if</span> (addr2 == MAP_FAILED)&#123;<br>            error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;mmap %s&quot;</span>, argv[<span class="hljs-number">2</span>]);<br>        &#125;<br>        <span class="hljs-comment">// 通过将addr1的内容复制到addr2中实现文件的复制</span><br>        <span class="hljs-built_in">memcpy</span>(addr2, addr1, length);<br>        offset += length;<br>        <span class="hljs-comment">// 解除映射</span><br>        <span class="hljs-keyword">int</span> err = munmap(addr1, length);<br>        <span class="hljs-keyword">if</span> (err == <span class="hljs-number">-1</span>)&#123;<br>            error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;munmap %s&quot;</span>, argv[<span class="hljs-number">1</span>]);<br>        &#125;<br>        <br>        err = munmap(addr2, length);<br>        <span class="hljs-keyword">if</span> (err == <span class="hljs-number">-1</span>)&#123;<br>            error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;munmap %s&quot;</span>, argv[<span class="hljs-number">2</span>]);<br>        &#125;<br>    &#125; <span class="hljs-comment">// offset == fsize</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
                 
               </div>
             

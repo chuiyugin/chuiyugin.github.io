@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250517202801.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250518195557.png">
 <meta property="article:published_time" content="2025-05-13T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-05-29T08:34:18.704Z">
+<meta property="article:modified_time" content="2025-06-06T12:40:37.000Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="库函数">
 <meta name="twitter:card" content="summary_large_image">
@@ -274,7 +274,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          822 字
+          1.1k 字
         
       </span>
     
@@ -286,7 +286,7 @@
         
         
           <!-- compatible with older versions-->
-          3 分钟
+          4 分钟
         
       </span>
     
@@ -391,6 +391,19 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cpp">unordered_map&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;::iterator it = mp.<span class="hljs-built_in">find</span>(target-nums[i]);<br>ans.<span class="hljs-built_in">push_back</span>(it-&gt;second);<br></code></pre></td></tr></table></figure>
 <h2 id="栈和队列相关"><a class="markdownIt-Anchor" href="#栈和队列相关"></a> 栈和队列相关</h2>
 <h3 id="双端队列deque"><a class="markdownIt-Anchor" href="#双端队列deque"></a> 双端队列（deque）</h3>
+<ul>
+<li>在 C++中，<code>deque</code> 双端队列提供的操作有以下几种（<code>front</code> 表示操作队列前面，<code>back</code> 表示操作队列后面）</li>
+<li>用法示例：
+<ul>
+<li>滑动窗口最大值：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sliding-window-maximum/">239. 滑动窗口最大值</a>中的单调队列实现</li>
+<li>弹出数据：<code>que.pop_back()</code>、<code>que.pop_front()</code></li>
+<li>传入数据：<code>que.push_back(value)</code>、<code>que.push_front(value)</code></li>
+<li>查询数据：<code>que.back()</code>、<code>que.front()</code></li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyQueue</span> &#123;</span> <span class="hljs-comment">//单调队列（从大到小）</span><br><span class="hljs-keyword">public</span>:<br>    deque&lt;<span class="hljs-keyword">int</span>&gt; que; <span class="hljs-comment">// 使用deque来实现单调队列</span><br>    <span class="hljs-comment">// 每次弹出的时候，比较当前要弹出的数值是否等于队列出口元素的数值，如果相等则弹出。</span><br>    <span class="hljs-comment">// 同时pop之前判断队列当前是否为空。</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">pop</span><span class="hljs-params">(<span class="hljs-keyword">int</span> value)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (!que.<span class="hljs-built_in">empty</span>() &amp;&amp; value == que.<span class="hljs-built_in">front</span>()) &#123;<br>            que.<span class="hljs-built_in">pop_front</span>();<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">// 如果push的数值大于入口元素的数值，那么就将队列后端的数值弹出，直到push的数值小于等于队列入口元素的数值为止。</span><br>    <span class="hljs-comment">// 这样就保持了队列里的数值是单调从大到小的了。</span><br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-keyword">int</span> value)</span> </span>&#123;<br>        <span class="hljs-keyword">while</span> (!que.<span class="hljs-built_in">empty</span>() &amp;&amp; value &gt; que.<span class="hljs-built_in">back</span>()) &#123;<br>            que.<span class="hljs-built_in">pop_back</span>();<br>        &#125;<br>        que.<span class="hljs-built_in">push_back</span>(value);<br>    &#125;<br>    <span class="hljs-comment">// 查询当前队列里的最大值 直接返回队列前端也就是front就可以了。</span><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">front</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> que.<span class="hljs-built_in">front</span>();<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
