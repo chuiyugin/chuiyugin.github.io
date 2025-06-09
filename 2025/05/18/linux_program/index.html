@@ -84,8 +84,25 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250608202024.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250608202612.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250608202721.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609155511.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609155956.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609160153.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609161526.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609161723.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609162127.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609164244.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609164333.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609165658.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609170714.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609180501.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609181435.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609181614.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609181901.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609182101.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609182315.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609182437.png">
 <meta property="article:published_time" content="2025-05-18T08:00:00.000Z">
-<meta property="article:modified_time" content="2025-06-08T12:32:49.585Z">
+<meta property="article:modified_time" content="2025-06-09T10:24:49.689Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="ubuntu">
@@ -331,7 +348,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          4.2k 字
+          5.4k 字
         
       </span>
     
@@ -343,7 +360,7 @@
         
         
           <!-- compatible with older versions-->
-          13 分钟
+          17 分钟
         
       </span>
     
@@ -871,6 +888,141 @@
 <li>执行程序：<code>exec</code> 函数簇</li>
 </ul>
 <h4 id="创建进程fork"><a class="markdownIt-Anchor" href="#创建进程fork"></a> 创建进程：fork()</h4>
+<ul>
+<li>系统调用 <code>fork()</code> 的用法：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609155511.png" srcset="/img/loading.gif" lazyload alt="系统调用 fork() 的用法" /></p>
+<ul>
+<li>
+<p>系统调用 <code>fork()</code> 的返回值：</p>
+<ul>
+<li>成功：
+<ul>
+<li>父进程：子进程的 <code>pid</code></li>
+<li>子进程：<code>0</code></li>
+</ul>
+</li>
+<li>失败：
+<ul>
+<li>父进程：<code>-1</code>，并且不会创建子进程，设置 <code>errno</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>惯用法代码：</p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// ./test_fork1 </span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;BEGIN:\n&quot;</span>);<br>    <br>    <span class="hljs-comment">//惯用法</span><br>    <span class="hljs-comment">//父子进程都是从fork()返回</span><br>    <span class="hljs-comment">//子进程不会执行前面的代码</span><br>    <span class="hljs-type">pid_t</span> pid = fork(); <br>    <br>    <span class="hljs-keyword">switch</span>(pid)&#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">-1</span>:<br>            <span class="hljs-comment">//出错</span><br>            error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;fork&quot;</span>);<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:<br>            <span class="hljs-comment">//子进程</span><br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I am a baby\n&quot;</span>);<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;child:pid = %d, ppid = %d\n&quot;</span>, getpid(), getppid());<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">default</span>:<br>            <span class="hljs-comment">//父进程</span><br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Who&#x27;s your daddy?\n&quot;</span>);<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;parent:pid = %d, chilpid = %d\n&quot;</span>, getpid(), pid);<br>            <span class="hljs-keyword">break</span>;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;BYE BYE!\n&quot;</span>); <span class="hljs-comment">// 父子进程</span><br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>测试结果：
+<ul>
+<li>到底是父进程先执行还是子进程先执行是不确定的（不能假定到底是谁先执行）。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609155956.png" srcset="/img/loading.gif" lazyload alt="测试结果" /></p>
+<ul>
+<li>系统调用 <code>fork()</code> 的原理：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609160153.png" srcset="/img/loading.gif" lazyload alt="系统调用 fork() 的原理" /></p>
+<h5 id="代码段父子进程共享不能修改"><a class="markdownIt-Anchor" href="#代码段父子进程共享不能修改"></a> 代码段：父子进程共享（不能修改）</h5>
+<ul>
+<li>栈、堆、数据段（父子进程私有）</li>
+<li>测试代码：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><br><span class="hljs-type">int</span> g_value = <span class="hljs-number">10</span>; <span class="hljs-comment">// 数据段</span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// ./test_fork2</span><br>    <span class="hljs-type">int</span> l_value = <span class="hljs-number">20</span>; <span class="hljs-comment">// 栈</span><br>    <span class="hljs-type">int</span>* d_value = (<span class="hljs-type">int</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-type">int</span>)); <span class="hljs-comment">// 堆</span><br>    *d_value = <span class="hljs-number">30</span>;<br>    <br>    <span class="hljs-comment">//惯用法</span><br>    <span class="hljs-comment">//父子进程都是从fork()返回</span><br>    <span class="hljs-comment">//子进程不会执行前面的代码</span><br>    <span class="hljs-type">pid_t</span> pid = fork(); <br>    <br>    <span class="hljs-keyword">switch</span>(pid)&#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">-1</span>:<br>            <span class="hljs-comment">//出错</span><br>            error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;fork&quot;</span>);<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:<br>            <span class="hljs-comment">//子进程</span><br>            g_value += <span class="hljs-number">100</span>;<br>            l_value += <span class="hljs-number">100</span>;<br>            *d_value += <span class="hljs-number">100</span>;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;g_value = %d, l_value = %d, d_value = %d\n&quot;</span>, g_value, l_value, *d_value);<br>            <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">default</span>:<br>            <span class="hljs-comment">//父进程</span><br>            sleep(<span class="hljs-number">2</span>);<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;g_value = %d, l_value = %d, d_value = %d\n&quot;</span>, g_value, l_value, *d_value);<br>            <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>测试结果：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609161526.png" srcset="/img/loading.gif" lazyload alt="测试结果" /></p>
+<h5 id="用户态缓冲区文件流父子进程是私有的"><a class="markdownIt-Anchor" href="#用户态缓冲区文件流父子进程是私有的"></a> 用户态缓冲区（文件流）：父子进程是私有的</h5>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609161723.png" srcset="/img/loading.gif" lazyload alt="用户态缓冲区（文件流）：父子进程是私有的" /></p>
+<ul>
+<li>测试代码：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// ./test_fork3</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;BEGIN:&quot;</span>); <span class="hljs-comment">// stdout是行缓冲区</span><br>    <br>    <span class="hljs-comment">//惯用法</span><br>    <span class="hljs-comment">//父子进程都是从fork()返回</span><br>    <span class="hljs-comment">//子进程不会执行前面的代码</span><br>    <span class="hljs-type">pid_t</span> pid = fork(); <br>    <br>    <span class="hljs-keyword">switch</span>(pid)&#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">-1</span>:<br>            <span class="hljs-comment">//出错</span><br>            error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;fork&quot;</span>);<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:<br>            <span class="hljs-comment">//子进程</span><br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;I am a baby\n&quot;</span>);<br>            <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">default</span>:<br>            <span class="hljs-comment">//父进程</span><br>            sleep(<span class="hljs-number">2</span>);<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Who&#x27;s your daddy?\n&quot;</span>);<br>            <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>测试结果：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609162127.png" srcset="/img/loading.gif" lazyload alt="测试结果" /></p>
+<ul>
+<li>用户缓冲区父子进程私有经典题目一：
+<ul>
+<li>总共输出 24 个 <code>a</code>。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609164244.png" srcset="/img/loading.gif" lazyload alt="经典题目一" /></p>
+<ul>
+<li>用户缓冲区父子进程私有经典题目二：
+<ul>
+<li>总共输出 14 个 <code>a</code>。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609164333.png" srcset="/img/loading.gif" lazyload alt="经典题目二" /></p>
+<h5 id="打开文件共享的-文件描述符列表私有的"><a class="markdownIt-Anchor" href="#打开文件共享的-文件描述符列表私有的"></a> 打开文件（共享的）、文件描述符列表（私有的）</h5>
+<ul>
+<li>对于父子进程，打开文件（共享的）、文件描述符列表（私有的）</li>
+<li>测试代码：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// ./test_fork4</span><br>    <span class="hljs-type">int</span> fd = open(<span class="hljs-string">&quot;test.txt&quot;</span>, O_RDWR | O_CREAT | O_TRUNC, <span class="hljs-number">0666</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;origin_pos: %ld\n&quot;</span>, lseek(fd, <span class="hljs-number">0</span>, SEEK_CUR));<br><br>    <span class="hljs-comment">//惯用法</span><br>    <span class="hljs-comment">//父子进程都是从fork()返回</span><br>    <span class="hljs-comment">//子进程不会执行前面的代码</span><br>    <span class="hljs-type">pid_t</span> pid = fork(); <br>    <span class="hljs-type">int</span> newfd;<br><br>    <span class="hljs-keyword">switch</span>(pid)&#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">-1</span>:<br>            <span class="hljs-comment">//出错</span><br>            error(<span class="hljs-number">1</span>, errno, <span class="hljs-string">&quot;fork&quot;</span>);<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:<br>            <span class="hljs-comment">//子进程</span><br>            write(fd, <span class="hljs-string">&quot;hello world&quot;</span>, <span class="hljs-number">11</span>);<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;child_pos: %ld\n&quot;</span>, lseek(fd, <span class="hljs-number">0</span>, SEEK_CUR));<br>            close(STDERR_FILENO);<br><br>            newfd = dup(fd); <span class="hljs-comment">// newfd = 2</span><br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;child_newfd = %d\n&quot;</span>, newfd);<br>            <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">default</span>:<br>            <span class="hljs-comment">//父进程</span><br>            sleep(<span class="hljs-number">2</span>);<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;parent_pos: %ld\n&quot;</span>, lseek(fd, <span class="hljs-number">0</span>, SEEK_CUR));<br>            newfd = dup(fd); <span class="hljs-comment">// newfd = 4</span><br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;parent_newfd = %d\n&quot;</span>, newfd);<br>            <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>测试结果：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609165658.png" srcset="/img/loading.gif" lazyload alt="测试结果" /></p>
+<h4 id="终止进程"><a class="markdownIt-Anchor" href="#终止进程"></a> 终止进程</h4>
+<ul>
+<li>基本概念：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609170714.png" srcset="/img/loading.gif" lazyload alt="终止进程的基本概念" /></p>
+<h5 id="正常终止"><a class="markdownIt-Anchor" href="#正常终止"></a> 正常终止</h5>
+<ul>
+<li>库函数 <code>exit()</code> 的步骤以及系统调用 <code>atexit()</code> 的用法和返回值：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609180501.png" srcset="/img/loading.gif" lazyload alt="库函数 exit() 的步骤和返回值" /></p>
+<ul>
+<li>示例代码：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-comment">//执行一些资源清理操作</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">func</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Something going to die...&quot;</span>);<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// ./test_exit</span><br>    <span class="hljs-comment">// 调用atexit()注册函数</span><br>    <span class="hljs-type">int</span> err = atexit(func); <span class="hljs-comment">// 仅注册，不会执行func函数</span><br>    <span class="hljs-keyword">if</span>(err != <span class="hljs-number">0</span>)&#123;<br>        error(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;atexit()&quot;</span>);<br>    &#125;<br>    <br>    <span class="hljs-comment">//正常执行程序...</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world&quot;</span>);<br>    <br>    <span class="hljs-built_in">exit</span>(<span class="hljs-number">123</span>); <span class="hljs-comment">//前面分析的执行exit函数后第一步执行atexit()注册的func函数</span><br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>测试结果：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609181435.png" srcset="/img/loading.gif" lazyload alt="测试结果" /></p>
+<ul>
+<li>系统调用 <code>_exit()</code> 的用法：
+<ul>
+<li>退出状态码传至操作系统。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609181614.png" srcset="/img/loading.gif" lazyload alt="系统调用 _exit() 的用法" /></p>
+<ul>
+<li>测试程序：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-comment">//执行一些资源清理操作</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">func</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Something going to die...&quot;</span>);<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// ./test_exit</span><br>    <span class="hljs-comment">// 调用atexit()注册函数</span><br>    <span class="hljs-type">int</span> err = atexit(func);<br>    <span class="hljs-keyword">if</span>(err != <span class="hljs-number">0</span>)&#123;<br>        error(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;atexit()&quot;</span>);<br>    &#125;<br>    <br>    <span class="hljs-comment">//正常执行程序...</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world&quot;</span>);<br>    <br>    _exit(<span class="hljs-number">123</span>);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>测试结果：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609181901.png" srcset="/img/loading.gif" lazyload alt="测试结果" /></p>
+<h5 id="异常终止"><a class="markdownIt-Anchor" href="#异常终止"></a> 异常终止</h5>
+<ul>
+<li>系统调用 <code>abort()</code> 的用法：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609182101.png" srcset="/img/loading.gif" lazyload alt="系统调用 abort() 的用法" /></p>
+<ul>
+<li>测试代码：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><br><span class="hljs-comment">//执行一些资源清理操作</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">func</span><span class="hljs-params">(<span class="hljs-type">void</span>)</span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Something going to die...&quot;</span>);<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// ./test__exit</span><br>    <span class="hljs-comment">// 调用atexit()注册函数</span><br>    <span class="hljs-type">int</span> err = atexit(func);<br>    <span class="hljs-keyword">if</span>(err != <span class="hljs-number">0</span>)&#123;<br>        error(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;atexit()&quot;</span>);<br>    &#125;<br>    <br>    <span class="hljs-comment">//正常执行程序...</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Hello world&quot;</span>);<br>    <br>    <span class="hljs-built_in">abort</span>();<br>    <br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;You can&#x27;t see me!!!&quot;</span>);<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>测试结果：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609182315.png" srcset="/img/loading.gif" lazyload alt="测试结果" /></p>
+<ul>
+<li>内核给该进程发送 <code>SIGABRT</code> 信号</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250609182437.png" srcset="/img/loading.gif" lazyload alt="内核给该进程发送 SIGABRT 信号" /></p>
 
                 
               </div>
