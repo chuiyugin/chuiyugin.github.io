@@ -134,8 +134,12 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250702213625.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250702215628.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250702215753.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250703174335.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250703185042.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250703185116.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250703185815.png">
 <meta property="article:published_time" content="2025-05-18T08:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-02T14:05:38.445Z">
+<meta property="article:modified_time" content="2025-07-03T10:58:22.695Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="ubuntu">
@@ -381,7 +385,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          8.8k 字
+          9.3k 字
         
       </span>
     
@@ -393,7 +397,7 @@
         
         
           <!-- compatible with older versions-->
-          28 分钟
+          29 分钟
         
       </span>
     
@@ -1331,6 +1335,61 @@
 <li>示例代码：</li>
 </ul>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/select.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/time.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;signal.h&gt;</span></span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// ./test_kill signo pid ...</span><br>    <span class="hljs-keyword">if</span>(argc &lt; <span class="hljs-number">3</span>)&#123;<br>        error(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Usage: %s signo pid ...&quot;</span>, argv[<span class="hljs-number">0</span>]);<br>    &#125;<br><br>    <span class="hljs-type">int</span> signo;<br>    <span class="hljs-built_in">sscanf</span>(argv[<span class="hljs-number">1</span>], <span class="hljs-string">&quot;%d&quot;</span>, &amp;signo);<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">2</span>; i&lt;argc; i++)&#123;<br>        <span class="hljs-type">pid_t</span> pid;<br>        <span class="hljs-built_in">sscanf</span>(argv[i], <span class="hljs-string">&quot;%d&quot;</span>, &amp;pid);<br>        <span class="hljs-keyword">if</span>(kill(pid, signo) == <span class="hljs-number">-1</span>)&#123;<br>            error(<span class="hljs-number">0</span>, errno, <span class="hljs-string">&quot;kill(%d %d)&quot;</span>, pid, signo);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="线程"><a class="markdownIt-Anchor" href="#线程"></a> 线程</h4>
+<ul>
+<li>线程：一条执行的流程。</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250703174335.png" srcset="/img/loading.gif" lazyload alt="线程" /></p>
+<ul>
+<li>引入线程：
+<ul>
+<li>进程是资源分配的最小单位；</li>
+<li>线程是调度的最小单位；</li>
+<li>线程共享进程的所有资源。</li>
+</ul>
+</li>
+<li>为什么要引入线程？
+<ul>
+<li>进程之间的切换（<code>CPU</code> 的高速缓存，<code>TLB</code> 失效），开销大。用进程中的线程之间切换，开销较小。</li>
+<li>进程之间通信，需要打破隔离避障，线程之间的通信，开销较小。</li>
+<li>进程的创建和销毁比较耗时，而线程的创建和销毁要轻量很多。</li>
+</ul>
+</li>
+</ul>
+<h5 id="线程的基本操作"><a class="markdownIt-Anchor" href="#线程的基本操作"></a> 线程的基本操作</h5>
+<ul>
+<li>获取线程的标识：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250703185042.png" srcset="/img/loading.gif" lazyload alt="获取线程的标识" /></p>
+<ul>
+<li>创建线程：
+<ul>
+<li><code>pthread</code> 库设计原则：
+<ul>
+<li>返回值是 <code>int</code> 类型，表示调用成功或失败。
+<ul>
+<li>成功：<code>0</code>；</li>
+<li>失败：错误码，不会设置 <code>errno</code>。</li>
+</ul>
+</li>
+<li><code>thread_t</code> ：返回时，存放创建线程 <code>ID</code>。</li>
+<li><code>attr_t</code> ：线程属性，一般填 <code>NULL</code>，表示用默认属性。</li>
+<li><code>start_routine</code> ：线程的入口函数。</li>
+<li><code>arg</code>：线程的入口函数的参数。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250703185116.png" srcset="/img/loading.gif" lazyload alt="创建线程" /></p>
+<ul>
+<li>示例代码：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/select.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/time.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;signal.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;pthread.h&gt;</span></span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">print_ids</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">char</span>* prefix)</span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s: &quot;</span>, prefix);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;pid = %d, ppid = %d &quot;</span>, getpid(), getppid());<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;tid = %lu\n&quot;</span>, pthread_self());<br>&#125;<br><br><span class="hljs-comment">// 子线程的执行流程</span><br><span class="hljs-type">void</span>* <span class="hljs-title function_">start_routine</span><span class="hljs-params">(<span class="hljs-type">void</span>* args)</span>&#123;<br>    print_ids(<span class="hljs-string">&quot;child_thread&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// 主线程</span><br>    print_ids(<span class="hljs-string">&quot;main_thread&quot;</span>);<br><br>    <span class="hljs-type">pthread_t</span> tid;<br>    <span class="hljs-type">int</span> err = pthread_create(&amp;tid, <span class="hljs-literal">NULL</span>, start_routine, <span class="hljs-literal">NULL</span>);<br>    <span class="hljs-keyword">if</span>(err)&#123;<br>        error(<span class="hljs-number">1</span>, err, <span class="hljs-string">&quot;pthread_create&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;main: new_thread = %lu\n&quot;</span>, tid);<br><br>    <span class="hljs-comment">// 注意事项：当主线程终止时，整个进程就终止了</span><br>    sleep(<span class="hljs-number">2</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行结果：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250703185815.png" srcset="/img/loading.gif" lazyload alt="运行结果" /></p>
 
                 
               </div>
