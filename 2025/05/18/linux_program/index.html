@@ -144,8 +144,16 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250705211817.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250705213222.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250705213915.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706133555.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706133657.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706141101.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706141824.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706155605.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706160444.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706162054.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706163256.png">
 <meta property="article:published_time" content="2025-05-18T08:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-05T13:39:39.817Z">
+<meta property="article:modified_time" content="2025-07-06T08:33:03.174Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="ubuntu">
@@ -391,7 +399,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          10k 字
+          12k 字
         
       </span>
     
@@ -403,7 +411,7 @@
         
         
           <!-- compatible with older versions-->
-          33 分钟
+          37 分钟
         
       </span>
     
@@ -1455,6 +1463,103 @@
 <li>主线程无法再获取游离线程的返回结果：</li>
 </ul>
 <p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250705213915.png" srcset="/img/loading.gif" lazyload alt="主线程无法再获取游离线程的返回结果" /></p>
+<h6 id="线程清理函数"><a class="markdownIt-Anchor" href="#线程清理函数"></a> 线程清理函数</h6>
+<ul>
+<li>线程清理函数：用于在线程退出时执行预定义的清理操作。
+<ul>
+<li><code>execute</code> 参数：
+<ul>
+<li><code>0</code>：栈中的 <code>args</code> 参数出栈但不执行 <code>cleanup</code> 线程清理函数。</li>
+<li>非 <code>0</code>：栈中的 <code>args</code> 参数出栈并执行 <code>cleanup</code> 线程清理函数。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706133555.png" srcset="/img/loading.gif" lazyload alt="线程清理函数" /></p>
+<ul>
+<li>与进程之间的对比：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706133657.png" srcset="/img/loading.gif" lazyload alt="与进程之间的对比" /></p>
+<ul>
+<li>示例代码：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/select.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/time.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;signal.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;pthread.h&gt;</span></span><br><br><span class="hljs-type">void</span> <span class="hljs-title function_">cleanup</span><span class="hljs-params">(<span class="hljs-type">void</span>* args)</span>&#123;<br>    <span class="hljs-type">char</span>* msg = (<span class="hljs-type">char</span>*) args;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;cleanup: %s\n&quot;</span>, msg);<br>&#125;<br><br><span class="hljs-comment">// 子线程的执行流程</span><br><span class="hljs-type">void</span>* <span class="hljs-title function_">start_routine</span><span class="hljs-params">(<span class="hljs-type">void</span>* args)</span>&#123;<br>    <span class="hljs-comment">// 注册线程清理函数</span><br>    pthread_cleanup_push(cleanup, <span class="hljs-string">&quot;first&quot;</span>);<br>    pthread_cleanup_push(cleanup, <span class="hljs-string">&quot;second&quot;</span>);<br>    pthread_cleanup_push(cleanup, <span class="hljs-string">&quot;third&quot;</span>);<br><br>    pthread_cleanup_pop(<span class="hljs-number">1</span>); <span class="hljs-comment">// 执行线程清理函数，打印third，执行顺序与注册顺序相反</span><br>    pthread_cleanup_pop(<span class="hljs-number">0</span>); <span class="hljs-comment">// </span><br><br>    sleep(<span class="hljs-number">2</span>);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;child thread is going to return!\n&quot;</span>);<br><br>    pthread_exit(<span class="hljs-literal">NULL</span>);<br>    <span class="hljs-comment">// 后面的代码肯定不会执行</span><br>    pthread_cleanup_pop(<span class="hljs-number">0</span>);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// 主线程</span><br>    <span class="hljs-type">pthread_t</span> tid;<br>    <span class="hljs-type">int</span> err = pthread_create(&amp;tid, <span class="hljs-literal">NULL</span>, start_routine, <span class="hljs-literal">NULL</span>);<br>    <span class="hljs-keyword">if</span>(err)&#123;<br>        error(<span class="hljs-number">1</span>, err, <span class="hljs-string">&quot;pthread_create&quot;</span>);<br>    &#125;<br>    <span class="hljs-comment">// 主线程等待子线程</span><br>    err = pthread_join(tid, <span class="hljs-literal">NULL</span>);<br>    <span class="hljs-keyword">if</span>(err)&#123;<br>        error(<span class="hljs-number">1</span>, err, <span class="hljs-string">&quot;pthread_join&quot;</span>);<br>    &#125;<br>    <span class="hljs-comment">// 注意事项：当主线程终止时，整个进程就终止了</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行结果：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706141101.png" srcset="/img/loading.gif" lazyload alt="运行结果" /></p>
+<ul>
+<li>注意事项：
+<ul>
+<li>从 <code>start_routine</code> 返回，不会执行线程清理函数。</li>
+<li><code>pthread_cleanup_push</code> 和 <code>pthread_cleanup_pop</code> 必须成对出现。
+<ul>
+<li>必须成对出现的原因在于源码中采用了宏函数的特性。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706141824.png" srcset="/img/loading.gif" lazyload alt="宏函数的特性" /></p>
+<h5 id="线程的同步"><a class="markdownIt-Anchor" href="#线程的同步"></a> 线程的同步</h5>
+<ul>
+<li>原子性：CPU 指令是原子性的。</li>
+<li>相关术语：
+<ul>
+<li>竞态条件（<code>race condition</code>）：
+<ul>
+<li>多个执行流程</li>
+<li>共享资源</li>
+<li>程序的结果（状态取决于执行流程调度的情况）</li>
+</ul>
+</li>
+<li>异步和同步：
+<ul>
+<li>异步：任何调度情况都可以出现、两个执行流程不做任何交流。</li>
+<li>同步：让一些调度不可能出现（同步会有一些开销）。
+<ul>
+<li>互斥锁、条件变量。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>并发和并行：
+<ul>
+<li>并发：一种现象，在一个时间段中，执行流程可以交替执行。</li>
+<li>并行：一种技术，同一时刻，可以执行多个执行流程（并行是并发的一种）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>线程的同步：
+<ul>
+<li>互斥地访问资源</li>
+<li>等待某个条件成立</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706155605.png" srcset="/img/loading.gif" lazyload alt="线程的同步" /></p>
+<ul>
+<li>互斥锁函数：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706160444.png" srcset="/img/loading.gif" lazyload alt="互斥锁函数" /></p>
+<ul>
+<li>互斥锁的使用代码：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/select.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/time.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;signal.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;pthread.h&gt;</span></span><br><br><span class="hljs-comment">// 具有以下状态：未初始化、初始化、上锁、没上锁、销毁..</span><br><span class="hljs-type">pthread_mutex_t</span> mutex = PTHREAD_MUTEX_INITIALIZER; <span class="hljs-comment">// 静态初始化，默认属性</span><br><br><span class="hljs-comment">// 子线程的执行流程</span><br><span class="hljs-type">void</span>* <span class="hljs-title function_">start_routine</span><span class="hljs-params">(<span class="hljs-type">void</span>* args)</span>&#123;<br>    <span class="hljs-type">long</span>* value = (<span class="hljs-type">long</span>*) args;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">10000000</span>; i++)&#123;<br>        pthread_mutex_lock(&amp;mutex);<br>        (*value)++; <span class="hljs-comment">// 临界区，对共享资源操作</span><br>        pthread_mutex_unlock(&amp;mutex);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// 主线程</span><br>    <span class="hljs-type">long</span>* value = (<span class="hljs-type">long</span>*)<span class="hljs-built_in">calloc</span>(<span class="hljs-number">1</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-type">long</span>)); <span class="hljs-comment">// *value = 0</span><br><br>    <span class="hljs-type">pthread_t</span> tid1, tid2;<br><br>    <span class="hljs-type">int</span> err = pthread_create(&amp;tid1, <span class="hljs-literal">NULL</span>, start_routine, value);<br>    <span class="hljs-keyword">if</span>(err)&#123;<br>        error(<span class="hljs-number">1</span>, err, <span class="hljs-string">&quot;pthread_create&quot;</span>);<br>    &#125;<br><br>    err = pthread_create(&amp;tid2, <span class="hljs-literal">NULL</span>, start_routine, value);<br>    <span class="hljs-keyword">if</span>(err)&#123;<br>        error(<span class="hljs-number">1</span>, err, <span class="hljs-string">&quot;pthread_create&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-comment">// 主线程：等待子线程结束，并接收返回值</span><br>    err = pthread_join(tid1, <span class="hljs-literal">NULL</span>);<br>    <span class="hljs-keyword">if</span>(err)&#123;<br>        error(<span class="hljs-number">1</span>, err, <span class="hljs-string">&quot;pthread_join %lu\n&quot;</span>, tid1);<br>    &#125;<br>    err = pthread_join(tid2, <span class="hljs-literal">NULL</span>);<br>    <span class="hljs-keyword">if</span>(err)&#123;<br>        error(<span class="hljs-number">1</span>, err, <span class="hljs-string">&quot;pthread_join %lu\n&quot;</span>, tid2);<br>    &#125;<br><br>    <span class="hljs-comment">// 销毁互斥锁</span><br>    pthread_mutex_destroy(&amp;mutex);<br><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;value = %ld\n&quot;</span>, *value);<br><br>    <span class="hljs-comment">// 注意事项：当主线程终止时，整个进程就终止了</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行结果：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706162054.png" srcset="/img/loading.gif" lazyload alt="运行结果" /></p>
+<ul>
+<li>银行例子（细粒度锁）：</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/select.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/time.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;sys/types.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;unistd.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;error.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;errno.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;fcntl.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;string.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;signal.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;pthread.h&gt;</span></span><br><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span>&#123;</span><br>    <span class="hljs-type">int</span> id;<br>    <span class="hljs-type">int</span> balance;<br>    <span class="hljs-type">pthread_mutex_t</span> mutex;<br>&#125; Account;<br><br><span class="hljs-comment">// 具有以下状态：未初始化、初始化、上锁、没上锁、销毁..</span><br>Account acct1 = &#123;<span class="hljs-number">1</span>, <span class="hljs-number">100</span>, PTHREAD_MUTEX_INITIALIZER&#125;;<br><br><span class="hljs-comment">// 扣款函数</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">withdraw</span><span class="hljs-params">(Account* acct, <span class="hljs-type">int</span> money)</span>&#123;<br>    pthread_mutex_lock(&amp;acct-&gt;mutex);<br>    <span class="hljs-comment">// 临界区，对共享资源操作</span><br>    <span class="hljs-keyword">if</span>(acct-&gt;balance &lt; money)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    &#125;<br>    sleep(<span class="hljs-number">1</span>);<span class="hljs-comment">// 让某种调度出现的概率最大化</span><br>    acct-&gt;balance -= money;<br>    pthread_mutex_unlock(&amp;acct-&gt;mutex);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lu: withdraw %d\n&quot;</span>,pthread_self(), money);<br>    <span class="hljs-keyword">return</span> money;<br>&#125;<br><br><span class="hljs-comment">// 子线程的执行流程</span><br><span class="hljs-type">void</span>* <span class="hljs-title function_">start_routine</span><span class="hljs-params">(<span class="hljs-type">void</span>* args)</span>&#123;<br>    withdraw(&amp;acct1, <span class="hljs-number">100</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>&#125;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">char</span>* argv[])</span><br>&#123;<br>    <span class="hljs-comment">// 主线程</span><br>    <span class="hljs-type">pthread_t</span> tid1, tid2;<br>    <span class="hljs-type">int</span> err = pthread_create(&amp;tid1, <span class="hljs-literal">NULL</span>, start_routine, <span class="hljs-literal">NULL</span>);<br>    <span class="hljs-keyword">if</span>(err)&#123;<br>        error(<span class="hljs-number">1</span>, err, <span class="hljs-string">&quot;pthread_create&quot;</span>);<br>    &#125;<br>    err = pthread_create(&amp;tid2, <span class="hljs-literal">NULL</span>, start_routine, <span class="hljs-literal">NULL</span>);<br>    <span class="hljs-keyword">if</span>(err)&#123;<br>        error(<span class="hljs-number">1</span>, err, <span class="hljs-string">&quot;pthread_create&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-comment">// 主线程：等待子线程结束</span><br>    err = pthread_join(tid1, <span class="hljs-literal">NULL</span>);<br>    <span class="hljs-keyword">if</span>(err)&#123;<br>        error(<span class="hljs-number">1</span>, err, <span class="hljs-string">&quot;pthread_join %lu\n&quot;</span>, tid1);<br>    &#125;<br>    err = pthread_join(tid2, <span class="hljs-literal">NULL</span>);<br>    <span class="hljs-keyword">if</span>(err)&#123;<br>        error(<span class="hljs-number">1</span>, err, <span class="hljs-string">&quot;pthread_join %lu\n&quot;</span>, tid2);<br>    &#125;<br><br>    <span class="hljs-comment">// 销毁互斥锁</span><br>    pthread_mutex_destroy(&amp;acct1.mutex);<br>    <span class="hljs-comment">// 打印账户余额</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;balance = %d\n&quot;</span>, acct1.balance);<br><br>    <span class="hljs-comment">// 注意事项：当主线程终止时，整个进程就终止了</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>运行结果：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250706163256.png" srcset="/img/loading.gif" lazyload alt="运行结果" /></p>
 
                 
               </div>
