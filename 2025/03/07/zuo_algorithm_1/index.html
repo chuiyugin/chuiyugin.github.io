@@ -20,8 +20,8 @@
   
     <meta name="description" content="C++、编程语言、算法学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="左程云算法学习">
-<meta property="og:url" content="http://example.com/2025/03/07/zuo_algorithm/index.html">
+<meta property="og:title" content="左程云、代码随想录算法学习（一）">
+<meta property="og:url" content="http://example.com/2025/03/07/zuo_algorithm_1/index.html">
 <meta property="og:site_name" content="CHUI YUGIN">
 <meta property="og:description" content="C++、编程语言、算法学习">
 <meta property="og:locale" content="zh_CN">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250510211156.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250420144955.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-03T06:58:41.692Z">
+<meta property="article:modified_time" content="2025-07-08T02:39:35.578Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -46,7 +46,7 @@
   
   
   
-  <title>左程云算法学习 - CHUI YUGIN</title>
+  <title>左程云、代码随想录算法学习（一） - CHUI YUGIN</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -254,7 +254,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="左程云算法学习"></span>
+            <span id="subtitle" data-typed-text="左程云、代码随想录算法学习（一）"></span>
           
         </div>
 
@@ -283,7 +283,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          21k 字
+          23k 字
         
       </span>
     
@@ -295,7 +295,7 @@
         
         
           <!-- compatible with older versions-->
-          67 分钟
+          71 分钟
         
       </span>
     
@@ -332,12 +332,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">左程云算法学习</h1>
+            <h1 id="seo-header">左程云、代码随想录算法学习（一）</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="左程云算法学习"><a class="markdownIt-Anchor" href="#左程云算法学习"></a> 左程云算法学习</h1>
+                <h1 id="左程云-代码随想录算法学习一"><a class="markdownIt-Anchor" href="#左程云-代码随想录算法学习一"></a> 左程云、代码随想录算法学习（一）</h1>
 <h2 id="二分法"><a class="markdownIt-Anchor" href="#二分法"></a> 二分法</h2>
 <ul>
 <li>二分查找法：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/description/">704.二分查找</a></li>
@@ -1027,6 +1027,62 @@
 <li>递归法代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">// 递归法插入</span><br>    <span class="hljs-function">TreeNode* <span class="hljs-title">insert</span><span class="hljs-params">(TreeNode* root, <span class="hljs-keyword">int</span> val)</span></span>&#123;<br>        <span class="hljs-comment">// 终止条件</span><br>        <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">nullptr</span>)&#123;<br>            root = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>(val);<br>            <span class="hljs-keyword">return</span> root;<br>        &#125;<br>        <span class="hljs-comment">// 向左递归</span><br>        <span class="hljs-keyword">if</span>(val &lt; root-&gt;val)&#123;<br>            root-&gt;left = <span class="hljs-built_in">insert</span>(root-&gt;left, val);<br>        &#125;<br>        <span class="hljs-comment">// 向右递归</span><br>        <span class="hljs-keyword">if</span>(val &gt; root-&gt;val)&#123;<br>            root-&gt;right = <span class="hljs-built_in">insert</span>(root-&gt;right, val);<br>        &#125;<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br><br>    <span class="hljs-function">TreeNode* <span class="hljs-title">insertIntoBST</span><span class="hljs-params">(TreeNode* root, <span class="hljs-keyword">int</span> val)</span> </span>&#123;<br>        TreeNode* ans = <span class="hljs-built_in">insert</span>(root, val);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;```<br><br>+ 迭代法代码：<br><br>```cpp<br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-comment">// 迭代法</span><br>    <span class="hljs-function">TreeNode* <span class="hljs-title">insertIntoBST</span><span class="hljs-params">(TreeNode* root, <span class="hljs-keyword">int</span> val)</span> </span>&#123;<br>        TreeNode* cur = root;<br>        <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">nullptr</span>)<br>            root = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>(val);<br>        <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">nullptr</span>)&#123;<br>            <span class="hljs-keyword">if</span>(val &lt; cur-&gt;val)&#123;<br>                <span class="hljs-keyword">if</span>(cur-&gt;left != <span class="hljs-literal">nullptr</span>)<br>                    cur = cur-&gt;left;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    TreeNode* node = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>(val);<br>                    cur-&gt;left = node;<br>                    cur = <span class="hljs-literal">nullptr</span>;<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(val &gt; cur-&gt;val)&#123;<br>                <span class="hljs-keyword">if</span>(cur-&gt;right != <span class="hljs-literal">nullptr</span>)<br>                    cur = cur-&gt;right;<br>                <span class="hljs-keyword">else</span>&#123;<br>                    TreeNode* node = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>(val);<br>                    cur-&gt;right = node;<br>                    cur = <span class="hljs-literal">nullptr</span>;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="删除二叉搜索树中的节点"><a class="markdownIt-Anchor" href="#删除二叉搜索树中的节点"></a> 删除二叉搜索树中的节点</h3>
+<ul>
+<li>删除二叉搜索树中的节点：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-node-in-a-bst/description/">450.删除二叉搜索树中的节点</a></li>
+<li>思路：
+<ul>
+<li>终止条件有以下五种情况：
+<ul>
+<li>第一种情况：没找到删除的节点，遍历到空节点直接返回了；</li>
+<li>找到删除的节点：
+<ul>
+<li>第二种情况：左右孩子都为空（叶子节点），直接删除节点，返回 NULL 为根节点；</li>
+<li>第三种情况：删除节点的左孩子为空，右孩子不为空，删除节点，右孩子补位，返回右孩子为根节点；</li>
+<li>第四种情况：删除节点的右孩子为空，左孩子不为空，删除节点，左孩子补位，返回左孩子为根节点；</li>
+<li>第五种情况：左右孩子节点都不为空，则将删除节点的左子树头结点（左孩子）放到删除节点的右子树的最左面节点的左孩子上，返回删除节点右孩子为新的根节点。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>根据二叉搜索树的规则递归查找 <code>key</code> 节点。</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">TreeNode* <span class="hljs-title">travelsal</span><span class="hljs-params">(TreeNode* root, <span class="hljs-keyword">int</span> key)</span></span>&#123;<br>        <span class="hljs-comment">// 终止条件</span><br>        <span class="hljs-comment">// 1.没有找到要删除的节点</span><br>        <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">nullptr</span>)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>        &#125;<br>        <span class="hljs-comment">// 2.删除的是叶子节点</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key == root-&gt;val &amp;&amp; root-&gt;left == <span class="hljs-literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="hljs-literal">nullptr</span>)&#123;<br>            <span class="hljs-keyword">delete</span> root;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>        &#125;<br>        <span class="hljs-comment">// 3.删除的节点只有左子树</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key == root-&gt;val &amp;&amp; root-&gt;left != <span class="hljs-literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="hljs-literal">nullptr</span>)&#123;<br>            TreeNode* temp_node = root-&gt;left;<br>            <span class="hljs-keyword">delete</span> root;<br>            <span class="hljs-keyword">return</span> temp_node;<br>        &#125;<br>        <span class="hljs-comment">// 4.删除的节点只有右子树</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key == root-&gt;val &amp;&amp; root-&gt;right != <span class="hljs-literal">nullptr</span> &amp;&amp; root-&gt;left == <span class="hljs-literal">nullptr</span>)&#123;<br>            TreeNode* temp_node = root-&gt;right;<br>            <span class="hljs-keyword">delete</span> root;<br>            <span class="hljs-keyword">return</span> temp_node;<br>        &#125;<br>        <span class="hljs-comment">// 5.删除的节点左右子树都不为空,把左子树嫁接到右子树处</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key == root-&gt;val &amp;&amp; root-&gt;right != <span class="hljs-literal">nullptr</span> &amp;&amp; root-&gt;left != <span class="hljs-literal">nullptr</span>)&#123;<br>            TreeNode* temp_node = root-&gt;right;<br>            <span class="hljs-keyword">while</span>(temp_node-&gt;left != <span class="hljs-literal">nullptr</span>)&#123;<br>                temp_node = temp_node-&gt;left;<br>            &#125;<br>            temp_node-&gt;left = root-&gt;left;<br>            TreeNode* new_root = root-&gt;right;<br>            <span class="hljs-keyword">delete</span> root;<br>            <span class="hljs-keyword">return</span> new_root;<br>        &#125;<br>        <span class="hljs-comment">// 递归遍历</span><br>        <span class="hljs-keyword">if</span>(key &lt; root-&gt;val)<br>            root-&gt;left = <span class="hljs-built_in">travelsal</span>(root-&gt;left, key);<br>        <span class="hljs-keyword">if</span>(key &gt; root-&gt;val)<br>            root-&gt;right = <span class="hljs-built_in">travelsal</span>(root-&gt;right, key);<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br><br>    <span class="hljs-function">TreeNode* <span class="hljs-title">deleteNode</span><span class="hljs-params">(TreeNode* root, <span class="hljs-keyword">int</span> key)</span> </span>&#123;<br>        TreeNode* ans = <span class="hljs-built_in">travelsal</span>(root, key);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="修剪二叉搜索树"><a class="markdownIt-Anchor" href="#修剪二叉搜索树"></a> 修剪二叉搜索树</h3>
+<ul>
+<li>修剪二叉搜索树：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/trim-a-binary-search-tree/">669.修剪二叉搜索树</a></li>
+<li>思路：
+<ul>
+<li>在终止条件中处理 <code>root</code> 节点：
+<ul>
+<li>遍历到 <code>root</code> 节点为空的情况则返回空；</li>
+<li>如果 <code>root</code> 节点的值小于下限值则继续往右子树遍历查找是否有不在区间的值；</li>
+<li>如果 <code>root</code> 节点的值大于下限值则继续往左子树遍历查找是否有不在区间的值。</li>
+</ul>
+</li>
+<li>之后 <code>root</code> 节点在区间内，再递归处理左右孩子不在区间内的节点。</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">// 返回处理好子树的根节点</span><br>    <span class="hljs-function">TreeNode* <span class="hljs-title">travelsal</span><span class="hljs-params">(TreeNode* root, <span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high)</span></span>&#123;<br>        <span class="hljs-comment">// 终止条件(处理root节点，root节点不在区间内)</span><br>        <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">nullptr</span>)<br>            <span class="hljs-keyword">return</span> root;<br>        <span class="hljs-keyword">if</span>(root-&gt;val &lt; low)&#123;<br>            TreeNode* root_right = root-&gt;right;<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">travelsal</span>(root-&gt;right, low, high);<br>        &#125;<br>        <span class="hljs-keyword">if</span>(root-&gt;val &gt; high)&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">travelsal</span>(root-&gt;left, low, high);<br>        &#125;<br>        <span class="hljs-comment">// 之后root节点在区间内，处理左右孩子不在区间内的节点</span><br>        <span class="hljs-comment">// 左</span><br>        root-&gt;left = <span class="hljs-built_in">travelsal</span>(root-&gt;left, low, high);<br>        <span class="hljs-comment">// 右</span><br>        root-&gt;right = <span class="hljs-built_in">travelsal</span>(root-&gt;right, low, high);<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br><br>    <span class="hljs-function">TreeNode* <span class="hljs-title">trimBST</span><span class="hljs-params">(TreeNode* root, <span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high)</span> </span>&#123;<br>        TreeNode* ans = <span class="hljs-built_in">travelsal</span>(root, low, high);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="将有序数组转换为二叉搜索树"><a class="markdownIt-Anchor" href="#将有序数组转换为二叉搜索树"></a> 将有序数组转换为二叉搜索树</h3>
+<ul>
+<li>将有序数组转换为二叉搜索树：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/description/">108.将有序数组转换为二叉搜索树</a></li>
+<li>思路：题目中给出的是按照升序排列的整数数组，只需要每次递归选取数组的中间数值作为根节点 <code>root</code>，递归数组左边作为左子树，数组右边作为右子树进行构造即可。</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">// 左闭右闭区间</span><br>    <span class="hljs-function">TreeNode* <span class="hljs-title">travelsal</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right)</span></span>&#123;<br>        <span class="hljs-comment">// 终止条件</span><br>        <span class="hljs-keyword">if</span>(left &gt; right)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>        <span class="hljs-comment">// 递归构造子树</span><br>        <span class="hljs-keyword">int</span> mid = left + (right - left)/<span class="hljs-number">2</span>;<br>        TreeNode* root = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>(nums[mid]);<br>        root-&gt;left = <span class="hljs-built_in">travelsal</span>(nums, left, mid<span class="hljs-number">-1</span>);<br>        root-&gt;right = <span class="hljs-built_in">travelsal</span>(nums, mid+<span class="hljs-number">1</span>, right);<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br><br>    <span class="hljs-function">TreeNode* <span class="hljs-title">sortedArrayToBST</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        TreeNode* ans = <span class="hljs-built_in">travelsal</span>(nums, <span class="hljs-number">0</span>, nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="把二叉搜索树转换为累加树"><a class="markdownIt-Anchor" href="#把二叉搜索树转换为累加树"></a> 把二叉搜索树转换为累加树</h3>
+<ul>
+<li>把二叉搜索树转换为累加树：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-bst-to-greater-tree/description/">538.把二叉搜索树转换为累加树</a></li>
+<li>思路：这题采用双指针的方法，因为要将比该节点大的所有数值加上，因此采用<strong>右-中-左</strong>的遍历方式，中的逻辑处理相加操作。</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-keyword">int</span> pre = <span class="hljs-number">0</span>;<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">travelsal</span><span class="hljs-params">(TreeNode* cur)</span></span>&#123;<br>	    <span class="hljs-comment">// 终止条件</span><br>        <span class="hljs-keyword">if</span>(cur == <span class="hljs-literal">nullptr</span>)<br>            <span class="hljs-keyword">return</span>;<br>        <span class="hljs-comment">// 右</span><br>        <span class="hljs-built_in">travelsal</span>(cur-&gt;right);<br>        <span class="hljs-comment">// 中</span><br>        cur-&gt;val += pre;<br>        pre = cur-&gt;val;<br>        <span class="hljs-comment">// 左</span><br>        <span class="hljs-built_in">travelsal</span>(cur-&gt;left);<br>    &#125;<br>    <br>    <span class="hljs-function">TreeNode* <span class="hljs-title">convertBST</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-built_in">travelsal</span>(root);<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="排序问题"><a class="markdownIt-Anchor" href="#排序问题"></a> 排序问题</h2>
 <h3 id="选择排序"><a class="markdownIt-Anchor" href="#选择排序"></a> 选择排序</h3>
 <h4 id="普通选择排序"><a class="markdownIt-Anchor" href="#普通选择排序"></a> 普通选择排序</h4>
@@ -1278,8 +1334,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>左程云算法学习</div>
-      <div>http://example.com/2025/03/07/zuo_algorithm/</div>
+      <div>左程云、代码随想录算法学习（一）</div>
+      <div>http://example.com/2025/03/07/zuo_algorithm_1/</div>
     </div>
     <div class="license-meta">
       
@@ -1323,9 +1379,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/26/C_system/" title="C语言系统学习">
+                      <a href="/2025/03/07/zuo_algorithm_2/" title="左程云、代码随想录算法学习（二）">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C语言系统学习</span>
+                        <span class="hidden-mobile">左程云、代码随想录算法学习（二）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -1357,7 +1413,7 @@
         var options = Object.assign(
           {"clientID":"5879fef477aebfb46fe6","clientSecret":"c6ddf310da089b6eade5be010238bbfc1507e2d9","repo":"blog-comments","owner":"chuiyugin","admin":["chuiyugin"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":false,"proxy":"https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token"},
           {
-            id: '6bf2a46431df0c49a5964c23466256e9'
+            id: 'f18fa51c516c062347d0a0da87fae8e2'
           }
         )
         var gitalk = new Gitalk(options);
