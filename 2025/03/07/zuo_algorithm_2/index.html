@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250714150713.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-23T04:18:47.572Z">
+<meta property="article:modified_time" content="2025-07-24T04:03:23.677Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -272,7 +272,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          5.5k 字
+          5.8k 字
         
       </span>
     
@@ -284,7 +284,7 @@
         
         
           <!-- compatible with older versions-->
-          18 分钟
+          19 分钟
         
       </span>
     
@@ -550,6 +550,18 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">wiggleMaxLength</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> up = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> down = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> result = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span>(nums.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> result;<br>        <span class="hljs-keyword">if</span>(nums.<span class="hljs-built_in">size</span>() &gt;= <span class="hljs-number">2</span>)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)&#123;<br>                <span class="hljs-keyword">if</span>(nums[i] &gt; nums[i<span class="hljs-number">-1</span>])<br>                    up = down + <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span>(nums[i] &lt; nums[i<span class="hljs-number">-1</span>])<br>                    down = up + <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        result = <span class="hljs-built_in">max</span>(up, down);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="最大子数组和"><a class="markdownIt-Anchor" href="#最大子数组和"></a> 最大子数组和</h3>
+<ul>
+<li>最大子数组和：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/description/">53.最大子数组和</a></li>
+<li>思路一（贪心解法）：贪心解法的核心在于如果此前记录的子数组累加和为负数时，再和数组 <code>nums</code> 中后续的数相加会使得总的子数组和变小，因此子数组累加和为负数时应当置为 <code>0</code>，用后一个数为起点再次累加，每次需要将较大值通过 <code>result = max(result, sum)</code> 来记录。</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxSubArray</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-comment">// 贪心解法</span><br>        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>; <span class="hljs-comment">// 子数组累加和</span><br>        <span class="hljs-keyword">int</span> result = INT_MIN;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            sum += nums[i];<br>            result = <span class="hljs-built_in">max</span>(result, sum);<br>            <span class="hljs-keyword">if</span>(sum &lt; <span class="hljs-number">0</span>) <span class="hljs-comment">// 子数组累加和为负数</span><br>                sum = <span class="hljs-number">0</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>思路二（前缀和解法）：应当找到一个尽可能小的前缀和 <code>MinPreSum</code>，然后用当前的总和 <code>sum</code> 减去此时最小的前缀和跟目前的最大子数组和比较再取最大值：<code>max(MaxSubSum, sum - MinPreSum)</code>。</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxSubArray</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-comment">// 前缀和解法</span><br>        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// 最大子数组和</span><br>        <span class="hljs-keyword">int</span> MaxSubSum = INT_MIN;<br>        <span class="hljs-comment">// 最小前缀和(初始为0)</span><br>        <span class="hljs-keyword">int</span> MinPreSum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            sum += nums[i];<br>            MaxSubSum = <span class="hljs-built_in">max</span>(MaxSubSum, sum - MinPreSum);<br>            MinPreSum = <span class="hljs-built_in">min</span>(sum, MinPreSum);<br>        &#125;<br>        <span class="hljs-keyword">return</span> MaxSubSum;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -639,9 +651,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/07/zuo_algorithm/" title="左程云算法学习">
+                      <a href="/2025/03/07/zuo_algorithm_1/" title="左程云、代码随想录算法学习（一）">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">左程云算法学习</span>
+                        <span class="hidden-mobile">左程云、代码随想录算法学习（一）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -649,8 +661,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/03/07/zuo_algorithm_1/" title="左程云、代码随想录算法学习（一）">
-                        <span class="hidden-mobile">左程云、代码随想录算法学习（一）</span>
+                      <a href="/2024/11/16/measurement/" title="计量方法与误差理论">
+                        <span class="hidden-mobile">计量方法与误差理论</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
