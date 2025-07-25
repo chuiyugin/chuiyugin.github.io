@@ -26,8 +26,9 @@
 <meta property="og:description" content="C++、编程语言、算法学习">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250714150713.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202507251344404.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-24T04:03:23.677Z">
+<meta property="article:modified_time" content="2025-07-25T05:44:27.489Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -272,7 +273,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          5.8k 字
+          6.3k 字
         
       </span>
     
@@ -284,7 +285,7 @@
         
         
           <!-- compatible with older versions-->
-          19 分钟
+          20 分钟
         
       </span>
     
@@ -562,6 +563,30 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxSubArray</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-comment">// 前缀和解法</span><br>        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// 最大子数组和</span><br>        <span class="hljs-keyword">int</span> MaxSubSum = INT_MIN;<br>        <span class="hljs-comment">// 最小前缀和(初始为0)</span><br>        <span class="hljs-keyword">int</span> MinPreSum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            sum += nums[i];<br>            MaxSubSum = <span class="hljs-built_in">max</span>(MaxSubSum, sum - MinPreSum);<br>            MinPreSum = <span class="hljs-built_in">min</span>(sum, MinPreSum);<br>        &#125;<br>        <span class="hljs-keyword">return</span> MaxSubSum;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="买卖股票的最佳时机-ii"><a class="markdownIt-Anchor" href="#买卖股票的最佳时机-ii"></a> 买卖股票的最佳时机 II</h3>
+<ul>
+<li>买卖股票的最佳时机 II：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/description/">122.买卖股票的最佳时机 II</a></li>
+<li>思路：这道题目采用贪心算法的思路非常直观和简单，只要每一天的收益为正便进行股票的买卖从而使得总收益的最大化。局部最优是每一天的收益为正数，全局最优即为总的收益最大。</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxProfit</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; prices)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(prices.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span> || prices.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;prices.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>; i++)&#123;<br>            <span class="hljs-keyword">if</span>(prices[i] &lt; prices[i+<span class="hljs-number">1</span>])<br>                sum += prices[i+<span class="hljs-number">1</span>] - prices[i];<br>        &#125;<br>        <span class="hljs-keyword">return</span> sum;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="跳跃游戏"><a class="markdownIt-Anchor" href="#跳跃游戏"></a> 跳跃游戏</h3>
+<ul>
+<li>跳跃游戏：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game/description/">55.跳跃游戏</a></li>
+<li>思路：本题的巧妙之处在于不去纠结每一跳具体是跳几步，只需要计算在 <code>i</code> 这个节点能够跳的范围 <code>cover</code>，并在 <code>cover</code> 这个范围内去寻找更大的范围，最终判断能否找到到达最后的范围。</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">canJump</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> cover = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;=cover; i++)&#123;<br>            cover = <span class="hljs-built_in">max</span>(cover, i+nums[i]);<br>            <span class="hljs-keyword">if</span>(cover &gt;= nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>)<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="跳跃游戏-ii"><a class="markdownIt-Anchor" href="#跳跃游戏-ii"></a> 跳跃游戏 II</h3>
+<ul>
+<li>跳跃游戏 II：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game-ii/description/">45.跳跃游戏 II</a></li>
+<li>思路：这道题目需要求从起点跳到终点的最短跳跃次数，处理方法和上一题有较大区别。我们需要记录当前访问过的所有节点能够跳到的最远距离 <code>max_cover</code>，以及现阶段的覆盖距离 <code>now_cover</code>，要从现阶段的覆盖范围出发，不管怎么跳，覆盖范围内一定是可以跳到的，以最小的步数增加覆盖范围，覆盖范围一旦覆盖了终点，得到的就是最少步数！</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202507251344404.png" srcset="/img/loading.gif" lazyload alt="跳跃游戏 II" /></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">jump</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(nums.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> max_cover = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> now_cover = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            max_cover = <span class="hljs-built_in">max</span>(max_cover, i+nums[i]);<br>            <span class="hljs-keyword">if</span>(i == now_cover)&#123;<br>                now_cover = max_cover;<br>                ans++;<br>                <span class="hljs-keyword">if</span>(now_cover &gt;= nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>)<br>                    <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -651,9 +676,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/07/zuo_algorithm_1/" title="左程云、代码随想录算法学习（一）">
+                      <a href="/2025/03/26/C_system/" title="C语言系统学习">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">左程云、代码随想录算法学习（一）</span>
+                        <span class="hidden-mobile">C语言系统学习</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -661,8 +686,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/11/16/measurement/" title="计量方法与误差理论">
-                        <span class="hidden-mobile">计量方法与误差理论</span>
+                      <a href="/2025/03/07/zuo_algorithm/" title="左程云算法学习">
+                        <span class="hidden-mobile">左程云算法学习</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
