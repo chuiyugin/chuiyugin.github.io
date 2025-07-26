@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250714150713.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202507251344404.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-25T05:44:27.489Z">
+<meta property="article:modified_time" content="2025-07-26T06:34:54.670Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -273,7 +273,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          6.3k 字
+          6.5k 字
         
       </span>
     
@@ -285,7 +285,7 @@
         
         
           <!-- compatible with older versions-->
-          20 分钟
+          21 分钟
         
       </span>
     
@@ -587,6 +587,22 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">jump</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(nums.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> max_cover = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> now_cover = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            max_cover = <span class="hljs-built_in">max</span>(max_cover, i+nums[i]);<br>            <span class="hljs-keyword">if</span>(i == now_cover)&#123;<br>                now_cover = max_cover;<br>                ans++;<br>                <span class="hljs-keyword">if</span>(now_cover &gt;= nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>)<br>                    <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="k-次取反后最大化的数组和"><a class="markdownIt-Anchor" href="#k-次取反后最大化的数组和"></a> K 次取反后最大化的数组和</h3>
+<ul>
+<li>K次取反后最大化的数组和：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game-ii/description/">1005.K次取反后最大化的数组和</a></li>
+<li>思路：
+<ul>
+<li>贪心的思路：
+<ul>
+<li>当数组有正数和负数时，局部最优：让绝对值大的负数变为正数，当前数值达到最大。整体最优：整个数组和达到最大。</li>
+<li>当数组只有正数和 <code>0</code> 后，局部最优：只让最小的数连续翻转，耗尽 <code>K</code> 值。整体最优：整个数组和达到最大。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sum</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span></span>&#123;<br>        <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            ans += nums[i];<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">largestSumAfterKNegations</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>        <span class="hljs-built_in">sort</span>(nums.<span class="hljs-built_in">begin</span>(), nums.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(i&lt;nums.<span class="hljs-built_in">size</span>() &amp;&amp; nums[i]&lt;<span class="hljs-number">0</span> &amp;&amp; k&gt;<span class="hljs-number">0</span>)&#123;<br>            nums[i] = -nums[i];<br>            k--;<br>            i++;<br>        &#125;<br>        <span class="hljs-built_in">sort</span>(nums.<span class="hljs-built_in">begin</span>(), nums.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-keyword">if</span>(k%<span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-comment">// k是奇数</span><br>            nums[<span class="hljs-number">0</span>] = -nums[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">sum</span>(nums);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -686,8 +702,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/03/07/zuo_algorithm/" title="左程云算法学习">
-                        <span class="hidden-mobile">左程云算法学习</span>
+                      <a href="/2025/03/07/zuo_algorithm_1/" title="左程云、代码随想录算法学习（一）">
+                        <span class="hidden-mobile">左程云、代码随想录算法学习（一）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
