@@ -28,7 +28,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/20250714150713.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202507251344404.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-26T06:34:54.670Z">
+<meta property="article:modified_time" content="2025-07-27T02:36:55.500Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -273,7 +273,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          6.5k 字
+          6.8k 字
         
       </span>
     
@@ -285,7 +285,7 @@
         
         
           <!-- compatible with older versions-->
-          21 分钟
+          22 分钟
         
       </span>
     
@@ -603,6 +603,13 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sum</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span></span>&#123;<br>        <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            ans += nums[i];<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">largestSumAfterKNegations</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>        <span class="hljs-built_in">sort</span>(nums.<span class="hljs-built_in">begin</span>(), nums.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(i&lt;nums.<span class="hljs-built_in">size</span>() &amp;&amp; nums[i]&lt;<span class="hljs-number">0</span> &amp;&amp; k&gt;<span class="hljs-number">0</span>)&#123;<br>            nums[i] = -nums[i];<br>            k--;<br>            i++;<br>        &#125;<br>        <span class="hljs-built_in">sort</span>(nums.<span class="hljs-built_in">begin</span>(), nums.<span class="hljs-built_in">end</span>());<br>        <span class="hljs-keyword">if</span>(k%<span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-comment">// k是奇数</span><br>            nums[<span class="hljs-number">0</span>] = -nums[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">sum</span>(nums);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="加油站"><a class="markdownIt-Anchor" href="#加油站"></a> 加油站</h3>
+<ul>
+<li>加油站：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/gas-station/description/">134.加油站</a></li>
+<li>思路：如果总油量减去总消耗大于等于零那么一定可以跑完一圈，说明各个站点的加油站剩油量相加一定是要大于等于零的。那么每个加油站的剩余量 <code>rest[i]</code> 为 <code>gas[i] - cost[i]</code> 。<code>i</code> 从 <code>0</code> 开始累加 <code>rest[i]</code>，和记为 <code>curSum</code> ，一旦 <code>curSum</code> 小于零，说明 <code>[0, i]</code> 区间都不能作为起始位置，因为这个区间选择任何一个位置作为起点，到 <code>i</code> 这里都会断油，那么起始位置从 <code>i+1</code> 算起，再从 <code>0</code> 计算 <code>curSum</code>。</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">canCompleteCircuit</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; gas, vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; cost)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> curSum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> totalSum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> start = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;gas.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            curSum  = curSum + (gas[i] - cost[i]);<br>            totalSum  = totalSum + (gas[i] - cost[i]);<br>            <span class="hljs-keyword">if</span>(curSum &lt; <span class="hljs-number">0</span>)&#123;<br>                start = i+<span class="hljs-number">1</span>;<br>                curSum = <span class="hljs-number">0</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(totalSum&lt;<span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">return</span> start;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
