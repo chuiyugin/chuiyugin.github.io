@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202507281126507.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202507301327566.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-07-30T05:27:59.961Z">
+<meta property="article:modified_time" content="2025-07-31T03:08:01.342Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -275,7 +275,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          7.6k 字
+          7.9k 字
         
       </span>
     
@@ -287,7 +287,7 @@
         
         
           <!-- compatible with older versions-->
-          24 分钟
+          25 分钟
         
       </span>
     
@@ -667,6 +667,21 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; a, <span class="hljs-keyword">const</span> vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; b)</span></span>&#123;<br>        <span class="hljs-keyword">if</span>(a[<span class="hljs-number">0</span>] == b[<span class="hljs-number">0</span>])<br>            <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>]&lt;b[<span class="hljs-number">1</span>]; <span class="hljs-comment">// 小于号从小到大排序</span><br>        <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>]&gt;b[<span class="hljs-number">0</span>]; <span class="hljs-comment">// 大于号从大到小排序</span><br>    &#125;<br><br>    vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-built_in">reconstructQueue</span>(vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; people) &#123;<br>        <span class="hljs-built_in">sort</span>(people.<span class="hljs-built_in">begin</span>(), people.<span class="hljs-built_in">end</span>(), cmp);<br>        vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt; result;<br>        <span class="hljs-keyword">int</span> pos = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;people.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            pos = people[i][<span class="hljs-number">1</span>];<br>            result.<span class="hljs-built_in">insert</span>(result.<span class="hljs-built_in">begin</span>()+pos, people[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="用最少数量的箭引爆气球"><a class="markdownIt-Anchor" href="#用最少数量的箭引爆气球"></a> 用最少数量的箭引爆气球</h3>
+<ul>
+<li>用最少数量的箭引爆气球：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/description/">452.用最少数量的箭引爆气球</a></li>
+<li>思路：
+<ul>
+<li>局部最优：当气球出现重叠，一起射，所用弓箭最少。</li>
+<li>全局最优：把所有气球射爆所用弓箭最少。</li>
+<li>怎么寻找重叠区域呢？首先按照各个气球的左坐标 <code>left_idx</code> 进行对 <code>points</code> 数组进行排序，遍历取当前气球的的左坐标和 <code>left_idx</code> 的较大值，同理，取当前气球右坐标和 <code>right_idx</code> 的较小值组成重叠区域。</li>
+<li>初始化要射箭的总数： <code>ans = points.size()</code>。</li>
+<li>怎么判断是否重叠？如果 <code>left_idx &lt;= right_idx</code> 说明当前气球和之前的气球重叠，需要射的箭的数量减一 <code>ans--</code> ，否则不重叠并更新 <code>left_idx</code> 和 <code>right_idx</code> 的值。</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; a, <span class="hljs-keyword">const</span> vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; b)</span></span>&#123;<br>        <span class="hljs-keyword">if</span>(a[<span class="hljs-number">0</span>] == b[<span class="hljs-number">0</span>])<br>            <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] &lt; b[<span class="hljs-number">1</span>]; <span class="hljs-comment">// 从小到大</span><br>        <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &lt; b[<span class="hljs-number">0</span>]; <span class="hljs-comment">// 从小到大</span><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">findMinArrowShots</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; points)</span> </span>&#123;<br>        <span class="hljs-built_in">sort</span>(points.<span class="hljs-built_in">begin</span>(), points.<span class="hljs-built_in">end</span>(), cmp);<br>        <span class="hljs-keyword">int</span> ans = points.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">int</span> left_idx = points[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">int</span> right_idx = points[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">if</span>(points.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> ans;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;points.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            left_idx = <span class="hljs-built_in">max</span>(left_idx, points[i][<span class="hljs-number">0</span>]);<br>            right_idx = <span class="hljs-built_in">min</span>(right_idx, points[i][<span class="hljs-number">1</span>]);<br>            <span class="hljs-keyword">if</span>(left_idx &lt;= right_idx)<br>                ans--;<br>            <span class="hljs-keyword">else</span>&#123;<br>                left_idx = points[i][<span class="hljs-number">0</span>];<br>                right_idx = points[i][<span class="hljs-number">1</span>];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
