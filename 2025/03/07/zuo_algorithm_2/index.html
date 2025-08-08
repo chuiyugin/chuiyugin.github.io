@@ -30,8 +30,9 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202507281126507.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202507301327566.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508011124775.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508081116545.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-01T03:28:22.022Z">
+<meta property="article:modified_time" content="2025-08-08T03:21:41.062Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -276,7 +277,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          8.1k 字
+          8.7k 字
         
       </span>
     
@@ -288,7 +289,7 @@
         
         
           <!-- compatible with older versions-->
-          26 分钟
+          28 分钟
         
       </span>
     
@@ -642,7 +643,7 @@
 <ul>
 <li>情况一：账单是 <code>5</code>，直接收下；</li>
 <li>情况二：账单是 <code> 10</code>，消耗一个 <code>5</code>，增加一个 <code>10</code>；</li>
-<li>情况三：账单是 <code>20</code>，优先消耗一个 <code>10</code> 和一个 <code>5</code>，如果不够，再消耗三个 <code>5</code>。</li>
+<li>情况三：账单是 <code>20</code>，优先消耗一个 <code>10</code> 和一个 <code>5</code>，如果不够，再消耗三个 <code>5</code> 。</li>
 </ul>
 </li>
 </ul>
@@ -697,6 +698,43 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; a, <span class="hljs-keyword">const</span> vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; b)</span></span>&#123;<br>        <span class="hljs-keyword">if</span>(a[<span class="hljs-number">0</span>] == b[<span class="hljs-number">0</span>])<br>            <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] &lt; b[<span class="hljs-number">1</span>]; <span class="hljs-comment">// 小于号表示从小到大排列</span><br>        <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &lt; b[<span class="hljs-number">0</span>]; <span class="hljs-comment">// 小于号表示从小到大排列</span><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">eraseOverlapIntervals</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; intervals)</span> </span>&#123;<br>        <span class="hljs-built_in">sort</span>(intervals.<span class="hljs-built_in">begin</span>(), intervals.<span class="hljs-built_in">end</span>(), cmp);<br>        <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span>(intervals.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> ans;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;intervals.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">if</span>(intervals[i][<span class="hljs-number">0</span>] &lt; intervals[i<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>])&#123; <span class="hljs-comment">// 重叠</span><br>                ans++;<br>                <span class="hljs-comment">// 用于判断后一个区间是否和重叠区间继续重叠</span><br>                intervals[i][<span class="hljs-number">1</span>] = <span class="hljs-built_in">min</span>(intervals[i][<span class="hljs-number">1</span>], intervals[i<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>]); <br>            &#125; <br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="划分字母区间"><a class="markdownIt-Anchor" href="#划分字母区间"></a> 划分字母区间</h3>
+<ul>
+<li>划分字母区间：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-labels/description/">763.划分字母区间</a></li>
+<li>思路：在遍历的过程中相当于是要找每一个字母的边界，<strong>如果找到之前遍历过的所有字母的最远边界，说明这个边界就是分割点了</strong>。此时前面出现过所有字母，最远也就到这个边界了。
+<ul>
+<li>具体分为以下两步：
+<ul>
+<li>统计每一个字符最后出现的位置；</li>
+<li>从头遍历字符，并更新字符的最远出现下标，如果找到字符最远出现位置下标和当前下标相等了，则找到了分割点。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508081116545.png" srcset="/img/loading.gif" lazyload alt="划分字母区间" /></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">partitionLabels</span><span class="hljs-params">(string s)</span> </span>&#123;<br>        vector&lt;<span class="hljs-keyword">int</span>&gt; result;<br>        <span class="hljs-comment">// 建立哈希数组并统计每个字母的最远出现下标</span><br>        <span class="hljs-keyword">int</span> hash[<span class="hljs-number">27</span>] = &#123;<span class="hljs-number">0</span>&#125;; <br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;s.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            hash[s[i]-<span class="hljs-string">&#x27;a&#x27;</span>] = i;<br>        &#125;<br>        <span class="hljs-comment">// 如果找到字符最远出现位置下标和当前下标相等了，则找到了分割点</span><br>        <span class="hljs-keyword">int</span> left =<span class="hljs-number">0</span>, right = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;s.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            right = <span class="hljs-built_in">max</span>(right, hash[s[i]-<span class="hljs-string">&#x27;a&#x27;</span>]);<br>            <span class="hljs-keyword">if</span>(i == right)&#123;<br>                result.<span class="hljs-built_in">push_back</span>(right-left+<span class="hljs-number">1</span>);<br>                left = i+<span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="合并区间"><a class="markdownIt-Anchor" href="#合并区间"></a> 合并区间</h3>
+<ul>
+<li>合并区间：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-intervals/description/">56.合并区间</a></li>
+<li>思路：
+<ul>
+<li>首先按照区间起点升序排列，如果起点相同，按终点升序排列。</li>
+<li>从第二个区间开始，与前一个区间比较：
+<ul>
+<li>如果<strong>重叠</strong>：<code>intervals[i][0] &lt;= intervals[i-1][1]</code>  → 合并为一个区间，更新当前区间的起点和终点， <code>intervals[i]</code> 代表合并后的区间。</li>
+<li>如果<strong>不重叠</strong>：直接把前一个区间放进 <code>result</code>，继续循环。</li>
+<li>循环结束后，把最后一个区间加入结果。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; a, <span class="hljs-keyword">const</span> vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; b)</span></span>&#123;<br>        <span class="hljs-keyword">if</span>(a[<span class="hljs-number">0</span>] == b[<span class="hljs-number">0</span>])<br>            <span class="hljs-keyword">return</span> a[<span class="hljs-number">1</span>] &lt; b[<span class="hljs-number">1</span>]; <span class="hljs-comment">// 小于号表示从小到大排序</span><br>        <span class="hljs-keyword">return</span> a[<span class="hljs-number">0</span>] &lt; b[<span class="hljs-number">0</span>]; <span class="hljs-comment">// 小于号表示从小到大排序</span><br>    &#125;<br><br>    vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-built_in">merge</span>(vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; intervals) &#123;<br>        <span class="hljs-keyword">if</span>(intervals.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> intervals;<br>        <span class="hljs-built_in">sort</span>(intervals.<span class="hljs-built_in">begin</span>(), intervals.<span class="hljs-built_in">end</span>(), cmp);<br>        vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt; result;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;intervals.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-comment">// 如果重叠，合并结果放到 intervals[i] 中</span><br>            <span class="hljs-keyword">if</span>(intervals[i][<span class="hljs-number">0</span>] &lt;= intervals[i<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>])&#123;<br>                intervals[i][<span class="hljs-number">0</span>] = intervals[i<span class="hljs-number">-1</span>][<span class="hljs-number">0</span>];<br>                intervals[i][<span class="hljs-number">1</span>] = <span class="hljs-built_in">max</span>(intervals[i][<span class="hljs-number">1</span>], intervals[i<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>]);<br>            &#125;<br>            <span class="hljs-keyword">else</span>&#123;<br>                result.<span class="hljs-built_in">push_back</span>(intervals[i<span class="hljs-number">-1</span>]);<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// 循环结束后，把最后一个区间加入结果</span><br>        result.<span class="hljs-built_in">push_back</span>(intervals[intervals.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>]);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -1091,5 +1129,20 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":300,"height":600},"mobile":{"show":false}});</script></body>
 </html>
