@@ -31,8 +31,9 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202507301327566.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508011124775.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508081116545.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508161257292.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-15T03:07:45.794Z">
+<meta property="article:modified_time" content="2025-08-16T04:58:09.183Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -289,7 +290,7 @@
         
         
           <!-- compatible with older versions-->
-          34 分钟
+          35 分钟
         
       </span>
     
@@ -889,6 +890,60 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">uniquePathsWithObstacles</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; obstacleGrid)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> m = obstacleGrid.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">int</span> n = obstacleGrid[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>();<br>        vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(m+<span class="hljs-number">1</span>, vector&lt;<span class="hljs-keyword">int</span>&gt;(n+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br>        dp[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=m; i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>; j&lt;=n; j++)&#123;<br>                <span class="hljs-keyword">if</span>(obstacleGrid[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>] == <span class="hljs-number">1</span>)&#123;<br>                    dp[i][j] = <span class="hljs-number">0</span>;<br>                    <span class="hljs-keyword">continue</span>;<br>                &#125;<br>                <span class="hljs-keyword">if</span>(i!=<span class="hljs-number">1</span> || j!=<span class="hljs-number">1</span>)&#123;<br>                    dp[i][j] = dp[i][j<span class="hljs-number">-1</span>] + dp[i<span class="hljs-number">-1</span>][j];<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[m][n];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="整数拆分"><a class="markdownIt-Anchor" href="#整数拆分"></a> 整数拆分</h3>
+<ul>
+<li>整数拆分：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/integer-break/description/">343.整数拆分</a></li>
+<li>思路：
+<ul>
+<li>按照动态规划五部曲进行分析：
+<ul>
+<li>确定 <code>dp</code> 数组及下标的含义：<code>dp[i]</code> 的定义为：拆分整数 <code>i</code> 后所得到的最大乘积为 <code>dp[i]</code> ；</li>
+<li>确定递推公式：
+<ul>
+<li>正整数 <code>i</code> 可以拆分成 <code>j*(i-j)</code>、<code>j*dp[i-j]</code> 这两种方式，此时能够覆盖所有的拆分情况，取出最大值即可。</li>
+<li>状态转移方程 <code>dp[i] = max(max(j*(i-j), j*dp[i-j]), dp[i]);</code> ;</li>
+</ul>
+</li>
+<li><code>dp</code> 数组如何初始化：<code>dp[0] = 0;</code> 、<code>dp[1] = 0;</code>、<code>dp[2] = 1;</code>；</li>
+<li>确定遍历顺序：从前往后遍历；</li>
+<li>举例推导 <code>dp</code> 数组符合要求。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">integerBreak</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> dp[<span class="hljs-number">59</span>] = &#123;<span class="hljs-number">0</span>&#125;;<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        dp[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;<br>        dp[<span class="hljs-number">2</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">3</span>; i&lt;=n; i++)&#123;<br>            <span class="hljs-comment">// 当拆分的整数尽可能接近时能得到最大值</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>; j&lt;=i/<span class="hljs-number">2</span>; j++)&#123; <br>                dp[i] = <span class="hljs-built_in">max</span>(<span class="hljs-built_in">max</span>(j*(i-j), j*dp[i-j]), dp[i]);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[n];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="不同的二叉搜索树"><a class="markdownIt-Anchor" href="#不同的二叉搜索树"></a> 不同的二叉搜索树</h3>
+<ul>
+<li>不同的二叉搜索树：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-binary-search-trees/description/">96.不同的二叉搜索树</a></li>
+<li>思路：
+<ul>
+<li>按照动态规划五部曲进行分析：
+<ul>
+<li>确定 <code>dp</code> 数组及下标的含义：<code>dp[i]</code> 的定义为：由 <code>i</code> 个节点组成的二叉搜索树的种类数量为 <code>dp[i]</code> 种；</li>
+<li><code>dp</code> 数组如何初始化：<code>dp[0] = 1;</code> ；</li>
+<li>确定遍历顺序：从前往后遍历；</li>
+<li>举例推导 <code>dp</code> 数组符合要求。</li>
+<li>确定递推公式：
+<ul>
+<li>二叉搜索树一旦形状确定，其内部节点的填充方法就是唯一确定的（从下方投影看，左到右依次增大），所以这题就是求不同形状的二叉搜索树数量，进而转换成左子树形状种类✖️右子树形状种类；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508161257292.png" srcset="/img/loading.gif" lazyload alt="不同的二叉搜索树" /></p>
+<ul>
+<li>状态转移方程：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>; j&lt;=i; j++)&#123;<br>    dp[i] += dp[j<span class="hljs-number">-1</span>] * dp[i-j];<br>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">numTrees</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> dp[<span class="hljs-number">20</span>];<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>; j&lt;=i; j++)&#123;<br>                dp[i] += dp[j<span class="hljs-number">-1</span>] * dp[i-j];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[n];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
