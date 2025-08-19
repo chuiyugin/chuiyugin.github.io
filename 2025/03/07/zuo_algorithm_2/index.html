@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508171430211.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508171439351.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-18T05:21:49.636Z">
+<meta property="article:modified_time" content="2025-08-19T09:34:44.456Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -292,7 +292,7 @@
         
         
           <!-- compatible with older versions-->
-          40 分钟
+          42 分钟
         
       </span>
     
@@ -1048,6 +1048,56 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">lastStoneWeightII</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; stones)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;stones.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            sum += stones[i];<br>        &#125;<br>        <span class="hljs-keyword">int</span> target = sum/<span class="hljs-number">2</span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(target+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;stones.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=target; j&gt;=stones[i]; j--)&#123;<br>                dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j-stones[i]]+stones[i]);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sum - dp[target] - dp[target];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="目标和"><a class="markdownIt-Anchor" href="#目标和"></a> 目标和</h3>
+<ul>
+<li>目标和：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/target-sum/description/">494.目标和</a></li>
+<li>思路：
+<ul>
+<li>这道题目同样可以看成是 <code>0 - 1</code> 背包问题的变式，假设加法的总和为 <code>pos</code>，那么减法对应的总和就是 <code>neg = pos - sum</code> 。所以我们要求的是 <code>pos + neg = target</code>，<code>pos = (target + sum)/2</code>，此时问题就转化为，用 <code>nums</code> 装满容量为 <code>pos</code> 的背包，有几种方法。</li>
+<li>按照动态规划五部曲进行分析：
+<ul>
+<li>确定 <code>dp</code> 数组及下标的含义：<code>dp[j]</code> 的定义为：<code>dp[j]</code> 表示装满容量为 <code>j</code> 的背包有 <code>dp[j]</code> 种方法。</li>
+<li>确定递推公式：
+<ul>
+<li><code>dp[j]</code> 由所有 <code>dp[j-nums[i]]</code> 相加得到，后续要装满容量为 <code>j</code> 的背包有多少种方法都是用该递推公式。</li>
+<li>状态转移方程 <code>dp[j] += dp[j-nums[i]];</code> ;</li>
+</ul>
+</li>
+<li><code>dp</code> 数组如何初始化：<code>dp[0] = 1;</code> 、其余初始化成 <code>0</code>；</li>
+<li>确定遍历顺序：在 <code>i</code> 上正序遍历，在 <code>j</code> 上倒序遍历；</li>
+<li>举例推导 <code>dp</code> 数组符合要求。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">findTargetSumWays</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target)</span> </span>&#123;<br>       <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            sum+=nums[i];<br>        &#125;<br>        <span class="hljs-comment">/*</span><br><span class="hljs-comment">        pos + neg = target</span><br><span class="hljs-comment">        pos - neg = sum -&gt; neg = pos - sum</span><br><span class="hljs-comment">        pos + pos - sum = target -&gt; pos = (target + sum)/2</span><br><span class="hljs-comment">        */</span><br>        <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">abs</span>(target)&gt;sum)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">if</span>((target+sum)%<span class="hljs-number">2</span> == <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> pos = (target+sum)/<span class="hljs-number">2</span>;<br>        <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(pos+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>)</span></span>;<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=pos; j&gt;=nums[i]; j--)&#123;<br>                dp[j] += dp[j-nums[i]]; <span class="hljs-comment">// dp[j] 表示装满容量为j的背包有 dp[j] 种方法</span><br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[pos];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="一和零"><a class="markdownIt-Anchor" href="#一和零"></a> 一和零</h3>
+<ul>
+<li>一和零：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ones-and-zeroes/description/">474.一和零</a></li>
+<li>思路：
+<ul>
+<li>这道题目同样可以看成是 <code>0 - 1</code> 背包问题的变式，只不过这个背包有两个维度，一个是 <code>m</code> 一个是 <code>n</code>，而不同长度的字符串就是不同大小的待装物品。</li>
+<li>按照动态规划五部曲进行分析：
+<ul>
+<li>确定 <code>dp</code> 数组及下标的含义：<code>dp[i][j]</code>：最多有 <code>i</code> 个 <code>0</code> 和 <code>j</code> 个 <code>1</code> 的 <code>strs</code> 的最大子集的大小为 <code>dp[i][j]</code> 。</li>
+<li>确定递推公式：
+<ul>
+<li><code>dp[i-x][j-y]+1</code> 的含义是容量为 <code>[i-x][j-y]</code> 的背包加上有 <code>x</code> 个 <code>0</code> 和 <code>y</code> 个 <code>1</code> 的字符串后子集的元素数量要 <code>+1</code> 。</li>
+<li>状态转移方程 <code>dp[i][j] = max(dp[i][j], dp[i-x][j-y]+1);</code> ;</li>
+</ul>
+</li>
+<li><code>dp</code> 数组如何初始化：全部初始化成 <code>0</code>；</li>
+<li>确定遍历顺序：在 <code>i</code> 上正序遍历，在 <code>j</code> 上倒序遍历；</li>
+<li>举例推导 <code>dp</code> 数组符合要求。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">CountStr</span><span class="hljs-params">(<span class="hljs-keyword">int</span>&amp; x, <span class="hljs-keyword">int</span>&amp; y, string str)</span></span>&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;str.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">if</span>(str[i] == <span class="hljs-string">&#x27;0&#x27;</span>)<br>                x++;<br>            <span class="hljs-keyword">else</span><br>                y++;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">findMaxForm</span><span class="hljs-params">(vector&lt;string&gt;&amp; strs, <span class="hljs-keyword">int</span> m, <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>        vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(m+<span class="hljs-number">1</span>, vector&lt;<span class="hljs-keyword">int</span>&gt; (n+<span class="hljs-number">1</span>,<span class="hljs-number">0</span>));<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>; k&lt;strs.<span class="hljs-built_in">size</span>(); k++)&#123;<br>            <span class="hljs-keyword">int</span> x=<span class="hljs-number">0</span>, y=<span class="hljs-number">0</span>; <span class="hljs-comment">// x,y 分别表示字符串中0和1的个数</span><br>            <span class="hljs-built_in">CountStr</span>(x, y, strs[k]);<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=m; i&gt;=x; i--)&#123;<br>                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=n; j&gt;=y; j--)&#123;<br>                    dp[i][j] = <span class="hljs-built_in">max</span>(dp[i][j], dp[i-x][j-y]+<span class="hljs-number">1</span>);<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[m][n];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
