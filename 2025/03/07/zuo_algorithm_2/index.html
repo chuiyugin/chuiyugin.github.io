@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508241256488.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508241256473.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-24T04:58:31.283Z">
+<meta property="article:modified_time" content="2025-08-25T05:55:25.015Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -283,7 +283,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          16k 字
+          17k 字
         
       </span>
     
@@ -295,7 +295,7 @@
         
         
           <!-- compatible with older versions-->
-          50 分钟
+          52 分钟
         
       </span>
     
@@ -1296,6 +1296,65 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">// 打家劫舍一的代码</span><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">rob_1</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span></span>&#123;<br>        <span class="hljs-keyword">if</span>(end == start)<br>            <span class="hljs-keyword">return</span> nums[start];<br>        <span class="hljs-keyword">if</span>(end - start == <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(nums[start], nums[start+<span class="hljs-number">1</span>]);<br>        <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(nums.size(), <span class="hljs-number">0</span>)</span></span>;<br>        dp[start] = nums[start];<br>        dp[start+<span class="hljs-number">1</span>] = <span class="hljs-built_in">max</span>(dp[start], nums[start+<span class="hljs-number">1</span>]);<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=start+<span class="hljs-number">2</span>; i&lt;=end; i++)&#123;<br>            dp[i] = <span class="hljs-built_in">max</span>(dp[i<span class="hljs-number">-2</span>]+nums[i], dp[i<span class="hljs-number">-1</span>]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[end];<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">rob</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(nums.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> nums[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">int</span> num_1 = <span class="hljs-built_in">rob_1</span>(nums, <span class="hljs-number">0</span>, nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-2</span>);<br>        <span class="hljs-keyword">int</span> num_2 = <span class="hljs-built_in">rob_1</span>(nums, <span class="hljs-number">1</span>, nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(num_1, num_2);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="打家劫舍iii"><a class="markdownIt-Anchor" href="#打家劫舍iii"></a> 打家劫舍III</h3>
+<ul>
+<li>打家劫舍 III：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-iii/description/">337.打家劫舍III</a></li>
+<li>思路：
+<ul>
+<li>1、确定递归函数的参数和返回值：这里我们要求一个节点偷与不偷的两个状态所得到的金钱，那么返回值就是一个长度为 <code>2</code> 的数组。</li>
+<li>2、确定终止条件：在遍历的过程中，如果遇到空节点的话，很明显，无论偷还是不偷都是 <code>0</code>，所以就返回 <code>&#123;0, 0&#125;</code> 。</li>
+<li>3、确定遍历顺序：
+<ul>
+<li>首先明确的是使用<strong>后序遍历</strong>。因为要通过递归函数的返回值来做下一步计算。</li>
+<li>通过递归<strong>左节点</strong>，得到左节点偷与不偷的金钱。</li>
+<li>通过递归<strong>右节点</strong>，得到右节点偷与不偷的金钱。</li>
+</ul>
+</li>
+<li>4、确定单层递归的逻辑：
+<ul>
+<li>如果是偷当前节点，那么左右孩子就不能偷，<code>dp[1] = root-&gt;val + val_1[0] + val_2[0];</code></li>
+<li>如果不偷当前节点，那么左右孩子就可以偷，至于到底偷不偷一定是选一个最大的，所以：<code>dp[0] = max (val_1[0], val_1[1]) + max (val_2[0], val_2[1]);</code></li>
+<li>最后当前节点的状态就是 <code>&#123;dp[0], dp[1]&#125;</code> 。即：{ 不偷当前节点得到的最大金钱，偷当前节点得到的最大金钱 }。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">robTree</span><span class="hljs-params">(TreeNode* root)</span></span>&#123;<br>        <span class="hljs-comment">// 终止条件</span><br>        <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">nullptr</span>)<br>            <span class="hljs-keyword">return</span> &#123;<span class="hljs-number">0</span>,<span class="hljs-number">0</span>&#125;;<br>        vector&lt;<span class="hljs-keyword">int</span>&gt; val_1 = <span class="hljs-built_in">robTree</span>(root-&gt;left);<br>        vector&lt;<span class="hljs-keyword">int</span>&gt; val_2 = <span class="hljs-built_in">robTree</span>(root-&gt;right);<br>        <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>)</span></span>;<br>        <span class="hljs-comment">// 不偷该节点</span><br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-built_in">max</span>(val_1[<span class="hljs-number">0</span>], val_1[<span class="hljs-number">1</span>]) + <span class="hljs-built_in">max</span>(val_2[<span class="hljs-number">0</span>], val_2[<span class="hljs-number">1</span>]);<br>        <span class="hljs-comment">// 偷该节点</span><br>        dp[<span class="hljs-number">1</span>] = root-&gt;val + val_1[<span class="hljs-number">0</span>] + val_2[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">return</span> dp;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">rob</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        vector&lt;<span class="hljs-keyword">int</span>&gt; dp = <span class="hljs-built_in">robTree</span>(root);<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(dp[<span class="hljs-number">0</span>], dp[<span class="hljs-number">1</span>]);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="买卖股票的最佳时机"><a class="markdownIt-Anchor" href="#买卖股票的最佳时机"></a> 买卖股票的最佳时机</h3>
+<ul>
+<li>买卖股票的最佳时机：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/description/">121.买卖股票的最佳时机</a></li>
+<li>贪心思路：
+<ul>
+<li>因为股票就买卖一次，那么贪心的想法很自然就是取最左最小值，取最右最大值，那么得到的差值就是最大利润。</li>
+</ul>
+</li>
+<li>贪心思路代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxProfit</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; prices)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> low = INT_MAX;<br>        <span class="hljs-keyword">int</span> result = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; prices.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            low = <span class="hljs-built_in">min</span>(low, prices[i]);  <span class="hljs-comment">// 取最左最小价格</span><br>            result = <span class="hljs-built_in">max</span>(result, prices[i] - low); <span class="hljs-comment">// 直接取最大区间利润</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<ul>
+<li>动规思路：
+<ul>
+<li>按照动态规划五部曲进行分析：
+<ul>
+<li>确定 <code>dp</code> 数组及下标的含义：<code>dp[i][0]</code> 表示不持有股票，<code>dp[i][1]</code> 表示持有股票。</li>
+<li>确定递推公式：
+<ul>
+<li>第 <code>i</code> 天如果不持有股票：<code>dp[i][0] = max(dp[i-1][0], dp[i-1][1]+prices[i]);</code></li>
+<li>第 <code>i</code> 天如果持有股票：<code>dp[i][1] = max(dp[i-1][1], 0-prices[i]);</code></li>
+</ul>
+</li>
+<li><code>dp</code> 数组如何初始化：<code>dp[0][0] = 0;</code> 、<code>dp[0][1] = 0-prices[0];</code> 、其余初始化成 <code>0</code>；</li>
+<li>确定遍历顺序：在 <code>i</code> 上正序遍历；</li>
+<li>举例推导 <code>dp</code> 数组符合要求。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>动规思路代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxProfit</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; prices)</span> </span>&#123;<br>        <span class="hljs-comment">// dp[i][0]表示不持有股票，dp[i][1]表示持有股票</span><br>        vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(prices.<span class="hljs-built_in">size</span>(), vector&lt;<span class="hljs-keyword">int</span>&gt;(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>));<br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>-prices[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;prices.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            dp[i][<span class="hljs-number">0</span>] = <span class="hljs-built_in">max</span>(dp[i<span class="hljs-number">-1</span>][<span class="hljs-number">0</span>], dp[i<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>]+prices[i]);<br>            dp[i][<span class="hljs-number">1</span>] = <span class="hljs-built_in">max</span>(dp[i<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>], <span class="hljs-number">0</span>-prices[i]);<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[prices.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>][<span class="hljs-number">0</span>];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -1690,20 +1749,5 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":300,"height":600},"mobile":{"show":false}});</script></body>
 </html>
