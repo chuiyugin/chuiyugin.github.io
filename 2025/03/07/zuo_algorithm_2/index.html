@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508241256488.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508241256473.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-27T14:53:31.796Z">
+<meta property="article:modified_time" content="2025-08-28T04:41:12.158Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -295,7 +295,7 @@
         
         
           <!-- compatible with older versions-->
-          56 分钟
+          58 分钟
         
       </span>
     
@@ -1428,6 +1428,52 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxProfit</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; prices)</span> </span>&#123;<br>        vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(prices.<span class="hljs-built_in">size</span>(), vector&lt;<span class="hljs-keyword">int</span>&gt;(<span class="hljs-number">4</span>, <span class="hljs-number">0</span>));<br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>-prices[<span class="hljs-number">0</span>]; <span class="hljs-comment">// 持有股票</span><br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>; <span class="hljs-comment">// 卖出状态（过了冷冻期可以买入）</span><br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">2</span>] = <span class="hljs-number">0</span>; <span class="hljs-comment">// 具体卖出的时候</span><br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">3</span>] = <span class="hljs-number">0</span>; <span class="hljs-comment">// 冷冻期</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;prices.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            dp[i][<span class="hljs-number">0</span>] = <span class="hljs-built_in">max</span>(dp[i<span class="hljs-number">-1</span>][<span class="hljs-number">0</span>], <span class="hljs-built_in">max</span>(dp[i<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>]-prices[i], dp[i<span class="hljs-number">-1</span>][<span class="hljs-number">3</span>]-prices[i]));<br>            dp[i][<span class="hljs-number">1</span>] = <span class="hljs-built_in">max</span>(dp[i<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>], dp[i<span class="hljs-number">-1</span>][<span class="hljs-number">3</span>]);<br>            dp[i][<span class="hljs-number">2</span>] = dp[i<span class="hljs-number">-1</span>][<span class="hljs-number">0</span>]+prices[i];<br>            dp[i][<span class="hljs-number">3</span>] = dp[i<span class="hljs-number">-1</span>][<span class="hljs-number">2</span>];<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(dp[prices.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>][<span class="hljs-number">1</span>],<span class="hljs-built_in">max</span>(dp[prices.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>][<span class="hljs-number">2</span>], dp[prices.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>][<span class="hljs-number">3</span>]));<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="最长递增子序列"><a class="markdownIt-Anchor" href="#最长递增子序列"></a> 最长递增子序列</h3>
+<ul>
+<li>最长递增子序列：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-increasing-subsequence/description/">300.最长递增子序列</a></li>
+<li>思路：
+<ul>
+<li>按照动态规划五部曲进行分析：
+<ul>
+<li>确定 <code>dp</code> 数组及下标的含义：<code>dp[i]</code> 表示 <code>i</code> 之前包括 <code>i</code> 的以 <code>nums[i]</code> 结尾的最长递增子序列的长度。</li>
+<li>确定递推公式：
+<ul>
+<li><code>j</code> 要从 <code>0</code> 循环到 <code>i</code>，判断 <code>nums[i] &gt; nums[j]</code> 说明满足递增子序列，因此采用递推公式 <code>dp[i] = max(dp[i], dp[j]+1);</code> 。</li>
+</ul>
+</li>
+<li><code>dp</code> 数组如何初始化：全部初始化成 <code>1</code>；</li>
+<li>确定遍历顺序：在 <code>i</code> 上正序遍历；</li>
+<li>举例推导 <code>dp</code> 数组符合要求。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">lengthOfLIS</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-comment">// 以nums[i]结尾的最长递增子序列数</span><br>        <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(nums.size(), <span class="hljs-number">1</span>)</span></span>;<br>        <span class="hljs-keyword">int</span> ans = dp[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>; j&lt;i; j++)&#123;<br>                <span class="hljs-keyword">if</span>(nums[i] &gt; nums[j])<br>                    dp[i] = <span class="hljs-built_in">max</span>(dp[i], dp[j]+<span class="hljs-number">1</span>);<br>            &#125;<br>            <span class="hljs-keyword">if</span>(dp[i] &gt; ans)<br>                ans = dp[i];<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="最长连续递增子序列"><a class="markdownIt-Anchor" href="#最长连续递增子序列"></a> 最长连续递增子序列</h3>
+<ul>
+<li>最长连续递增子序列：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-continuous-increasing-subsequence/description/">674.最长连续递增子序列</a></li>
+<li>思路：
+<ul>
+<li>按照动态规划五部曲进行分析：
+<ul>
+<li>确定 <code>dp</code> 数组及下标的含义：<code>dp[i]</code> 表示 <code>i</code> 之前包括 <code>i</code> 的以 <code>nums[i]</code> 结尾的最长连续递增子序列的长度。</li>
+<li>确定递推公式：
+<ul>
+<li>和上一题的最大不同在于本题要求连续的递增子序列，因此 <code>i</code> 只需要和它的前一个元素 <code>i-1</code> 来比较即可，因此递推公式为当 <code>nums[i] &gt; nums[i-1]</code> 时，有 <code>dp[i] = dp[i-1]+1;</code>。</li>
+</ul>
+</li>
+<li><code>dp</code> 数组如何初始化：全部初始化成 <code>1</code>；</li>
+<li>确定遍历顺序：在 <code>i</code> 上正序遍历；</li>
+<li>举例推导 <code>dp</code> 数组符合要求。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">findLengthOfLCIS</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-comment">// 以nums[i]结尾的最长连续递增子序列数</span><br>        <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(nums.size(), <span class="hljs-number">1</span>)</span></span>;<br>        <span class="hljs-keyword">int</span> ans = dp[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">if</span>(nums[i]&gt;nums[i<span class="hljs-number">-1</span>])<br>                dp[i] = dp[i<span class="hljs-number">-1</span>]+<span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">if</span>(dp[i]&gt;ans)<br>                ans = dp[i];<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
