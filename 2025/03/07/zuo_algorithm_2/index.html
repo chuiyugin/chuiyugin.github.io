@@ -37,8 +37,9 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508241255366.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508241256488.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508241256473.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508311557508.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-30T03:23:00.057Z">
+<meta property="article:modified_time" content="2025-08-31T07:57:34.396Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -295,7 +296,7 @@
         
         
           <!-- compatible with older versions-->
-          62 分钟
+          64 分钟
         
       </span>
     
@@ -1584,6 +1585,65 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxSubArray</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(nums.<span class="hljs-built_in">size</span>() == <span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">return</span> nums[<span class="hljs-number">0</span>];<br>        <span class="hljs-comment">// dp[i] 以元素nums[i]为结尾的最大子数组和</span><br>        <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(nums.size(), INT_MIN)</span></span>;<br>        dp[<span class="hljs-number">0</span>] = nums[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">int</span> ans = dp[<span class="hljs-number">0</span>];<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            dp[i] = <span class="hljs-built_in">max</span>(nums[i], dp[i<span class="hljs-number">-1</span>]+nums[i]);<br>            <span class="hljs-keyword">if</span>(dp[i] &gt; ans)<br>                ans = dp[i];<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="判断子序列"><a class="markdownIt-Anchor" href="#判断子序列"></a> 判断子序列</h3>
+<ul>
+<li>判断子序列：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/is-subsequence/">392.判断子序列</a></li>
+<li>思路：
+<ul>
+<li>按照动态规划五部曲进行分析：
+<ul>
+<li>确定 <code>dp</code> 数组及下标的含义：<code>dp[i][j]</code> 表示以 <code>s[i-1]</code> 结尾和 <code>t[j-1]</code> 结尾的相同子序列的长度。</li>
+<li>确定递推公式：
+<ul>
+<li>当 <code>s[i-1] == t[j-1]</code> 的时候，<code>dp[i][j] = dp[i-1][j-1]+1;</code>，可以理解为是将 <code>s[i-1]</code> 和 <code>t[j-1]</code> 删除后的子序列的长度加 <code>1</code> 。</li>
+<li>否则，<code>dp[i][j] = dp[i][j-1];</code>，可以理解为与删除 <code>t</code> 字符串的最后一个元素的相同子序列的长度一致。</li>
+</ul>
+</li>
+<li><code>dp</code> 数组如何初始化：全部初始化成 <code>0</code>；
+<ul>
+<li>根据 <code>dp[i][j]</code> 的定义，<code>dp[i][0]</code> 和 <code>dp[0][j]</code> 其实都是没有意义的！但 <code>dp[i][0]</code> 和 <code>dp[0][j]</code> 要初始值，因为为了方便递归公式 <code>dp[i][j] = dp[i-1][j-1] + 1;</code> 所以 <code>dp[i][0]</code> 和 <code>dp[0][j]</code> 初始化为 <code>0</code>。</li>
+</ul>
+</li>
+<li>确定遍历顺序：在 <code>i</code> 上正序遍历，在 <code>j</code> 上正序遍历；</li>
+<li>举例推导 <code>dp</code> 数组符合要求。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isSubsequence</span><span class="hljs-params">(string s, string t)</span> </span>&#123;<br>        vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(s.<span class="hljs-built_in">size</span>()+<span class="hljs-number">1</span>, vector&lt;<span class="hljs-keyword">int</span>&gt;(t.<span class="hljs-built_in">size</span>()+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=s.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>; j&lt;=t.<span class="hljs-built_in">size</span>(); j++)&#123;<br>                <span class="hljs-keyword">if</span>(s[i<span class="hljs-number">-1</span>] == t[j<span class="hljs-number">-1</span>])&#123;<br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>]+<span class="hljs-number">1</span>;<br>                &#125;<span class="hljs-keyword">else</span>&#123;<br>                    dp[i][j] = dp[i][j<span class="hljs-number">-1</span>]; <span class="hljs-comment">// 可以理解为与删除t字符串的最后一个元素的相同子序列的长度一致</span><br>                &#125;    <br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(dp[s.<span class="hljs-built_in">size</span>()][t.<span class="hljs-built_in">size</span>()] == s.<span class="hljs-built_in">size</span>())<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="不同的子序列"><a class="markdownIt-Anchor" href="#不同的子序列"></a> 不同的子序列</h3>
+<ul>
+<li>不同的子序列：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/distinct-subsequences/description/">115.不同的子序列</a></li>
+<li>思路：
+<ul>
+<li>按照动态规划五部曲进行分析：
+<ul>
+<li>确定 <code>dp</code> 数组及下标的含义：<code>dp[i][j]</code> 表示以以 <code>s[i-1]</code> 元素结尾的 <code>s</code> 中有多少个以 <code>t[j-1]</code> 为结尾的子字符串。</li>
+<li>确定递推公式：
+<ul>
+<li>当 <code>s[i-1] == t[j-1]</code> 的时候，<code>dp[i][j] = dp[i-1][j-1] + dp[i-1][j];</code>，可以理解为是将 <code>s[i-1]</code> 和 <code>t[j-1]</code> 删除后 <code>s</code> 中包含 <code>t</code> 的数量加上将 <code>s[i-1]</code> 删除后 <code>s</code> 中包含 <code>t</code> 的数量。</li>
+<li>否则，<code>dp[i][j] = dp[i][j-1];</code>，可以理解为与将 <code>s[i-1]</code> 删除后 <code>s</code> 中包含 <code>t</code> 的数量相等。</li>
+</ul>
+</li>
+<li><code>dp</code> 数组如何初始化：全部初始化成 <code>0</code>；
+<ul>
+<li>根据 <code>dp[i][j]</code> 的定义，<code>dp[i][0]</code> 表示 <code>s</code> 中至少有一个空字符串和 <code>dp[0][j]</code> 表示 <code>s</code> 为空时没有子字符串！</li>
+</ul>
+</li>
+<li>确定遍历顺序：在 <code>i</code> 上正序遍历，在 <code>j</code> 上正序遍历；</li>
+<li>举例推导 <code>dp</code> 数组符合要求。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508311557508.png" srcset="/img/loading.gif" lazyload alt="不同的子序列" /></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">numDistinct</span><span class="hljs-params">(string s, string t)</span> </span>&#123;<br>        <span class="hljs-comment">// dp[i][j] 以i-1元素结尾的s中有多少个以j-1为结尾的子字符串</span><br>        vector&lt;vector&lt;<span class="hljs-keyword">uint64_t</span>&gt;&gt; <span class="hljs-built_in">dp</span>(s.<span class="hljs-built_in">size</span>()+<span class="hljs-number">1</span>, vector&lt;<span class="hljs-keyword">uint64_t</span>&gt;(t.<span class="hljs-built_in">size</span>()+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;=s.<span class="hljs-built_in">size</span>(); i++)<br>            dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>; <span class="hljs-comment">// s中至少有一个空字符串</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>; j&lt;=t.<span class="hljs-built_in">size</span>(); j++)<br>            dp[<span class="hljs-number">0</span>][j] = <span class="hljs-number">0</span>; <span class="hljs-comment">// s为空时没有子字符串</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=s.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>; j&lt;=t.<span class="hljs-built_in">size</span>(); j++)&#123;<br>                <span class="hljs-keyword">if</span>(s[i<span class="hljs-number">-1</span>] == t[j<span class="hljs-number">-1</span>])<br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>] + dp[i<span class="hljs-number">-1</span>][j];<br>                <span class="hljs-keyword">else</span><br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[s.<span class="hljs-built_in">size</span>()][t.<span class="hljs-built_in">size</span>()];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
