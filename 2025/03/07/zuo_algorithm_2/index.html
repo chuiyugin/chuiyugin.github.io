@@ -38,8 +38,10 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508241256488.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508241256473.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202508311557508.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202509011233604.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202509011231109.png">
 <meta property="article:published_time" content="2025-03-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-31T07:57:34.396Z">
+<meta property="article:modified_time" content="2025-09-01T04:34:00.425Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -284,7 +286,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          20k 字
+          21k 字
         
       </span>
     
@@ -296,7 +298,7 @@
         
         
           <!-- compatible with older versions-->
-          64 分钟
+          67 分钟
         
       </span>
     
@@ -1620,7 +1622,7 @@
 <ul>
 <li>按照动态规划五部曲进行分析：
 <ul>
-<li>确定 <code>dp</code> 数组及下标的含义：<code>dp[i][j]</code> 表示以以 <code>s[i-1]</code> 元素结尾的 <code>s</code> 中有多少个以 <code>t[j-1]</code> 为结尾的子字符串。</li>
+<li>确定 <code>dp</code> 数组及下标的含义：<code>dp[i][j]</code> 表示以 <code>s[i-1]</code> 元素结尾的 <code>s</code> 中有多少个以 <code>t[j-1]</code> 为结尾的子字符串。</li>
 <li>确定递推公式：
 <ul>
 <li>当 <code>s[i-1] == t[j-1]</code> 的时候，<code>dp[i][j] = dp[i-1][j-1] + dp[i-1][j];</code>，可以理解为是将 <code>s[i-1]</code> 和 <code>t[j-1]</code> 删除后 <code>s</code> 中包含 <code>t</code> 的数量加上将 <code>s[i-1]</code> 删除后 <code>s</code> 中包含 <code>t</code> 的数量。</li>
@@ -1644,6 +1646,70 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">numDistinct</span><span class="hljs-params">(string s, string t)</span> </span>&#123;<br>        <span class="hljs-comment">// dp[i][j] 以i-1元素结尾的s中有多少个以j-1为结尾的子字符串</span><br>        vector&lt;vector&lt;<span class="hljs-keyword">uint64_t</span>&gt;&gt; <span class="hljs-built_in">dp</span>(s.<span class="hljs-built_in">size</span>()+<span class="hljs-number">1</span>, vector&lt;<span class="hljs-keyword">uint64_t</span>&gt;(t.<span class="hljs-built_in">size</span>()+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;=s.<span class="hljs-built_in">size</span>(); i++)<br>            dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>; <span class="hljs-comment">// s中至少有一个空字符串</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>; j&lt;=t.<span class="hljs-built_in">size</span>(); j++)<br>            dp[<span class="hljs-number">0</span>][j] = <span class="hljs-number">0</span>; <span class="hljs-comment">// s为空时没有子字符串</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=s.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>; j&lt;=t.<span class="hljs-built_in">size</span>(); j++)&#123;<br>                <span class="hljs-keyword">if</span>(s[i<span class="hljs-number">-1</span>] == t[j<span class="hljs-number">-1</span>])<br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>] + dp[i<span class="hljs-number">-1</span>][j];<br>                <span class="hljs-keyword">else</span><br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j];<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[s.<span class="hljs-built_in">size</span>()][t.<span class="hljs-built_in">size</span>()];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="两个字符串的删除操作"><a class="markdownIt-Anchor" href="#两个字符串的删除操作"></a> 两个字符串的删除操作</h3>
+<ul>
+<li>两个字符串的删除操作：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-operation-for-two-strings/">583.两个字符串的删除操作</a></li>
+<li>思路：
+<ul>
+<li>按照动态规划五部曲进行分析：
+<ul>
+<li>确定 <code>dp</code> 数组及下标的含义：<code>dp[i][j]</code> 表示以 <code>word1[i-1]</code> 为结尾的字符串 <code>word1</code>，和以 <code>word2[j-1]</code> 结尾的字符串 <code>word2</code>，想要达到相等，所需要删除元素的最少次数。</li>
+<li>确定递推公式：
+<ul>
+<li>当 <code>word1[i-1] == word2[j-1]</code> 的时候，<code>dp[i][j] = dp[i-1][j-1];</code>，可以理解为是将 <code>word1[i-1]</code> 和 <code>word2[j-1]</code> 删除后使得两个字符串相等的最少次数。</li>
+<li>否则，<code>dp[i][j] = min(dp[i-1][j], dp[i][j-1])+1;</code>，可以理解为前一个状态 <code>dp[i-1][j]</code> 或者 <code>dp[i][j-1]</code> 的更小者需要通过 <code>dp[i][j]</code> 的一次删除操作完成。</li>
+</ul>
+</li>
+<li><code>dp</code> 数组如何初始化：<code>dp[i][0]</code> 初始化为 <code>i</code>，<code>dp[0][j]</code> 初始化为 <code>j</code>，其余全部初始化成 <code>0</code>；
+<ul>
+<li>根据 <code>dp[i][j]</code> 的定义，<code>dp[i][0]</code> 表示 <code>word1</code> 中需要删除 <code>i</code> 次变为空字符串与 <code>word2</code> 相同。</li>
+<li>同理，<code>dp[0][j]</code> 表示 <code>word2</code> 中需要删除 <code>j</code> 次变为空字符串与 <code>word1</code> 相同。</li>
+</ul>
+</li>
+<li>确定遍历顺序：在 <code>i</code> 上正序遍历，在 <code>j</code> 上正序遍历；</li>
+<li>举例推导 <code>dp</code> 数组符合要求。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202509011233604.png" srcset="/img/loading.gif" lazyload alt="两个字符串的删除操作" /></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">minDistance</span><span class="hljs-params">(string word1, string word2)</span> </span>&#123;<br>        vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(word1.<span class="hljs-built_in">size</span>()+<span class="hljs-number">1</span>, vector&lt;<span class="hljs-keyword">int</span>&gt;(word2.<span class="hljs-built_in">size</span>()+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br>        <span class="hljs-comment">// 初始化</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;=word1.<span class="hljs-built_in">size</span>(); i++)<br>            dp[i][<span class="hljs-number">0</span>] = i;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>; j&lt;=word2.<span class="hljs-built_in">size</span>(); j++)<br>            dp[<span class="hljs-number">0</span>][j] = j;<br>        <span class="hljs-comment">// 递推公式</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=word1.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>; j&lt;=word2.<span class="hljs-built_in">size</span>(); j++)&#123;<br>                <span class="hljs-keyword">if</span>(word1[i<span class="hljs-number">-1</span>] == word2[j<span class="hljs-number">-1</span>])<br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>];<br>                <span class="hljs-keyword">else</span><br>                    dp[i][j] = <span class="hljs-built_in">min</span>(dp[i<span class="hljs-number">-1</span>][j], dp[i][j<span class="hljs-number">-1</span>])+<span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[word1.<span class="hljs-built_in">size</span>()][word2.<span class="hljs-built_in">size</span>()];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="编辑距离"><a class="markdownIt-Anchor" href="#编辑距离"></a> 编辑距离</h3>
+<ul>
+<li>编辑距离：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/edit-distance/description/">72.编辑距离</a></li>
+<li>思路：
+<ul>
+<li>按照动态规划五部曲进行分析：
+<ul>
+<li>确定 <code>dp</code> 数组及下标的含义：<code>dp[i][j]</code> 表示以 <code>word1[i-1]</code> 为结尾的字符串 <code>word1</code>，和以 <code>word2[j-1]</code> 结尾的字符串 <code>word2</code>，想要达到相等，所需要进行三种操作的最少次数。</li>
+<li>确定递推公式：
+<ul>
+<li>当 <code>word1[i-1] == word2[j-1]</code> 的时候，<code>dp[i][j] = dp[i-1][j-1];</code>，可以理解为是将 <code>word1[i-1]</code> 和 <code>word2[j-1]</code> 删除后使得两个字符串相等的最少次数。</li>
+<li>否则，<code>min(dp[i-1][j-1], min(dp[i-1][j], dp[i][j-1]))+1;</code>，可以理解为前一个状态 <code>dp[i-1][j]</code> 或者 <code>dp[i][j-1]</code> 的更小者需要通过 <code>dp[i][j]</code> 的一次删除、增加或者替换操作完成。</li>
+</ul>
+</li>
+<li><code>dp</code> 数组如何初始化：<code>dp[i][0]</code> 初始化为 <code>i</code>，<code>dp[0][j]</code> 初始化为 <code>j</code>，其余全部初始化成 <code>0</code>；
+<ul>
+<li>根据 <code>dp[i][j]</code> 的定义，<code>dp[i][0]</code> 表示 <code>word1</code> 中需要删除 <code>i</code> 次变为空字符串与 <code>word2</code> 相同。</li>
+<li>同理，<code>dp[0][j]</code> 表示 <code>word2</code> 中需要删除 <code>j</code> 次变为空字符串与 <code>word1</code> 相同。</li>
+</ul>
+</li>
+<li>确定遍历顺序：在 <code>i</code> 上正序遍历，在 <code>j</code> 上正序遍历；</li>
+<li>举例推导 <code>dp</code> 数组符合要求。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202509011231109.png" srcset="/img/loading.gif" lazyload alt="编辑距离" /></p>
+<ul>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">minDistance</span><span class="hljs-params">(string word1, string word2)</span> </span>&#123;<br>        vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-built_in">dp</span>(word1.<span class="hljs-built_in">size</span>()+<span class="hljs-number">1</span>, vector&lt;<span class="hljs-keyword">int</span>&gt;(word2.<span class="hljs-built_in">size</span>()+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>));<br>        <span class="hljs-comment">// 初始化</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;=word1.<span class="hljs-built_in">size</span>(); i++)<br>            dp[i][<span class="hljs-number">0</span>] = i;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>; j&lt;=word2.<span class="hljs-built_in">size</span>(); j++)<br>            dp[<span class="hljs-number">0</span>][j] = j;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=word1.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>; j&lt;=word2.<span class="hljs-built_in">size</span>(); j++)&#123;<br>                <span class="hljs-keyword">if</span>(word1[i<span class="hljs-number">-1</span>] == word2[j<span class="hljs-number">-1</span>])<br>                    dp[i][j] = dp[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>];<br>                <span class="hljs-keyword">else</span><br>                    dp[i][j] = <span class="hljs-built_in">min</span>(dp[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>], <span class="hljs-built_in">min</span>(dp[i<span class="hljs-number">-1</span>][j], dp[i][j<span class="hljs-number">-1</span>]))+<span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[word1.<span class="hljs-built_in">size</span>()][word2.<span class="hljs-built_in">size</span>()];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -2038,5 +2104,20 @@
   <noscript>
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":300,"height":600},"mobile":{"show":false}});</script></body>
 </html>
