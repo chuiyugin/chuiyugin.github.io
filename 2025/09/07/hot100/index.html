@@ -27,7 +27,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202509071517393.png">
 <meta property="article:published_time" content="2025-09-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-07T07:23:24.254Z">
+<meta property="article:modified_time" content="2025-09-08T07:42:19.330Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -272,7 +272,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          419 字
+          879 字
         
       </span>
     
@@ -284,7 +284,7 @@
         
         
           <!-- compatible with older versions-->
-          2 分钟
+          3 分钟
         
       </span>
     
@@ -350,6 +350,32 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">moveZeroes</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> right = <span class="hljs-number">0</span>; right&lt;nums.<span class="hljs-built_in">size</span>(); right++)&#123;<br>            <span class="hljs-keyword">if</span>(nums[right] != <span class="hljs-number">0</span>)&#123;<br>                <span class="hljs-built_in">swap</span>(nums[left], nums[right]);<br>                left++;<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h2 id="滑动窗口"><a class="markdownIt-Anchor" href="#滑动窗口"></a> 滑动窗口</h2>
+<h3 id="无重复字符的最长子串"><a class="markdownIt-Anchor" href="#无重复字符的最长子串"></a> 无重复字符的最长子串</h3>
+<ul>
+<li>无重复字符的最长子串：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/description/?envType=study-plan-v2&amp;envId=top-100-liked">3.无重复字符的最长子串</a></li>
+<li>思路：用两个指针 <code>left</code> 和 <code>right</code> 表示当前考察的窗口区间 <code>[left, right)</code>。<code>unordered_set&lt;char&gt;</code> 用来存储窗口内的字符，保证窗口内不出现重复。（滑动窗口+哈希集合）的问题。
+<ul>
+<li>当 <code>s[right]</code> 不在集合里时，说明窗口可以安全<strong>扩张</strong>，将 <code>s[right]</code> 插入集合，<code>right++</code> 向右移动，更新最大长度 <code>result = max(result, right - left)</code> 。</li>
+<li>当 <code>s[right]</code> 已经在集合中时，说明出现重复字符，删除 <code>s[left]</code>， <code>left++</code> <strong>收缩</strong>窗口，直到窗口内没有重复字符。</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">lengthOfLongestSubstring</span><span class="hljs-params">(string s)</span> </span>&#123;<br>        unordered_set&lt;<span class="hljs-keyword">char</span>&gt; se;<br>        <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> right = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> result = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(right&lt;s.<span class="hljs-built_in">size</span>() &amp;&amp; left&lt;=right)&#123;<br>            <span class="hljs-keyword">if</span>(se.<span class="hljs-built_in">find</span>(s[right]) == se.<span class="hljs-built_in">end</span>())&#123;<br>                se.<span class="hljs-built_in">insert</span>(s[right]);<br>                right++;<br>            &#125;<br>            <span class="hljs-keyword">else</span>&#123;<br>                se.<span class="hljs-built_in">erase</span>(s[left]);<br>                left++;<br>            &#125;<br>            result = <span class="hljs-built_in">max</span>(result, right-left);<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h2 id="子串"><a class="markdownIt-Anchor" href="#子串"></a> 子串</h2>
+<h3 id="和为-k-的子数组"><a class="markdownIt-Anchor" href="#和为-k-的子数组"></a> 和为 K 的子数组</h3>
+<ul>
+<li>和为 K 的子数组：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subarray-sum-equals-k/description/?envType=study-plan-v2&amp;envId=top-100-liked">560.和为 K 的子数组</a></li>
+<li>思路：这道题是典型的前缀和+ 哈希表解法，用来统计和为 <code>k</code> 的连续子数组个数。
+<ul>
+<li>在开始时放入 <code>mp[0] = 1</code>，表示「前缀和为 0 出现过 1 次」，这样可以处理从数组开头开始的子数组。</li>
+<li>用一个哈希表 <code>mp</code> 存储某个前缀和出现的次数。在遍历过程中，此时前缀和为 <code>sum</code> 时，只要 <code>sum - k</code> 在哈希表中存在，说明之前有某个前缀和能让子数组和刚好为 <code>k</code>。于是把 <code>mp[sum - k]</code> 累加到答案 <code>ans</code> 中。</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">subarraySum</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;<br>        unordered_map&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; mp;<br>        mp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;nums.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            sum+=nums[i];<br>            <span class="hljs-keyword">if</span>(mp.<span class="hljs-built_in">find</span>(sum-k)!=mp.<span class="hljs-built_in">end</span>())&#123;<br>                ans+=mp[sum-k];<br>            &#125;<br>            mp[sum]++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
                 
               </div>
             
