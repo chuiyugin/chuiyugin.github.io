@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202509151505105.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202509182317589.png">
 <meta property="article:published_time" content="2025-09-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-20T13:16:35.799Z">
+<meta property="article:modified_time" content="2025-09-21T11:54:45.195Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -275,7 +275,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          11k 字
+          12k 字
         
       </span>
     
@@ -287,7 +287,7 @@
         
         
           <!-- compatible with older versions-->
-          34 分钟
+          38 分钟
         
       </span>
     
@@ -591,6 +591,48 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">spiralOrder</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> m = matrix.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">int</span> n = matrix[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>();<br>        vector&lt;<span class="hljs-keyword">int</span>&gt; ans;<br>        <span class="hljs-comment">// bottom 和 right 为有效数据的后一位</span><br>        <span class="hljs-keyword">int</span> top = <span class="hljs-number">0</span>, bottom = m, left = <span class="hljs-number">0</span>, right = n; <br>        <span class="hljs-keyword">while</span>(left&lt;right &amp;&amp; top&lt;bottom)&#123;<br>            <span class="hljs-comment">// 向右</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=left; i&lt;right; i++)&#123;<br>                ans.<span class="hljs-built_in">push_back</span>(matrix[top][i]);<br>            &#125;<br>            top++;<br>            <span class="hljs-keyword">if</span>(top&gt;=bottom)<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-comment">// 向下</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=top; i&lt;bottom; i++)&#123;<br>                ans.<span class="hljs-built_in">push_back</span>(matrix[i][right<span class="hljs-number">-1</span>]);<br>            &#125;<br>            right--;<br>            <span class="hljs-keyword">if</span>(left&gt;=right)<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-comment">// 向左</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=right<span class="hljs-number">-1</span>; i&gt;=left; i--)&#123;<br>                ans.<span class="hljs-built_in">push_back</span>(matrix[bottom<span class="hljs-number">-1</span>][i]);<br>            &#125;<br>            bottom--;<br>            <span class="hljs-keyword">if</span>(top&gt;=bottom)<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-comment">// 向上</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=bottom<span class="hljs-number">-1</span>; i&gt;=top; i--)&#123;<br>                ans.<span class="hljs-built_in">push_back</span>(matrix[i][left]);<br>            &#125;<br>            left++;<br>        &#125;<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="旋转图像"><a class="markdownIt-Anchor" href="#旋转图像"></a> 旋转图像</h3>
+<ul>
+<li>旋转图像：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotate-image/submissions/664197492/">48.旋转图像</a></li>
+<li>思路：
+<ul>
+<li>定义四个指针：<code>top</code>、<code>bottom</code>、<code>left</code>、<code>right</code>，分别表示当前处理层的四个边界。
+<ul>
+<li>在 <code>left &lt; right</code> 的前提下，每次循环处理一层（从外到内）。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>对于每层：
+<ul>
+<li>逐个元素进行<strong>四边交换</strong>（<code>top → right → bottom → left → top</code>），利用一个 <code>tmp</code> 做中转。</li>
+<li>完成一圈后，收缩边界：<code>top++</code>, <code>bottom--</code>, <code>left++</code>, <code>right--</code>，进入内层。</li>
+</ul>
+</li>
+<li>最终所有层完成后，矩阵即被原地旋转 <code>90°</code>。</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">rotate</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> top = <span class="hljs-number">0</span>, bottom = matrix.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>, right = matrix[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">int</span> tmp = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(left&lt;right)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;right-left; i++)&#123;<br>                tmp = matrix[top][left+i];<br>                matrix[top][left+i] = matrix[bottom-i][left];<br>                matrix[bottom-i][left] = matrix[bottom][right-i];<br>                matrix[bottom][right-i] = matrix[top+i][right];<br>                matrix[top+i][right] = tmp;<br>            &#125;<br>            left++;<br>            right--;<br>            top++;<br>            bottom--;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="搜索二维矩阵-ii"><a class="markdownIt-Anchor" href="#搜索二维矩阵-ii"></a> 搜索二维矩阵 II</h3>
+<ul>
+<li>搜索二维矩阵 II：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-a-2d-matrix-ii/description/">240.搜索二维矩阵 II</a></li>
+<li>思路：
+<ul>
+<li>利用矩阵的有序性，从右上角 ( <code>matrix[0][n-1]</code> ) 作为起点开始搜索。
+<ul>
+<li>如果 <code>target &lt; 当前值</code>：说明目标数一定在左边，列指针 <code>lie--</code>；</li>
+<li>如果 <code>target &gt; 当前值</code>：说明目标数一定在下边，行指针 <code>hang++</code>；</li>
+<li>如果相等，则直接返回 <code>true</code></li>
+</ul>
+</li>
+<li>不断缩小搜索范围，直到行或列越界结束。</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">searchMatrix</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; matrix, <span class="hljs-keyword">int</span> target)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> m = matrix.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">int</span> n = matrix[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">int</span> hang = <span class="hljs-number">0</span>, lie = n<span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">while</span>( hang&lt;m &amp;&amp; lie&gt;=<span class="hljs-number">0</span> )&#123;<br>            <span class="hljs-keyword">if</span>(target &lt; matrix[hang][lie])<br>                lie--;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(target &gt; matrix[hang][lie])<br>                hang++;<br>            <span class="hljs-keyword">else</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="链表"><a class="markdownIt-Anchor" href="#链表"></a> 链表</h2>
 <h3 id="回文链表"><a class="markdownIt-Anchor" href="#回文链表"></a> 回文链表</h3>
 <ul>
@@ -650,48 +692,73 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * struct ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode *next;</span><br><span class="hljs-comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">addTwoNumbers</span><span class="hljs-params">(ListNode* l1, ListNode* l2)</span> </span>&#123;<br>        ListNode* cur1 = l1;<br>        ListNode* cur2 = l2;<br>        <span class="hljs-keyword">int</span> jinwei = <span class="hljs-number">0</span>;<br>        ListNode* head = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>();<br>        ListNode* cur = head;<br>        <span class="hljs-keyword">while</span>(cur1!=<span class="hljs-literal">nullptr</span> &amp;&amp; cur2!=<span class="hljs-literal">nullptr</span>)&#123;<br>            <span class="hljs-keyword">int</span> num = cur1-&gt;val+cur2-&gt;val+jinwei;<br>            cur-&gt;next = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(num%<span class="hljs-number">10</span>);<br>            jinwei=num/<span class="hljs-number">10</span>;<br>            cur = cur-&gt;next;<br>            cur1 = cur1-&gt;next;<br>            cur2 = cur2-&gt;next;<br>        &#125;<br>        <span class="hljs-keyword">while</span>(cur1!=<span class="hljs-literal">nullptr</span>)&#123;<br>            <span class="hljs-keyword">int</span> num = cur1-&gt;val+jinwei;<br>            cur-&gt;next = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(num%<span class="hljs-number">10</span>);<br>            jinwei=num/<span class="hljs-number">10</span>;<br>            cur = cur-&gt;next;<br>            cur1 = cur1-&gt;next;<br>        &#125;<br>        <span class="hljs-keyword">while</span>(cur2!=<span class="hljs-literal">nullptr</span>)&#123;<br>            <span class="hljs-keyword">int</span> num = cur2-&gt;val+jinwei;<br>            cur-&gt;next = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(num%<span class="hljs-number">10</span>);<br>            jinwei=num/<span class="hljs-number">10</span>;<br>            cur = cur-&gt;next;<br>            cur2 = cur2-&gt;next;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(jinwei!=<span class="hljs-number">0</span>)&#123;<br>            cur-&gt;next = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(jinwei);<br>        &#125;<br>        <span class="hljs-keyword">return</span> head-&gt;next;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-<h3 id="旋转图像"><a class="markdownIt-Anchor" href="#旋转图像"></a> 旋转图像</h3>
+<h3 id="随机链表的复制"><a class="markdownIt-Anchor" href="#随机链表的复制"></a> 随机链表的复制</h3>
 <ul>
-<li>旋转图像：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotate-image/submissions/664197492/">48.旋转图像</a></li>
+<li>随机链表的复制：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/copy-list-with-random-pointer/?envType=study-plan-v2&amp;envId=top-100-liked">138.随机链表的复制</a></li>
 <li>思路：
 <ul>
-<li>定义四个指针：<code>top</code>、<code>bottom</code>、<code>left</code>、<code>right</code>，分别表示当前处理层的四个边界。
+<li>本解法使用 <strong>哈希表（unordered_map）</strong> 来建立 <strong>旧节点 → 新节点</strong> 的映射关系，分两步完成：</li>
+<li>第一步：复制所有节点（仅 <code>val</code>）
 <ul>
-<li>在 <code>left &lt; right</code> 的前提下，每次循环处理一层（从外到内）。</li>
+<li>遍历原链表，把每个节点 <code>cur</code> 的副本节点 <code>tmp</code> 创建出来。</li>
+<li>用 <code>map[cur] = tmp</code> 保存映射关系。</li>
+<li>此时，副本节点只存了值，<code>next</code> 和 <code>random</code> 都还没处理。</li>
+</ul>
+</li>
+<li>第二步：建立指针关系
+<ul>
+<li>再次遍历原链表。</li>
+<li>对于每个旧节点 <code>cur</code>，通过映射关系补全副本节点的指针：
+<ul>
+<li><code>mp[cur]-&gt;next = mp[cur-&gt;next]</code></li>
+<li><code>mp[cur]-&gt;random = mp[cur-&gt;random]</code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>对于每层：
-<ul>
-<li>逐个元素进行<strong>四边交换</strong>（<code>top → right → bottom → left → top</code>），利用一个 <code>tmp</code> 做中转。</li>
-<li>完成一圈后，收缩边界：<code>top++</code>, <code>bottom--</code>, <code>left++</code>, <code>right--</code>，进入内层。</li>
-</ul>
-</li>
-<li>最终所有层完成后，矩阵即被原地旋转 <code>90°</code>。</li>
+<li>这样，新节点的 <code>next</code> 和 <code>random</code> 就正确指向新链表中的节点。</li>
 </ul>
 </li>
 <li>代码：</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">rotate</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> top = <span class="hljs-number">0</span>, bottom = matrix.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>, right = matrix[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">int</span> tmp = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(left&lt;right)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;right-left; i++)&#123;<br>                tmp = matrix[top][left+i];<br>                matrix[top][left+i] = matrix[bottom-i][left];<br>                matrix[bottom-i][left] = matrix[bottom][right-i];<br>                matrix[bottom][right-i] = matrix[top+i][right];<br>                matrix[top+i][right] = tmp;<br>            &#125;<br>            left++;<br>            right--;<br>            top++;<br>            bottom--;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-<h3 id="搜索二维矩阵-ii"><a class="markdownIt-Anchor" href="#搜索二维矩阵-ii"></a> 搜索二维矩阵 II</h3>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/*</span><br><span class="hljs-comment">// Definition for a Node.</span><br><span class="hljs-comment">class Node &#123;</span><br><span class="hljs-comment">public:</span><br><span class="hljs-comment">    int val;</span><br><span class="hljs-comment">    Node* next;</span><br><span class="hljs-comment">    Node* random;</span><br><span class="hljs-comment">    </span><br><span class="hljs-comment">    Node(int _val) &#123;</span><br><span class="hljs-comment">        val = _val;</span><br><span class="hljs-comment">        next = NULL;</span><br><span class="hljs-comment">        random = NULL;</span><br><span class="hljs-comment">    &#125;</span><br><span class="hljs-comment">&#125;;</span><br><span class="hljs-comment">*/</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">Node* <span class="hljs-title">copyRandomList</span><span class="hljs-params">(Node* head)</span> </span>&#123;<br>        unordered_map&lt;Node*, Node*&gt; mp;<br>        Node* cur = head;<br>        <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">nullptr</span>)&#123;<br>            Node* tmp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Node</span>(cur-&gt;val);<br>            mp[cur] = tmp;<br>            cur = cur-&gt;next;<br>        &#125;<br>        cur = head;<br>        <span class="hljs-keyword">while</span>(cur != <span class="hljs-literal">nullptr</span>)&#123;<br>            mp[cur]-&gt;next = mp[cur-&gt;next];<br>            mp[cur]-&gt;random = mp[cur-&gt;random];<br>            cur = cur-&gt;next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> mp[head];<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="k-个一组翻转链表"><a class="markdownIt-Anchor" href="#k-个一组翻转链表"></a> K 个一组翻转链表</h3>
 <ul>
-<li>搜索二维矩阵 II：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-a-2d-matrix-ii/description/">240.搜索二维矩阵 II</a></li>
+<li>K 个一组翻转链表：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-nodes-in-k-group/?envType=study-plan-v2&amp;envId=top-100-liked">25.K 个一组翻转链表</a></li>
 <li>思路：
 <ul>
-<li>利用矩阵的有序性，从右上角 ( <code>matrix[0][n-1]</code> ) 作为起点开始搜索。
+<li>虚拟节点辅助：创建 <code>dummy</code> 指向头结点，方便处理头部被翻转的场景。用 <code>groupPre</code> 表示当前要翻转这一组的<strong>前驱节点</strong>（初始为 <code>dummy</code>）。</li>
+</ul>
 <ul>
-<li>如果 <code>target &lt; 当前值</code>：说明目标数一定在左边，列指针 <code>lie--</code>；</li>
-<li>如果 <code>target &gt; 当前值</code>：说明目标数一定在下边，行指针 <code>hang++</code>；</li>
-<li>如果相等，则直接返回 <code>true</code></li>
+<li>定位一组范围 <code>[groupPre-&gt;next, cur]</code>
+<ul>
+<li>从 <code>groupPre</code> 出发向前数 <code>k</code> 个节点，到达该组的末尾 <code>cur</code>。</li>
+<li>若不足 <code>k</code> 个（<code>cur == nullptr</code>），说明剩余节点不足一组，直接结束（保持不变）。</li>
 </ul>
 </li>
-<li>不断缩小搜索范围，直到行或列越界结束。</li>
+<li>记录下一段起点：<code>groupNxt = cur-&gt;next</code>，翻转只在 <code>[groupPre-&gt;next, cur]</code> 这段闭区间内进行。</li>
+<li>原地翻转这一组
+<ul>
+<li><code>pre = groupPre-&gt;next</code>（组内的第一个结点，翻转后会变成该组的最后一个）。</li>
+<li><code>cur = pre-&gt;next</code>，循环把 <code>cur</code> 指向 <code>pre</code>，逐步逆转直到 <code>cur == groupNxt</code> 为止。</li>
+<li>这一段标准链表原地反转模板，不额外开空间。</li>
+</ul>
+</li>
+<li>接回链表
+<ul>
+<li>翻转完成后，<code>pre</code> 指向该组新的头；<code>groupPre-&gt;next</code> 应该连到 <code>pre</code>。</li>
+<li>原组头（翻转前的 <code>groupPre-&gt;next</code>，此时用临时变量 <code>tmp</code> 保存）变成组尾，需要连到 <code>groupNxt</code>。</li>
+<li>更新 <code>groupPre = tmp</code>，准备处理下一组。</li>
+</ul>
+</li>
+<li>循环直到无法再成组，返回 <code>dummy-&gt;next</code>。</li>
 </ul>
 </li>
 <li>代码：</li>
 </ul>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">searchMatrix</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; matrix, <span class="hljs-keyword">int</span> target)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> m = matrix.<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">int</span> n = matrix[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>();<br>        <span class="hljs-keyword">int</span> hang = <span class="hljs-number">0</span>, lie = n<span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">while</span>( hang&lt;m &amp;&amp; lie&gt;=<span class="hljs-number">0</span> )&#123;<br>            <span class="hljs-keyword">if</span>(target &lt; matrix[hang][lie])<br>                lie--;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(target &gt; matrix[hang][lie])<br>                hang++;<br>            <span class="hljs-keyword">else</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * struct ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode *next;</span><br><span class="hljs-comment"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function">ListNode* <span class="hljs-title">reverseKGroup</span><span class="hljs-params">(ListNode* head, <span class="hljs-keyword">int</span> k)</span> </span>&#123;<br>        ListNode* dummy = <span class="hljs-keyword">new</span> <span class="hljs-built_in">ListNode</span>(<span class="hljs-number">0</span>, head);<br>        ListNode* groupPre = dummy;<br>        <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;<br>            <span class="hljs-keyword">int</span> kth = k;<br>            ListNode* cur = groupPre;<br>            <span class="hljs-keyword">while</span>(kth&gt;<span class="hljs-number">0</span> &amp;&amp; cur!=<span class="hljs-literal">nullptr</span>)&#123;<br>                kth--;<br>                cur = cur-&gt;next;<br>            &#125;<br>            <span class="hljs-keyword">if</span>(cur == <span class="hljs-literal">nullptr</span>)<br>                <span class="hljs-keyword">break</span>;<br>            ListNode* groupNxt = cur-&gt;next;<br>            <span class="hljs-comment">// 翻转组内节点</span><br>            ListNode* pre = groupPre-&gt;next;<br>            cur = pre-&gt;next;<br>            ListNode* tmp = <span class="hljs-literal">nullptr</span>;<br>            <span class="hljs-keyword">while</span>(cur != groupNxt)&#123;<br>                tmp = cur-&gt;next;<br>                cur-&gt;next = pre;<br>                pre = cur;<br>                cur = tmp;<br>            &#125;<br>            tmp = groupPre-&gt;next;<br>            tmp-&gt;next = groupNxt;<br>            groupPre-&gt;next = pre;<br>            groupPre = tmp;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dummy-&gt;next;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="二叉树"><a class="markdownIt-Anchor" href="#二叉树"></a> 二叉树</h2>
 <h3 id="二叉树的直径"><a class="markdownIt-Anchor" href="#二叉树的直径"></a> 二叉树的直径</h3>
 <ul>
@@ -913,6 +980,64 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">binSearch</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target, <span class="hljs-keyword">bool</span> isLeft)</span></span>&#123;<br>        <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> right = nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">int</span> mid = left+(right-left)/<span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">int</span> index = <span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">while</span>(left&lt;=right)&#123;<br>            mid = left+(right-left)/<span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(nums[mid] == target &amp;&amp; isLeft)&#123;<br>                index = mid;<br>                right = mid<span class="hljs-number">-1</span>;<br>            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(nums[mid] == target &amp;&amp; !isLeft)&#123;<br>                index = mid;<br>                left = mid+<span class="hljs-number">1</span>;<br>            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(target&gt;nums[mid])&#123;<br>                left = mid+<span class="hljs-number">1</span>;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                right = mid<span class="hljs-number">-1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> index;<br>    &#125;<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">searchRange</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target)</span> </span>&#123;<br>        <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">ans</span><span class="hljs-params">(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>)</span></span>;<br>        ans[<span class="hljs-number">0</span>] = <span class="hljs-built_in">binSearch</span>(nums, target, <span class="hljs-literal">true</span>);<br>        ans[<span class="hljs-number">1</span>] = <span class="hljs-built_in">binSearch</span>(nums, target, <span class="hljs-literal">false</span>);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="搜索旋转排序数组"><a class="markdownIt-Anchor" href="#搜索旋转排序数组"></a> 搜索旋转排序数组</h3>
+<ul>
+<li>搜索旋转排序数组：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/search-in-rotated-sorted-array/?envType=study-plan-v2&amp;envId=top-100-liked">33.搜索旋转排序数组</a></li>
+<li>思路：
+<ul>
+<li>普通二分查找只适用于完全有序数组。但是旋转后的数组，可以分为两段依然有序的区间：
+<ul>
+<li>左半段有序；</li>
+<li>右半段有序；</li>
+</ul>
+</li>
+<li>如果 <code>nums[left] &lt;= nums[mid]</code>，说明左半段有序：
+<ul>
+<li>如果 <code>target</code> 落在 <code>[nums[left], nums[mid])</code> 之间，就去左边查找；</li>
+<li>否则去右边查找。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>否则说明右半段有序：
+<ul>
+<li>如果 <code>target</code> 落在 <code>(nums[mid], nums[right]]</code> 之间，就去右边查找；</li>
+<li>否则去左边查找。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>通过这种方式，每次都能排除一半的区间，保持<strong>对数复杂度</strong>。</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">search</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums, <span class="hljs-keyword">int</span> target)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> right = nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">int</span> mid = left+(right-left)/<span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">while</span>(left&lt;=right)&#123;<br>            mid = left+(right-left)/<span class="hljs-number">2</span>;<br>            <span class="hljs-keyword">if</span>(nums[mid] == target)<br>                <span class="hljs-keyword">return</span> mid;<br>            <span class="hljs-comment">// mid 在前半段</span><br>            <span class="hljs-keyword">if</span>(nums[left]&lt;=nums[mid])&#123;<br>                <span class="hljs-keyword">if</span>(target&lt;nums[mid] &amp;&amp; target&gt;=nums[left])<br>                    right = mid<span class="hljs-number">-1</span>;<br>                <span class="hljs-keyword">else</span><br>                    left = mid+<span class="hljs-number">1</span>;<br>            &#125;<span class="hljs-keyword">else</span>&#123; <span class="hljs-comment">// mid 在后半段</span><br>                <span class="hljs-keyword">if</span>(target&gt;nums[mid] &amp;&amp; target&lt;=nums[right])<br>                    left = mid+<span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">else</span><br>                    right = mid<span class="hljs-number">-1</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="寻找旋转排序数组中的最小值"><a class="markdownIt-Anchor" href="#寻找旋转排序数组中的最小值"></a> 寻找旋转排序数组中的最小值</h3>
+<ul>
+<li>寻找旋转排序数组中的最小值：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/?envType=study-plan-v2&amp;envId=top-100-liked">153.寻找旋转排序数组中的最小值</a></li>
+<li>思路：
+<ul>
+<li>在旋转后的有序数组中，总有一半区间是单调递增的。通过比较 <code>nums[mid]</code> 与 <code>nums[left]</code>、<code>nums[right]</code>，可以判断当前 <code>mid</code> 落在哪一半，并决定如何缩小搜索范围。</li>
+<li>收缩到单调区间的情况：
+<ul>
+<li>如果 <code>nums[left] &lt;= nums[right]</code>，说明当前 <code>[left, right]</code> 区间已经是单调递增的，此时最小值就是 <code>nums[left]</code>。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>判断 mid 所在区间
+<ul>
+<li>如果 <code>nums[mid] &gt;= nums[left]</code>，说明 <code>mid</code> 在左半段有序区间内，最小值一定在 <code>mid</code> 右边，于是移动 <code>left = mid + 1</code>。</li>
+<li>否则（即 <code>nums[mid] &lt;= nums[right]</code>），说明 <code>mid</code> 落在右半段区间，最小值在 <code>[left, mid]</code>，于是移动 <code>right = mid</code>。</li>
+</ul>
+</li>
+<li>不断收缩左右边界，直到区间收缩为单调递增区间，直接返回 <code>nums[left]</code>。</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">findMin</span><span class="hljs-params">(vector&lt;<span class="hljs-keyword">int</span>&gt;&amp; nums)</span> </span>&#123;<br>        <span class="hljs-keyword">int</span> left = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> right = nums.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">int</span> mid = left+(right-left)/<span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">while</span>(left&lt;=right)&#123;<br>            mid = left+(right-left)/<span class="hljs-number">2</span>;<br>            <span class="hljs-comment">// 当left和right收缩到单调递增区间</span><br>            <span class="hljs-keyword">if</span>(nums[left]&lt;=nums[right])<br>                <span class="hljs-keyword">return</span> nums[left];<br>            <span class="hljs-comment">// 在左半段区间</span><br>            <span class="hljs-keyword">if</span>(nums[mid]&gt;=nums[left])<br>                left = mid+<span class="hljs-number">1</span>;<br>            <span class="hljs-comment">// 在后半段区间</span><br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(nums[mid]&lt;=nums[right])<br>                right = mid;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 <h2 id="栈"><a class="markdownIt-Anchor" href="#栈"></a> 栈</h2>
 <h3 id="最小栈"><a class="markdownIt-Anchor" href="#最小栈"></a> 最小栈</h3>
 <ul>
