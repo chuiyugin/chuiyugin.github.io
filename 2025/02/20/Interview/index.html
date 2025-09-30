@@ -26,7 +26,7 @@
 <meta property="og:description" content="面经汇总">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-20T15:30:00.000Z">
-<meta property="article:modified_time" content="2025-09-16T12:40:14.000Z">
+<meta property="article:modified_time" content="2025-09-30T17:28:08.252Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -270,7 +270,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          465 字
+          1.1k 字
         
       </span>
     
@@ -282,7 +282,7 @@
         
         
           <!-- compatible with older versions-->
-          2 分钟
+          4 分钟
         
       </span>
     
@@ -351,6 +351,47 @@
 <li>1、控制负载因子：让期望复杂度回到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>，负载因子 α = 元素数/桶数，当 α 逼近设定阈值的时候就扩容➕重新哈希</li>
 <li>2、优化哈希函数：降低冲突几率</li>
 <li>3、桶内结构升级：把链表换成平衡树</li>
+</ul>
+</li>
+</ul>
+<h2 id="语言语法"><a class="markdownIt-Anchor" href="#语言语法"></a> 语言语法</h2>
+<h3 id="golang"><a class="markdownIt-Anchor" href="#golang"></a> Golang</h3>
+<h4 id="gmp-相关"><a class="markdownIt-Anchor" href="#gmp-相关"></a> GMP 相关</h4>
+<ul>
+<li>当一个 <code>goroutine</code> 进入系统调用被阻塞，底层线程与 <code>p</code> 如何解绑？
+<ul>
+<li>在系统调用前，首先该线程 <code>m</code> 的 <code>g0</code> 会保存当前 <code>g</code> 的执行环境</li>
+<li>然后将 <code>g</code> 和 <code>p</code> 的状态更新为 <code>syscall</code>；</li>
+<li>解除 <code>p</code> 和当前 <code>m</code> 之间的绑定，因为 <code>m</code> 即将进入系统调用而导致短暂不可用；</li>
+<li>最后将 <code>p</code> 添加到当前 <code>m</code> 的 <code>oldP</code> 容器当中，后续 <code>m</code> 恢复后，会优先寻找旧的 <code>p</code> 重新建立绑定关系。</li>
+</ul>
+</li>
+<li>当 <code>m</code> 完成了内核态的系统调用之后，如何寻找 <code>p</code> 开始重新运作？
+<ul>
+<li>方法执行之初，此时的执行权是普通 <code>g</code> 倘若此前设置的 <code>oldp</code> 仍然可用，则重新和 <code>oldP</code> 绑定，将当前 <code>g</code> 重新置为 <code>_Grunning</code> 状态，然后开始执行后续的用户函数；</li>
+<li><code>old</code> 绑定失败，则调用 <code>mcall</code> 方法切换到 <code>m</code> 的 <code>g0</code>，并执行 <code>exitsyscall0</code> 方法；</li>
+<li>将 <code>g</code> 由系统调用状态切换为可运行态（<code>_Grunnable</code>），并解绑 <code>g</code> 和 <code>m</code> 的关系；</li>
+<li>从全局 <code>p</code> 队列获取可用的 <code>p</code>，如果获取到了，则执行 <code>g</code>；</li>
+<li>如若无 <code>p</code> 可用，则将 <code>g</code> 添加到全局队列，当前 <code>m</code> 陷入沉睡，直到被唤醒后才会继续发起调度。</li>
+</ul>
+</li>
+<li>讲讲 Go 协程：
+<ul>
+<li>与线程存在映射关系，为 <code>M:N</code>，<code>M</code> 可以大于 <code>N</code>；</li>
+<li>创建、销毁、调度在用户态完成，对内核透明，足够轻便；</li>
+<li>可利用多个线程，实现并行；</li>
+<li>通过调度器 <code>p</code> 的斡旋，实现和线程间的动态绑定和灵活调度；</li>
+<li>栈空间大小可动态扩缩，因地制宜。</li>
+</ul>
+</li>
+<li>讲讲 GMP 模型中 <code>p</code> 的作用，一定需要 <code>p</code> 吗？
+<ul>
+<li><code>p</code> 即 <code>processor</code>，是 <code>golang</code> 中协程的调度器；</li>
+<li><code>p</code> 是 <code>gmp</code> 的中枢，借由 <code>p</code> 承上启下，实现 <code>g</code> 和 <code>m</code> 之间的动态有机结合；</li>
+<li>对 <code>g</code> 而言，<code>p</code> 是其 <code>cpu</code>，<code>g</code> 只有被 <code>p</code> 调度，才得以执行；</li>
+<li>对 <code>m</code> 而言，<code>p</code> 是其执行代理，为其提供必要信息的同时（可执行的 <code>g</code>、内存分配情况等），并隐藏了繁杂的调度细节；</li>
+<li><code>p</code> 的数量决定了 <code>g</code> 最大并行数量，可由用户通过 <code>GOMAXPROCS</code> 进行设定（超过 <code>CPU</code> 核数时无意义）。</li>
+<li>在目前的 GMP 模型下，<code>p</code> 是必须的，当去掉 <code>p</code> 让 <code>m</code> 从全局队列中直接取 <code>g</code> 进行执行的话会导致无法高效控制并行度，导致运行效率大幅下降。</li>
 </ul>
 </li>
 </ul>
@@ -444,9 +485,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/07/zuo_algorithm_2/" title="左程云、代码随想录算法学习（二）">
+                      <a href="/2025/03/07/zuo_algorithm_1/" title="左程云、代码随想录算法学习（一）">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">左程云、代码随想录算法学习（二）</span>
+                        <span class="hidden-mobile">左程云、代码随想录算法学习（一）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
