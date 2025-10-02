@@ -26,7 +26,7 @@
 <meta property="og:description" content="面经汇总">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-20T15:30:00.000Z">
-<meta property="article:modified_time" content="2025-10-01T17:06:52.472Z">
+<meta property="article:modified_time" content="2025-10-02T17:20:50.636Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -270,7 +270,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.3k 字
+          1.9k 字
         
       </span>
     
@@ -282,7 +282,7 @@
         
         
           <!-- compatible with older versions-->
-          5 分钟
+          6 分钟
         
       </span>
     
@@ -407,6 +407,41 @@
 <li>确认证书是否在有效期内。</li>
 <li>通过 CRL（证书吊销列表）或 OCSP 协议验证证书是否已被吊销。</li>
 <li>如果以上都通过，浏览器才会信任这个证书，并继续进行 <strong>TLS 握手</strong>，协商出对称密钥来加密后续通信。</li>
+</ul>
+</li>
+<li>对称密钥和非对称的区别？
+<ul>
+<li>对称密钥：
+<ul>
+<li>加密和解密使用<strong>同一把密钥</strong>。通信双方需要共享一把密钥。</li>
+<li>假如有 N 个用户相互通信，就需要 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>N</mi><mo stretchy="false">(</mo><mi>N</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{N(N-1)}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.355em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mbin mtight">−</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> ​ 把不同的密钥，管理起来比较复杂。</li>
+<li>加密解密速度快，适合处理大量数据。</li>
+<li>缺点：如何安全地分发和保存密钥是个难题，如果密钥泄露，通信内容也就不安全了。</li>
+</ul>
+</li>
+<li>非对称加密：
+<ul>
+<li>加密和解密使用<strong>一对密钥</strong>：公钥 (Public Key) 和私钥 (Private Key)。公钥可以公开，用来加密数据。私钥必须保密，用来解密数据。</li>
+<li>每个人只需要维护自己的一对密钥（公钥和私钥）。公钥可以对外公开，私钥由自己保管，密钥管理相对简单。</li>
+<li>加密解密速度慢，性能消耗大，但安全性更高，因为私钥不需要传输。</li>
+<li>通常用来做：
+<ul>
+<li><strong>数字签名</strong>（保证身份和不可否认性）</li>
+<li><strong>密钥交换</strong>（先用非对称加密交换对称密钥，再用对称密钥加密数据）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>TLS 的四次握手流程
+<ul>
+<li>1、客户端发起请求：告诉服务器自己支持的 TLS 版本、加密算法套件、随机数 (用于生产后续的会话密钥，也就是对称密钥)。</li>
+<li>2、服务器回应：选择使用的 TLS 版本和加密算法、发送自己的随机数（也是用于生产后续的会话密钥，也就是对称密钥）、发送服务器证书（包含服务器公钥，用于身份认证）。</li>
+<li>3、客户端再次发起请求做会话密钥协商：客户端生成一个“预主密钥” (Pre-Master Secret)，用服务器的公钥加密后发给服务器。同时发送加密算法改变通知，表示后续信息都用会话密钥来加密。</li>
+<li>4、服务端通过“预主密钥” (Pre-Master Secret)计算出会话密钥后向客户端发信息：发送加密算法改变的通知，表示后续信息都用会话密钥来加密。</li>
 </ul>
 </li>
 </ul>
