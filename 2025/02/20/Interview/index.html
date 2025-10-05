@@ -25,11 +25,14 @@
 <meta property="og:site_name" content="CHUI YUGIN">
 <meta property="og:description" content="面经汇总">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510060105044.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510060107616.png">
 <meta property="article:published_time" content="2025-02-20T15:30:00.000Z">
-<meta property="article:modified_time" content="2025-10-02T17:20:50.636Z">
+<meta property="article:modified_time" content="2025-10-05T17:25:48.708Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510060105044.png">
   
   
   
@@ -270,7 +273,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          1.9k 字
+          2.8k 字
         
       </span>
     
@@ -282,7 +285,7 @@
         
         
           <!-- compatible with older versions-->
-          6 分钟
+          9 分钟
         
       </span>
     
@@ -351,6 +354,41 @@
 <li>1、控制负载因子：让期望复杂度回到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>，负载因子 α = 元素数/桶数，当 α 逼近设定阈值的时候就扩容➕重新哈希</li>
 <li>2、优化哈希函数：降低冲突几率</li>
 <li>3、桶内结构升级：把链表换成平衡树</li>
+</ul>
+</li>
+</ul>
+<h3 id="排序相关"><a class="markdownIt-Anchor" href="#排序相关"></a> 排序相关</h3>
+<ul>
+<li>稳定排序和不稳定排序
+<ul>
+<li>如果一个排序算法在对一组数据进行排序时，<strong>相等的元素在排序后仍然保持它们原来的相对顺序</strong>，那么这种算法就是<strong>稳定的</strong>。</li>
+<li>若相等的元素在排序后<strong>相对顺序可能发生变化</strong>，这种算法就是<strong>不稳定的</strong>。</li>
+</ul>
+</li>
+<li>稳定排序算法</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510060105044.png" srcset="/img/loading.gif" lazyload alt="稳定排序算法" /></p>
+<ul>
+<li>不稳定排序算法：</li>
+</ul>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510060107616.png" srcset="/img/loading.gif" lazyload alt="不稳定排序算法" /></p>
+<ul>
+<li>快排为什么不稳定？
+<ul>
+<li>快速排序的主要过程是：
+<ol>
+<li><strong>选择一个基准（pivot）</strong>；</li>
+<li><strong>将数组分为三部分</strong>：
+<ul>
+<li>左边放比基准小的元素；</li>
+<li>中间放和基准相等的元素；</li>
+<li>右边放比基准大的元素；</li>
+</ul>
+</li>
+<li><strong>递归地对两部分进行排序</strong>。</li>
+</ol>
+</li>
+<li>快速排序的<strong>不稳定性</strong>来源于——<strong>“交换操作”可能跨越相等元素之间的原始相对顺序</strong>。</li>
 </ul>
 </li>
 </ul>
@@ -442,6 +480,74 @@
 <li>2、服务器回应：选择使用的 TLS 版本和加密算法、发送自己的随机数（也是用于生产后续的会话密钥，也就是对称密钥）、发送服务器证书（包含服务器公钥，用于身份认证）。</li>
 <li>3、客户端再次发起请求做会话密钥协商：客户端生成一个“预主密钥” (Pre-Master Secret)，用服务器的公钥加密后发给服务器。同时发送加密算法改变通知，表示后续信息都用会话密钥来加密。</li>
 <li>4、服务端通过“预主密钥” (Pre-Master Secret)计算出会话密钥后向客户端发信息：发送加密算法改变的通知，表示后续信息都用会话密钥来加密。</li>
+</ul>
+</li>
+</ul>
+<h3 id="dns-相关"><a class="markdownIt-Anchor" href="#dns-相关"></a> DNS 相关</h3>
+<ul>
+<li>在浏览器输入栏中输入 <code>baidu.com</code> 发生了什么？
+<ul>
+<li>为了找到 <code>baidu.com</code> 对应的服务器 IP 地址，浏览器会按层次查找缓存：
+<ol>
+<li><strong>浏览器 DNS 缓存</strong>
+<ul>
+<li>若近期访问过，会直接命中缓存。</li>
+</ul>
+</li>
+<li><strong>操作系统缓存（OS Cache）</strong>
+<ul>
+<li>否则，向操作系统查询本地缓存（例如 Windows 的 <code>DNS Client Service</code>）。</li>
+</ul>
+</li>
+<li><strong>本地 hosts 文件</strong>
+<ul>
+<li>检查系统文件 <code>/etc/hosts</code>（Linux/Mac）或 <code>C:\Windows\System32\drivers\etc\hosts</code> 是否有静态映射。</li>
+</ul>
+</li>
+<li><strong>本地 DNS 服务器（ISP 或路由器）</strong>
+<ul>
+<li>若都没有命中，系统会向配置的 DNS 服务器（例如电信、Google DNS 8.8.8.8）发起 DNS 查询请求。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>DNS 什么时候用递归查询，什么时候用迭代（反复）查询？
+<ul>
+<li>递归查询（客户端 → 本地 DNS 服务器），意思是：“帮我查出 <code>baidu.com</code> 的 IP 地址，不要让我再管后面的细节。”</li>
+<li>迭代查询（本地 DNS → 其他上级 DNS 服务器），这些过程中，每一层上级 DNS 都<strong>不会代为继续查询</strong>，只告诉下一级地址。</li>
+</ul>
+</li>
+<li>DNS 根服务器会不会同时接收到大量并发查询请求？
+<ul>
+<li>是的：根服务器会接收到大量并发查询</li>
+<li>为什么根服务器能扛住如此高并发？
+<ul>
+<li>分布式部署（Anycast 技术），全球共有 <strong>超过 1000+ 台根服务器实例</strong>（通过 Anycast 技术部署在各地）。</li>
+<li>高缓存利用率，实际上，绝大多数 DNS 查询 <strong>根本不会真的到达根服务器</strong>，<strong>本地 DNS 服务器</strong>（ISP 或公司内部 DNS）会缓存查询结果； <code>.com</code>、<code>.net</code> 等 <strong>顶级域名服务器</strong> 也会被缓存；根域的权威信息（比如顶级域的 NS 记录）<strong>变化极少</strong>，TTL 时间长（通常为 48 小时甚至更长）。</li>
+<li>根区数据非常小且易处理；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>百度是如何处理大量对 <code>baidu.com</code> 的并发请求的？
+<ul>
+<li>
+<ol>
+<li>DNS 多层调度 + 全球加速：当你访问 <code>baidu.com</code>，其实并不止一个 IP。同一个域名对应多个服务器 IP；根据用户地理位置，返回<strong>距离最近</strong>的服务器地址；DNS 还会考虑各节点的负载情况、延迟、可用性。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>CDN（内容分发网络）缓存静态资源：静态资源（图片、CSS、JS、搜索页面模板等）被分发到全国各地的边缘节点。页面中的图片、脚本等资源<strong>就近从 CDN 节点获取</strong>；只有动态内容（如搜索结果）才需回源请求百度主站。</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>分布式缓存与异步队列、高可扩展的搜索索引集群、健壮的监控与容灾体系等方式应对大量并发请求。</li>
+</ol>
+</li>
 </ul>
 </li>
 </ul>
