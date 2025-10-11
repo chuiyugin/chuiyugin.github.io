@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510110106148.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510110106267.png">
 <meta property="article:published_time" content="2025-02-20T15:30:00.000Z">
-<meta property="article:modified_time" content="2025-10-10T17:09:27.837Z">
+<meta property="article:modified_time" content="2025-10-11T17:22:50.937Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -275,7 +275,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          4.8k 字
+          5.1k 字
         
       </span>
     
@@ -461,6 +461,18 @@
 <li>管道的关闭只能由发送方关闭，接收方可以检测通道是否关闭，但发送方往关闭的管道发送数据会触发 <code>panic</code>。</li>
 </ul>
 </li>
+<li><code>select</code> 是怎么和 <code>channel</code> 配合的？
+<ul>
+<li><code>select</code> 是 Go 专门用于<strong>同时等待多个 channel 操作</strong>的控制结构。它的作用类似于多路复用器，让 <code>goroutine</code> 能够「同时监听多个 <code>channel</code> 」，只要其中任意一个可以通信（发送或接收），就立即执行对应的分支。</li>
+<li><code>select</code> 的行为可以分为三种情况：
+<ul>
+<li>至少有一个 <code>case</code> 可执行，随机选择一个执行；</li>
+<li>所有通道都阻塞，阻塞等待直到某个通道可用；</li>
+<li>有 <code>default</code> 且所有通道都阻塞，立即执行 <code>default</code>（非阻塞）。</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h4 id="contex-相关"><a class="markdownIt-Anchor" href="#contex-相关"></a> Contex 相关</h4>
 <ul>
@@ -642,6 +654,30 @@
 <li><code>poolLocalInternal.private</code>：对应于某个 P 的私有元素，操作时无需加锁；</li>
 <li><code>poolLocalInternal.shared</code> : 某个 P 下的共享元素链表，由于各 P 都有可能访问，因此需要加锁.</li>
 </ul>
+<h4 id="defer"><a class="markdownIt-Anchor" href="#defer"></a> defer</h4>
+<ul>
+<li>介绍一下 <code>defer</code> 以及执行顺序
+<ul>
+<li><code>defer</code> 主要用在函数或者方法上面，作用是用于函数和方法的延迟调用。</li>
+<li><code>defer</code> 的执行顺序和栈一样，是先调用，后执行。</li>
+<li><code>defer</code> 有两个主要的实际用处：
+<ul>
+<li>用于资源回收，根据其延迟调用的机制，可以优雅地处理资源回收问题。</li>
+<li>可以配合 <code>recover()</code> 一起处理 <code>panic</code> 。</li>
+</ul>
+</li>
+<li><code>defer</code> 和 <code>return</code> 的处理顺序：
+<ul>
+<li>先设置返回值</li>
+<li>执行 <code>defer</code> 语句</li>
+<li>将结果返回</li>
+</ul>
+</li>
+<li>注意下面这个例子输出是 <code>2</code> ：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>   res := deferRun()<br>   fmt.Println(res)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">deferRun</span><span class="hljs-params">()</span> <span class="hljs-params">(res <span class="hljs-keyword">int</span>)</span></span> &#123;<br>  num := <span class="hljs-number">1</span><br>  <br>  <span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>    res++<br>  &#125;()<br>  <br>  <span class="hljs-keyword">return</span> num<br>&#125;<br></code></pre></td></tr></table></figure>
 <h2 id="计网相关"><a class="markdownIt-Anchor" href="#计网相关"></a> 计网相关</h2>
 <h3 id="http-篇"><a class="markdownIt-Anchor" href="#http-篇"></a> HTTP 篇</h3>
 <ul>
@@ -883,9 +919,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/07/zuo_algorithm_2/" title="左程云、代码随想录算法学习（二）">
+                      <a href="/2025/03/07/zuo_algorithm_1/" title="左程云、代码随想录算法学习（一）">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">左程云、代码随想录算法学习（二）</span>
+                        <span class="hidden-mobile">左程云、代码随想录算法学习（一）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
