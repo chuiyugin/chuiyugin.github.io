@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510110106148.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510110106267.png">
 <meta property="article:published_time" content="2025-02-20T15:30:00.000Z">
-<meta property="article:modified_time" content="2025-10-11T17:22:50.937Z">
+<meta property="article:modified_time" content="2025-10-15T17:25:33.732Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -275,7 +275,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          5.1k 字
+          6k 字
         
       </span>
     
@@ -287,7 +287,7 @@
         
         
           <!-- compatible with older versions-->
-          16 分钟
+          19 分钟
         
       </span>
     
@@ -330,6 +330,33 @@
               <div class="markdown-body">
                 
                 <h1 id="知识复习汇总"><a class="markdownIt-Anchor" href="#知识复习汇总"></a> 知识复习汇总</h1>
+<h2 id="项目相关"><a class="markdownIt-Anchor" href="#项目相关"></a> 项目相关</h2>
+<h3 id="reviewcloud-项目"><a class="markdownIt-Anchor" href="#reviewcloud-项目"></a> ReviewCloud 项目</h3>
+<ul>
+<li><code>ES</code> 前面的 <code>Redis</code> 缓存是怎么存的？
+<ul>
+<li>把 <code>storeID</code>，<code>offset</code>，<code>limit</code> 合并设置为缓存的 <code>key</code>，返回的数据设置为 <code>value</code>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">key := fmt.Sprintf(<span class="hljs-string">&quot;review:%d:%d:%d&quot;</span>, storeID, offset, limit)<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>ES</code> 是在哪里分词的？
+<ul>
+<li>分词行为由 <code>Elasticsearch</code> 的索引定义（mapping）决定。</li>
+</ul>
+</li>
+<li><code>Canal</code> 怎么知道传那个表的信息？</li>
+<li><code>gRPC</code> 和 <code>HTTP</code> 的区别？</li>
+<li><code>protobuf</code> 和 <code>json</code> 的区别？</li>
+<li><code>Kafka</code> 怎么保证不丢数据？
+<ul>
+<li>生产端：幂等 + acks=all + 重试</li>
+<li>Broker：多副本 + 顺序写 + ISR 机制</li>
+<li>消费端：offset 管理 + 事务</li>
+</ul>
+</li>
+</ul>
 <h2 id="数据结构"><a class="markdownIt-Anchor" href="#数据结构"></a> 数据结构</h2>
 <h3 id="哈希相关"><a class="markdownIt-Anchor" href="#哈希相关"></a> 哈希相关</h3>
 <ul>
@@ -542,6 +569,21 @@
 </ul>
 </li>
 </ul>
+<h4 id="interface-相关"><a class="markdownIt-Anchor" href="#interface-相关"></a> interface 相关</h4>
+<ul>
+<li><code>interface</code> 和 <code>interface&#123;&#125;</code> 的区别
+<ul>
+<li><code>interface&#123;&#125;</code> 是可以接受任何类型的接口。Go 1.18 之后，<code>any</code> 是 <code>interface&#123;&#125;</code> 的别名。</li>
+<li>例如：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// 表示任何类型参数</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">PrintAny</span><span class="hljs-params">(v <span class="hljs-keyword">interface</span>&#123;&#125;)</span></span> &#123;<br>    fmt.Println(v)<br>&#125;<br><br><span class="hljs-comment">// 动态类型容器</span><br><span class="hljs-keyword">var</span> data = []<span class="hljs-keyword">interface</span>&#123;&#125;&#123;<span class="hljs-number">1</span>, <span class="hljs-string">&quot;hello&quot;</span>, <span class="hljs-literal">true</span>&#125;<br></code></pre></td></tr></table></figure>
+<ul>
+<li><code>interface</code> 是“定义行为规范的接口类型”。</li>
+<li>例如：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// 定义了一组方法签名。</span><br><span class="hljs-comment">// 只有实现了这些方法的类型 才算实现了该接口。</span><br><span class="hljs-comment">// 是 Go 的多态机制核心。</span><br><span class="hljs-keyword">type</span> Reader <span class="hljs-keyword">interface</span> &#123;<br>    Read(p []<span class="hljs-keyword">byte</span>) (n <span class="hljs-keyword">int</span>, err error)<br>&#125;<br></code></pre></td></tr></table></figure>
 <h4 id="gin-框架"><a class="markdownIt-Anchor" href="#gin-框架"></a> Gin 框架</h4>
 <ul>
 <li>介绍一下 <code>Gin</code> 框架的路由注册
@@ -678,6 +720,49 @@
 </li>
 </ul>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>   res := deferRun()<br>   fmt.Println(res)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">deferRun</span><span class="hljs-params">()</span> <span class="hljs-params">(res <span class="hljs-keyword">int</span>)</span></span> &#123;<br>  num := <span class="hljs-number">1</span><br>  <br>  <span class="hljs-keyword">defer</span> <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>    res++<br>  &#125;()<br>  <br>  <span class="hljs-keyword">return</span> num<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="gorm-相关"><a class="markdownIt-Anchor" href="#gorm-相关"></a> GORM 相关</h4>
+<ul>
+<li>讲讲 <code>gorm</code> 框架？
+<ul>
+<li><code>gorm</code> 框架可以将数据库表和代码中的类（结构体）建立映射。其三大核心思想包括：数据库表和类（结构体）映射、表中列字段和类（结构体）属性映射、对象操作转换为 SQL 语句。</li>
+</ul>
+</li>
+<li><code>gorm</code> 框架为什么要使用反射？
+<ul>
+<li><code>gorm</code> 框架不能在编译期硬编码针对每个 <code>struct</code> 的逻辑，反射让它可以在运行期做到“识别任意类型”，从而适配多种不同结构体的不同字段。</li>
+</ul>
+</li>
+<li><code>gorm</code> 对象与字段映射的底层实现？
+<ul>
+<li>创建 <code>schema.Schema</code> 对象，保存表与字段的映射，通过结构体反射 + tag 解析实现。
+<ul>
+<li><code>reflect.TypeOf(User&#123;&#125;)</code> 获取结构体类型；</li>
+<li>遍历字段；</li>
+<li>解析每个字段的 tag（如 <code>gorm:&quot;primaryKey&quot;</code>、<code>gorm:&quot;column:email_address&quot;</code>）；</li>
+<li>根据命名策略生成表名和列名；</li>
+<li>构造 <code>Schema</code>，存入缓存。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>gorm</code> 标签底层怎么处理？
+<ul>
+<li>通过 <code>ParseTagSetting</code> 函数处理成 <code>map[string]string</code> 的形式，tag 中以分号 <code>;</code> 拆分 tag 内容</li>
+<li>通过 <code>:</code> 来分割 <code>key:value</code>：
+<ul>
+<li>如果有 <code>:</code>，如 <code>size:100</code> → key= <code>size</code>, value= <code>100</code></li>
+<li>如果没有 <code>:</code>，如 <code>primaryKey</code> → key= <code>primaryKey</code>, value= <code>true</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>gorm</code> 每次提取标签都要进行一次反射吗？
+<ul>
+<li>GORM 并不会每次都反射提取标签；</li>
+<li>它只在第一次遇到某个模型类型时用反射解析所有字段和 tag，之后所有 SQL 构造和操作都直接复用缓存的 <code>Schema</code> 信息，只在运行时通过轻量级反射访问字段值。</li>
+</ul>
+</li>
+</ul>
 <h2 id="计网相关"><a class="markdownIt-Anchor" href="#计网相关"></a> 计网相关</h2>
 <h3 id="http-篇"><a class="markdownIt-Anchor" href="#http-篇"></a> HTTP 篇</h3>
 <ul>
@@ -826,6 +911,37 @@
 <p>缓存一致性怎么解决？</p>
 <ul>
 <li>采用旁路缓存，读的话先读缓存，缓存命中则返回。缓存未命中，则读数据库，然后将数据写入缓存，再返回。然后写操作： 先更新数据库，再删除缓存。</li>
+</ul>
+</li>
+</ul>
+<h2 id="git-相关"><a class="markdownIt-Anchor" href="#git-相关"></a> git 相关</h2>
+<ul>
+<li><code>git</code> 分支的作用？
+<ul>
+<li><code>git</code> 分支只是一个指向提交（ <code>commit</code> ）的指针，它没有复制文件或代码。不同分支的修改互不影响，开发完成后可以通过 <code>merge</code>（合并）或 <code>rebase</code>（变基）整合到主线。</li>
+</ul>
+</li>
+<li><code>git pull</code> 和 <code>git fetch</code> 的区别？
+<ul>
+<li><code>git fetch</code> 仅仅把远程仓库的新提交取回到本地仓库，但<strong>不会改变你当前分支的状态</strong>。</li>
+<li><code>git pull</code> 实际上等价于 <code>fetch</code> + <code>merge</code>（或 <code>rebase</code>），会更新本地分支，并且可能修改工作区。</li>
+</ul>
+</li>
+<li><code>git checkout</code> 和 <code>git stash</code> 的区别？
+<ul>
+<li><code>git checkout</code> 是切换分支或恢复文件到某个版本，可能会丢弃或覆盖当前修改。</li>
+<li><code>git stash</code> 是临时保存当前未提交的更改，会安全地保存修改并清理工作区。</li>
+</ul>
+</li>
+<li><code>git merge</code> 和 <code>git rebase</code> 的区别？
+<ul>
+<li><code>git merge</code> 把两个分支的内容合并，保留原有提交历史，会生成一个新的“合并提交”。</li>
+<li><code>git rebase</code> 会重写提交历史，使之线性化，不会合并两个分支。</li>
+</ul>
+</li>
+<li>说一下 <code>git cherrypick</code>
+<ul>
+<li><code>git cherrypick</code> 是从其他分支中“挑选”一个或多个提交（<code>commit</code>），并把它们应用到当前分支上。</li>
 </ul>
 </li>
 </ul>
