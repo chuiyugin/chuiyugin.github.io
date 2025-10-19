@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510110106148.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510110106267.png">
 <meta property="article:published_time" content="2025-02-20T15:30:00.000Z">
-<meta property="article:modified_time" content="2025-10-15T17:25:33.732Z">
+<meta property="article:modified_time" content="2025-10-19T16:29:02.996Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -275,7 +275,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          6k 字
+          8.3k 字
         
       </span>
     
@@ -287,7 +287,7 @@
         
         
           <!-- compatible with older versions-->
-          19 分钟
+          26 分钟
         
       </span>
     
@@ -333,6 +333,22 @@
 <h2 id="项目相关"><a class="markdownIt-Anchor" href="#项目相关"></a> 项目相关</h2>
 <h3 id="reviewcloud-项目"><a class="markdownIt-Anchor" href="#reviewcloud-项目"></a> ReviewCloud 项目</h3>
 <ul>
+<li>谈谈 <code>ReviewCloud</code> 这个项目你的主要工作是什么，难点在哪？
+<ul>
+<li>参考开源项目，对服务架构设计与接口统一：基于 <strong>Kratos + Protobuf</strong> 定义 gRPC 与 HTTP 接口规范，保证 C/B/O 三端服务接口一致；</li>
+<li>微服务注册与治理：引入 <strong>Consul</strong> 作为服务注册发现中心；</li>
+<li>数据异步化与扩展能力建设：通过 <strong>Canal + Kafka</strong> 实现 MySQL Binlog 日志订阅；</li>
+<li>流式数据处理模块（review-job）：开发独立的流式处理服务 <code>review-job</code>，从 Kafka 消费数据库变更事件，实现评价数据的实时清洗与结构化处理，并同步到 <strong>Elasticsearch</strong> 以支持多维查询。</li>
+<li>性能优化与缓存体系建设：使用 <strong>Redis</strong> 作为 Elasticsearch 查询缓存层，引入 <strong>singleflight</strong> 机制抑制并发请求的缓存击穿，使用 <strong>JMeter 压测</strong> 验证优化效果，<strong>QPS 提升约 18.6%</strong>。</li>
+<li>难点：
+<ul>
+<li>MySQL 与 Kafka 的一致性：通过 Canal 订阅 Binlog 实现异步一致性，保证消息可靠投递与下游实时性。</li>
+<li>流式任务消费与 Elasticsearch 同步延迟：设计异步管道并引入分区并发消费机制，使延迟控制在百毫秒级。</li>
+<li>高并发下缓存击穿问题：使用 singleflight 合并同 key 并发请求，减少 Redis 缓存重建压力。</li>
+</ul>
+</li>
+</ul>
+</li>
 <li><code>ES</code> 前面的 <code>Redis</code> 缓存是怎么存的？
 <ul>
 <li>把 <code>storeID</code>，<code>offset</code>，<code>limit</code> 合并设置为缓存的 <code>key</code>，返回的数据设置为 <code>value</code>。</li>
@@ -346,14 +362,68 @@
 <li>分词行为由 <code>Elasticsearch</code> 的索引定义（mapping）决定。</li>
 </ul>
 </li>
-<li><code>Canal</code> 怎么知道传那个表的信息？</li>
-<li><code>gRPC</code> 和 <code>HTTP</code> 的区别？</li>
-<li><code>protobuf</code> 和 <code>json</code> 的区别？</li>
+<li><code>Canal</code> 怎么知道传那个表的信息？
+<ul>
+<li>在配置项中通过正则匹配的方式来进行配置。</li>
+</ul>
+</li>
+<li><code>gRPC</code> 和 <code>HTTP</code> 的区别？
+<ul>
+<li><code>gRPC</code> 本质上是 Google 开发的一个<strong>高性能 RPC 框架</strong>，它在 HTTP/2 之上定义了自己的协议层，使用 <code>Protobuf</code> 来定义接口与序列化格式。</li>
+<li>而 <code>HTTP</code> 则是基于 <code>URL</code> 的资源访问模型，传输格式通常是 <code>JSON</code>。</li>
+</ul>
+</li>
+<li>序列化和非序列化的区别是什么？
+<ul>
+<li>程序运行时的数据是存放在内存里的（例如 Go 的 struct、Java 的对象、Python 的字典），它们的内存结构和不同语言的运行时相关，不能直接通过网络发送给另一个系统。</li>
+<li>所以我们要<strong>序列化成中立的格式</strong>，比如 JSON / Protobuf / 二进制流，再发送给对方。</li>
+</ul>
+</li>
+<li><code>protobuf</code> 和 <code>JSON</code> 的序列化区别？
+<ul>
+<li><code>JSON</code> 的序列化结果就是一段文本字符串，本质是把内存中的数据结构（如结构体、对象、数组）转换成一段可读的字符串格式，方便传输和存储。</li>
+<li><code>protobuf</code> 本质是把内存中的数据结构（如结构体、对象、数组）按照 <code>.proto</code> 文件中定义的<strong>字段编号和类型</strong>，转换成一种<strong>紧凑的二进制格式</strong>，以便在网络中高效传输或存储。</li>
+</ul>
+</li>
 <li><code>Kafka</code> 怎么保证不丢数据？
 <ul>
 <li>生产端：幂等 + acks=all + 重试</li>
 <li>Broker：多副本 + 顺序写 + ISR 机制</li>
 <li>消费端：offset 管理 + 事务</li>
+</ul>
+</li>
+<li>项目中的 <code>Kafka</code> 有几个 <code>Topic</code> 和几个 <code>Partition</code> ？
+<ul>
+<li>目前项目中只有一个 <code>Topic</code> 和这个 <code>Topic</code> 下只有一个 <code>Partition</code> 来保证消息的有序性。</li>
+</ul>
+</li>
+<li>雪花算法的机制是怎么样的？
+<ul>
+<li>“<strong>雪花算法（Snowflake Algorithm）</strong>” 是一种在 <strong>分布式系统中生成全局唯一 ID</strong> 的算法。它最早由 <strong>Twitter</strong> 提出，用来解决分布式环境下「高并发下生成唯一 ID」的问题。</li>
+<li>雪花算法使用一个 <strong>64 位的 long 型整数</strong> 来表示一个唯一 ID，各部分含义如下：<code>| 1 位符号位 | 41 位时间戳 | 10 位机器标识 | 12 位序列号 |</code></li>
+<li>序列号每毫秒可生成 4096 个不同 ID（0~4095）</li>
+</ul>
+</li>
+<li>雪花算法相较于传统自增 <code>id</code> 的区别在哪？
+<ul>
+<li>雪花算法每台机器独立生成，带上时间戳 + 机器 ID，支持在分布式系统中既能保证唯一，又能支持按时间排序（日志、消息、订单等场景）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="links-短链接项目"><a class="markdownIt-Anchor" href="#links-短链接项目"></a> Links 短链接项目</h3>
+<ul>
+<li>谈谈 <code>Links</code> 这个项目你的主要工作是什么，难点在哪？
+<ul>
+<li>开发用户鉴权模块：基于 <strong>JWT（JSON Web Token）</strong> 实现对调用转链服务的用户身份认证，引入 <strong>Access Token + Refresh Token</strong> 双令牌机制，兼顾安全性与性能，设计令牌续签逻辑，确保用户会话安全有效。</li>
+<li>设计实现了分布式短链生成模块：基于 <strong>MySQL 自增主键</strong> 设计发号器，利用 <code>REPLACE</code> + <code>LAST_INSERT_ID()</code> 实现高效递增 ID，通过 <strong>62 进制编码</strong> 生成唯一短链 ID，保证短链生成全局唯一、无重复、无循环转链。</li>
+<li>短链解析与重定向模块：实现短链到长链的查询和跳转逻辑，使用 HTTP 库中的 <code>http.Redirect(w, r, resp.LongUrl, http.StatusFound)</code> 方法实现重定向跳转。</li>
+<li>缓存与并发优化：针对读多写少的业务场景，引入 <strong>Redis 缓存层</strong>，使用 <strong>布隆过滤器（Bloom Filter）</strong> 防止缓存穿透，结合 <strong>singleflight</strong> 合并相同并发请求，避免缓存击穿。</li>
+<li>难点：
+<ul>
+<li>采用 <code>map</code> 遍历对比过滤敏感词和保留词等，转链时查询数据库是否包含原始链接，避免重复转链。</li>
+<li>短链唯一性与分布式发号冲突：使用 MySQL 自增主键结合 <code>REPLACE INTO</code> 语义，确保发号全局唯一；生成后转为 62 进制字符串。</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -425,6 +495,21 @@
 <h3 id="golang"><a class="markdownIt-Anchor" href="#golang"></a> Golang</h3>
 <h4 id="gmp-相关"><a class="markdownIt-Anchor" href="#gmp-相关"></a> GMP 相关</h4>
 <ul>
+<li>用自己的话讲讲 GMP：
+<ul>
+<li>G：Go 的“协程”，存放执行的函数、栈、状态等；</li>
+<li>M：系统线程（OS Thread），真正被操作系统调度运行；</li>
+<li>P：调度器的逻辑处理器，持有本地 goroutine 队列，并控制 goroutine 的执行；</li>
+<li><code>findRunnableG()</code> 的查找顺序是：
+<ul>
+<li>1、当前 P 的本地队列（Local run queue）：优先从自己 P 的本地队列里取 G，开销最低。</li>
+<li>2、全局队列（Global run queue）：如果本地队列为空，会从全局队列中取 G。</li>
+<li>3、Work stealing（从其他 P 窃取）：如果全局也为空，会随机选择其他 P，从它的本地队列里偷一半 G 过来，保持负载均衡。</li>
+<li>4、NetPoll（网络事件轮询）：如果前面都没有，就检查网络轮询器（比如 goroutine 在等待 I/O），是否有准备好的 G。</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>当一个 <code>goroutine</code> 进入系统调用被阻塞，底层线程与 <code>p</code> 如何解绑？
 <ul>
 <li>在系统调用前，首先该线程 <code>m</code> 的 <code>g0</code> 会保存当前 <code>g</code> 的执行环境</li>
@@ -470,6 +555,20 @@
 <li>倘若预期的新容量超过老容量的两倍，则直接采用预期的新容量；</li>
 <li>倘若原容量小于 <code>256</code>，则扩容后新容量为原容量的两倍；</li>
 <li>倘若老容量已经大于等于 <code>256</code>，则在老容量的基础上扩容 <code>1/4</code> 的比例并且累加上 <code>192</code> 的数值，持续这样处理，直到得到的新容量已经大于等于预期的新容量为止。</li>
+</ul>
+</li>
+</ul>
+<h4 id="map-相关"><a class="markdownIt-Anchor" href="#map-相关"></a> map 相关</h4>
+<ul>
+<li>假如在函数内对 map 扩容了，在外面能看到吗？
+<ul>
+<li>在 Go 里，即使函数内触发了 map 扩容，<strong>外部依然能看到扩容后的内容和新增的键值对</strong>，因为：
+<ul>
+<li><code>map</code> 是<strong>引用类型</strong>；</li>
+<li>传参时传的是 <code>hmap</code> 的引用；</li>
+<li>扩容时只是底层结构发生变化（<code>buckets</code> 指针换了），但这个变化发生在<strong>同一个 hmap 对象</strong>里。</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -813,6 +912,21 @@
 </ul>
 </li>
 </ul>
+<h3 id="tcp-相关"><a class="markdownIt-Anchor" href="#tcp-相关"></a> TCP 相关</h3>
+<ul>
+<li>UDP 和 TCP 假如同时发一个 100 M 带宽的网络最终是一个什么情况？
+<ul>
+<li>UDP 没有拥塞控制，会尽力占用全部 100 M；</li>
+<li>TCP 会检测到丢包率升高，RTT 延长，于是快速减小发送窗口；</li>
+<li>结果：
+<ul>
+<li>UDP 流量几乎占满整个链路；</li>
+<li>TCP 速率可能下降到非常低（几 kbps ~ 几 Mbps 不等）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="dns-相关"><a class="markdownIt-Anchor" href="#dns-相关"></a> DNS 相关</h3>
 <ul>
 <li>在浏览器输入栏中输入 <code>baidu.com</code> 发生了什么？
@@ -896,21 +1010,71 @@
 <li>innodb、MyISAM</li>
 </ul>
 </li>
-<li></li>
+<li>MySQL 中使用 <code>limit</code> 导致慢查询的原因是什么？如何优化？
+<ul>
+<li>原因
+<ul>
+<li>大偏移量（LIMIT offset, size）：MySQL 在取 <code>LIMIT 100000, 20</code> 时，通常会<strong>扫描并丢弃前 100000 行</strong>，再返回 20 行。即便这些行不返回，也要先找出来再跳过，代价高。</li>
+<li><strong>无法利用索引顺序</strong>（<code>ORDER BY</code> 与索引不匹配）：<code>ORDER BY</code> 的列没有合适索引时需要 <strong>filesort/临时表</strong>，先把候选行排序，再截取 <code>LIMIT</code>，量一大就慢。</li>
+<li>回表成本高（InnoDB）: 即使能用到二级索引，但 <code>SELECT *</code> 会为每一行再去<strong>回表</strong>拿主键以外的列。行很多时随机 I/O 多、CPU 也高。</li>
+<li>过滤条件与排序列不协同：<code>WHERE</code> 过滤用到了一个索引，<code>ORDER BY</code> 用到了另一个，二者不能同时利用同一复合索引 → 要么扫太多行，要么排序代价大。</li>
+<li>深翻页需求本身不合理：真要跳到很深的页（例如第 5000 页），即使优化到极致，也会有“跳过大量记录”的本质成本。</li>
+</ul>
+</li>
+<li>解决方案：
+<ul>
+<li>对于排序慢的问题，让 <code>WHERE+ORDER BY</code> 共享<strong>同一个复合索引</strong>，避免全表扫描。</li>
+<li>当 <code>offset</code> 过大，会引发深度分页问题，目前不管是 <code>mysql</code> 还是 <code>es</code> 都没有很好的方法去解决这个问题。只能通过限制查询数量或分批获取的方式进行规避。</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h2 id="redis"><a class="markdownIt-Anchor" href="#redis"></a> Redis</h2>
 <ul>
-<li>
-<p>缓存击穿和缓存雪崩的概念，以及怎么解决？</p>
+<li>缓存击穿和缓存雪崩的概念，以及怎么解决？
 <ul>
 <li><strong>缓存击穿</strong>是指缓存中某个热点数据过期了，此时有大量请求访问这个数据，导致无法从缓存中直接读取，会去访问数据库，此时数据库很容易被高并发请求击垮，称为缓存击穿。解决方法是不给热点数据设置过期缓存，由后台异步更新缓存。</li>
 <li>缓存雪崩是指缓存中有大量数据在同一时间段过期了，此时有大量的用户请求无法访问到缓存中的数据，会去访问数据库，此时数据库很容易被高并发请求击垮，称为缓存雪崩。解决方法是均匀设置缓存的过期时间，不要让大量数据在同一时间段过期。或者不给热点数据设置过期缓存，由后台异步更新缓存。</li>
 </ul>
 </li>
-<li>
-<p>缓存一致性怎么解决？</p>
+<li>缓存一致性怎么解决？
 <ul>
 <li>采用旁路缓存，读的话先读缓存，缓存命中则返回。缓存未命中，则读数据库，然后将数据写入缓存，再返回。然后写操作： 先更新数据库，再删除缓存。</li>
+</ul>
+</li>
+<li>如何使用 <code>redis</code> 来实现滑动时间窗口限流？
+<ul>
+<li><code>ZSET</code> 精准滑动窗口
+<ul>
+<li>用 <code>ZSET</code> 存最近一段时间内的每次请求时间戳。</li>
+<li>每次请求：
+<ol>
+<li>删除窗口外的旧数据 <code>ZREMRANGEBYSCORE key 0 now-window</code></li>
+<li>插入当前请求 <code>ZADD key now member</code></li>
+<li>统计窗口内数量 <code>ZCARD key</code>（或 <code>ZCOUNT</code>）</li>
+</ol>
+</li>
+<li>超过 <code>limit</code> 则拒绝；否则放行。设置 <code>EXPIRE key window</code> 避免长期留存。</li>
+</ul>
+</li>
+<li><strong>优点</strong>：精确、并发安全（用 Lua 原子化）。</li>
+<li><strong>缺点</strong>：每次请求 1 条记录，QPS 极高时 ZSET 体积变大（可按业务限流关键点使用）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="消息队列"><a class="markdownIt-Anchor" href="#消息队列"></a> 消息队列</h2>
+<h3 id="kafka"><a class="markdownIt-Anchor" href="#kafka"></a> Kafka</h3>
+<ul>
+<li>Kafka 的相关术语：
+<ul>
+<li>Messages And Batches：Kafka 的基本数据单元被称为 message (消息)，为减少网络开销，提高效率，多个消息会被放入同⼀批次 (Batch) 中后再写入。</li>
+<li>Topic：⽤来对消息进⾏分类，每个进入到 Kafka 的信息都会被放到⼀个 Topic 下</li>
+<li>Broker：用来实现数据存储的主机服务器, kafka 节点</li>
+<li>Partition：每个 Topic 中的消息会被分为若干个 Partition，以提高消息的处理效率，一个 Partition 只能被一个消费者读，而一个消费者能够读多个 Partition</li>
+<li>Producer：消息的生产者</li>
+<li>Consumer：消息的消费者</li>
+<li>Consumer Group：消息的消费群组</li>
 </ul>
 </li>
 </ul>
@@ -1035,9 +1199,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/07/zuo_algorithm_1/" title="左程云、代码随想录算法学习（一）">
+                      <a href="/2025/03/07/zuo_algorithm_2/" title="左程云、代码随想录算法学习（二）">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">左程云、代码随想录算法学习（一）</span>
+                        <span class="hidden-mobile">左程云、代码随想录算法学习（二）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
