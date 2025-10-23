@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510212125355.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510212126097.png">
 <meta property="article:published_time" content="2025-02-20T15:30:00.000Z">
-<meta property="article:modified_time" content="2025-10-21T13:26:47.617Z">
+<meta property="article:modified_time" content="2025-10-23T16:15:58.422Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -277,7 +277,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          8.4k 字
+          9k 字
         
       </span>
     
@@ -289,7 +289,7 @@
         
         
           <!-- compatible with older versions-->
-          27 分钟
+          29 分钟
         
       </span>
     
@@ -1013,6 +1013,15 @@
 </ul>
 </li>
 </ul>
+<h2 id="操作系统相关"><a class="markdownIt-Anchor" href="#操作系统相关"></a> 操作系统相关</h2>
+<ul>
+<li>什么是死锁，怎么解决？
+<ul>
+<li>当多个线程（或事务）互相持有对方需要的资源且都不释放，从而形成循环等待的状态，就叫“死锁”。</li>
+<li>固定加锁顺序、尽量缩短锁持有时间、使用“尝试锁”/超时机制等</li>
+</ul>
+</li>
+</ul>
 <h2 id="mysql"><a class="markdownIt-Anchor" href="#mysql"></a> MySQL</h2>
 <ul>
 <li>MySQL 常用的存储引擎
@@ -1037,6 +1046,20 @@
 <li>当 <code>offset</code> 过大，会引发深度分页问题，目前不管是 <code>mysql</code> 还是 <code>es</code> 都没有很好的方法去解决这个问题。只能通过限制查询数量或分批获取的方式进行规避。</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>MySQL 什么时候会加间隙锁？
+<ul>
+<li>在可重复读隔离级别下，查询为范围匹配（<code>&gt;</code>, <code>&lt;</code>, <code>BETWEEN</code>）时会加间隙锁，查询为精确匹配（<code>=</code>）且有唯一索引时加的是记录锁。</li>
+<li>记录锁：锁定索引上的单条记录</li>
+<li>间隙锁：锁定两个索引记录之间的“间隙”，不包括记录本身</li>
+<li>临键锁：锁定索引记录本身 + 前一个间隙（记录锁 + 间隙锁）</li>
+</ul>
+</li>
+<li>sql 注入的原理和防范？
+<ul>
+<li><strong>SQL 注入</strong>是攻击者把恶意的 SQL 片段当做数据注入到应用与数据库交互的输入中，导致应用执行了攻击者构造的 SQL，从而泄露、篡改、删除数据或升级权限。防范核心是：<strong>永远把“代码”（SQL 语句）和“数据”分离</strong>，并做到最小权限 + 多层防护。</li>
+<li>通过参数化查询来防范，<strong>把 SQL 语句的“代码部分”与“数据部分”分离</strong>，把用户提供的数据作为参数（绑定变量）传给数据库驱动/引擎，而不是把数据直接拼接到 SQL 字符串里执行。</li>
 </ul>
 </li>
 </ul>
@@ -1070,6 +1093,13 @@
 </li>
 <li><strong>优点</strong>：精确、并发安全（用 Lua 原子化）。</li>
 <li><strong>缺点</strong>：每次请求 1 条记录，QPS 极高时 ZSET 体积变大（可按业务限流关键点使用）。</li>
+</ul>
+</li>
+<li>不用布隆过滤器还有什么方法解决缓存穿透的问题？
+<ul>
+<li>缓存空对象：当缓存 miss，DB 也查不到数据时，仍然在缓存中写入一个特殊值（比如 <code>&quot;NULL&quot;</code>、空 JSON）。</li>
+<li>参数校验 / 业务层防线：在进入缓存逻辑之前，对请求参数进行合法性检查。比如用户 ID、商品 ID 必须是正整数、存在于某个范围内、或者符合雪花算法规则。</li>
+<li>接口限流 / 黑名单机制：针对特定 IP、用户、token 做访问速率限制。对高频访问不存在 key 的请求源，临时加入黑名单。</li>
 </ul>
 </li>
 </ul>
@@ -1123,6 +1153,16 @@
 <li>说一下 <code>git cherrypick</code>
 <ul>
 <li><code>git cherrypick</code> 是从其他分支中“挑选”一个或多个提交（<code>commit</code>），并把它们应用到当前分支上。</li>
+</ul>
+</li>
+</ul>
+<h2 id="服务注册与服务发现"><a class="markdownIt-Anchor" href="#服务注册与服务发现"></a> 服务注册与服务发现</h2>
+<ul>
+<li>客户端 A 是怎么通过 Consul 向服务端 B 做服务发现的？
+<ul>
+<li>A 向 Consul 查询服务名 <code>&quot;user-service&quot;</code>。</li>
+<li>Consul 返回所有健康实例（IP:Port）。</li>
+<li>A 从列表中选一个，向该健康实例（IP:Port）拨号连接得到对象 client，通过 client 调用相应的方法。</li>
 </ul>
 </li>
 </ul>
