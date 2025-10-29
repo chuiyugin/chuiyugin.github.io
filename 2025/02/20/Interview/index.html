@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510212125355.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510212126097.png">
 <meta property="article:published_time" content="2025-02-20T15:30:00.000Z">
-<meta property="article:modified_time" content="2025-10-23T16:15:58.422Z">
+<meta property="article:modified_time" content="2025-10-29T16:35:48.476Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -277,7 +277,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          9k 字
+          9.8k 字
         
       </span>
     
@@ -289,7 +289,7 @@
         
         
           <!-- compatible with older versions-->
-          29 分钟
+          31 分钟
         
       </span>
     
@@ -1062,6 +1062,36 @@
 <li>通过参数化查询来防范，<strong>把 SQL 语句的“代码部分”与“数据部分”分离</strong>，把用户提供的数据作为参数（绑定变量）传给数据库驱动/引擎，而不是把数据直接拼接到 SQL 字符串里执行。</li>
 </ul>
 </li>
+<li>红黑树的特性？
+<ul>
+<li>每个节点要么是红色，要么是黑色</li>
+<li>根节点是黑色</li>
+<li>所有叶子节点（NIL/空节点）都是黑色</li>
+<li>红色节点的子节点必须是黑色（即红节点不能相邻）</li>
+<li>从任一节点到其所有叶子节点的路径上，黑色节点数相同</li>
+</ul>
+</li>
+<li>为什么 innodb 使用 B+树而不是红黑树？
+<ul>
+<li>B+ 树的“多路结构”降低了树的高度，降低了磁盘 I/O 的次数，性能有所提升。</li>
+<li>红黑树是二叉搜索树，节点之间的顺序关系只能通过<strong>中序遍历</strong>实现，遍历时需递归访问多个节点，可能跨磁盘页。而 B+ 树的所有数据都在<strong>叶子节点</strong>，并且叶子节点之间通过<strong>双向链表指针相连</strong>。</li>
+</ul>
+</li>
+<li>假如单表数据量过大你会怎么进行优化？
+<ul>
+<li>可以采用按照时间进行分表：
+<ul>
+<li><strong>分区表（单表多分区）</strong>：对应用最透明，按 <code>created_at</code> 做 RANGE 分区，查询带时间条件自动“分区裁剪”。适合：单实例、以时间查询为主、追求改造成本最低。</li>
+<li><strong>物理分表（多张月/日表）</strong>：真实多表，如 <code>t_YYYY_MM</code>；应用或中间件负责路由与跨表聚合。适合：需要强物理隔离、后续要跨库扩容、备份/迁移按月解耦。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SQL 语句查询很慢怎么解决？
+<ul>
+<li>通过 <code>EXPLAIN</code> 可以判断 SQL 是否执行了全表扫描：主要看输出中的 <strong>type 列</strong>，如果显示为 <strong>ALL</strong>，表示优化器未使用任何索引，对整张表逐行扫描，是最慢的一种访问方式；理想情况下应看到 <strong>ref、range、const</strong> 等更高效的访问类型。此外还可以结合 <strong>rows</strong>（预估扫描行数）与 <strong>key</strong>（实际使用的索引）字段一起分析，若 key 为空且 rows 很大，就能确定该语句在执行全表查询，需要通过添加合适索引或优化条件来改善性能。</li>
+</ul>
+</li>
 </ul>
 <h2 id="redis"><a class="markdownIt-Anchor" href="#redis"></a> Redis</h2>
 <ul>
@@ -1122,6 +1152,17 @@
 <li>生产者：消息<strong>被可靠写入多个副本</strong>后再返回成功；失败要<strong>可重试且不重复</strong>。</li>
 <li>Broker / 主题（Topic）与集群层：<strong>副本冗余 + 正确的选主与同步策略</strong>，避免单点和“脏主”导致的数据缺失。</li>
 <li>消费者（Consumer）与 Offset 提交：<strong>处理完再提交偏移</strong>，或者用事务做到<strong>精确一次（EOS）</strong>。</li>
+</ul>
+</li>
+<li>Kafka 是怎么保证有序的？
+<ul>
+<li>在 Kafka 中，<strong>消息的有序性是以分区（Partition）为粒度来保证的</strong>。同一个分区里的消息按照写入顺序追加到日志文件中，消费者也是<strong>按偏移量（offset）顺序</strong>依次读取，因此单分区内消息的顺序是天然有序的。</li>
+<li>为了维持业务上的顺序，Kafka 会在 <strong>生产者（Producer）端</strong>通过 <strong>分区策略</strong>来控制消息落到同一个分区：
+<ul>
+<li>如果发送消息时指定了 <strong>相同的 key</strong>（比如订单号、用户 ID），Kafka 会使用 <strong>key 的 hash 值</strong>来计算目标分区，使得相同 key 的消息总是进入同一个分区，从而保证这部分消息的先后顺序。（假设在一个 Topic 下有很多 partition）；</li>
+<li>若不指定 key，Kafka 会采用轮询策略（Round Robin），这样消息会分散到多个分区中，整体就<strong>无法保证全局有序</strong>。</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
