@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510212125355.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510212126097.png">
 <meta property="article:published_time" content="2025-02-20T15:30:00.000Z">
-<meta property="article:modified_time" content="2025-10-29T16:35:48.476Z">
+<meta property="article:modified_time" content="2025-10-30T16:43:28.664Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -277,7 +277,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          9.8k 字
+          12k 字
         
       </span>
     
@@ -289,7 +289,7 @@
         
         
           <!-- compatible with older versions-->
-          31 分钟
+          38 分钟
         
       </span>
     
@@ -411,6 +411,11 @@
 <li>雪花算法每台机器独立生成，带上时间戳 + 机器 ID，支持在分布式系统中既能保证唯一，又能支持按时间排序（日志、消息、订单等场景）。</li>
 </ul>
 </li>
+<li>go 循环包依赖的引用问题怎么解决的？
+<ul>
+<li>解决思路是让依赖<strong>单向化</strong>：抽公共部分到第三方包</li>
+</ul>
+</li>
 </ul>
 <h3 id="links-短链接项目"><a class="markdownIt-Anchor" href="#links-短链接项目"></a> Links 短链接项目</h3>
 <ul>
@@ -426,6 +431,11 @@
 <li>短链唯一性与分布式发号冲突：使用 MySQL 自增主键结合 <code>REPLACE INTO</code> 语义，确保发号全局唯一；生成后转为 62 进制字符串。</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>go-zero 怎么重零开始实现 <code>api</code> ？
+<ul>
+<li><strong>写 API DSL → goctl 生成骨架 → 在 logic 写业务 → 在 svc 注入依赖（DB/缓存/RPC）→ 配置启动 → 自测与加中间件</strong>。</li>
 </ul>
 </li>
 </ul>
@@ -512,6 +522,11 @@
 </li>
 </ul>
 </li>
+<li>为什么有了本地队列，还要有全局队列？
+<ul>
+<li>Go 调度器中每个 P 拥有一个本地运行队列（local runq），用于存放可运行的 goroutine，以减少全局锁竞争、提高并发效率。  但如果只靠本地队列，容易出现任务分布不均的问题，因此 runtime 还维护一个全局队列（global runq），用来接收新建或唤醒的 goroutine，并在调度时为各 P 提供任务补充。  调度器采用“局部优先、全局补充、任务窃取”的策略，在保证性能的同时实现全局负载均衡和公平调度。</li>
+</ul>
+</li>
 <li>当一个 <code>goroutine</code> 进入系统调用被阻塞，底层线程与 <code>p</code> 如何解绑？
 <ul>
 <li>在系统调用前，首先该线程 <code>m</code> 的 <code>g0</code> 会保存当前 <code>g</code> 的执行环境</li>
@@ -548,6 +563,14 @@
 <li>在目前的 GMP 模型下，<code>p</code> 是必须的，当去掉 <code>p</code> 让 <code>m</code> 从全局队列中直接取 <code>g</code> 进行执行的话会导致无法高效控制并行度，导致运行效率大幅下降。</li>
 </ul>
 </li>
+<li>Goroutine 有哪些状态，状态之间具体是怎么切换和调度的？
+<ul>
+<li>goroutine 在 Go runtime 中有六种主要状态：  <code>_Gidle</code>（未初始化）、<code>_Grunnable</code>（可运行）、<code>_Grunning</code>（正在运行）、<code>_Gwaiting</code>（阻塞等待）、<code>_Gsyscall</code>（系统调用中）、<code>_Gdead</code>（已结束）。</li>
+<li>调度器通过 <code>gopark()</code> 和 <code>goready()</code> 控制状态切换：当 goroutine 因 IO、channel、锁等操作阻塞时，会从 <code>_Grunning</code> 转为 <code>_Gwaiting</code> 并挂起；</li>
+<li>当条件满足时转回 <code>_Grunnable</code> 并重新入队等待调度。</li>
+<li>Go 使用 GMP 模型实现调度，M（线程）通过绑定 P（逻辑处理器）执行队列中的 G（goroutine），支持 work-stealing 和用户态抢占，从而实现百万级轻量并发的高效调度。</li>
+</ul>
+</li>
 </ul>
 <h4 id="slice-相关"><a class="markdownIt-Anchor" href="#slice-相关"></a> slice 相关</h4>
 <ul>
@@ -562,6 +585,15 @@
 </ul>
 <h4 id="map-相关"><a class="markdownIt-Anchor" href="#map-相关"></a> map 相关</h4>
 <ul>
+<li>map 的底层是怎么实现的？
+<ul>
+<li>Go 的 map 底层是一个基于哈希表的结构，采用 <strong>数组 + 桶（buckets）+ 溢出桶</strong> 实现。</li>
+<li>每个桶最多存 8 个键值对，桶内数据连续存放以提高缓存命中率。</li>
+<li>桶的查找通过哈希值低位确定位置，高 8 位存在 <code>tophash</code> 中快速对比。</li>
+<li>当负载因子过高或删除碎片多时，会触发<strong>渐进式扩容</strong>，保证性能平滑。</li>
+<li>map 非并发安全，需加锁或使用 <code>sync.Map</code>。</li>
+</ul>
+</li>
 <li>假如在函数内对 map 扩容了，在外面能看到吗？
 <ul>
 <li>在 Go 里，即使函数内触发了 map 扩容，<strong>外部依然能看到扩容后的内容和新增的键值对</strong>，因为：
@@ -576,6 +608,11 @@
 </ul>
 <h4 id="channel-相关"><a class="markdownIt-Anchor" href="#channel-相关"></a> channel 相关</h4>
 <ul>
+<li>channel 的内部结构是怎么样的？
+<ul>
+<li>在 Go 语言中，<strong>channel 的底层是一个由锁保护的环形队列结构</strong>（<code>hchan</code>）。  它内部包含缓冲区（<code>buf</code>）、当前元素数量（<code>qcount</code>）、队列容量（<code>dataqsiz</code>）、  发送与接收的索引（<code>sendx</code>、<code>recvx</code>），以及两个等待队列（<code>sendq</code>、<code>recvq</code>）用于存放被阻塞的发送和接收 goroutine。  所有操作都由一个互斥锁（<code>mutex</code>）保护以保证并发安全。  当缓冲区满时发送方阻塞，当缓冲区空时接收方阻塞，通过调度器唤醒实现同步通信。</li>
+</ul>
+</li>
 <li>介绍一下 <code>channel</code>
 <ul>
 <li><code>channel</code> 是 go 语言<strong>一种内置的同步原语</strong>，可以在多个并发执行的 <code>goroutine</code> 之间通过通信来共享数据，而不需要显式使用锁。</li>
@@ -599,6 +636,13 @@
 <li>有 <code>default</code> 且所有通道都阻塞，立即执行 <code>default</code>（非阻塞）。</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>读写无缓冲 channel 时，生产者和消费者 Goroutine 会发生什么，它们的状态会发生什么样的转换？
+<ul>
+<li>当读写 <strong>无缓冲 channel</strong> 时，发送和接收必须同时进行。如果发送方 goroutine 先执行，它会被挂起（状态变为 waiting），直到接收方到来；</li>
+<li>若接收方先执行，同样会被阻塞等待发送方。  Runtime 在两者匹配时会直接在它们的栈之间复制数据，并通过 <code>gopark()</code> 与 <code>goready()</code> 完成状态切换，使被阻塞的 goroutine 从 waiting 恢复为 runnable。</li>
+<li>因此，无缓冲 channel 实现了 goroutine 间的同步通信。</li>
 </ul>
 </li>
 </ul>
@@ -913,6 +957,55 @@
 <li>4、服务端通过“预主密钥” (Pre-Master Secret)计算出会话密钥后向客户端发信息：发送加密算法改变的通知，表示后续信息都用会话密钥来加密。</li>
 </ul>
 </li>
+<li>什么是粘包，有什么解决方法？在 http 中是怎么解决的？
+<ul>
+<li><strong>粘包</strong>是 TCP 通信中多个消息在接收方黏在一起，导致无法区分消息边界的现象，原因是 TCP 面向字节流，没有消息边界概念，系统可能将多次发送合并或拆分。解决方法是应用层自定义协议边界，比如：
+<ul>
+<li>固定长度；</li>
+<li>特殊分隔符；</li>
+<li>消息头携带长度；</li>
+<li>或使用现成协议（HTTP、gRPC）。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>而 <strong>HTTP 协议通过 Content-Length 文本长度或 chunked 分块传输</strong> 来标识消息边界，因此天然避免了粘包问题。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>post 和 get 的区别
+<ul>
+<li><strong>GET</strong> 用于从服务器获取资源，参数放在 URL，通常可被缓存、可书签、幂等、安全；</li>
+<li><strong>POST</strong> 用于向服务器提交数据，参数放在请求体中，不可缓存、不幂等，常用于创建或修改资源。</li>
+<li>语义上 GET 是“安全读取”，POST 是“有副作用的提交”。</li>
+<li>在 HTTP 中，它们的区别体现在语义、缓存策略、参数传递、安全性等多个方面。</li>
+</ul>
+</li>
+<li>HTTP 的两种缓存机制是什么？
+<ul>
+<li><strong>强制缓存（强缓存）</strong>：浏览器在缓存未过期时直接使用本地副本，不与服务器通信；通过响应头 <code>Expires</code> 或 <code>Cache-Control: max-age</code> 控制。</li>
+</ul>
+<ul>
+<li><strong>协商缓存（对比缓存）</strong>：当强缓存失效后，浏览器带上 <code>If-Modified-Since</code> 或 <code>If-None-Match</code> 与服务器确认资源是否更新；若未修改返回 304，继续使用缓存。</li>
+</ul>
+<ul>
+<li>强缓存节省请求次数，协商缓存节省数据传输，两者结合使用可最大化性能与一致性。</li>
+</ul>
+</li>
+<li>HTTPS 解决了 HTTP 的什么问题？
+<ul>
+<li>HTTPS 提供了数据加密、身份认证、完整性保护三大安全能力，使网络通信安全可靠。</li>
+</ul>
+</li>
+<li>websocket 的建立过程
+<ul>
+<li>1️⃣ 客户端通过 HTTP 发起 Upgrade 请求，携带 <code>Upgrade: websocket</code>、<code>Connection: Upgrade</code>、<code>Sec-WebSocket-Key</code> 等头；</li>
+<li>2️⃣ 服务器返回 <code>101 Switching Protocols</code>，并校验生成 <code>Sec-WebSocket-Accept</code>；</li>
+<li>3️⃣ 双方协议升级，建立基于 TCP 的持久全双工连接；</li>
+<li>4️⃣ 后续通信采用 WebSocket 帧结构进行消息双向传输（文本、二进制、心跳等）。</li>
+</ul>
+</li>
 </ul>
 <h3 id="tcp-相关"><a class="markdownIt-Anchor" href="#tcp-相关"></a> TCP 相关</h3>
 <ul>
@@ -1021,6 +1114,30 @@
 <li>固定加锁顺序、尽量缩短锁持有时间、使用“尝试锁”/超时机制等</li>
 </ul>
 </li>
+<li>线程、进程、协程的区别，各自的优劣，各自是怎么创建的，底层是怎么样的数据结构？
+<ul>
+<li>进程：是操作系统资源分配的<strong>最小单位</strong>。拥有<strong>独立地址空间</strong>（代码段、堆、栈、文件描述符等）。不同进程之间<strong>内存隔离</strong>，通信需要 IPC（管道、共享内存、消息队列等）。在 Linux 下用 <code>fork()</code>（复制父进程）；</li>
+<li>线程：是操作系统调度的<strong>最小执行单位</strong>。属于某个进程，与同进程内的线程<strong>共享内存与资源</strong>。多线程可并行（在多核 CPU 上），但共享资源容易引发 <strong>竞争</strong>、<strong>死锁</strong>。C 语言使用 <code>pthread_create()</code> 来创建。</li>
+<li>协程：是用户态的“轻量级线程”，由程序自己调度，不需要内核调度，也无需上下文切换到内核态，上下文切换成本更低。</li>
+</ul>
+</li>
+<li>协程的提出是为了解决什么问题，为什么说它轻量级？
+<ul>
+<li>在不增加线程（或系统开销）的前提下，让程序能<strong>同时处理大量 I/O 并发任务</strong>，当一个协程等待 I/O 时，它“主动让出”执行权，CPU 去执行其他协程，I/O 完成后再恢复该协程。</li>
+</ul>
+</li>
+<li>从底层的角度来看，程序是如何读取一个变量的值的？如果是局部变量/全局变量呢？如果是值类型/引用类型呢？、
+<ul>
+<li>程序访问变量的本质是<strong>通过内存地址读取数据</strong>：</li>
+</ul>
+<ul>
+<li>局部变量存放在<strong>栈上</strong>，通过栈帧基址偏移寻址；</li>
+<li>全局变量存放在<strong>数据段</strong>，通过固定地址或符号表访问；</li>
+<li>值类型变量直接存放数据，访问时一次寻址；</li>
+<li>引用类型变量存放指针，访问时先取指针再解引用（两次寻址）。</li>
+<li>在执行层面，CPU 通过寄存器 + 内存寻址方式完成变量读取，编译器可能将频繁访问的变量直接放入寄存器优化访问速度。</li>
+</ul>
+</li>
 </ul>
 <h2 id="mysql"><a class="markdownIt-Anchor" href="#mysql"></a> MySQL</h2>
 <ul>
@@ -1090,6 +1207,55 @@
 <li>SQL 语句查询很慢怎么解决？
 <ul>
 <li>通过 <code>EXPLAIN</code> 可以判断 SQL 是否执行了全表扫描：主要看输出中的 <strong>type 列</strong>，如果显示为 <strong>ALL</strong>，表示优化器未使用任何索引，对整张表逐行扫描，是最慢的一种访问方式；理想情况下应看到 <strong>ref、range、const</strong> 等更高效的访问类型。此外还可以结合 <strong>rows</strong>（预估扫描行数）与 <strong>key</strong>（实际使用的索引）字段一起分析，若 key 为空且 rows 很大，就能确定该语句在执行全表查询，需要通过添加合适索引或优化条件来改善性能。</li>
+</ul>
+</li>
+<li>简述向数据库发送 sql 到返回结果的过程
+<ul>
+<li>当客户端发送一条 SQL 到数据库时，主要经历以下过程：
+<ul>
+<li>1️、建立连接；</li>
+<li>2️、数据库接收 SQL 并解析（语法与语义检查）；</li>
+<li>3️、优化器生成执行计划；</li>
+<li>4️、执行器根据计划调用存储引擎；</li>
+<li>5️、存储引擎从内存或磁盘读取数据，或写入日志与页；</li>
+<li>6️、数据返回执行器，经网络返回客户端。</li>
+</ul>
+</li>
+<li>整个过程涵盖连接管理、解析、优化、执行、存储引擎访问与结果返回，是 SQL 查询性能优化的关键路径。</li>
+</ul>
+</li>
+<li>数据库什么时候应该建立索引？
+<ul>
+<li>数据库应在以下场景建立索引：
+<ul>
+<li>经常出现在 <strong>WHERE、JOIN、ORDER BY、GROUP BY</strong> 的列；</li>
+<li><strong>高选择性</strong>（区分度高）的列；</li>
+<li><strong>频繁查询、读多写少</strong> 的表；</li>
+<li><strong>联合查询的常用组合列</strong>（建立联合索引）。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>不宜建索引的情况包括：表很小、更新频繁、重复值多、临时字段等。</li>
+</ul>
+<ul>
+<li>建立索引的目标是<strong>用最少的索引覆盖最常用的查询路径</strong>，平衡读写性能。</li>
+</ul>
+</li>
+<li>如何检测并解决数据库死锁？
+<ul>
+<li>数据库死锁是多个事务因相互占用资源而循环等待的现象。InnoDB 会自动检测死锁并回滚其中一个事务，返回错误 <code>1213</code>。我们可以通过 <code>SHOW ENGINE INNODB STATUS</code> 查看详细死锁日志。解决办法包括：
+<ul>
+<li>优化 SQL 与索引，减少锁范围；</li>
+<li>控制事务粒度与执行顺序；</li>
+<li>避免长事务；</li>
+<li>必要时降低隔离级别；</li>
+<li>在应用层捕获死锁异常并重试。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>预防关键是：<strong>一致的资源访问顺序 + 精确索引 + 快速事务。</strong></li>
 </ul>
 </li>
 </ul>
@@ -1297,9 +1463,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/07/zuo_algorithm_2/" title="左程云、代码随想录算法学习（二）">
+                      <a href="/2025/03/07/zuo_algorithm_1/" title="左程云、代码随想录算法学习（一）">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">左程云、代码随想录算法学习（二）</span>
+                        <span class="hidden-mobile">左程云、代码随想录算法学习（一）</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
