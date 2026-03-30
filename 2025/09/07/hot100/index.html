@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202509151505105.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202509182317589.png">
 <meta property="article:published_time" content="2025-09-07T07:00:00.000Z">
-<meta property="article:modified_time" content="2025-10-30T16:51:40.000Z">
+<meta property="article:modified_time" content="2026-03-30T09:24:43.975Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -275,7 +275,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          14k 字
+          15k 字
         
       </span>
     
@@ -287,7 +287,7 @@
         
         
           <!-- compatible with older versions-->
-          43 分钟
+          47 分钟
         
       </span>
     
@@ -1010,6 +1010,110 @@
 <li>代码：</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-keyword">int</span> ans = INT_MIN;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">travelsal</span><span class="hljs-params">(TreeNode* root)</span></span>&#123;<br>        <span class="hljs-comment">// 终止条件</span><br>        <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">nullptr</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// 子节点返回的数值可能是负数，直接取 0</span><br>        <span class="hljs-keyword">int</span> left = <span class="hljs-built_in">max</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">travelsal</span>(root-&gt;left));<br>        <span class="hljs-keyword">int</span> right = <span class="hljs-built_in">max</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">travelsal</span>(root-&gt;right));<br>        ans = <span class="hljs-built_in">max</span>(ans, left+right+root-&gt;val);<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(root-&gt;val, <span class="hljs-built_in">max</span>(left+root-&gt;val, right+root-&gt;val));<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">maxPathSum</span><span class="hljs-params">(TreeNode* root)</span> </span>&#123;<br>        <span class="hljs-built_in">travelsal</span>(root);<br>        <span class="hljs-keyword">return</span> ans;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h2 id="图论"><a class="markdownIt-Anchor" href="#图论"></a> 图论</h2>
+<h3 id="腐烂的橘子"><a class="markdownIt-Anchor" href="#腐烂的橘子"></a> 腐烂的橘子</h3>
+<ul>
+<li>腐烂的橘子：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotting-oranges/description/?envType=study-plan-v2&amp;envId=top-100-liked">994.腐烂的橘子</a></li>
+<li>思路：
+<ul>
+<li>1、遍历整个网格：
+<ul>
+<li>统计新鲜橘子数量 <code>fresh</code></li>
+</ul>
+<ul>
+<li>把所有腐烂橘子加入队列（作为 BFS 起点）</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>2、多源 BFS 扩散：
+<ul>
+<li><code>q</code>（队列中的橘子）：当前所有“正在传播的腐烂橘子”</li>
+<li>如果邻居是新鲜橘子：则会被感染，并加入下一轮传播队列</li>
+<li>每一层 BFS 结束，表示过了 <strong>1分钟</strong></li>
+</ul>
+</li>
+<li>3、结束条件
+<ul>
+<li>情况一：所有橘子腐烂，返回 <code>time</code></li>
+<li>情况二：还有新鲜橘子，返回 <code>-1</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-comment">// 四个方向</span><br>    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> dir[<span class="hljs-number">4</span>][<span class="hljs-number">2</span>] = &#123;<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>&#125;;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">orangesRotting</span><span class="hljs-params">(vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; grid)</span> </span>&#123;<br>        queue&lt;pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt;&gt; q;<br>        <span class="hljs-keyword">int</span> time = <span class="hljs-number">0</span>, fresh = <span class="hljs-number">0</span>;<br>        <span class="hljs-comment">// 遍历一遍网格，统计新鲜橘子个数，把腐烂橘子入队列</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;grid.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>; j&lt;grid[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>(); j++)&#123;<br>                <span class="hljs-keyword">if</span>(grid[i][j] == <span class="hljs-number">1</span>)<br>                    fresh++;<br>                <span class="hljs-keyword">if</span>(grid[i][j] == <span class="hljs-number">2</span>)<br>                    q.<span class="hljs-built_in">push</span>(&#123;i, j&#125;);<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 从队列中进行广度优先搜索(注意只有存在新鲜橘子的时候才进循环)</span><br>        <span class="hljs-keyword">while</span>(!q.<span class="hljs-built_in">empty</span>() &amp;&amp; fresh &gt; <span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-keyword">int</span> q_len = q.<span class="hljs-built_in">size</span>();<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;q_len; i++)&#123;<br>                pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; cur = q.<span class="hljs-built_in">front</span>();<br>                q.<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-comment">// 向四周扩散</span><br>                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">4</span>; i++)&#123;<br>                    <span class="hljs-keyword">int</span> nextx = cur.first+dir[i][<span class="hljs-number">0</span>];<br>                    <span class="hljs-keyword">int</span> nexty = cur.second+dir[i][<span class="hljs-number">1</span>];<br>                    <span class="hljs-keyword">if</span>(nextx&lt;<span class="hljs-number">0</span> || nextx&gt;=grid.<span class="hljs-built_in">size</span>() || nexty&lt;<span class="hljs-number">0</span> || nexty&gt;=grid[<span class="hljs-number">0</span>].<span class="hljs-built_in">size</span>() ||grid[nextx][nexty] != <span class="hljs-number">1</span>)&#123;<br>                        <span class="hljs-keyword">continue</span>;<br>                    &#125;<br>                    q.<span class="hljs-built_in">push</span>(&#123;nextx, nexty&#125;);<br>                    grid[nextx][nexty] = <span class="hljs-number">2</span>;<br>                    fresh--;<br>                &#125;<br>            &#125;<br>            time++;<br>        &#125;<br>        <span class="hljs-keyword">if</span>(fresh != <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-keyword">return</span> time;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="课程表"><a class="markdownIt-Anchor" href="#课程表"></a> 课程表</h3>
+<ul>
+<li>课程表：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/course-schedule/description/?envType=study-plan-v2&amp;envId=top-100-liked">207.课程表</a></li>
+<li>思路：
+<ul>
+<li>入度为 <code>0</code>，说明这门课没有任何前置条件</li>
+</ul>
+<ul>
+<li>这些课程可以作为 BFS 的起点，先学习</li>
+<li>同时用 <code>count</code> 统计已经可以学完的课程数量</li>
+<li>BFS 拓扑排序过程：
+<ul>
+<li>每次取出队首课程 <code>cur</code>，说明这门课已经学完了</li>
+<li>然后遍历它的后续课程，并将其入度减 1，如果入度变为 0 即加入队列（表示该门课前置条件完成了可以学）</li>
+</ul>
+</li>
+<li>结束条件：
+<ul>
+<li>情况一：如果最终 <code>count == numCourses</code>，说明所有课程都能按照拓扑顺序学完，返回 <code>true</code>。</li>
+<li>情况二：否则，说明还有课程始终无法变成入度 <code>0</code>，也就是图中存在环，返回 <code>false</code>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> &#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">canFinish</span><span class="hljs-params">(<span class="hljs-keyword">int</span> numCourses, vector&lt;vector&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; prerequisites)</span> </span>&#123;<br>        <span class="hljs-comment">// 定义节点入度(入度为 0 表示该课程可以先修)</span><br>        <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">indegree</span><span class="hljs-params">(numCourses, <span class="hljs-number">0</span>)</span></span>;<br>        <span class="hljs-comment">// 哈希表(key:先修课程，value:后修课程列表）</span><br>        unordered_map&lt;<span class="hljs-keyword">int</span>, vector&lt;<span class="hljs-keyword">int</span>&gt;&gt; mp;<br>        <span class="hljs-comment">// 遍历课程</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;prerequisites.<span class="hljs-built_in">size</span>(); i++)&#123;<br>            indegree[prerequisites[i][<span class="hljs-number">0</span>]]++;<br>            mp[prerequisites[i][<span class="hljs-number">1</span>]].<span class="hljs-built_in">push_back</span>(prerequisites[i][<span class="hljs-number">0</span>]);<br>        &#125;<br>        <span class="hljs-comment">// 把入度为 0 的加入队列</span><br>        queue&lt;<span class="hljs-keyword">int</span>&gt; q;<br>        <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>; <span class="hljs-comment">// 入度为 0，即学完的课程</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;numCourses; i++)&#123;<br>            <span class="hljs-keyword">if</span>(indegree[i] == <span class="hljs-number">0</span>)&#123;<br>                q.<span class="hljs-built_in">push</span>(i);<br>                count++;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// 出队列即为修完该课程</span><br>        <span class="hljs-keyword">while</span>(!q.<span class="hljs-built_in">empty</span>())&#123;<br>            <span class="hljs-keyword">int</span> cur = q.<span class="hljs-built_in">front</span>();<br>            q.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;mp[cur].<span class="hljs-built_in">size</span>(); i++)&#123;<br>                indegree[mp[cur][i]]--;<br>                <span class="hljs-keyword">if</span>(indegree[mp[cur][i]] == <span class="hljs-number">0</span>)&#123;<br>                    q.<span class="hljs-built_in">push</span>(mp[cur][i]);<br>                    count++;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">// 说明所有课程都能按照拓扑顺序学完</span><br>        <span class="hljs-keyword">if</span>(count == numCourses)<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h3 id="实现-trie前缀树"><a class="markdownIt-Anchor" href="#实现-trie前缀树"></a> 实现 Trie（前缀树）</h3>
+<ul>
+<li>实现 Trie（前缀树）：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/implement-trie-prefix-tree/description/?envType=study-plan-v2&amp;envId=top-100-liked">208.实现 Trie（前缀树）</a></li>
+<li>思路：
+<ul>
+<li>1、初始化前缀树根节点
+<ul>
+<li>整棵树需要一个根节点 <code>root</code></li>
+</ul>
+<ul>
+<li>根节点本身不存具体字符，只作为所有单词的起点</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>2、插入单词 <code>insert</code>：
+<ul>
+<li>从根节点开始，依次遍历单词中的每个字符</li>
+<li>如果当前字符对应的子节点不存在，就创建一个新节点</li>
+<li>然后继续往下一层走</li>
+<li>当整个单词遍历结束时，说明这条路径已经表示了一个完整单词，把末尾节点标记为 <code>true</code></li>
+</ul>
+</li>
+<li>3、查找完整单词 <code>search</code>：
+<ul>
+<li>同样从根节点开始，按字符逐层向下查找</li>
+<li>如果某个字符对应的节点不存在，说明这个单词不在前缀树中，直接返回 <code>false</code></li>
+<li>如果所有字符都能找到，还要进一步判断最后一个节点是不是某个单词的结尾</li>
+</ul>
+</li>
+<li>4、查找前缀 <code>startsWith</code>：
+<ul>
+<li>也是逐个字符向下走</li>
+<li>只要中途有字符不存在，就返回 <code>false</code></li>
+<li>如果整段前缀都能走完，说明前缀存在，直接返回 <code>true</code></li>
+<li>注意⚠️：这里不需要判断 <code>isEnd</code>，因为题目只要求“是否存在这个前缀”。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>代码：</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Trie</span> &#123;</span><br><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span>&#123;</span><br>    unordered_map&lt;<span class="hljs-keyword">char</span>, TreeNode*&gt; children;<br>    <span class="hljs-keyword">bool</span> isEnd;<br>    <span class="hljs-built_in">TreeNode</span>(): <span class="hljs-built_in">isEnd</span>(<span class="hljs-literal">false</span>)&#123;&#125;<br>&#125;;<br><br><span class="hljs-keyword">private</span>:<br>    TreeNode* root;<br><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">Trie</span>() &#123;<br>        root = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>();<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(string word)</span> </span>&#123;<br>        TreeNode* cur = root;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;word.<span class="hljs-built_in">length</span>(); i++)&#123;<br>            <span class="hljs-keyword">if</span>(cur-&gt;children[word[i]] == <span class="hljs-literal">nullptr</span>)&#123;<br>                cur-&gt;children[word[i]] = <span class="hljs-keyword">new</span> <span class="hljs-built_in">TreeNode</span>();<br>            &#125;<br>            cur = cur-&gt;children[word[i]];<br>        &#125;<br>        <span class="hljs-comment">// word都插入到了前缀树中</span><br>        cur-&gt;isEnd = <span class="hljs-literal">true</span>;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">search</span><span class="hljs-params">(string word)</span> </span>&#123;<br>        TreeNode* cur = root;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;word.<span class="hljs-built_in">length</span>(); i++)&#123;<br>            <span class="hljs-keyword">if</span>(cur-&gt;children[word[i]] == <span class="hljs-literal">nullptr</span>)<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            cur = cur-&gt;children[word[i]];<br>        &#125;<br>        <span class="hljs-keyword">return</span> cur-&gt;isEnd;<br>    &#125;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">startsWith</span><span class="hljs-params">(string prefix)</span> </span>&#123;<br>        TreeNode* cur = root;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;prefix.<span class="hljs-built_in">length</span>(); i++)&#123;<br>            <span class="hljs-keyword">if</span>(cur-&gt;children[prefix[i]] == <span class="hljs-literal">nullptr</span>)<br>                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>            cur = cur-&gt;children[prefix[i]];<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Your Trie object will be instantiated and called as such:</span><br><span class="hljs-comment"> * Trie* obj = new Trie();</span><br><span class="hljs-comment"> * obj-&gt;insert(word);</span><br><span class="hljs-comment"> * bool param_2 = obj-&gt;search(word);</span><br><span class="hljs-comment"> * bool param_3 = obj-&gt;startsWith(prefix);</span><br><span class="hljs-comment"> */</span><br></code></pre></td></tr></table></figure>
 <h2 id="回溯"><a class="markdownIt-Anchor" href="#回溯"></a> 回溯</h2>
 <h3 id="括号生成"><a class="markdownIt-Anchor" href="#括号生成"></a> 括号生成</h3>
 <ul>
