@@ -31,8 +31,9 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510110106267.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510212125355.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510212126097.png">
+<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202604081651293.png">
 <meta property="article:published_time" content="2025-02-20T15:30:00.000Z">
-<meta property="article:modified_time" content="2026-03-27T15:18:59.000Z">
+<meta property="article:modified_time" content="2026-04-09T16:52:18.875Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -277,7 +278,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          12k 字
+          15k 字
         
       </span>
     
@@ -289,7 +290,7 @@
         
         
           <!-- compatible with older versions-->
-          38 分钟
+          49 分钟
         
       </span>
     
@@ -333,6 +334,27 @@
                 
                 <h1 id="知识复习汇总"><a class="markdownIt-Anchor" href="#知识复习汇总"></a> 知识复习汇总</h1>
 <h2 id="项目相关"><a class="markdownIt-Anchor" href="#项目相关"></a> 项目相关</h2>
+<h3 id="多-agent-项目"><a class="markdownIt-Anchor" href="#多-agent-项目"></a> 多 Agent 项目</h3>
+<ul>
+<li>什么是多智能体编排器-工作者（Orchestrator-Workers）模式？
+<ul>
+<li>借鉴了 Claude 博客中关于“如何构建高效的智能体”这篇文章，它是一种任务驱动的多智能体协作架构，其核心是由一个中央大模型（Orchestrator）<strong>动态拆解任务、分配子任务给多个工作者模型（Workers），并最终整合结果输出</strong>。</li>
+</ul>
+</li>
+<li>怎么样进行动态分块并注入来源信息，详细介绍一下分块逻辑？
+<ul>
+<li>我做的动态分块不是固定长度硬切，而是先判断文档大小：短文档（小于 1500 个字符）保留整体，长文档再按 markdown 结构递归切分，优先按<strong>标题、加粗小节、段落</strong>这些语义边界切，切不动再逐步退化到按行、按空格、按字符切，同时设置 overlap （200 个字符）保证上下文连续。</li>
+<li>分块后，我会把文档来源信息直接注入到每个 chunk 的正文前缀里，而不是只放 metadata，这样 embedding 时能把来源语境一起编码进去，既提升检索召回准确率，也方便后续回答做来源溯源。最后再做 metadata 清洗和空块过滤，批量写入 Chroma。</li>
+</ul>
+</li>
+<li>为什么不用只存 metadata，不注入正文？
+<ul>
+<li>只把来源放在 metadata 里，向量化时 embedding 模型通常感知不到这些信息；</li>
+<li>但把来源信息注入正文后，模型在生成向量时会把“文档标题、产品名、主题背景”一起编码进去，这对语义召回更有帮助。</li>
+<li>metadata 更多是给过滤和展示用，正文注入才真正作用于 embedding 表达。</li>
+</ul>
+</li>
+</ul>
 <h3 id="reviewcloud-项目"><a class="markdownIt-Anchor" href="#reviewcloud-项目"></a> ReviewCloud 项目</h3>
 <ul>
 <li>谈谈 <code>ReviewCloud</code> 这个项目你的主要工作是什么，难点在哪？
@@ -1372,6 +1394,137 @@
 <li>A 从列表中选一个，向该健康实例（IP:Port）拨号连接得到对象 client，通过 client 调用相应的方法。</li>
 </ul>
 </li>
+</ul>
+<h2 id="大模型相关"><a class="markdownIt-Anchor" href="#大模型相关"></a> 大模型相关</h2>
+<h3 id="模型采样参数"><a class="markdownIt-Anchor" href="#模型采样参数"></a> 模型采样参数</h3>
+<ul>
+<li>在使用大模型时，会经常看到类似 <code>Temperature</code> 这类的可配置参数，其本质是通过调整模型对 “概率分布” 的采样策略，让输出匹配具体场景需求，配置合适的参数可以提升 Agent 在特定场景的性能。</li>
+<li>传统的概率分布是由 Softmax 公式计算得到的：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>i</mi></msub><mo>=</mo><mfrac><msup><mi>e</mi><msub><mi>z</mi><mi>i</mi></msub></msup><mrow><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></msubsup><msup><mi>e</mi><msub><mi>z</mi><mi>j</mi></msub></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">p_i=\frac{e^{z_i}}{\sum_{j=1}^ke^{z_j}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.6684269999999999em;vertical-align:-0.7574469999999999em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.91098em;"><span style="top:-2.56478em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mop op-symbol small-op mtight" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8931714285714285em;"><span style="top:-2.1785614285714283em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-2.8971428571428572em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.46032428571428574em;"><span></span></span></span></span></span></span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord mtight"><span class="mord mathnormal mtight">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7789785714285715em;"><span style="top:-2.9714357142857146em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3448em;margin-left:-0.04398em;margin-right:0.1em;"><span class="pstrut" style="height:2.65952em;"></span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5091600000000001em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7385428571428572em;"><span style="top:-2.931em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3448em;margin-left:-0.04398em;margin-right:0.1em;"><span class="pstrut" style="height:2.65952em;"></span><span class="mord mathnormal mtight">i</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.31472em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7574469999999999em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>，采样参数的本质就是在此基础上，根据不同策略“重新调整”或“截断”分布，从而改变大模型输出的下一个 token。</li>
+<li><code>Temperature</code>：温度是控制模型输出 “随机性” 与 “确定性” 的关键参数。其原理是引入温度系数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">T&gt;0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>, 将 Softmax 改写为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>p</mi><mi>i</mi><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow></msubsup><mo>=</mo><mfrac><msup><mi>e</mi><mrow><msub><mi>z</mi><mi>i</mi></msub><mi mathvariant="normal">/</mi><mi>T</mi></mrow></msup><mrow><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></msubsup><msup><mi>e</mi><mrow><msub><mi>z</mi><mi>j</mi></msub><mi mathvariant="normal">/</mi><mi>T</mi></mrow></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">p_{i}^{(T)}=\frac{e^{z_{i}/T}}{\sum_{j=1}^{k}e^{z_{j}/T}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.321664em;vertical-align:-0.27686399999999994em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.4231360000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.27686399999999994em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.907932em;vertical-align:-0.837232em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0707em;"><span style="top:-2.4849949999999996em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mop op-symbol small-op mtight" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8931714285714285em;"><span style="top:-2.1785614285714283em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-2.8971428571428572em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.46032428571428574em;"><span></span></span></span></span></span></span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord mtight"><span class="mord mathnormal mtight">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.00715em;"><span style="top:-3.00715em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5357142857142856em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3448em;margin-left:-0.04398em;margin-right:0.1em;"><span class="pstrut" style="height:2.65952em;"></span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5091600000000001em;"><span></span></span></span></span></span></span><span class="mord mtight">/</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9667142857142856em;"><span style="top:-2.9667142857142856em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5357142857142856em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3448em;margin-left:-0.04398em;margin-right:0.1em;"><span class="pstrut" style="height:2.65952em;"></span><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.31472em;"><span></span></span></span></span></span></span><span class="mord mtight">/</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.837232em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li>当 T 变小时，分布“更加陡峭”，高概率项权重进一步放大，生成更“保守”且重复率更高的文本。当 T 变大时，分布“更加平坦”，低概率项权重提升，生成更“多样”但可能出现不连贯的内容。
+<ul>
+<li>低温度（0 ⩽ Temperature &lt; 0.3）：输出更 “精准、确定”。适用场景： 事实性任务：如问答、数据计算、代码生成；严谨性场景：法律条文解读、技术文档撰写、学术概念解释等场景。</li>
+<li>中温度（0.3 ⩽ Temperature &lt; 0.7）：输出 “平衡、自然”。适用场景： 日常对话：如客服交互、聊天机器人；常规创作：如邮件撰写、产品文案、简单故事创作。</li>
+<li>高温度（0.7 ⩽ Temperature &lt; 2）：输出 “创新、发散”。适用场景： 创意性任务：如诗歌创作、科幻故事构思、广告 slogan brainstorm、艺术灵感启发；发散性思考。</li>
+</ul>
+</li>
+</ul>
+<h3 id="提示词工程和上下文工程"><a class="markdownIt-Anchor" href="#提示词工程和上下文工程"></a> 提示词工程和上下文工程</h3>
+<ul>
+<li>提示词工程和上下文工程的区别是什么？
+<ul>
+<li>提示词工程：提示工程关注如何编写与组织 LLM 的指令以获得更优结果（例如系统提示的写法与结构化策略）</li>
+<li>上下文工程：上下文工程则是<strong>在推理阶段，如何策划与维护“最优的信息集合（tokens）”</strong>，其中不仅包含提示本身，还包含其他会进入上下文窗口的一切信息。</li>
+</ul>
+</li>
+<li>为什么上下文工程重要？
+<ul>
+<li>Transformer 让每个 token 能够与上下文中的<strong>所有</strong> token 建立关联，理论上形成 (n^2) 级别的两两注意力关系。随着上下文长度增长，模型对这些两两关系的建模能力会被“拉薄”，从而自然地产生“上下文规模”与“注意力集中度”的张力。此外，模型的注意力模式来源于训练数据分布——短序列通常比长序列更常见，因此模型对“全上下文依赖”的经验更少、专门参数也更少。</li>
+<li>诸如位置编码插值（position encoding interpolation）等技术可以让模型在推理时“适配”比训练期更长的序列，但会牺牲部分对 token 位置的精确理解。总体上，这些因素共同形成的是一个<strong>性能梯度</strong>，而非“悬崖式”崩溃：模型在长上下文下依旧强大，但相较短上下文，在信息检索与长程推理上的精度会有所下降。</li>
+</ul>
+</li>
+<li>怎么实现有效的上下文？
+<ul>
+<li>在“有限注意力预算”的约束下，优秀的上下文工程目标是：<strong>用尽可能少、但高信号密度的 tokens，最大化获得期望结果的概率</strong>。落实到实践中，建议围绕以下组件开展工程化建设：</li>
+</ul>
+<ul>
+<li>1、<strong>系统提示（System Prompt）</strong>：语言清晰、直白，信息层级把握在“刚刚好”的高度。常见两极误区：
+<ul>
+<li>过度硬编码：在提示中写入复杂、脆弱的 if-else 逻辑，长期维护成本高、易碎。</li>
+<li>过于空泛：只给出宏观目标与泛化指引，缺少对期望输出的<strong>具体信号</strong>或假定了错误的“共享上下文”。建议将提示分区组织（如 <code>、</code>、工具指引、输出描述等），用 XML/Markdown 分隔。无论格式如何，追求的是<strong>能完整勾勒期望行为的&quot;最小必要信息集&quot;</strong>（“最小&quot;并不等于&quot;最短”）。先用最好的模型在最小提示上试跑，再依据失败模式增补清晰的指令与示例。</li>
+</ul>
+</li>
+<li>2、<strong>工具（Tools）</strong>：工具定义了智能体与信息/行动空间的契约，必须促进效率：既要返回<strong>token 友好</strong>的信息，又要鼓励高效的智能体行为。工具应当：
+<ul>
+<li>职责单一、相互低重叠，接口语义清晰；</li>
+<li>对错误鲁棒；</li>
+<li>入参描述明确、无歧义，充分发挥模型擅长的表达与推理能力。常见失败模式是“臃肿工具集”：功能边界模糊，导致“选哪个工具”这一决策本身就含混不清。<strong>如果人类工程师都说不准用哪个工具，别指望智能体做得更好</strong>。精心甄别一个“最小可行工具集（MVTS）”往往能显著提升长期交互中的稳定性与可维护性。</li>
+</ul>
+</li>
+<li>3、<strong>示例（Few-shot）</strong>：始终推荐提供示例，但不建议把“所有边界条件”的罗列一股脑塞进提示。请精挑细选一组<strong>多样且典型</strong>的示例，直接画像“期望行为”。对 LLM 而言，<strong>好的示例胜过千言万语</strong>。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>面向长时程任务的上下文工程？
+<ul>
+<li>长时程任务要求智能体在超出上下文窗口的长序列行动中，仍能保持连贯性、上下文一致与目标导向。例如大型代码库迁移、跨数小时的系统性研究。指望无限增大上下文窗口并不能根治“上下文污染”与相关性退化的问题，因此需要直接面向这些约束的工程手段：<strong>压缩整合（Compaction）</strong>、<strong>结构化笔记（Structured note-taking）<strong>与</strong>子代理架构（Sub-agent architectures）</strong>。</li>
+<li>1、<strong>压缩整合（Compaction）</strong>
+<ul>
+<li>定义：当对话接近上下文上限时，对其进行高保真总结，并用该摘要重启一个新的上下文窗口，以维持长程连贯性。</li>
+<li>实践：让模型压缩并保留架构性决策、未解决缺陷、实现细节，丢弃重复的工具输出与噪声；新窗口携带压缩摘要 + 最近少量高相关工件（如“最近访问的若干文件”）。</li>
+<li>调参建议：先优化<strong>召回</strong>（确保不遗漏关键信息），再优化<strong>精确度</strong>（剔除冗余内容）；一种安全的“轻触式”压缩是对“深历史中的工具调用与结果”进行清理。</li>
+</ul>
+</li>
+<li>2、<strong>结构化笔记（Structured note-taking）</strong>
+<ul>
+<li>定义：也称“智能体记忆”。智能体以固定频率将关键信息写入<strong>上下文外的持久化存储</strong>，在后续阶段按需拉回。</li>
+<li>价值：以极低的上下文开销维持持久状态与依赖关系。例如维护 TODO 列表、项目 NOTES. Md、关键结论/依赖/阻塞项的索引，跨数十次工具调用与多轮上下文重置仍能保持进度与一致性。</li>
+<li>说明：在非编码场景中同样有效（如长期策略性任务、游戏/仿真中的目标管理与统计计数）。结合 MemoryTool，可轻松实现文件式/向量式的外部记忆并在运行时检索。</li>
+</ul>
+</li>
+<li>3、<strong>子代理架构（Sub-agent architectures）</strong>
+<ul>
+<li>思想：由主代理负责高层规划与综合，多个专长子代理在“干净的上下文窗口”中各自深挖、调用工具并探索，最后仅回传<strong>凝练摘要</strong>（常见 1,000–2,000 tokens）。</li>
+<li>好处：实现关注点分离。庞杂的搜索上下文留在子代理内部，主代理专注于整合与推理；适合需要并行探索的复杂研究/分析任务。</li>
+<li>经验：公开的多智能体研究系统显示，该模式在复杂研究任务上相较单代理基线具有显著优势。</li>
+</ul>
+</li>
+<li>总结：
+<ul>
+<li><strong>压缩整合</strong>：适合需要长对话连续性的任务，强调上下文的“接力”。</li>
+<li><strong>结构化笔记</strong>：适合有里程碑/阶段性成果的迭代式开发与研究。</li>
+<li><strong>子代理架构</strong>：适合复杂研究与分析，能从并行探索中获益。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="agent-开发相关"><a class="markdownIt-Anchor" href="#agent-开发相关"></a> Agent 开发相关</h2>
+<h3 id="agent-核心概念"><a class="markdownIt-Anchor" href="#agent-核心概念"></a> Agent 核心概念</h3>
+<ul>
+<li></li>
+</ul>
+<h3 id="三个单智能体范式"><a class="markdownIt-Anchor" href="#三个单智能体范式"></a> 三个单智能体范式</h3>
+<ol>
+<li><strong>ReAct:</strong> 我们构建了一个能与外部世界交互的 ReAct 智能体。通过“思考-行动-观察”的动态循环，它成功地利用搜索引擎回答了自身知识库无法覆盖的实时性问题。其核心优势在于<strong>环境适应性</strong>和<strong>动态纠错能力</strong>，使其成为处理探索性、需要外部工具输入的任务的首选。</li>
+<li><strong>Plan-and-Solve:</strong> 我们实现了一个先规划后执行的 Plan-and-Solve 智能体，并利用它解决了需要多步推理的数学应用题。它将复杂的任务分解为清晰的步骤，然后逐一执行。其核心优势在于<strong>结构性</strong>和<strong>稳定性</strong>，特别适合处理逻辑路径确定、内部推理密集的任务。</li>
+<li><strong>Reflection (自我反思与迭代)</strong>: 我们构建了一个具备自我优化能力的 Reflection 智能体。通过引入“执行-反思-优化”的迭代循环，它成功地将一个效率较低的初始代码方案，优化为了一个算法上更优的高性能版本。其核心价值在于能<strong>显著提升解决方案的质量</strong>，适用于对结果的准确性和可靠性有极高要求的场景。</li>
+</ol>
+<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202604081651293.png" srcset="/img/loading.gif" lazyload alt="不同 Agent Loop 的选择策略" /></p>
+<ul>
+<li>这三种范式在&quot;思考&quot;与&quot;行动&quot;的组织方式上有什么本质区别？
+<ul>
+<li><strong>ReAct</strong>：思考和行动<strong>交替耦合</strong></li>
+<li><strong>Plan-and-Solve</strong>：思考先于行动，属于<strong>先规划后执行</strong></li>
+<li><strong>Reflection</strong>：行动后再思考，属于<strong>先尝试后修正</strong></li>
+</ul>
+<ul>
+<li>如果把它们看成三种“智能体时间结构”：
+<ul>
+<li>ReAct 关注“<strong>当前下一步怎么做</strong>”</li>
+<li>Plan-and-Solve 关注“<strong>整个任务应该怎么分解</strong>”</li>
+<li>Reflection 关注“<strong>刚才做得对不对，怎么改进</strong>”</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="rag-系统知识检索增强生成"><a class="markdownIt-Anchor" href="#rag-系统知识检索增强生成"></a> RAG 系统：知识检索增强生成</h2>
+<h3 id="rag-的基础知识"><a class="markdownIt-Anchor" href="#rag-的基础知识"></a> RAG 的基础知识</h3>
+<ul>
+<li>什么是 RAG？
+<ul>
+<li>检索增强生成（Retrieval-Augmented Generation，RAG）是一种结合了信息检索和文本生成的技术。它的核心思想是：在生成回答之前，先从外部知识库中检索相关信息，然后将检索到的信息作为上下文提供给大语言模型，从而生成更准确、更可靠的回答。</li>
+<li>因此，检索增强生成可以拆分为三个词汇。<strong>检索</strong>是指从知识库中查询相关内容；<strong>增强</strong>是将检索结果融入提示词，辅助模型生成；<strong>生成</strong>则输出兼具准确性与透明度的答案。</li>
+</ul>
+</li>
+<li>RAG 的基本工作流程
+<ul>
+<li>一个完整的 RAG 应用流程主要分为两大核心环节。在<strong>数据准备阶段</strong>，系统通过<strong>数据提取</strong>、<strong>文本分割</strong>和<strong>向量化</strong>，将外部知识构建成一个可检索的数据库。随后在<strong>应用阶段</strong>，系统会响应用户的<strong>提问</strong>，从数据库中<strong>检索</strong>相关信息，将其<strong>注入 Prompt</strong>，并最终驱动大语言模型<strong>生成答案</strong>。</li>
+</ul>
+</li>
+<li></li>
 </ul>
 
                 
