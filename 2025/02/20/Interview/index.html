@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510212126097.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202604081651293.png">
 <meta property="article:published_time" content="2025-02-20T15:30:00.000Z">
-<meta property="article:modified_time" content="2026-04-09T16:52:18.875Z">
+<meta property="article:modified_time" content="2026-04-10T06:29:18.782Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -278,7 +278,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          15k 字
+          18k 字
         
       </span>
     
@@ -290,7 +290,7 @@
         
         
           <!-- compatible with older versions-->
-          49 分钟
+          56 分钟
         
       </span>
     
@@ -336,22 +336,148 @@
 <h2 id="项目相关"><a class="markdownIt-Anchor" href="#项目相关"></a> 项目相关</h2>
 <h3 id="多-agent-项目"><a class="markdownIt-Anchor" href="#多-agent-项目"></a> 多 Agent 项目</h3>
 <ul>
-<li>什么是多智能体编排器-工作者（Orchestrator-Workers）模式？
+<li>
+<p>什么是多智能体编排器-工作者（Orchestrator-Workers）模式？</p>
 <ul>
 <li>借鉴了 Claude 博客中关于“如何构建高效的智能体”这篇文章，它是一种任务驱动的多智能体协作架构，其核心是由一个中央大模型（Orchestrator）<strong>动态拆解任务、分配子任务给多个工作者模型（Workers），并最终整合结果输出</strong>。</li>
 </ul>
 </li>
-<li>怎么样进行动态分块并注入来源信息，详细介绍一下分块逻辑？
+<li>
+<p>怎么样进行动态分块并注入来源信息，详细介绍一下分块逻辑？</p>
 <ul>
 <li>我做的动态分块不是固定长度硬切，而是先判断文档大小：短文档（小于 1500 个字符）保留整体，长文档再按 markdown 结构递归切分，优先按<strong>标题、加粗小节、段落</strong>这些语义边界切，切不动再逐步退化到按行、按空格、按字符切，同时设置 overlap （200 个字符）保证上下文连续。</li>
 <li>分块后，我会把文档来源信息直接注入到每个 chunk 的正文前缀里，而不是只放 metadata，这样 embedding 时能把来源语境一起编码进去，既提升检索召回准确率，也方便后续回答做来源溯源。最后再做 metadata 清洗和空块过滤，批量写入 Chroma。</li>
 </ul>
 </li>
-<li>为什么不用只存 metadata，不注入正文？
+<li>
+<p>为什么不用只存 metadata，不注入正文？</p>
 <ul>
 <li>只把来源放在 metadata 里，向量化时 embedding 模型通常感知不到这些信息；</li>
 <li>但把来源信息注入正文后，模型在生成向量时会把“文档标题、产品名、主题背景”一起编码进去，这对语义召回更有帮助。</li>
 <li>metadata 更多是给过滤和展示用，正文注入才真正作用于 embedding 表达。</li>
+</ul>
+</li>
+<li>
+<p>怎么设计基于向量检索与标题分词匹配的 RAG 双路检索架构？</p>
+<ul>
+<li>第一路是基于向量余弦距离的语义相似度检索，返回 TOP-K 个文本块，其中在项目中是 5 个。</li>
+<li>第二路是标题文词匹配检索，先扫描 markdown 文件标题，再做两阶段排序：
+<ul>
+<li>第一阶段是标题粗排：用 jieba 分词 + 字符级匹配提升完整文档的召回率：
+<ul>
+<li>第一步是字符级 Jaccard 匹配，把用户问题和标题都拆成字符集合，计算交集 / 并集，这样做是因为即使 jieba 分词结果一般，字符仍然能保底召回。</li>
+<li>第二步是词项级 jieba 分词匹配，对用户问题和标题做 <code>jieba.lcut()</code>，按词集合算 Jaccard，也就是计算交集 / 并集，相比字符级，词项级更能体现语义单元，所以权重更高。</li>
+<li>其中字符级的权重是 0.3，词项级的权重是 0.7，保留前 50 个粗排结果。</li>
+</ul>
+</li>
+<li>第二阶段是标题精排：采用标题语义相似度 + 粗排分数加权：
+<ul>
+<li>分别对用户问题和粗排后的标题进行向量化，用余弦相似度算标题和问题的语义相关性，再和粗排得分做加权融合，其中粗排权重 0.3，精排权重 0.7。使得精排分数作为主导，体现语义相关性，粗排分数保留一定作用，体现关键词命中。</li>
+</ul>
+</li>
+<li>最后对长文档（大于 3000 字符）进行切分和计算分数，取 TOP-K 个标题分数的文本块，在项目中是 5 个。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>为什么要“粗排 + 精排”两阶段？</p>
+<ul>
+<li>因为单独只用 jieba 分词会有问题：
+<ul>
+<li>只能看字面重合</li>
+<li>对同义表达不够敏感</li>
+</ul>
+</li>
+<li>但如果一开始就对所有标题全量 embedding，又比较重。</li>
+<li>所以我用了两阶段方案：
+<ul>
+<li><strong>粗排</strong>负责低成本扩大召回</li>
+<li><strong>精排</strong>负责提高结果相关性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>标题检索为什么有意义？</p>
+<ul>
+<li>在知识库里，很多 markdown 文档的标题本身就高度概括主题，比如“安装说明”“常见问题”“接口文档”“模型训练流程”。</li>
+<li>如果只依赖 chunk 级向量检索，可能会因为切块过细导致主题信息被稀释；而标题检索等于从文档级主题入口再召回一遍，可以补足纯向量检索对文档主题感知不足的问题。</li>
+</ul>
+</li>
+<li>
+<p>为什么要标题与内容前缀去重并进行相似度重排序输出前 N 个结果？</p>
+<ul>
+<li><strong>重复</strong>：同一文档可能既被向量检索命中，也被标题检索命中</li>
+</ul>
+<ul>
+<li><strong>分数体系不同</strong>：两条路出来的结果打分方式不完全一致</li>
+<li><strong>排序不稳定</strong>：如果不统一重排，最终结果质量会波动</li>
+</ul>
+<ul>
+<li>主要步骤：
+<ul>
+<li>1、把向量和标题召回的结果合并成一个候选集</li>
+<li>2、基于标题 + 内容前缀去重，把 <code>title</code> 和 <code>content</code> 前 100 个字符组成一个联合 key 进行去重。</li>
+<li>3、对去重后的候选结果做统一 embedding 相似度打分和重排序，返回 TOP-N 个文本块，在项目中是 5 个。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>多智能体编排是使用了什么思想？</p>
+<ul>
+<li>OpenAI Agents SDK 支持两种主要的多 Agent 设计模式：Manager 模式（Agents as Tools）和Handoff 模式（交接接管）。</li>
+<li>Manager 模式（Agents as Tools）：把子 Agent 当作工具（tool）供主 Agent 调用，控制权始终在 Manager 手里。</li>
+<li>Handoff 模式（交接接管）：当前 Agent 把任务“交接”给另一个 Agent，由它接管后续流程。</li>
+<li>我的项目中使用的是 Manager 模式（Agents as Tools），考虑到如果一个用户请求同时涉及技术判断和线下服务站查询，Manager 模式会更适合，因为主调度 Agent 可以把问题拆成两个子任务，分别交给技术专家和业务服务专家执行，再统一聚合结果。理论上既可以顺序调用，也可以并行调用。而 Handoff 模式更适合单一职责的接管场景，一旦把控制权交给某个 Agent，后续如果还需要另一个 Agent 协作，链路会变复杂，尤其不适合并行协同。</li>
+</ul>
+</li>
+<li>
+<p>MCP 和 SKILL 的区别是什么？</p>
+<ul>
+<li>MCP（Model Context Protocol）是一个把外部能力接给模型的协议层。通过 MCP，模型可以连到远程 MCP server 或 connector，去访问搜索、地图、私有数据源等能力；在 OpenAI 的 Responses API 里，这些都可以通过 <code>mcp</code> 工具类型接入。</li>
+<li>Skill 是一个可复用的工作流封装。它是可复用、可分享的 workflow，用来告诉 LLM 如何把某类任务做得更稳定、更一致；一个 Skill 可以打包说明、示例，甚至代码。OpenAI 也把 skills 描述成介于 prompt 和 tools 之间的“中间层”：prompt 定义常驻行为，tools 提供原子能力，skills 则把一套可重复执行的步骤封装起来。</li>
+<li><strong>MCP 关注连接</strong>：把外部系统或数据源暴露给模型。<strong>Skill 关注编排</strong>：把完成某类任务的步骤、规则、资源打包成一个可复用流程。</li>
+</ul>
+</li>
+<li>
+<p>提示词的编写上有什么技巧吗？</p>
+<ul>
+<li>1、先定义“唯一职责”，缩小模型自由度，让模型不要又当专家、又当总结器、又当调度器，避免角色混乱。</li>
+<li>2、明确“工具-场景映射”，降低选错工具概率，定义工具时，不只写工具名，要写适用场景、边界和典型触发条件。</li>
+<li>3、用“原则”约束行为，而不是只写功能，不只是说“怎么做”，还说了很多“不能怎么做”。</li>
+<li>4、把高风险问题单独上升为“核心原则”，把最容易犯错的点，提升为显式规则，并重复强化，模型对“重复出现的关键约束”会更敏感。</li>
+<li>5、把复杂任务拆成流程步骤，对多步任务，提示词最好写成 SOP，而不是一段大而泛的说明。</li>
+<li>6、用正反例强化边界，提示词里最好加入“相似场景下的正反例”，帮助模型学会区分。</li>
+</ul>
+</li>
+<li>
+<p>项目里的上下文工程是怎么做的？</p>
+<ul>
+<li>持久化使用 <code>SessionManager</code> 按用户和会话把历史消息持久化到本地 JSON 文件中；</li>
+<li>上下文工程则是在每轮请求时先加载历史、拼接当前输入，再通过 <code>_truncate_memory()</code> 保留 system message、按最近 N 轮做裁剪，最后把处理后的 <code>chat_history</code> 作为 <code>Runner.run_streamed</code> 的输入传给调度 Agent，从而兼顾多轮对话连续性、token 成本和上下文质量。</li>
+</ul>
+</li>
+<li>
+<p>什么是 FastAPI 的异步接口？</p>
+<ul>
+<li>FastAPI 的异步接口，指的是用 <code>async def</code> 定义的接口函数。这里的 <code>async def</code> 表示这个接口是<strong>异步的</strong>，不会在等待大模型输出时把整个线程卡死，而是可以把等待时间让出去，去处理别的请求。</li>
+</ul>
+</li>
+<li>
+<p>什么是 SSE 协议？</p>
+<ul>
+<li>SSE 是 <strong>Server-Sent Events</strong>，中文一般叫：服务器发送事件。</li>
+<li>它是一种浏览器和服务端之间的<strong>单向流式通信协议</strong>，特点是：
+<ul>
+<li>服务端可以持续往前端推消息</li>
+<li>前端不需要反复轮询</li>
+<li>基于 HTTP，比较轻量</li>
+<li>很适合大模型“边生成边推送”</li>
+</ul>
+</li>
+<li>资料里也明确说了，SSE 相比 WebSocket 更简单，非常适合大模型流式输出场景。</li>
 </ul>
 </li>
 </ul>
@@ -436,6 +562,30 @@
 <li>go 循环包依赖的引用问题怎么解决的？
 <ul>
 <li>解决思路是让依赖<strong>单向化</strong>：抽公共部分到第三方包</li>
+</ul>
+</li>
+<li>AI 智能评价回复部分具体是怎么做的？
+<ul>
+<li>在“用户评价智能处理”微服务中，我将多智能体流程设计为 Evaluator-optimizer （评估与优化工作流）模式：当一条用户评价进入系统后，首先不会立刻生成回复，而是先进入 <strong>评价意图识别 Agent</strong>。这个 Agent 的职责是判断当前这条评价属于哪种业务场景，因为不同类型的评价，后续处理逻辑完全不同。</li>
+<li>系统主要将评价划分为四类：
+<ul>
+<li><strong>praise</strong>：明显好评、满意反馈、夸赞类内容</li>
+<li><strong>technical_question</strong>：包含“不会用、连不上、故障、怎么操作、怎么维修”等技术或售后问题</li>
+<li><strong>complaint_or_malicious</strong>：差评、抱怨、负面情绪内容，以及可能带有人身攻击或不良用语的评价</li>
+<li><strong>other</strong>：语义不完整、信息不足、无法明确归类的评价</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>这个阶段不只是输出类别，还会同时输出一个 <strong>confidence（置信度）</strong>。对于 <strong>低置信度评价</strong>，系统不会继续往下执行自动回复，而是直接触发人工审核。因为如果意图识别本身就不准，后续路由到错误 Agent，只会放大错误。</li>
+<li>在意图识别完成后，系统会根据分类结果，把评价路由到不同的专家 Agent。
+<ul>
+<li>如果识别为好评，系统会进入 <strong>好评回复 Agent</strong>。这个 Agent 的目标不是“解决问题”，而是输出更有温度的品牌式回复。</li>
+<li>如果识别为技术问题，系统会把评价交给 <strong>技术问题专家 Agent</strong> 处理。系统不会只给一句安抚式回复，而是会调用技术问题检索工具或售后政策工具，辅助生成更专业的内容。</li>
+<li>如果识别为差评、抱怨或情绪化负评，则进入 <strong>负面评价处理 Agent</strong>。若是普通差评：给出安抚 + 解决路径（退款/换货/排查）。若含不良用语：回复应克制，并建议转人工专员</li>
+</ul>
+</li>
+<li>回复质量评价 Agent，用于对各个专家 Agent 生成的客服回复进行质量打分和放行判断，决定该回复是否可以直接返回用户，还是需要转人工处理。</li>
 </ul>
 </li>
 </ul>
