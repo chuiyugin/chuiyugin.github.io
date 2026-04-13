@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510212126097.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202604081651293.png">
 <meta property="article:published_time" content="2025-02-20T15:30:00.000Z">
-<meta property="article:modified_time" content="2026-04-11T17:09:12.838Z">
+<meta property="article:modified_time" content="2026-04-13T16:58:11.800Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -290,7 +290,7 @@
         
         
           <!-- compatible with older versions-->
-          67 分钟
+          68 分钟
         
       </span>
     
@@ -1317,6 +1317,27 @@
 </ul>
 </li>
 </ul>
+<h3 id="代理篇"><a class="markdownIt-Anchor" href="#代理篇"></a> 代理篇</h3>
+<ul>
+<li>什么是反向代理和正向代理？有什么区别？
+<ul>
+<li>正向代理：
+<ul>
+<li>代理对象是客户端。它位于客户端和原始服务器之间，代替客户端向服务器发送请求。</li>
+<li>客户端需要配置代理服务器的 IP 和端口，客户端知道代理的存在，但目标服务器不知道客户端的真实 IP。</li>
+<li>主要用于突破网络限制、隐藏客户端身份、缓存加速及访问授权控制。</li>
+</ul>
+</li>
+<li>反向代理：
+<ul>
+<li>代理对象是‌服务器。它位于客户端和服务器之间，代替服务器接收客户端请求。</li>
+<li>客户端无需配置，客户端感知不到代理的存在，认为直接访问的是目标服务器，但后端服务器知道请求来自代理。</li>
+<li>主要用于保护后端服务器、负载均衡、缓存静态内容、SSL/TLS 终止及统一入口管理。‌‌‌‌‌‌</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="操作系统相关"><a class="markdownIt-Anchor" href="#操作系统相关"></a> 操作系统相关</h2>
 <ul>
 <li>什么是死锁，怎么解决？
@@ -1710,7 +1731,11 @@
 <h2 id="agent-开发相关"><a class="markdownIt-Anchor" href="#agent-开发相关"></a> Agent 开发相关</h2>
 <h3 id="agent-核心概念"><a class="markdownIt-Anchor" href="#agent-核心概念"></a> Agent 核心概念</h3>
 <ul>
-<li></li>
+<li>对于不同的场景应该分别选什么模型？
+<ul>
+<li>推理模型的代价是延迟更高、token 消耗更大，所以不是所有场景都适合用。一个常见的工程做法是：用推理能力强的大模型做核心决策（比如任务规划、关键判断），用更快更便宜的小模型做简单任务（比如意图分类、格式提取），根据不同环节的需求来搭配。</li>
+</ul>
+</li>
 </ul>
 <h3 id="三个单智能体范式"><a class="markdownIt-Anchor" href="#三个单智能体范式"></a> 三个单智能体范式</h3>
 <ol>
