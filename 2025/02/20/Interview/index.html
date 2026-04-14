@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510212126097.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202604081651293.png">
 <meta property="article:published_time" content="2025-02-20T15:30:00.000Z">
-<meta property="article:modified_time" content="2026-04-13T16:58:11.800Z">
+<meta property="article:modified_time" content="2026-04-14T16:23:58.084Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -278,7 +278,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          21k 字
+          22k 字
         
       </span>
     
@@ -290,7 +290,7 @@
         
         
           <!-- compatible with older versions-->
-          68 分钟
+          69 分钟
         
       </span>
     
@@ -1569,6 +1569,25 @@
 </li>
 </ul>
 </li>
+<li>使用 canal+kafka，那如果 canal 宕机或者 kafka 消息阻塞怎么办？
+<ul>
+<li>Canal + Kafka 这条链路主要风险在两个点：Canal 宕机和 Kafka 堆积/阻塞。</li>
+<li>对于 Canal 宕机，核心是保证<strong>数据不丢</strong>。一般会做三件事：
+<ul>
+<li>第一，<strong>持久化 binlog 位点</strong>，保证重启后可以从断点继续消费；</li>
+<li>第二，<strong>延长 MySQL binlog 保留时间</strong>，避免宕机期间 binlog 被清理导致无法追赶；</li>
+<li>第三，下游要做<strong>幂等处理</strong>（幂等就是保证同一条消息重复处理不会导致数据错误，通常通过唯一 ID、去重表或状态控制实现），因为恢复时可能会有重复消费。</li>
+</ul>
+</li>
+<li>对于 Kafka 阻塞，更多是<strong>延迟和堆积问题</strong>。处理思路是：
+<ul>
+<li>一方面通过<strong>扩分区、扩消费者、优化消费逻辑</strong>提升吞吐；</li>
+<li>另一方面要有<strong>重试 + 死信队列机制</strong>，避免“毒消息”卡住整个分区；</li>
+<li>同时配合<strong>监控 lag 和告警</strong>，在堆积初期就发现问题。</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="消息队列-2"><a class="markdownIt-Anchor" href="#消息队列-2"></a> 消息队列</h3>
 <ul>
@@ -1734,6 +1753,24 @@
 <li>对于不同的场景应该分别选什么模型？
 <ul>
 <li>推理模型的代价是延迟更高、token 消耗更大，所以不是所有场景都适合用。一个常见的工程做法是：用推理能力强的大模型做核心决策（比如任务规划、关键判断），用更快更便宜的小模型做简单任务（比如意图分类、格式提取），根据不同环节的需求来搭配。</li>
+</ul>
+</li>
+<li>什么是 Harness Engineering（驾驭工程）？它和传统 Prompt Engineering 有什么本质区别？
+<ul>
+<li>Harness Engineering 是 2025 年兴起的一个概念，指的是系统性地设计、约束和引导 AI Agent 行为的工程实践，它超越了单纯的 Prompt Engineering，涵盖了从系统架构、工具编排、安全护栏到反馈回路的全链路设计。</li>
+<li>与 Prompt Engineering 的区别：<br />
+• Prompt Engineering：聚焦于“如何写好一段提示词”，让 LLM 给出更好的单次回答<br />
+• Harness Engineering：聚焦于“如何构建一套系统”，让 Agent 在复杂环境中持续、安全、可控地工作</li>
+<li>Harness Engineering 的核心要素包括：
+<ol>
+<li>行为约束：定义 Agent 的行为边界和安全护栏</li>
+<li>工具编排：设计 Agent 可用的工具集和调用策略</li>
+<li>反馈回路：建立 Agent 行为的监控、评估和修正机制</li>
+<li>上下文管理：动态管理 Agent 的记忆和上下文窗口</li>
+<li>人机协作：设计合理的 Human-in-the-Loop 交互点</li>
+</ol>
+</li>
+<li>简单来说，Prompt Engineering 是“调教一个模型”，Harness Engineering 是“驾驭一个系统”。</li>
 </ul>
 </li>
 </ul>
