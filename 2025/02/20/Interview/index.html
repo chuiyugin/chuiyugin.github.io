@@ -31,9 +31,8 @@
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510110106267.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510212125355.png">
 <meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202510212126097.png">
-<meta property="og:image" content="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202604081651293.png">
 <meta property="article:published_time" content="2025-02-20T15:30:00.000Z">
-<meta property="article:modified_time" content="2026-04-14T16:23:58.084Z">
+<meta property="article:modified_time" content="2026-04-26T08:52:22.982Z">
 <meta property="article:author" content="Mr.CHUI">
 <meta property="article:tag" content="面经">
 <meta name="twitter:card" content="summary_large_image">
@@ -278,7 +277,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          22k 字
+          15k 字
         
       </span>
     
@@ -290,7 +289,7 @@
         
         
           <!-- compatible with older versions-->
-          69 分钟
+          48 分钟
         
       </span>
     
@@ -334,153 +333,6 @@
                 
                 <h1 id="知识复习汇总"><a class="markdownIt-Anchor" href="#知识复习汇总"></a> 知识复习汇总</h1>
 <h2 id="项目相关"><a class="markdownIt-Anchor" href="#项目相关"></a> 项目相关</h2>
-<h3 id="多-agent-项目"><a class="markdownIt-Anchor" href="#多-agent-项目"></a> 多 Agent 项目</h3>
-<ul>
-<li>
-<p>什么是多智能体编排器-工作者（Orchestrator-Workers）模式？</p>
-<ul>
-<li>借鉴了 Claude 博客中关于“如何构建高效的智能体”这篇文章，它是一种任务驱动的多智能体协作架构，其核心是由一个中央大模型（Orchestrator）<strong>动态拆解任务、分配子任务给多个工作者模型（Workers），并最终整合结果输出</strong>。</li>
-</ul>
-</li>
-<li>
-<p>怎么样进行动态分块并注入来源信息，详细介绍一下分块逻辑？</p>
-<ul>
-<li>我做的动态分块不是固定长度硬切，而是先判断文档大小：短文档（小于 1500 个字符）保留整体，长文档再按 markdown 结构递归切分，优先按<strong>标题、加粗小节、段落</strong>这些语义边界切，切不动再逐步退化到按行、按空格、按字符切，同时设置 overlap （200 个字符）保证上下文连续。</li>
-<li>分块后，我会把文档来源信息直接注入到每个 chunk 的正文前缀里，而不是只放 metadata，这样 embedding 时能把来源语境一起编码进去，既提升检索召回准确率，也方便后续回答做来源溯源。最后再做 metadata 清洗和空块过滤，批量写入 Chroma。</li>
-</ul>
-</li>
-<li>
-<p>为什么不用只存 metadata，不注入正文？</p>
-<ul>
-<li>只把来源放在 metadata 里，向量化时 embedding 模型通常感知不到这些信息；</li>
-<li>但把来源信息注入正文后，模型在生成向量时会把“文档标题、产品名、主题背景”一起编码进去，这对语义召回更有帮助。</li>
-<li>metadata 更多是给过滤和展示用，正文注入才真正作用于 embedding 表达。</li>
-</ul>
-</li>
-<li>
-<p>怎么设计基于向量检索与标题分词匹配的 RAG 双路检索架构？</p>
-<ul>
-<li>第一路是基于向量余弦距离的语义相似度检索，返回 TOP-K 个文本块，其中在项目中是 5 个。</li>
-<li>第二路是标题文词匹配检索，先扫描 markdown 文件标题，再做两阶段排序：
-<ul>
-<li>第一阶段是标题粗排：用 jieba 分词 + 字符级匹配提升完整文档的召回率：
-<ul>
-<li>第一步是字符级 Jaccard 匹配，把用户问题和标题都拆成字符集合，计算交集 / 并集，这样做是因为即使 jieba 分词结果一般，字符仍然能保底召回。</li>
-<li>第二步是词项级 jieba 分词匹配，对用户问题和标题做 <code>jieba.lcut()</code>，按词集合算 Jaccard，也就是计算交集 / 并集，相比字符级，词项级更能体现语义单元，所以权重更高。</li>
-<li>其中字符级的权重是 0.3，词项级的权重是 0.7，保留前 50 个粗排结果。</li>
-</ul>
-</li>
-<li>第二阶段是标题精排：采用标题语义相似度 + 粗排分数加权：
-<ul>
-<li>分别对用户问题和粗排后的标题进行向量化，用余弦相似度算标题和问题的语义相关性，再和粗排得分做加权融合，其中粗排权重 0.3，精排权重 0.7。使得精排分数作为主导，体现语义相关性，粗排分数保留一定作用，体现关键词命中。</li>
-</ul>
-</li>
-<li>最后对长文档（大于 3000 字符）进行切分和计算分数，取 TOP-K 个标题分数的文本块，在项目中是 5 个。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>为什么要“粗排 + 精排”两阶段？</p>
-<ul>
-<li>因为单独只用 jieba 分词会有问题：
-<ul>
-<li>只能看字面重合</li>
-<li>对同义表达不够敏感</li>
-</ul>
-</li>
-<li>但如果一开始就对所有标题全量 embedding，又比较重。</li>
-<li>所以我用了两阶段方案：
-<ul>
-<li><strong>粗排</strong>负责低成本扩大召回</li>
-<li><strong>精排</strong>负责提高结果相关性</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>标题检索为什么有意义？</p>
-<ul>
-<li>在知识库里，很多 markdown 文档的标题本身就高度概括主题，比如“安装说明”“常见问题”“接口文档”“模型训练流程”。</li>
-<li>如果只依赖 chunk 级向量检索，可能会因为切块过细导致主题信息被稀释；而标题检索等于从文档级主题入口再召回一遍，可以补足纯向量检索对文档主题感知不足的问题。</li>
-</ul>
-</li>
-<li>
-<p>为什么要标题与内容前缀去重并进行相似度重排序输出前 N 个结果？</p>
-<ul>
-<li><strong>重复</strong>：同一文档可能既被向量检索命中，也被标题检索命中</li>
-</ul>
-<ul>
-<li><strong>分数体系不同</strong>：两条路出来的结果打分方式不完全一致</li>
-<li><strong>排序不稳定</strong>：如果不统一重排，最终结果质量会波动</li>
-</ul>
-<ul>
-<li>主要步骤：
-<ul>
-<li>1、把向量和标题召回的结果合并成一个候选集</li>
-<li>2、基于标题 + 内容前缀去重，把 <code>title</code> 和 <code>content</code> 前 100 个字符组成一个联合 key 进行去重。</li>
-<li>3、对去重后的候选结果做统一 embedding 相似度打分和重排序，返回 TOP-N 个文本块，在项目中是 5 个。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>多智能体编排是使用了什么思想？</p>
-<ul>
-<li>OpenAI Agents SDK 支持两种主要的多 Agent 设计模式：Manager 模式（Agents as Tools）和Handoff 模式（交接接管）。</li>
-<li>Manager 模式（Agents as Tools）：把子 Agent 当作工具（tool）供主 Agent 调用，控制权始终在 Manager 手里。</li>
-<li>Handoff 模式（交接接管）：当前 Agent 把任务“交接”给另一个 Agent，由它接管后续流程。</li>
-<li>我的项目中使用的是 Manager 模式（Agents as Tools），考虑到如果一个用户请求同时涉及技术判断和线下服务站查询，Manager 模式会更适合，因为主调度 Agent 可以把问题拆成两个子任务，分别交给技术专家和业务服务专家执行，再统一聚合结果。理论上既可以顺序调用，也可以并行调用。而 Handoff 模式更适合单一职责的接管场景，一旦把控制权交给某个 Agent，后续如果还需要另一个 Agent 协作，链路会变复杂，尤其不适合并行协同。</li>
-</ul>
-</li>
-<li>
-<p>MCP 和 SKILL 的区别是什么？</p>
-<ul>
-<li>MCP（Model Context Protocol）是一个把外部能力接给模型的协议层。通过 MCP，模型可以连到远程 MCP server 或 connector，去访问搜索、地图、私有数据源等能力；在 OpenAI 的 Responses API 里，这些都可以通过 <code>mcp</code> 工具类型接入。</li>
-<li>Skill 是一个可复用的工作流封装。它是可复用、可分享的 workflow，用来告诉 LLM 如何把某类任务做得更稳定、更一致；一个 Skill 可以打包说明、示例，甚至代码。OpenAI 也把 skills 描述成介于 prompt 和 tools 之间的“中间层”：prompt 定义常驻行为，tools 提供原子能力，skills 则把一套可重复执行的步骤封装起来。</li>
-<li><strong>MCP 关注连接</strong>：把外部系统或数据源暴露给模型。<strong>Skill 关注编排</strong>：把完成某类任务的步骤、规则、资源打包成一个可复用流程。</li>
-</ul>
-</li>
-<li>
-<p>提示词的编写上有什么技巧吗？</p>
-<ul>
-<li>1、先定义“唯一职责”，缩小模型自由度，让模型不要又当专家、又当总结器、又当调度器，避免角色混乱。</li>
-<li>2、明确“工具-场景映射”，降低选错工具概率，定义工具时，不只写工具名，要写适用场景、边界和典型触发条件。</li>
-<li>3、用“原则”约束行为，而不是只写功能，不只是说“怎么做”，还说了很多“不能怎么做”。</li>
-<li>4、把高风险问题单独上升为“核心原则”，把最容易犯错的点，提升为显式规则，并重复强化，模型对“重复出现的关键约束”会更敏感。</li>
-<li>5、把复杂任务拆成流程步骤，对多步任务，提示词最好写成 SOP，而不是一段大而泛的说明。</li>
-<li>6、用正反例强化边界，提示词里最好加入“相似场景下的正反例”，帮助模型学会区分。</li>
-</ul>
-</li>
-<li>
-<p>项目里的上下文工程是怎么做的？</p>
-<ul>
-<li>持久化使用 <code>SessionManager</code> 按用户和会话把历史消息持久化到本地 JSON 文件中；</li>
-<li>上下文工程则是在每轮请求时先加载历史、拼接当前输入，再通过 <code>_truncate_memory()</code> 保留 system message、按最近 N 轮做裁剪，最后把处理后的 <code>chat_history</code> 作为 <code>Runner.run_streamed</code> 的输入传给调度 Agent，从而兼顾多轮对话连续性、token 成本和上下文质量。</li>
-</ul>
-</li>
-<li>
-<p>什么是 FastAPI 的异步接口？</p>
-<ul>
-<li>FastAPI 的异步接口，指的是用 <code>async def</code> 定义的接口函数。这里的 <code>async def</code> 表示这个接口是<strong>异步的</strong>，不会在等待大模型输出时把整个线程卡死，而是可以把等待时间让出去，去处理别的请求。</li>
-</ul>
-</li>
-<li>
-<p>什么是 SSE 协议？</p>
-<ul>
-<li>SSE 是 <strong>Server-Sent Events</strong>，中文一般叫：服务器发送事件。</li>
-<li>它是一种浏览器和服务端之间的<strong>单向流式通信协议</strong>，特点是：
-<ul>
-<li>服务端可以持续往前端推消息</li>
-<li>前端不需要反复轮询</li>
-<li>基于 HTTP，比较轻量</li>
-<li>很适合大模型“边生成边推送”</li>
-</ul>
-</li>
-<li>资料里也明确说了，SSE 相比 WebSocket 更简单，非常适合大模型流式输出场景。</li>
-</ul>
-</li>
-</ul>
 <h3 id="reviewcloud-项目"><a class="markdownIt-Anchor" href="#reviewcloud-项目"></a> ReviewCloud 项目</h3>
 <ul>
 <li>谈谈 <code>ReviewCloud</code> 这个项目你的主要工作是什么，难点在哪？
@@ -1662,175 +1514,6 @@
 </ul>
 </li>
 </ul>
-<h2 id="大模型相关"><a class="markdownIt-Anchor" href="#大模型相关"></a> 大模型相关</h2>
-<h3 id="模型采样参数"><a class="markdownIt-Anchor" href="#模型采样参数"></a> 模型采样参数</h3>
-<ul>
-<li>在使用大模型时，会经常看到类似 <code>Temperature</code> 这类的可配置参数，其本质是通过调整模型对 “概率分布” 的采样策略，让输出匹配具体场景需求，配置合适的参数可以提升 Agent 在特定场景的性能。</li>
-<li>传统的概率分布是由 Softmax 公式计算得到的：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>i</mi></msub><mo>=</mo><mfrac><msup><mi>e</mi><msub><mi>z</mi><mi>i</mi></msub></msup><mrow><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></msubsup><msup><mi>e</mi><msub><mi>z</mi><mi>j</mi></msub></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">p_i=\frac{e^{z_i}}{\sum_{j=1}^ke^{z_j}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.6684269999999999em;vertical-align:-0.7574469999999999em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.91098em;"><span style="top:-2.56478em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mop op-symbol small-op mtight" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8931714285714285em;"><span style="top:-2.1785614285714283em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-2.8971428571428572em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.46032428571428574em;"><span></span></span></span></span></span></span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord mtight"><span class="mord mathnormal mtight">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7789785714285715em;"><span style="top:-2.9714357142857146em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3448em;margin-left:-0.04398em;margin-right:0.1em;"><span class="pstrut" style="height:2.65952em;"></span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5091600000000001em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7385428571428572em;"><span style="top:-2.931em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3448em;margin-left:-0.04398em;margin-right:0.1em;"><span class="pstrut" style="height:2.65952em;"></span><span class="mord mathnormal mtight">i</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.31472em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.7574469999999999em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>，采样参数的本质就是在此基础上，根据不同策略“重新调整”或“截断”分布，从而改变大模型输出的下一个 token。</li>
-<li><code>Temperature</code>：温度是控制模型输出 “随机性” 与 “确定性” 的关键参数。其原理是引入温度系数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">T&gt;0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>, 将 Softmax 改写为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>p</mi><mi>i</mi><mrow><mo stretchy="false">(</mo><mi>T</mi><mo stretchy="false">)</mo></mrow></msubsup><mo>=</mo><mfrac><msup><mi>e</mi><mrow><msub><mi>z</mi><mi>i</mi></msub><mi mathvariant="normal">/</mi><mi>T</mi></mrow></msup><mrow><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></msubsup><msup><mi>e</mi><mrow><msub><mi>z</mi><mi>j</mi></msub><mi mathvariant="normal">/</mi><mi>T</mi></mrow></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">p_{i}^{(T)}=\frac{e^{z_{i}/T}}{\sum_{j=1}^{k}e^{z_{j}/T}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.321664em;vertical-align:-0.27686399999999994em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.4231360000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.27686399999999994em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.907932em;vertical-align:-0.837232em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0707em;"><span style="top:-2.4849949999999996em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mop op-symbol small-op mtight" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8931714285714285em;"><span style="top:-2.1785614285714283em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-2.8971428571428572em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.46032428571428574em;"><span></span></span></span></span></span></span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord mtight"><span class="mord mathnormal mtight">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.00715em;"><span style="top:-3.00715em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5357142857142856em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3448em;margin-left:-0.04398em;margin-right:0.1em;"><span class="pstrut" style="height:2.65952em;"></span><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5091600000000001em;"><span></span></span></span></span></span></span><span class="mord mtight">/</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9667142857142856em;"><span style="top:-2.9667142857142856em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5357142857142856em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3448em;margin-left:-0.04398em;margin-right:0.1em;"><span class="pstrut" style="height:2.65952em;"></span><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.31472em;"><span></span></span></span></span></span></span><span class="mord mtight">/</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.837232em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
-<li>当 T 变小时，分布“更加陡峭”，高概率项权重进一步放大，生成更“保守”且重复率更高的文本。当 T 变大时，分布“更加平坦”，低概率项权重提升，生成更“多样”但可能出现不连贯的内容。
-<ul>
-<li>低温度（0 ⩽ Temperature &lt; 0.3）：输出更 “精准、确定”。适用场景： 事实性任务：如问答、数据计算、代码生成；严谨性场景：法律条文解读、技术文档撰写、学术概念解释等场景。</li>
-<li>中温度（0.3 ⩽ Temperature &lt; 0.7）：输出 “平衡、自然”。适用场景： 日常对话：如客服交互、聊天机器人；常规创作：如邮件撰写、产品文案、简单故事创作。</li>
-<li>高温度（0.7 ⩽ Temperature &lt; 2）：输出 “创新、发散”。适用场景： 创意性任务：如诗歌创作、科幻故事构思、广告 slogan brainstorm、艺术灵感启发；发散性思考。</li>
-</ul>
-</li>
-</ul>
-<h3 id="提示词工程和上下文工程"><a class="markdownIt-Anchor" href="#提示词工程和上下文工程"></a> 提示词工程和上下文工程</h3>
-<ul>
-<li>提示词工程和上下文工程的区别是什么？
-<ul>
-<li>提示词工程：提示工程关注如何编写与组织 LLM 的指令以获得更优结果（例如系统提示的写法与结构化策略）</li>
-<li>上下文工程：上下文工程则是<strong>在推理阶段，如何策划与维护“最优的信息集合（tokens）”</strong>，其中不仅包含提示本身，还包含其他会进入上下文窗口的一切信息。</li>
-</ul>
-</li>
-<li>为什么上下文工程重要？
-<ul>
-<li>Transformer 让每个 token 能够与上下文中的<strong>所有</strong> token 建立关联，理论上形成 (n^2) 级别的两两注意力关系。随着上下文长度增长，模型对这些两两关系的建模能力会被“拉薄”，从而自然地产生“上下文规模”与“注意力集中度”的张力。此外，模型的注意力模式来源于训练数据分布——短序列通常比长序列更常见，因此模型对“全上下文依赖”的经验更少、专门参数也更少。</li>
-<li>诸如位置编码插值（position encoding interpolation）等技术可以让模型在推理时“适配”比训练期更长的序列，但会牺牲部分对 token 位置的精确理解。总体上，这些因素共同形成的是一个<strong>性能梯度</strong>，而非“悬崖式”崩溃：模型在长上下文下依旧强大，但相较短上下文，在信息检索与长程推理上的精度会有所下降。</li>
-</ul>
-</li>
-<li>怎么实现有效的上下文？
-<ul>
-<li>在“有限注意力预算”的约束下，优秀的上下文工程目标是：<strong>用尽可能少、但高信号密度的 tokens，最大化获得期望结果的概率</strong>。落实到实践中，建议围绕以下组件开展工程化建设：</li>
-</ul>
-<ul>
-<li>1、<strong>系统提示（System Prompt）</strong>：语言清晰、直白，信息层级把握在“刚刚好”的高度。常见两极误区：
-<ul>
-<li>过度硬编码：在提示中写入复杂、脆弱的 if-else 逻辑，长期维护成本高、易碎。</li>
-<li>过于空泛：只给出宏观目标与泛化指引，缺少对期望输出的<strong>具体信号</strong>或假定了错误的“共享上下文”。建议将提示分区组织（如 <code>、</code>、工具指引、输出描述等），用 XML/Markdown 分隔。无论格式如何，追求的是<strong>能完整勾勒期望行为的&quot;最小必要信息集&quot;</strong>（“最小&quot;并不等于&quot;最短”）。先用最好的模型在最小提示上试跑，再依据失败模式增补清晰的指令与示例。</li>
-</ul>
-</li>
-<li>2、<strong>工具（Tools）</strong>：工具定义了智能体与信息/行动空间的契约，必须促进效率：既要返回<strong>token 友好</strong>的信息，又要鼓励高效的智能体行为。工具应当：
-<ul>
-<li>职责单一、相互低重叠，接口语义清晰；</li>
-<li>对错误鲁棒；</li>
-<li>入参描述明确、无歧义，充分发挥模型擅长的表达与推理能力。常见失败模式是“臃肿工具集”：功能边界模糊，导致“选哪个工具”这一决策本身就含混不清。<strong>如果人类工程师都说不准用哪个工具，别指望智能体做得更好</strong>。精心甄别一个“最小可行工具集（MVTS）”往往能显著提升长期交互中的稳定性与可维护性。</li>
-</ul>
-</li>
-<li>3、<strong>示例（Few-shot）</strong>：始终推荐提供示例，但不建议把“所有边界条件”的罗列一股脑塞进提示。请精挑细选一组<strong>多样且典型</strong>的示例，直接画像“期望行为”。对 LLM 而言，<strong>好的示例胜过千言万语</strong>。</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>面向长时程任务的上下文工程？
-<ul>
-<li>长时程任务要求智能体在超出上下文窗口的长序列行动中，仍能保持连贯性、上下文一致与目标导向。例如大型代码库迁移、跨数小时的系统性研究。指望无限增大上下文窗口并不能根治“上下文污染”与相关性退化的问题，因此需要直接面向这些约束的工程手段：<strong>压缩整合（Compaction）</strong>、<strong>结构化笔记（Structured note-taking）<strong>与</strong>子代理架构（Sub-agent architectures）</strong>。</li>
-<li>1、<strong>压缩整合（Compaction）</strong>
-<ul>
-<li>定义：当对话接近上下文上限时，对其进行高保真总结，并用该摘要重启一个新的上下文窗口，以维持长程连贯性。</li>
-<li>实践：让模型压缩并保留架构性决策、未解决缺陷、实现细节，丢弃重复的工具输出与噪声；新窗口携带压缩摘要 + 最近少量高相关工件（如“最近访问的若干文件”）。</li>
-<li>调参建议：先优化<strong>召回</strong>（确保不遗漏关键信息），再优化<strong>精确度</strong>（剔除冗余内容）；一种安全的“轻触式”压缩是对“深历史中的工具调用与结果”进行清理。</li>
-</ul>
-</li>
-<li>2、<strong>结构化笔记（Structured note-taking）</strong>
-<ul>
-<li>定义：也称“智能体记忆”。智能体以固定频率将关键信息写入<strong>上下文外的持久化存储</strong>，在后续阶段按需拉回。</li>
-<li>价值：以极低的上下文开销维持持久状态与依赖关系。例如维护 TODO 列表、项目 NOTES. Md、关键结论/依赖/阻塞项的索引，跨数十次工具调用与多轮上下文重置仍能保持进度与一致性。</li>
-<li>说明：在非编码场景中同样有效（如长期策略性任务、游戏/仿真中的目标管理与统计计数）。结合 MemoryTool，可轻松实现文件式/向量式的外部记忆并在运行时检索。</li>
-</ul>
-</li>
-<li>3、<strong>子代理架构（Sub-agent architectures）</strong>
-<ul>
-<li>思想：由主代理负责高层规划与综合，多个专长子代理在“干净的上下文窗口”中各自深挖、调用工具并探索，最后仅回传<strong>凝练摘要</strong>（常见 1,000–2,000 tokens）。</li>
-<li>好处：实现关注点分离。庞杂的搜索上下文留在子代理内部，主代理专注于整合与推理；适合需要并行探索的复杂研究/分析任务。</li>
-<li>经验：公开的多智能体研究系统显示，该模式在复杂研究任务上相较单代理基线具有显著优势。</li>
-</ul>
-</li>
-<li>总结：
-<ul>
-<li><strong>压缩整合</strong>：适合需要长对话连续性的任务，强调上下文的“接力”。</li>
-<li><strong>结构化笔记</strong>：适合有里程碑/阶段性成果的迭代式开发与研究。</li>
-<li><strong>子代理架构</strong>：适合复杂研究与分析，能从并行探索中获益。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="agent-开发相关"><a class="markdownIt-Anchor" href="#agent-开发相关"></a> Agent 开发相关</h2>
-<h3 id="agent-核心概念"><a class="markdownIt-Anchor" href="#agent-核心概念"></a> Agent 核心概念</h3>
-<ul>
-<li>对于不同的场景应该分别选什么模型？
-<ul>
-<li>推理模型的代价是延迟更高、token 消耗更大，所以不是所有场景都适合用。一个常见的工程做法是：用推理能力强的大模型做核心决策（比如任务规划、关键判断），用更快更便宜的小模型做简单任务（比如意图分类、格式提取），根据不同环节的需求来搭配。</li>
-</ul>
-</li>
-<li>什么是 Harness Engineering（驾驭工程）？它和传统 Prompt Engineering 有什么本质区别？
-<ul>
-<li>Harness Engineering 是 2025 年兴起的一个概念，指的是系统性地设计、约束和引导 AI Agent 行为的工程实践，它超越了单纯的 Prompt Engineering，涵盖了从系统架构、工具编排、安全护栏到反馈回路的全链路设计。</li>
-<li>与 Prompt Engineering 的区别：<br />
-• Prompt Engineering：聚焦于“如何写好一段提示词”，让 LLM 给出更好的单次回答<br />
-• Harness Engineering：聚焦于“如何构建一套系统”，让 Agent 在复杂环境中持续、安全、可控地工作</li>
-<li>Harness Engineering 的核心要素包括：
-<ol>
-<li>行为约束：定义 Agent 的行为边界和安全护栏</li>
-<li>工具编排：设计 Agent 可用的工具集和调用策略</li>
-<li>反馈回路：建立 Agent 行为的监控、评估和修正机制</li>
-<li>上下文管理：动态管理 Agent 的记忆和上下文窗口</li>
-<li>人机协作：设计合理的 Human-in-the-Loop 交互点</li>
-</ol>
-</li>
-<li>简单来说，Prompt Engineering 是“调教一个模型”，Harness Engineering 是“驾驭一个系统”。</li>
-</ul>
-</li>
-</ul>
-<h3 id="三个单智能体范式"><a class="markdownIt-Anchor" href="#三个单智能体范式"></a> 三个单智能体范式</h3>
-<ol>
-<li><strong>ReAct:</strong> 我们构建了一个能与外部世界交互的 ReAct 智能体。通过“思考-行动-观察”的动态循环，它成功地利用搜索引擎回答了自身知识库无法覆盖的实时性问题。其核心优势在于<strong>环境适应性</strong>和<strong>动态纠错能力</strong>，使其成为处理探索性、需要外部工具输入的任务的首选。</li>
-<li><strong>Plan-and-Solve:</strong> 我们实现了一个先规划后执行的 Plan-and-Solve 智能体，并利用它解决了需要多步推理的数学应用题。它将复杂的任务分解为清晰的步骤，然后逐一执行。其核心优势在于<strong>结构性</strong>和<strong>稳定性</strong>，特别适合处理逻辑路径确定、内部推理密集的任务。</li>
-<li><strong>Reflection (自我反思与迭代)</strong>: 我们构建了一个具备自我优化能力的 Reflection 智能体。通过引入“执行-反思-优化”的迭代循环，它成功地将一个效率较低的初始代码方案，优化为了一个算法上更优的高性能版本。其核心价值在于能<strong>显著提升解决方案的质量</strong>，适用于对结果的准确性和可靠性有极高要求的场景。</li>
-</ol>
-<p><img src="https://yugin-blog-1313489805.cos.ap-guangzhou.myqcloud.com/202604081651293.png" srcset="/img/loading.gif" lazyload alt="不同 Agent Loop 的选择策略" /></p>
-<ul>
-<li>这三种范式在&quot;思考&quot;与&quot;行动&quot;的组织方式上有什么本质区别？
-<ul>
-<li><strong>ReAct</strong>：思考和行动<strong>交替耦合</strong></li>
-<li><strong>Plan-and-Solve</strong>：思考先于行动，属于<strong>先规划后执行</strong></li>
-<li><strong>Reflection</strong>：行动后再思考，属于<strong>先尝试后修正</strong></li>
-</ul>
-<ul>
-<li>如果把它们看成三种“智能体时间结构”：
-<ul>
-<li>ReAct 关注“<strong>当前下一步怎么做</strong>”</li>
-<li>Plan-and-Solve 关注“<strong>整个任务应该怎么分解</strong>”</li>
-<li>Reflection 关注“<strong>刚才做得对不对，怎么改进</strong>”</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="rag-系统知识检索增强生成"><a class="markdownIt-Anchor" href="#rag-系统知识检索增强生成"></a> RAG 系统：知识检索增强生成</h2>
-<h3 id="rag-的基础知识"><a class="markdownIt-Anchor" href="#rag-的基础知识"></a> RAG 的基础知识</h3>
-<ul>
-<li>什么是 RAG？
-<ul>
-<li>检索增强生成（Retrieval-Augmented Generation，RAG）是一种结合了信息检索和文本生成的技术。它的核心思想是：在生成回答之前，先从外部知识库中检索相关信息，然后将检索到的信息作为上下文提供给大语言模型，从而生成更准确、更可靠的回答。</li>
-<li>因此，检索增强生成可以拆分为三个词汇。<strong>检索</strong>是指从知识库中查询相关内容；<strong>增强</strong>是将检索结果融入提示词，辅助模型生成；<strong>生成</strong>则输出兼具准确性与透明度的答案。</li>
-</ul>
-</li>
-<li>RAG 的基本工作流程
-<ul>
-<li>一个完整的 RAG 应用流程主要分为两大核心环节。在<strong>数据准备阶段</strong>，系统通过<strong>数据提取</strong>、<strong>文本分割</strong>和<strong>向量化</strong>，将外部知识构建成一个可检索的数据库。随后在<strong>应用阶段</strong>，系统会响应用户的<strong>提问</strong>，从数据库中<strong>检索</strong>相关信息，将其<strong>注入 Prompt</strong>，并最终驱动大语言模型<strong>生成答案</strong>。</li>
-</ul>
-</li>
-</ul>
-<h2 id="场景题"><a class="markdownIt-Anchor" href="#场景题"></a> 场景题</h2>
-<ul>
-<li>
-<p>设计一个订餐系统，如何设计状态流转？</p>
-<ul>
-<li>如果让我设计订餐系统的状态流转，我会先把它拆成几个核心对象：<strong>订单、支付、配送、售后</strong>，然后围绕订单主状态去设计状态机。订单一般会经历：<strong>待支付 → 已支付 → 商家接单 → 备餐中 → 配送中 / 待自取 → 已完成</strong>，同时还要考虑异常分支，比如 <strong>已取消、退款中、已退款、接单失败</strong> 等。设计上我会强调一点：<strong>状态流转一定要单向、可追踪、幂等</strong>，不能随便跳状态，比如“待支付”可以变“已取消”或“已支付”，但不能直接跳到“配送中”。这样做的目的是保证状态清晰，方便后续处理库存扣减、优惠券核销、骑手调度、退款补偿这些业务动作。</li>
-<li>订餐系统本质上是一个<strong>事件驱动的状态机</strong>。比如用户下单后生成订单，支付成功事件驱动订单从“待支付”变成“已支付”；商家接单事件再推动进入“备餐中”；骑手取餐后变成“配送中”；用户确认收餐或超时自动确认后进入“已完成”。异常场景也要提前定义清楚，比如用户支付超时自动取消、商家拒单触发退款、配送失败进入售后状态。实现上通常会用<strong>状态字段 + 状态流转表 + 操作日志</strong>来控制，更新时做状态校验，保证只有合法流转才能成功；同时结合消息队列处理异步事件，结合定时任务处理超时取消、自动确认这类流程。<strong>订餐系统的状态设计核心不是状态有多少，而是状态边界是否清晰、流转是否合法、异常补偿是否完整。</strong></li>
-</ul>
-</li>
-<li>
-<p>如果大模型接口有超时或抖动，怎么保证正确性和一致性？哪些场景可以重试，哪些场景禁止重试？</p>
-<ul>
-<li>如果大模型接口存在超时或抖动，把问题分成两层看：<strong>调用层的可靠性</strong>和<strong>业务层的一致性</strong>。调用层要做超时控制、熔断、限流、隔离、降级，避免单点接口抖动把整个系统拖垮；业务层更关键，核心是做到<strong>请求幂等、结果可追踪、状态可回放</strong>。比如每次请求都带唯一 <code>requestId</code>，先落请求日志和业务状态，再发起模型调用；返回结果后做状态更新，确保同一个请求即使因为超时看起来“失败了”，后面补偿查询或重复到达时也能识别这是同一笔请求，而不是重复执行。对于强一致要求的场景，不能把“大模型返回成功”直接等同于“业务成功”，而是要通过状态机把流程拆成待处理、处理中、已完成、已失败几种状态，必要时配合消息队列、任务表和补偿机制保证最终一致性。面试里我会强调一句：<strong>大模型调用本身通常很难做到强一致，只能通过幂等、状态机和补偿机制保证业务一致性。</strong></li>
-<li>是否允许重试，关键看这个调用是不是<strong>幂等</strong>，以及是否会引发<strong>重复副作用</strong>。像<strong>纯查询类、纯生成类、未落业务结果的内部推理类</strong>，一般都可以重试，比如“帮我总结一段文本”“做一次分类判断”“提取关键词”，因为即使重试，最多是多花一点算力，不会破坏业务状态；但也要注意，大模型结果可能有随机性，所以如果业务要求结果稳定，最好固定模型版本、温度参数，必要时缓存首次结果。相反，像<strong>已经触发外部副作用的场景</strong>通常禁止直接重试，比如已经根据模型结果发了短信、发了优惠券、扣了库存、创建了工单、调用了支付或审批流，这种如果简单重试，容易造成重复发放、重复扣减、重复提交。对于这类场景，正确做法不是“失败就重试整个流程”，而是把流程拆开：模型推理和业务落库分阶段处理，先做幂等校验，再决定是否补偿。总结成面试话术就是：<strong>可重试的是无副作用或天然幂等的调用；禁止直接重试的是会造成资金、库存、通知、工单、审批等外部副作用的调用，这类场景必须靠幂等键、状态机和补偿机制来保证一致性。</strong></li>
-</ul>
-</li>
-</ul>
 
                 
               </div>
@@ -1921,9 +1604,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/03/07/zuo_algorithm_2/" title="左程云、代码随想录算法学习（二）">
+                      <a href="/2025/02/21/Interview_2/" title="知识复习汇总2">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">左程云、代码随想录算法学习（二）</span>
+                        <span class="hidden-mobile">知识复习汇总2</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
